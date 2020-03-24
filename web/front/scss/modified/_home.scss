@@ -1,0 +1,128 @@
+$first-try: linear-gradient(90deg, #5988fd, #6bd1ff, #feae06, #ff586d, #ba0ec4, #c500b0, #5988fd);
+
+.home-btn
+{
+    color: white;
+    font-size: 20px;
+    font-weight: 700;
+    box-sizing: border-box;
+border-radius: 30px;
+background: linear-gradient(90deg, #79eeac, #6bd1ff, #5988fd, #c500b0, #ba0ec4, #ff586d, #feae06, #feae06, #79eeac);
+background-size: 400%;
+}
+
+.home-btn:hover
+{
+    color: white;
+    animation: animate 8s linear infinite;
+    z-index: 1;
+}
+
+@keyframes animate
+{
+    0%
+    {
+        background-position: 0%;
+    }
+    100%
+    {
+        background-position: 400%;
+    }
+}
+
+.home-btn::before
+{
+    content: '';
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    right: 20px;
+    bottom: 20px;
+    z-index: -1;
+    border-radius: 40px;
+    background: linear-gradient(90deg, #79eeac, #6bd1ff, #5988fd, #c500b0, #ba0ec4, #ff586d, #feae06, #feae06, #79eeac);
+    background-size: 400%;
+    opacity: 0;
+    transition: 0.5s;
+}
+
+.home-btn:hover::before
+{
+    filter: blur(20px);
+    opacity: 1;
+}
+
+//////////////////////////////////////////////////////////////////////
+.Thome-btn
+{
+    color: white;
+    font-size: 20px;
+    font-weight: 700;
+    box-sizing: border-box;
+border-radius: 30px;
+background: linear-gradient(90deg, #79eeac, #6bd1ff, #5988fd, #c500b0, #ba0ec4, #ff586d, #feae06, #feae06, #79eeac);
+background-size: 400%;
+}
+
+.Thome-btn:hover
+{
+    background: linear-gradient(90deg, #79eeac, #6bd1ff, #5988fd, #c500b0, #ba0ec4, #ff586d, #feae06, #feae06, #79eeac);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    border-style: solid;
+    border-radius: 40px;
+    border-image: linear-gradient( #79eeac, #6bd1ff, #5988fd, #c500b0, #ba0ec4, #ff586d, #feae06, #feae06, #79eeac) ;
+    border-width: 10px;
+    animation: animate 8s linear infinite;
+    z-index: 1;
+}
+
+@keyframes animate
+{
+    0%
+    {
+        background-position: 0%;
+    }
+    100%
+    {
+        background-position: 400%;
+    }
+}
+
+.Thome-btn::before
+{
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    z-index: -1;
+    border-radius: 40px;
+    background: linear-gradient(90deg, #79eeac, #6bd1ff, #5988fd, #c500b0, #ba0ec4, #ff586d, #feae06, #feae06, #79eeac);
+    background-size: 400%;
+    opacity: 0;
+    transition: 0.5s;
+}
+
+.Thome-btn:hover::before
+{
+    filter: blur(5px);
+    opacity: 1;
+}
+
+///////////////////////////////////////////////////////////////////////////
+
+.chome-btn
+{
+    letter-spacing: 0.2rem;
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: 700;
+    box-sizing: border-box;
+border-radius: 30px;
+background: linear-gradient(90deg, #c500b0, #ff586d, #c500b0);
+background-size: 500%;
+animation: animate 4s linear infinite;
+}

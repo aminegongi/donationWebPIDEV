@@ -1,0 +1,16 @@
+{
+	"version": 3,
+	"file": "emploi.css",
+	"sources": [
+		"../emploi.scss",
+		"../_test1.scss",
+		"../_test2.scss"
+	],
+	"sourcesContent": [
+		"@import \"test1\";\n@import \"test2\";",
+		"h1\n{\nsize: 20px;\nbackground: black;\n}",
+		"h2\n{\n    color: black;\n}"
+	],
+	"names": [],
+	"mappings": "ACAA,AAAA,EAAE,CACF;EACA,IAAI,EAAE,IAAI;EACV,UAAU,EAAE,KAAK,GAChB;;ACJD,AAAA,EAAE,CACF;EACI,KAAK,EAAE,KAAK,GACf"
+}

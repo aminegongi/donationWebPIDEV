@@ -1,0 +1,16 @@
+{
+	"version": 3,
+	"file": "aide.css",
+	"sources": [
+		"../aide.scss",
+		"../_test1.scss",
+		"../_test2.scss"
+	],
+	"sourcesContent": [
+		"@import \"test1\";\n@import \"test2\";",
+		"h1\n{\nsize: 20px;\n}",
+		"h2\n{\n    color: black;\n}"
+	],
+	"names": [],
+	"mappings": "ACAA,AAAA,EAAE,CACF;EACA,IAAI,EAAE,IAAI,GACT;;ACHD,AAAA,EAAE,CACF;EACI,KAAK,EAAE,KAAK,GACf"
+}

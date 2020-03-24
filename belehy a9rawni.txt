@@ -1,0 +1,48 @@
+****************************************************************************************************************************************
+
+***************************************************    salut chabeb    *****************************************************************
+
+
+I- La structure:
+
+j'ai préparer pour chacun d'entre vous un dossier, contenant un fichier scss nommer selon la plateforme, avec deux exemple de deux sous-fichier scss importer dans votre fichier scss principale. et votre dossier contient un sous-dossier nommer css (dans lequel vous aurez votre fichier css compiler).
+NB⚠️: le fichier root.css contient votre couleur de plateforme individuel avec le quel vous manipulerez vos style.
+
+II- Compilation "scss" en "css"
+
+NB⚠️: 
+les navigateurs n'utilise que les styles css donc on aura besoin de compiler le fichier scss principale en un fichier css. 
+=> Donc j'ai préparé pour chacun d'entre vous un script qui compilera votre fichier scss en celui en css dans votre dossier css personnel.
+=> écriver ce script dans le terminal avant de commencer la manipulation de vos fichier scss.
+Script: npm run  votrePrenom-watch                   //exemple: npm run safraou-watch
+
+
+La liste des prénom : 
+*khalifa
+*zghibi
+*farhat
+*fourati
+*gongi
+
+
+III- Couleur individuelle
+
+Au lieu d'écrire votre code couleur primaire ecrivez "var(--my-color)".
+NB⚠️: N'oubliez pas d'importer vos styles dans tous vos fichier html ( vous êtes obliger de mettre les deux fichier css citer ci-dessous)
+
+				<link rel="stylesheet" href="scss/nomPlateforme/css/root.css">
+				<link rel="stylesheet" href="scss/nomPlateforme/css/nomPlateforme.css">
+
+		Exemlpe: 
+				
+				<link rel="stylesheet" href="scss/restoDon/css/root.css">
+				<link rel="stylesheet" href="scss/restoDon/css/restoDon.css">
+
+
+Dernière remarque:
+si vous voulez changer entre back et front pour les afficher => src/AppBundle/Controller/DefaultController.php changer frontHome par dash.
+
+
+************************************************* Let's Rock This Guys ✌️🎸️ ***********************************************************
+
+

@@ -1,0 +1,16 @@
+{
+	"version": 3,
+	"file": "restoDon.css",
+	"sources": [
+		"../restoDon.scss",
+		"../_test1.scss",
+		"../_test2.scss"
+	],
+	"sourcesContent": [
+		"@import \"test1\";\n@import \"test2\";",
+		"h1\n{\nsize: 20px;\n}\n\n.khedmet\n{\n  background: var(--my-color);\n}",
+		"h2\n{\n    color: black;\n}"
+	],
+	"names": [],
+	"mappings": "ACAA,AAAA,EAAE,CACF;EACA,IAAI,EAAE,IAAI,GACT;;AAED,AAAA,QAAQ,CACR;EACE,UAAU,EAAE,eAAe,GAC5B;;ACRD,AAAA,EAAE,CACF;EACI,KAAK,EAAE,KAAK,GACf"
+}

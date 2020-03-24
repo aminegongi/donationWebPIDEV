@@ -1,0 +1,34 @@
+{
+  "name": "donationFront",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "donation": "node-sass --output web/front/scss/modified/css --source-map true --source-map-contents web/front/scss/modified/donation.scss",
+    "khalifa": "node-sass --output web/front/scss/aide/css --source-map true --source-map-contents web/front/scss/aide/aide.scss",
+    "zghibi": "node-sass --output web/front/scss/cagnotte/css --source-map true --source-map-contents web/front/scss/cagnotte/cagnotte.scss",
+    "farhat": "node-sass --output web/front/scss/emploi/css --source-map true --source-map-contents web/front/scss/emploi/emploi.scss",
+    "safraou": "node-sass --output web/front/scss/restoDon/css --source-map true --source-map-contents web/front/scss/restoDon/restoDon.scss",
+    "fourati": "node-sass --output web/front/scss/restOrg/css --source-map true --source-map-contents web/front/scss/restOrg/restOrg.scss",
+    "gongi": "node-sass --output web/front/scss/gongi/css --source-map true --source-map-contents web/front/scss/gongi/gongi.scss",
+    "donation-watch": "nodemon -e scss -x \"npm run donation\"",
+    "khalifa-watch": "nodemon -e scss -x \"npm run khalifa\"",
+    "zghibi-watch": "nodemon -e scss -x \"npm run zghibi\"",
+    "farhat-watch": "nodemon -e scss -x \"npm run farhat\"",
+    "safraou-watch": "nodemon -e scss -x \"npm run safraou\"",
+    "fourati-watch": "nodemon -e scss -x \"npm run fourati\"",
+    "gongi-watch": "nodemon -e scss -x \"npm run gongi\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap": "^4.4.1",
+    "jquery": "^3.4.1",
+    "node-sass": "^4.13.1",
+    "nodemon": "^2.0.2",
+    "popper.js": "^1.16.1",
+    "prettier": "^2.0.1"
+  }
+}
