@@ -93,6 +93,11 @@ class User extends BaseUser
      */
     private $latitude;
 
+    /**
+     * @ORM\Column(name="yesNews",type="integer" )
+     */
+    private $yesNews=0;
+
 
     /**
      * Get id
@@ -327,6 +332,24 @@ class User extends BaseUser
     {
         $this->siteWeb = $siteWeb;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getYesNews()
+    {
+        return $this->yesNews;
+    }
+
+    /**
+     * @param mixed $yesNews
+     */
+    public function setYesNews($yesNews)
+    {
+        $this->yesNews = $yesNews;
+    }
+
+
 
     public function __construct()
     {
