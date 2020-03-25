@@ -1,0 +1,17 @@
+{% extends "base.html.twig" %}
+
+
+{% block content %}
+
+    <form action="{{ path('newsletterHTMLBuilder') }}" method="post" name="ajoutNewsHTML">
+        <label for="titre">titre:</label>
+        <input type="text" id="titre" name="_titre"/>
+        <br />
+        <label for="corps">corpsHTML:</label>
+        <input type="text" id="cHTML" name="_cHTML"/>
+        <br />
+        <br />
+        <input type="submit" name="add" value="add" />
+    </form>
+
+{% endblock %}

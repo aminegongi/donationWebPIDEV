@@ -1,3 +1,7 @@
+newsletter:
+    resource: "@NewsletterBundle/Resources/config/routing.yml"
+    prefix:   /admin/Newsletter
+
 user:
     resource: "@UserBundle/Resources/config/routing.yml"
     prefix:   /user

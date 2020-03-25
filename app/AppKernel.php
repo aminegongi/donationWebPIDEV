@@ -20,6 +20,7 @@ class AppKernel extends Kernel
             new AppBundle\AppBundle(),
             new haytBundle\haytBundle(),
             new UserBundle\UserBundle(),
+            new NewsletterBundle\NewsletterBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

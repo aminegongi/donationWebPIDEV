@@ -1,0 +1,7 @@
+newsletter_homepage:
+    path:     /
+    defaults: { _controller: NewsletterBundle:Default:index }
+
+newsletterHTMLBuilder:
+    path:     /NHB
+    defaults: { _controller: NewsletterBundle:NewsletterHTMLBuilder:add }
