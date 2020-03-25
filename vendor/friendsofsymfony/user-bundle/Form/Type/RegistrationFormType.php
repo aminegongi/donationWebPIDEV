@@ -65,6 +65,16 @@ class RegistrationFormType extends AbstractType
                 'required' => true,
                 'multiple' => true,
             ))
+           ->add('yesNews', ChoiceType::class, array(
+                'label' => 'Recevoir les Newsletters ',
+                'choices' => array(
+                    'Non' => '0',
+                    'Oui' => '1',
+                    ),
+                'required' => true,
+                'multiple' => false,
+                'expanded'=>true,
+            ))
         ;
     }
 
