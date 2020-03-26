@@ -1,0 +1,33 @@
+// Import
+// -------------------------------------------------
+@import "../_mixins";
+@import "../_variables";
+
+
+// Hidden UI
+// -------------------------------------------------
+.keditor-ui-hidden {
+    display: none !important;
+}
+
+
+// Cutting UI
+// -------------------------------------------------
+.keditor-ui-cutting {
+    .keditor-component-content,
+    .keditor-container-inner {
+        opacity: 0.5 !important;
+    }
+}
+
+
+// Dragging UI
+// -------------------------------------------------
+.keditor-ui-dragging {
+    display: block !important;
+    opacity: 0.2 !important;
+    
+    .keditor-toolbar {
+        display: none !important;
+    }
+}

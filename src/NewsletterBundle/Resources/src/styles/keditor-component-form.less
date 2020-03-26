@@ -1,0 +1,30 @@
+// Import
+// -------------------------------------------------
+@import "_mixins";
+@import "_variables";
+
+.keditor-component[data-type="component-form"] {
+    .keditor-component-content {
+        min-height: 50px;
+    }
+}
+
+#keditor-modal-form {
+    .form-builder-area-wrapper {
+        padding: 15px;
+        height: 100%;
+    }
+    
+    .form-builder-area,
+    .form-wrap,
+    .stage-wrap {
+        height: 100%;
+    }
+    
+    .frmb {
+        .keditor-scrollbar();
+        height: 100%;
+        overflow-y: auto;
+        padding: 5px;
+    }
+}

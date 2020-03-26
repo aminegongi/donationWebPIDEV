@@ -1,0 +1,155 @@
+// Import
+// -------------------------------------------------
+@import "../_mixins";
+@import "../_variables";
+
+
+// Modal
+// -------------------------------------------------
+.keditor-modal {
+    display: none;
+    position: fixed;
+    z-index: @modal-zindex;
+    top: -100%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: @modal-bg;
+    transition: all @animation-duration;
+    opacity: 0;
+    .keditor-text();
+    
+    &.showed {
+        top: 0;
+        opacity: 1;
+    }
+    
+    .keditor-snippet {
+        display: none;
+    }
+    
+    &.keditor-modal-component {
+        .keditor-snippet-component {
+            display: block;
+        }
+        
+        .keditor-snippets-filter-component {
+            display: block;
+        }
+    }
+    
+    &.keditor-modal-container {
+        .keditor-snippet-container {
+            display: block;
+        }
+        
+        .keditor-snippets-filter-container {
+            display: block;
+        }
+    }
+    
+    &.keditor-modal-component.keditor-modal-container {
+        .keditor-snippets-filter-container.duplicated {
+            display: none;
+        }
+    }
+    
+}
+
+.keditor-modal-header {
+    .clearfix();
+    background: @modal-bg;
+    border-bottom: 1px solid @border-color;
+    padding: @modal-header-padding;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    flex-direction: row-reverse;
+    height: @modal-header-height;
+    align-items: center;
+    
+    .keditor-modal-title {
+        font-size: @modal-header-title-font-size;
+        line-height: 1.4;
+        margin: 0;
+        color: @modal-header-title-color;
+        font-weight: 500;
+        flex: 1;
+    }
+    
+    .keditor-modal-close {
+        border: 0;
+        background: 0;
+        font-size: @modal-closer-font-size;
+        color: @closer-color;
+        cursor: pointer;
+        width: @modal-closer-size;
+        height: @modal-closer-size;
+        line-height: @modal-closer-size;
+        padding: 0;
+        font-weight: bold;
+        
+        &:hover {
+            color: @closer-hover-color;
+        }
+    }
+    
+    .keditor-snippets-filter-wrapper {
+        flex: 1;
+        display: flex;
+    }
+    
+    .keditor-snippets-filter-component,
+    .keditor-snippets-filter-container {
+        display: none;
+    }
+    
+    .keditor-snippets-filter-label,
+    .keditor-snippets-filter,
+    .keditor-snippets-search {
+        .keditor-text();
+        height: 25px;
+        background: none;
+        margin-right: 15px;
+        font-weight: normal;
+        line-height: 25px;
+        border: 0;
+    }
+    
+    .keditor-snippets-filter,
+    .keditor-snippets-search {
+        background: @modal-input-bg;
+        padding: 0 5px;
+    }
+    
+    .keditor-snippets-search {
+        width: 40%;
+    }
+    
+}
+
+.keditor-modal-body {
+    height: ~"calc(100% - @{modal-header-height})";
+    position: relative;
+    z-index: 1;
+    
+    .has-footer & {
+        height: ~"calc(100% - @{modal-header-height} - @{modal-footer-height})";
+    }
+}
+
+.keditor-modal-footer {
+    background: @modal-bg;
+    border-top: 1px solid @border-color;
+    text-align: center;
+    padding: @modal-footer-padding;
+    height: @modal-footer-height;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    .keditor-btn {
+        margin: 0 5px;
+    }
+}
+

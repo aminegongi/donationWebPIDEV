@@ -1,0 +1,101 @@
+// Import
+// -------------------------------------------------
+@import "../_mixins";
+@import "../_variables";
+
+
+// Container
+// -------------------------------------------------
+.keditor-container {
+    position: relative;
+    
+    > .keditor-container-inner {
+        position: relative;
+        
+        &:before {
+            position: absolute;
+            top: unit(-@container-outline-with + @container-outline-offset, px);
+            right: unit(-@container-outline-with + @container-outline-offset, px);
+            left: unit(-@container-outline-with + @container-outline-offset, px);
+            bottom: unit(-@container-outline-with + @container-outline-offset, px);
+            border: @container-outline-with dashed transparent;
+            content: " ";
+            display: block;
+            z-index: -1;
+        }
+    }
+    
+    > .keditor-toolbar {
+        top: unit(-@container-outline-with + @container-outline-offset, px);
+        left: unit(-@toolbar-item-size + @container-outline-offset, px);
+        border-radius: @border-radius 0 0 @border-radius;
+        
+        > a {
+            background: @container-toolbar-button-bg;
+            color: @container-toolbar-button-color;
+            
+            &:hover {
+                background: @container-toolbar-button-bg-hover;
+            }
+        }
+    }
+    
+    > .keditor-toolbar-bottom-container {
+        bottom: -@container-outline-with;
+        
+        > a {
+            float: left;
+        }
+    }
+    
+    &:hover {
+        > .keditor-container-inner {
+            &:before {
+                border-color: @container-outline-color-hover;
+            }
+        }
+    }
+    
+    &.showed-keditor-toolbar {
+        z-index: 2;
+        
+        > .keditor-container-inner {
+            &:before {
+                border-color: @container-outline-color-selected;
+            }
+        }
+    }
+    
+    &:hover,
+    &.showed-keditor-toolbar {
+        > .keditor-toolbar {
+            display: block;
+        }
+    }
+    
+    &:last-child,
+    &:only-child {
+        > .keditor-toolbar-bottom-container {
+            display: none;
+        }
+    }
+}
+
+.keditor-container-content {
+    position: relative;
+    
+    &:before {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        content: " ";
+        display: block;
+        border: 1px dashed @container-content-outline-color;
+    }
+}
+
+.keditor-container-content-inner {
+    min-height: 70px !important;
+}
