@@ -1,0 +1,7 @@
+pub_pub:
+    resource: "@PubBundle/Resources/config/routing/pub.yml"
+    prefix:   /pub
+
+pub_homepage:
+    path:     /
+    defaults: { _controller: PubBundle:Default:index }

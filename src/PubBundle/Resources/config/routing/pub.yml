@@ -1,0 +1,24 @@
+pub_index:
+    path:     /
+    defaults: { _controller: "PubBundle:Pub:index" }
+    methods:  GET
+
+pub_show:
+    path:     /{id}/show
+    defaults: { _controller: "PubBundle:Pub:show" }
+    methods:  GET
+
+pub_new:
+    path:     /new
+    defaults: { _controller: "PubBundle:Pub:new" }
+    methods:  [GET, POST]
+
+pub_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "PubBundle:Pub:edit" }
+    methods:  [GET, POST]
+
+pub_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "PubBundle:Pub:delete" }
+    methods:  DELETE

@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Pub</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ pub.id }}</td>
+            </tr>
+            <tr>
+                <th>Titre</th>
+                <td>{{ pub.titre }}</td>
+            </tr>
+            <tr>
+                <th>Marque</th>
+                <td>{{ pub.marque }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ pub.description }}</td>
+            </tr>
+            <tr>
+                <th>Dateajout</th>
+                <td>{% if pub.dateAjout %}{{ pub.dateAjout|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Image</th>
+                <td>{{ pub.image }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('pub_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('pub_edit', { 'id': pub.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

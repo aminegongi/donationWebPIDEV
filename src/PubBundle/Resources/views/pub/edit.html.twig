@@ -1,0 +1,79 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-12 col-sm-12 ">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Publicité </h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li><a class="collapse-link" href="{{ path('pub_index') }}"><i class="fa fa-arrow-left"></i></a>
+                        </li>
+                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+
+                        <li><a class="close-link"><i class="fa fa-close"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content" style="display: block;">
+                    <br>
+                    {{ form_start(edit_form) }}
+
+
+                    <div class="item form-group">
+                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Titre <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 ">
+                            {{ form_widget(edit_form.titre,{'attr': {'class': 'form-control'}}) }}
+                            <ul class="parsley-errors-list filled" id="parsley-id-5"><li class="parsley-required">
+
+                                </li></ul>
+                        </div>
+                    </div>
+                    <div class="item form-group">
+                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Marque <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 ">
+                            {{ form_widget(edit_form.marque,{'attr': {'class': 'form-control'}}) }}
+                        </div>
+                    </div>
+                    <div class="item form-group">
+                        <label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Lien de redirection</label>
+                        <div class="col-md-6 col-sm-6 ">
+                            {{ form_widget(edit_form.description,{'attr': {'class': 'form-control'}}) }}
+                        </div>
+                    </div>
+
+                    <div class="item form-group">
+                        <label class="col-form-label col-md-3 col-sm-3 label-align">Chossisez une affiche<span class="required">*</span>
+                        </label>
+
+                        <div class="btn-group">
+                            <a class="btn" title="Insert picture (or just drag &amp; drop)" id="pictureBtn"><i class="fa fa-picture-o"></i></a>
+                            {{ form_widget(edit_form.image) }}
+                        </div></div>
+                    <div class="ln_solid"></div>
+                    <div class="item form-group">
+                        <div class="col-md-6 col-sm-6 offset-md-3">
+
+                            <a href="{{ path('pub_index') }}" class="btn btn-primary">Annuler</a>
+                            <button class="btn btn-primary" type="reset">Reset</button>
+
+                            <input type="submit" class="btn btn-success" value="Modifier">
+                        </div>
+                    </div>
+
+
+                    {{ form_end(edit_form) }}
+                    {{ form_start(delete_form) }}
+                    <input type="submit" class="btn btn-danger" value="Supprimer definitivement.">
+                    {{ form_end(delete_form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
