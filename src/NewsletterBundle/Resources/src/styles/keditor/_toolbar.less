@@ -1,0 +1,58 @@
+// Import
+// -------------------------------------------------
+@import "../_mixins";
+@import "../_variables";
+
+
+// Toolbar
+// -------------------------------------------------
+.keditor-toolbar {
+    position: absolute;
+    display: none;
+    z-index: 5;
+    .keditor-text();
+    overflow: hidden;
+    
+    > a {
+        font-size: @toolbar-item-font-size;
+        width: @toolbar-item-size;
+        height: @toolbar-item-size;
+        display: block;
+        text-align: center;
+        line-height: @toolbar-item-size;
+        transition: all @animation-duration;
+        
+        .fa {
+            line-height: inherit;
+        }
+    }
+    
+    .btn-container-move {
+        cursor: n-resize;
+    }
+    
+    .btn-component-move {
+        cursor: move;
+    }
+}
+
+.keditor-toolbar.keditor-toolbar-bottom {
+    top: auto !important;
+    left: 50% !important;
+    transform: translateX(-50%);
+    background-color: @component-toolbar-bg;
+    border-radius: @border-radius @border-radius 0 0 !important;
+    
+    > a {
+        line-height: unit(@toolbar-item-size + 1, px);
+    }
+}
+
+.keditor-toolbar-content-area,
+.keditor-toolbar-container-content {
+    text-align: center;
+    padding: 15px 0;
+    position: relative;
+    z-index: 1;
+    display: block;
+}

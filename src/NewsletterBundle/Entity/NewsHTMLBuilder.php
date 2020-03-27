@@ -42,10 +42,11 @@ class NewsHTMLBuilder
      */
     private $dateAjout;
 
-
-    //gee eg @ORM\ManyToOne(targetEntity="UserBundle\Entity\User")
-    //egeg ge @ORM\JoinColumn(name="addBy", referencedColumnName="id")
-    //private $addBy;
+    /**
+    * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User")
+    * @ORM\JoinColumn(name="addBy", referencedColumnName="id")
+    */
+    private $addBy;
 
     /**
      * Get id
@@ -130,4 +131,28 @@ class NewsHTMLBuilder
     }
 
 
+
+    /**
+     * Set addBy
+     *
+     * @param \UserBundle\Entity\User $addBy
+     *
+     * @return NewsHTMLBuilder
+     */
+    public function setAddBy(\UserBundle\Entity\User $addBy = null)
+    {
+        $this->addBy = $addBy;
+
+        return $this;
+    }
+
+    /**
+     * Get addBy
+     *
+     * @return \UserBundle\Entity\User
+     */
+    public function getAddBy()
+    {
+        return $this->addBy;
+    }
 }

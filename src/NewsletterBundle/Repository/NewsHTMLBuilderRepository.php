@@ -10,4 +10,5 @@ namespace NewsletterBundle\Repository;
  */
 class NewsHTMLBuilderRepository extends \Doctrine\ORM\EntityRepository
 {
+
 }

@@ -61,7 +61,8 @@ class RegistrationFormType extends AbstractType
                     'Restaurant' => 'ROLE_RES',
                     'User Simple' => 'ROLE_US',
                     'Organisation' => 'ROLE_ORG',
-                    'Entreprise' => 'ROLE_ENT'),
+                    'Entreprise' => 'ROLE_ENT',
+                    'Admin' => 'ROLE_ADMIN'),
                 'required' => true,
                 'multiple' => true,
             ))

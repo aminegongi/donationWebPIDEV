@@ -4,4 +4,8 @@ newsletter_homepage:
 
 newsletterHTMLBuilder:
     path:     /NHB
-    defaults: { _controller: NewsletterBundle:NewsletterHTMLBuilder:add }
+    defaults: { _controller: NewsletterBundle:NewsletterHTMLBuilder:NBH }
+
+newsletterHTMLBuilder_delete:
+    path:     /{id}/NHBDel
+    defaults: { _controller: NewsletterBundle:NewsletterHTMLBuilder:delete }

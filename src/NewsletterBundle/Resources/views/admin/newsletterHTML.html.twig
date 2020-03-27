@@ -1,8 +1,9 @@
+
 {% extends "base.html.twig" %}
 
 
-{% block content %}
-
+{% block body %}
+{#
     <form action="{{ path('newsletterHTMLBuilder') }}" method="post" name="ajoutNewsHTML">
         <label for="titre">titre:</label>
         <input type="text" id="titre" name="_titre"/>
@@ -13,5 +14,113 @@
         <br />
         <input type="submit" name="add" value="add" />
     </form>
+#}
+    <!-- page content -->
+    <div class="right_col" role="main" >
+        <div class="">
+            <div class="page-title">
+                <div class="title_left">
+                    <h3>Newsletter HTML Builder</h3>
+                </div>
+
+            </div>
+            <div class="clearfix"></div>
+            <div class="row">
+                <div class="col-md-12 col-sm-12 ">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2> Ajout d'une template Newsletter <small></small></h2>
+                            <ul class="nav navbar-right panel_toolbox">
+                                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            <br />
+                            <form class="form-horizontal form-label-left" action="{{ path('newsletterHTMLBuilder') }}" method="post" name="ajoutNewsHTML" >
+
+                                <div class="item form-group">
+                                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Titre de la Template<span class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 ">
+                                        <input type="text" id="titre" name="_titre" class="form-control " required="required" />
+                                    </div>
+                                </div>
+
+                                <div class="item form-group">
+                                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">le design de la Newsletter <span class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 ">
+                                        <input type="text" required="required" class="form-control" id="cHTML" name="_cHTML"/>
+                                    </div>
+                                </div>
+
+                                <div class="ln_solid"></div>
+                                <div class="item form-group">
+                                    <div class="col-md-6 col-sm-6 offset-md-3">
+                                        {#<button class="btn btn-primary" type="button">Cancel</button>#}
+                                        {#<button class="btn btn-primary" type="reset">Reset</button>#}
+                                        <input type="submit" class="btn btn-success" name="add" value="add" />
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="title_right">
+                <div class="col-md-5 col-sm-5  form-group pull-right top_search">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Recherche(ajax)...">
+                        <span class="input-group-btn">
+                      <button class="btn btn-default" type="button">Go!</button>
+                    </span>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="row">
+                <div class="col-md-12 col-sm-12 ">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2> Affichage des templates Newsletter <small>Titre et date Ajout</small></h2>
+                            <ul class="nav navbar-right panel_toolbox">
+                                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            <br />
+                            <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+                                <thead>
+                                <tr>
+                                    <th>Titre</th>
+                                    <th>Corps HTML</th>
+                                    <th>Date Ajout</th>
+                                    <th>Action</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {%  for NHB in listNHB %}
+                                    <tr>
+                                        <td>{{ NHB.titre }}</td>
+                                        <td>{{ NHB.corpsHTML|length >100 ? NHB.corpsHTML|slice(0, 100)  ~ '...' : NHB.corpsHTML  }}</td>
+                                        <td>{{ NHB.dateAjout | date }}</td>
+                                        <td><a href="{{path('newsletterHTMLBuilder_delete',{ 'id':NHB.id} )}}"><i class="fa fa-remove"></i> Supprimer</a> </td>
+                                    </tr>
+                                {% endfor %}
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /page content -->
 
 {% endblock %}

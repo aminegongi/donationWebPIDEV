@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>KEditor - Kademi Content Editor</title>
+        <link rel="stylesheet" type="text/css" href="./plugins/bootstrap-3.4.1/css/bootstrap.min.css" data-type="keditor-style" />
+        <link rel="stylesheet" type="text/css" href="./plugins/font-awesome-4.7.0/css/font-awesome.min.css" data-type="keditor-style" />
+        <!-- Start of KEditor styles -->
+        <link rel="stylesheet" type="text/css" href="../dist/css/keditor.css" data-type="keditor-style" />
+        <link rel="stylesheet" type="text/css" href="../dist/css/keditor-components.css" data-type="keditor-style" />
+        <!-- End of KEditor styles -->
+        <link rel="stylesheet" type="text/css" href="./plugins/code-prettify/src/prettify.css" />
+        <link rel="stylesheet" type="text/css" href="./css/examples.css" />
+    </head>
+    
+    <body>
+        <div class="container">
+            <form action="#" method="GET" >
+                <br />
+                <input type="text" name="titre" id="titre" placeholder="Titre" >
+                <br />
+                <br />
+
+                <div data-keditor="html" style="height: 700px;  width:auto;">
+                    <div id="content-area">
+                        
+                    </div>
+                </div>
+                <br />
+                <br />
+                <button type="button" onclick="jibCodeHTML()"><i class="fa fa-file-text-o"></i> Save </button>
+                <textarea name="textHTML" id="textHTML">Rien</textarea>
+                <input type="submit" name="btAdd" value="Ajouter" >
+            </form>
+        </div>
+        
+            
+
+        <script>
+            function jibCodeHTML(){
+                
+                var HTMLCode = $('#content-area').keditor('getContent');
+                var area = document.getElementById('textHTML');
+                var head = 
+                    "<!DOCTYPE html>"+
+                    "<html lang=\"en\">"+
+                    "<head>"+
+                    "<meta charset=\"UTF-8\" />"+
+                    "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />"+
+                    "<link rel=\"stylesheet\" type=\"text/css\" href=\"http://www.donation.tn/biblio/plugins/bootstrap-3.4.1/css/bootstrap.min.css\" data-type=\"keditor-style\" />"+
+                    "<link rel=\"stylesheet\" type=\"text/css\" href=\"http://www.donation.tn/biblio/plugins/font-awesome-4.7.0/css/font-awesome.min.css\" data-type=\"keditor-style\" />"+
+
+                    "<link rel=\"stylesheet\" type=\"text/css\" href=\"http://www.donation.tn/dist/css/keditor.css\" data-type=\"keditor-style\" />"+
+                    "<link rel=\"stylesheet\" type=\"text/css\" href=\"http://www.donation.tn/dist/css/keditor-components.css\" data-type=\"keditor-style\" />"+
+                    "<link rel=\"stylesheet\" type=\"text/css\" href=\"http://www.donation.tn/biblio/plugins/code-prettify/src/prettify.css\" />"+
+                    "<link rel=\"stylesheet\" type=\"text/css\" href=\"http://www.donation.tn/biblio/css/examples.css\" />"+
+                    "</head>";
+
+                var end = "</html>";
+                    
+                area.value = head + HTMLCode + end ; 
+                //modal.find('.content-html').html( HTMLCode );
+                //modal.modal('show');
+            }
+
+            function beautifyHtml(htmlCode) {
+                htmlCode = html_beautify(htmlCode, {
+                    'indent_size': '4',
+                    'indent_char': ' ',
+                    'space_after_anon_function': true,
+                    'end_with_newline': true
+                });
+                htmlCode = htmlCode.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+                return PR.prettyPrintOne(htmlCode, 'lang-html');
+            }
+        </script>
+        <script type="text/javascript" src="./plugins/jquery-1.11.3/jquery-1.11.3.min.js"></script>
+        <script type="text/javascript" src="./plugins/bootstrap-3.4.1/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="./plugins/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="./plugins/ckeditor-4.11.4/ckeditor.js"></script>
+        <script type="text/javascript" src="./plugins/formBuilder-2.5.3/form-builder.min.js"></script>
+        <script type="text/javascript" src="./plugins/formBuilder-2.5.3/form-render.min.js"></script>
+        <!-- Start of KEditor scripts -->
+        <script type="text/javascript" src="../dist/js/keditor.js"></script>
+        <script type="text/javascript" src="../dist/js/keditor-components.js"></script>
+        <!-- End of KEditor scripts -->
+        <script type="text/javascript" src="./plugins/code-prettify/src/prettify.js"></script>
+        <script type="text/javascript" src="./plugins/js-beautify-1.7.5/js/lib/beautify.js"></script>
+        <script type="text/javascript" src="./plugins/js-beautify-1.7.5/js/lib/beautify-html.js"></script>
+        <script type="text/javascript" src="./js/examples.js"></script>
+        <script type="text/javascript" data-keditor="script">
+            $(function () {
+                $('#content-area').keditor();
+            });
+        </script>
+    </body>
+</html>
