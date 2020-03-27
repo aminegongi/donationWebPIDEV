@@ -2,6 +2,8 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: services.yml }
+    - { resource: "@AideBundle/Resources/config/services.yml" }
+    - { resource: "@RestoDonBundle/Resources/config/services.yml" }
     - { resource: "@haytBundle/Resources/config/services.yml" }
     - { resource: "@UserBundle/Resources/config/services.yml" }
     - { resource: "@NewsletterBundle/Resources/config/services.yml" }
