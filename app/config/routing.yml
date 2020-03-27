@@ -1,3 +1,7 @@
+pub:
+    resource: "@PubBundle/Resources/config/routing/pub.yml"
+    prefix:   /admin/pub
+
 newsletter:
     resource: "@NewsletterBundle/Resources/config/routing.yml"
     prefix:   /admin/Newsletter
