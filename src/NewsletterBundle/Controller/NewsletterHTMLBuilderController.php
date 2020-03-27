@@ -36,8 +36,11 @@ class NewsletterHTMLBuilderController extends Controller
         $nhb = $em->getRepository(NewsHTMLBuilder::class)->find($id);
         $em->remove($nhb);
         $em->flush();
-        var_dump($id);
-        die();
         return  $this->redirectToRoute('newsletterHTMLBuilder');
+    }
+
+    public function nnAction(Request $req)
+    {
+        return  $this->render('@Newsletter/admin/custom_size.html');
     }
 }

@@ -2,7 +2,34 @@
 {% extends "base.html.twig" %}
 
 
+
 {% block body %}
+    <style>
+        .tooltipPrev {
+            position: relative;
+            display: inline-block;
+        }
+
+        .tooltipPrev .tooltiptextPrev {
+            visibility: hidden;
+            background-color: white;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px 0;
+
+            bottom: 100%;
+            left: 50%;
+            margin-left: -60px; /* Use half of the width (120/2 = 60), to center the tooltip */
+            /* Position the tooltip */
+            position: absolute;
+            z-index: 1;
+        }
+
+        .tooltipPrev:hover .tooltiptextPrev {
+            visibility: visible;
+        }
+    </style>
 {#
     <form action="{{ path('newsletterHTMLBuilder') }}" method="post" name="ajoutNewsHTML">
         <label for="titre">titre:</label>
@@ -107,7 +134,12 @@
                                 {%  for NHB in listNHB %}
                                     <tr>
                                         <td>{{ NHB.titre }}</td>
-                                        <td>{{ NHB.corpsHTML|length >100 ? NHB.corpsHTML|slice(0, 100)  ~ '...' : NHB.corpsHTML  }}</td>
+                                        <td>
+                                            {{ NHB.corpsHTML|length >100 ? NHB.corpsHTML|slice(0, 100)  ~ '...' : NHB.corpsHTML  }}
+                                            <div class="tooltipPrev"> <i style="color: #d98532;"  class="fa fa-info-circle"></i>
+                                                <iframe class="tooltiptextPrev" srcdoc="{{NHB.corpsHTML  }}" width = "400px" height = "460px"></iframe>
+                                            </div>
+                                        </td>
                                         <td>{{ NHB.dateAjout | date }}</td>
                                         <td><a href="{{path('newsletterHTMLBuilder_delete',{ 'id':NHB.id} )}}"><i class="fa fa-remove"></i> Supprimer</a> </td>
                                     </tr>

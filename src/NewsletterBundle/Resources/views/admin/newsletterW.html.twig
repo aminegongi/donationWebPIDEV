@@ -1,0 +1,129 @@
+{% extends "base.html.twig" %}
+
+
+{% block body %}
+
+    {#
+        <form action="{{ path('newsletterHTMLBuilder') }}" method="post" name="ajoutNewsHTML">
+            <label for="titre">titre:</label>
+            <input type="text" id="titre" name="_titre"/>
+            <br />
+            <label for="corps">corpsHTML:</label>
+            <input type="text" id="cHTML" name="_cHTML"/>
+            <br />
+            <br />
+            <input type="submit" name="add" value="add" />
+        </form>
+    #}
+    <!-- page content -->
+    <div class="right_col" role="main" >
+        <div class="">
+            <div class="page-title">
+                <div class="title_left">
+                    <h3>Newsletter</h3>
+                </div>
+
+            </div>
+            <div class="clearfix"></div>
+            <div class="row">
+                <div class="col-md-8 col-sm-12 ">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2> Affichages des Newsletters <small></small></h2>
+                            <ul class="nav navbar-right panel_toolbox">
+                                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            <br />
+                            <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+                                <thead>
+                                <tr>
+                                    <th>Libelle</th>
+                                    <th>Objet du Mail</th>
+                                    <th>Preview du Corps</th>
+                                    <th>Date Ajout</th>
+                                    <th>Envoyé ?</th>
+                                    <th>Action</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {%  for NW in listNW %}
+                                    <tr>
+                                        <td>{{ NW.libelle }}</td>
+                                        <td>{{ NW.objetMail }}</td>
+                                        <td>{{ NW.corpsID.titre }}</td>
+                                        <td>{{ NW.dateAjout|date }}</td>
+                                        {% if NW.dateEnvoi is null %}
+                                            <td> <a href="{{path('newsletterW',{ 'id':NW.id,'action':'Envoi'} )}}"><i class="fa fa-edit"></i>Envoyé </a> </td>
+                                            <td> <a href="{{path('newsletterW',{ 'id':NW.id,'action':'Modifier'} )}}"><i class="fa fa-edit"></i> Modifier </a>
+                                            <a href="{{path('newsletterW',{ 'id':NW.id,'action':'Supprimer'} )}}"><i class="fa fa-remove"></i> Supprimer</a> </td>
+                                        {% else %}
+                                            <td>{{ NW.dateEnvoi|date }}</td>
+                                            <td><a style="pointer-events: none;" href="#"><i ></i> Newsletter Archivée </a> </td>
+                                        {% endif %}
+                                    </tr>
+                                {% endfor %}
+
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-12 ">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2> {{action}} une Newsletter <small></small></h2>
+                            <ul class="nav navbar-right panel_toolbox">
+                                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            <br />
+                            {{ form_start(form) }}
+                                <div class="item form-group">
+                                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Libelle Newsletter<span class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 ">
+                                        {{ form_widget(form.libelle, {'attr':{'class': 'form-control'}}) }}
+                                    </div>
+                                </div>
+                                <div class="item form-group">
+                                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Objet du Mail<span class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 ">
+                                        {{ form_widget(form.objetMail, {'attr':{'class': 'form-control'}}) }}
+                                    </div>
+                                </div>
+                                <div class="item form-group">
+                                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Corps du Mail<span class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 ">
+                                        {{ form_widget(form.corpsID, {'attr':{'class': 'form-control'}}) }}
+                                    </div>
+                                </div>
+
+                                <div class="ln_solid"></div>
+                                <div class="item form-group">
+                                    <div class="col-md-6 col-sm-6 offset-md-3">
+                                        <input type="submit" class="btn btn-success" name="add" value="{{action}}" />
+                                    </div>
+                                </div>
+
+
+
+                            {{ form_end(form) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /page content -->
+
+{% endblock %}

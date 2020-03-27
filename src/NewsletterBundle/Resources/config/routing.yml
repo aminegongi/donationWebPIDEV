@@ -9,3 +9,11 @@ newsletterHTMLBuilder:
 newsletterHTMLBuilder_delete:
     path:     /{id}/NHBDel
     defaults: { _controller: NewsletterBundle:NewsletterHTMLBuilder:delete }
+
+ne:
+    path:     /n
+    defaults: { _controller: NewsletterBundle:NewsletterHTMLBuilder:nn }
+
+newsletterW:
+    path:     /NW
+    defaults: { _controller: NewsletterBundle:Newsletter:news }
