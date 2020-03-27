@@ -1,3 +1,8 @@
+resto_don:
+    resource: "@RestoDonBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 newsletter:
     resource: "@NewsletterBundle/Resources/config/routing.yml"
     prefix:   /admin/Newsletter
