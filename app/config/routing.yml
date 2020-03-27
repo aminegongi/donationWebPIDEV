@@ -1,12 +1,11 @@
-aide:
-    resource: "@AideBundle/Controller/"
-    type:     annotation
-    prefix:   /
+#aide:
+#resource: "@AideBundle/Resources/config/routing.yml"
+#prefix:   /aide
 
-resto_don:
-    resource: "@RestoDonBundle/Controller/"
-    type:     annotation
-    prefix:   /
+#resto_don:
+#resource: "@RestoDonBundle/Controller/"
+#type:     annotation
+#prefix:   /
 
 newsletter:
     resource: "@NewsletterBundle/Resources/config/routing.yml"
