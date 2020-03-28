@@ -1,0 +1,3 @@
+resto_don_homepage:
+    path:     /
+    defaults: { _controller: RestoDonBundle:Default:index }

@@ -1,3 +1,7 @@
+resto_don:
+    resource: "@RestoDonBundle/Resources/config/routing.yml"
+    prefix:   /RestoDon
+
 pub:
     resource: "@PubBundle/Resources/config/routing/pub.yml"
     prefix:   /admin/pub
