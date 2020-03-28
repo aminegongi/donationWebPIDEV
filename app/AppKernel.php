@@ -23,6 +23,7 @@ class AppKernel extends Kernel
             new NewsletterBundle\NewsletterBundle(),
             new PubBundle\PubBundle(),
             new RestoDonBundle\RestoDonBundle(),
+            new AideBundle\AideBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
