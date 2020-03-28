@@ -1,0 +1,3 @@
+nInscriF:
+    path:     /nif
+    defaults: { _controller: NewsletterBundle:NewsletterInscri:ninscrire }

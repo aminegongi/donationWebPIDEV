@@ -17,3 +17,7 @@ ne:
 newsletterW:
     path:     /NW
     defaults: { _controller: NewsletterBundle:Newsletter:news }
+
+newsletterInscri:
+    path:     /NI
+    defaults: { _controller: NewsletterBundle:NewsletterInscri:newsInscri }
