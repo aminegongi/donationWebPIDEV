@@ -17,9 +17,6 @@ class NewsletterInscriController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($in);
             $em->flush();
-            $req->getSession()
-                ->getFlashBag()
-                ->add('notice', 'success');
             $referer = $req->headers->get('referer');
             return $this->redirect($referer);
         }
