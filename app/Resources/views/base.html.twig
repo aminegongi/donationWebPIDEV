@@ -131,7 +131,7 @@
         <!-- /footer content -->
       </div>
     </div>
-
+{% block javascript %}
     <!-- jQuery -->
     <script src="{{ asset('gentelella-master/vendors/jquery/dist/jquery.min.js') }}"></script>
     <!-- Bootstrap -->
@@ -171,6 +171,7 @@
     <script src="{{ asset('gentelella-master/vendors/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
     <!-- Custom Theme Scripts -->
     <script src="{{ asset('gentelella-master/build/js/custom.min.js') }}"></script>
+    {% endblock %}
 
  {#   <!-- Datatables -->
     <script src="{{ asset('gentelella-master/vendors/datatables.net/js/jquery.dataTables.min.js') }}"></script>

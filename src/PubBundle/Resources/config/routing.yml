@@ -5,3 +5,5 @@ pub_pub:
 pub_homepage:
     path:     /
     defaults: { _controller: PubBundle:Default:index }
+
+

@@ -1,3 +1,6 @@
+resto_org:
+    resource: "@RestoOrgBundle/Resources/config/routing/publicationdon.yml"
+    prefix:   /RestoOrg
 aide:
     resource: "@AideBundle/Resources/config/routing.yml"
     prefix:   /aide

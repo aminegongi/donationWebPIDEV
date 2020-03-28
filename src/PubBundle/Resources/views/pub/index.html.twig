@@ -53,7 +53,7 @@
                                                 <div class="mask">
                                                     <p>{{ pub.titre }}</p>
                                                     <div class="tools tools-bottom">
-                                                        <a href="{{ path('pub_show', { 'id': pub.id }) }}"><i class="fa fa-link"></i></a>
+                                                        <a href="{{ path('update_map', { 'idPub': pub.id }) }}"><i class="fa fa-link"></i></a>
                                                         <a href="{{ path('pub_edit', { 'id': pub.id }) }}"><i class="fa fa-pencil"></i></a>
                                                     </div>
                                                 </div>
@@ -72,44 +72,7 @@
                 </div>
             </div>
 
-    {# Gooogle API#}
-    <div class="row">
-        <div class="col-md-12">
-            <div class="x_panel">
-                <div class="x_title">
-                    <h2>Other Graph types <small> Assorted graph types</small></h2>
-                    <ul class="nav navbar-right panel_toolbox">
-                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                        </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="#">Settings 1</a>
-                                <a class="dropdown-item" href="#">Settings 2</a>
-                            </div>
-                        </li>
-                        <li><a class="close-link"><i class="fa fa-close"></i></a>
-                        </li>
-                    </ul>
-                    <div class="clearfix"></div>
-                </div>
-                <div class="x_content">
 
-                    <div class="row">
-
-                        <div class="col-md-8 center-margin" style="padding: 30px">
-                            <p>World Vector Map</p>
-                            {#ici div de google maps#}
-                        </div>
-                    </div>
-                    <div class="clearfix"></div>
-
-
-
-                </div>
-            </div>
-        </div>
-    </div>
 
 
 

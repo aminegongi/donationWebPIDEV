@@ -22,6 +22,7 @@ class ComposerStaticInitc1191d9ace51ddfc51324677a67b7076
     public static $prefixLengthsPsr4 = array (
         'T' => 
         array (
+            'Twig\\Extensions\\' => 16,
             'Twig\\' => 5,
             'Tests\\' => 6,
         ),
@@ -85,6 +86,10 @@ class ComposerStaticInitc1191d9ace51ddfc51324677a67b7076
     );
 
     public static $prefixDirsPsr4 = array (
+        'Twig\\Extensions\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/twig/extensions/src',
+        ),
         'Twig\\' => 
         array (
             0 => __DIR__ . '/..' . '/twig/twig/src',
@@ -246,9 +251,20 @@ class ComposerStaticInitc1191d9ace51ddfc51324677a67b7076
     public static $prefixesPsr0 = array (
         'T' => 
         array (
+            'Twig_Extensions_' => 
+            array (
+                0 => __DIR__ . '/..' . '/twig/extensions/lib',
+            ),
             'Twig_' => 
             array (
                 0 => __DIR__ . '/..' . '/twig/twig/lib',
+            ),
+        ),
+        'K' => 
+        array (
+            'Knp\\Bundle\\TimeBundle' => 
+            array (
+                0 => __DIR__ . '/..' . '/knplabs/knp-time-bundle',
             ),
         ),
         'D' => 

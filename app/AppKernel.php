@@ -24,6 +24,8 @@ class AppKernel extends Kernel
             new PubBundle\PubBundle(),
             new RestoDonBundle\RestoDonBundle(),
             new AideBundle\AideBundle(),
+            new RestoOrgBundle\RestoOrgBundle(),
+            new Knp\Bundle\TimeBundle\KnpTimeBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

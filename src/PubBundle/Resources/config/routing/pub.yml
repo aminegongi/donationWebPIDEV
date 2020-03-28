@@ -22,3 +22,7 @@ pub_delete:
     path:     /{id}/delete
     defaults: { _controller: "PubBundle:Pub:delete" }
     methods:  DELETE
+update_map:
+    path:     /map{idPub}
+    defaults: { _controller: "PubBundle:Publicite_country:updateMap" }
+    methods:  [GET, POST]

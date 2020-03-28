@@ -58,6 +58,14 @@ class Pub
 
 
     /**
+     * @ORM\OneToMany(targetEntity="Apps_countries", mappedBy="id_country")
+     *
+     * @ORM\Column(type="string")
+     */
+    private $country;
+
+
+    /**
      * Get id
      *
      * @return integer
@@ -186,5 +194,22 @@ class Pub
     {
         return $this->image;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getCountry()
+    {
+        return $this->country;
+    }
+
+    /**
+     * @param mixed $country
+     */
+    public function setCountry($country)
+    {
+        $this->country = $country;
+    }
+
 }
 
