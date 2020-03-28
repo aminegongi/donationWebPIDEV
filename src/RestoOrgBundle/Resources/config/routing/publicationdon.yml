@@ -1,0 +1,24 @@
+publicationdon_index:
+    path:     /
+    defaults: { _controller: "RestoOrgBundle:PublicationDon:index" }
+    methods:  GET
+
+publicationdon_show:
+    path:     /{id}/show
+    defaults: { _controller: "RestoOrgBundle:PublicationDon:show" }
+    methods:  GET
+
+publicationdon_new:
+    path:     /new
+    defaults: { _controller: "RestoOrgBundle:PublicationDon:new" }
+    methods:  [GET, POST]
+
+publicationdon_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "RestoOrgBundle:PublicationDon:edit" }
+    methods:  [GET, POST]
+
+publicationdon_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "RestoOrgBundle:PublicationDon:delete" }
+    methods:  DELETE

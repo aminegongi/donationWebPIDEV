@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Publicationdon</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ publicationDon.id }}</td>
+            </tr>
+            <tr>
+                <th>Type</th>
+                <td>{{ publicationDon.type }}</td>
+            </tr>
+            <tr>
+                <th>Titre</th>
+                <td>{{ publicationDon.titre }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ publicationDon.description }}</td>
+            </tr>
+            <tr>
+                <th>Datepublication</th>
+                <td>{% if publicationDon.datePublication %}{{ publicationDon.datePublication|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Nbreup</th>
+                <td>{{ publicationDon.nbreUp }}</td>
+            </tr>
+            <tr>
+                <th>Nbreplat</th>
+                <td>{{ publicationDon.nbrePlat }}</td>
+            </tr>
+            <tr>
+                <th>Etat</th>
+                <td>{{ publicationDon.etat }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('publicationdon_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('publicationdon_edit', { 'id': publicationDon.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

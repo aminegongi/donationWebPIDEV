@@ -1,0 +1,7 @@
+resto_org_publicationdon:
+    resource: "@RestoOrgBundle/Resources/config/routing/publicationdon.yml"
+    prefix:   /publicationdon
+
+resto_org_homepage:
+    path:     /
+    defaults: { _controller: RestoOrgBundle:Default:index }

@@ -1,0 +1,23 @@
+{#{% extends 'front.html.twig' %} #}
+{{ dump(publicationDons) }}
+{% block body %}
+
+        {% for pd in publicationDons %}
+            {#photo#}{{ pd.ajoutePar.prenom }}{{ pd.ajoutePar.nom }}{{ pd.ajoutePar.numtel }}
+
+                {{ pd.titre }}
+             {{ pd.description }}
+               {% if pd.datePublication %}{{ pd.datePublication|ago  }}{% endif %}
+            {% if pd.nbrePlat %} Nous avons besoin de {{ pd.nbrePlat }} pour nourir {{ pd.nbrePlat }}{% endif %}
+
+               
+                            <a href="{{ path('publicationdon_show', { 'id': pd.id }) }}">show</a>
+                    
+                            <a href="{{ path('publicationdon_edit', { 'id': pd.id }) }}">edit</a>
+          
+        {% endfor %}
+
+
+            <a href="{{ path('publicationdon_new') }}">Create a new pd</a>
+
+{% endblock %}
