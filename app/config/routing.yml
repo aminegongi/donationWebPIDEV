@@ -1,3 +1,7 @@
+aide:
+    resource: "@AideBundle/Resources/config/routing.yml"
+    prefix:   /aide
+
 resto_don:
     resource: "@RestoDonBundle/Resources/config/routing.yml"
     prefix:   /RestoDon

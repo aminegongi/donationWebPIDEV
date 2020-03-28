@@ -1,0 +1,3 @@
+aide_homepage:
+    path:     /
+    defaults: { _controller: AideBundle:Default:index }
