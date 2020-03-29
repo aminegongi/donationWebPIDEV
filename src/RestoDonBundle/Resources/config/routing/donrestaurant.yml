@@ -1,0 +1,24 @@
+donrestaurant_index:
+    path:     /
+    defaults: { _controller: "RestoDonBundle:DonRestaurant:index" }
+    methods:  GET
+
+donrestaurant_show:
+    path:     /{idDon}/show
+    defaults: { _controller: "RestoDonBundle:DonRestaurant:show" }
+    methods:  GET
+
+donrestaurant_new:
+    path:     /new
+    defaults: { _controller: "RestoDonBundle:DonRestaurant:new" }
+    methods:  [GET, POST]
+
+donrestaurant_edit:
+    path:     /{idDon}/edit
+    defaults: { _controller: "RestoDonBundle:DonRestaurant:edit" }
+    methods:  [GET, POST]
+
+donrestaurant_delete:
+    path:     /{idDon}/delete
+    defaults: { _controller: "RestoDonBundle:DonRestaurant:delete" }
+    methods:  DELETE

@@ -1,0 +1,24 @@
+tarifresto_index:
+    path:     /
+    defaults: { _controller: "RestoDonBundle:TarifResto:index" }
+    methods:  GET
+
+tarifresto_show:
+    path:     /{idResto}/show
+    defaults: { _controller: "RestoDonBundle:TarifResto:show" }
+    methods:  GET
+
+tarifresto_new:
+    path:     /new
+    defaults: { _controller: "RestoDonBundle:TarifResto:new" }
+    methods:  [GET, POST]
+
+tarifresto_edit:
+    path:     /{idResto}/edit
+    defaults: { _controller: "RestoDonBundle:TarifResto:edit" }
+    methods:  [GET, POST]
+
+tarifresto_delete:
+    path:     /{idResto}/delete
+    defaults: { _controller: "RestoDonBundle:TarifResto:delete" }
+    methods:  DELETE

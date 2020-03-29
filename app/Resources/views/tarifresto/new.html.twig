@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <section style="position: relative; left: 20%;">
+    <h1>Tarifresto creation</h1>
+
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <input type="submit" value="Create" />
+    {{ form_end(form) }}
+
+    <ul>
+        <li>
+            <a href="{{ path('tarifresto_index') }}">Back to the list</a>
+        </li>
+    </ul>
+    </section>
+{% endblock %}

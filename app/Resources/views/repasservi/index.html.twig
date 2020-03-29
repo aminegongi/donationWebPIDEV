@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Repasservis list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Idresto</th>
+                <th>Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for repasServi in repasServis %}
+            <tr>
+                <td><a href="{{ path('repasservi_show', { 'idResto': repasServi.idResto }) }}">{{ repasServi.idResto }}</a></td>
+                <td>{% if repasServi.date %}{{ repasServi.date|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('repasservi_show', { 'idResto': repasServi.idResto }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('repasservi_edit', { 'idResto': repasServi.idResto }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('repasservi_new') }}">Create a new repasServi</a>
+        </li>
+    </ul>
+{% endblock %}

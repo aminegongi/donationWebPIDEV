@@ -1,3 +1,15 @@
+resto_don_tarifresto:
+    resource: "@RestoDonBundle/Resources/config/routing/tarifresto.yml"
+    prefix:   /tarifresto
+
+resto_don_repasservi:
+    resource: "@RestoDonBundle/Resources/config/routing/repasservi.yml"
+    prefix:   /repasservi
+
+resto_don_donrestaurant:
+    resource: "@RestoDonBundle/Resources/config/routing/donrestaurant.yml"
+    prefix:   /donrestaurant
+
 resto_don_homepage:
     path:     /
     defaults: { _controller: RestoDonBundle:Default:index }
