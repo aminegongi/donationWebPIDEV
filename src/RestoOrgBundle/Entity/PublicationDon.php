@@ -45,7 +45,7 @@ class PublicationDon
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="datePublication", type="datetime")
+     * @ORM\Column(name="datePublication", type="datetime",options={"default": "CURRENT_TIMESTAMP"},nullable=true)
      */
     private $datePublication;
 
@@ -66,7 +66,7 @@ class PublicationDon
     /**
      * @var int
      *
-     * @ORM\Column(name="etat", type="integer")
+     * @ORM\Column(name="etat", type="integer",options={"default": 1},nullable=true)
      */
     private $etat;
 

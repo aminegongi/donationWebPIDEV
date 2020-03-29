@@ -1,21 +1,29 @@
-{% extends 'base.html.twig' %}
+{% extends 'front.html.twig' %}
 
 {% block body %}
-    <h1>Publicationdon edit</h1>
 
-    {{ form_start(edit_form) }}
-        {{ form_widget(edit_form) }}
-        <input type="submit" value="Edit" />
-    {{ form_end(edit_form) }}
+    <div class="row">
 
-    <ul>
-        <li>
-            <a href="{{ path('publicationdon_index') }}">Back to the list</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+        <div class="col">
+            <div class="search-wrapper">
+
+                {{ form_start(edit_form) }}
+                <form class="search-form" action="#">
+
+
+                    {{ form_widget(edit_form) }}
+                    <input type="submit" class="button border-0 mt-3">
+
+
+                </form>{{ form_end(edit_form) }}
+            </div>
+
+        </div>
+    </div>
+
+
+    <a href="{{ path('publicationdon_index') }}">Back to the list</a>
+    {{ form_start(delete_form) }}
+    <input type="submit" value="Delete">
+    {{ form_end(delete_form) }}
 {% endblock %}

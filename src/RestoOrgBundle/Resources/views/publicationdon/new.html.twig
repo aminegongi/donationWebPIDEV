@@ -1,16 +1,28 @@
-{#{% extends 'front.html.twig' %} #}
+{% extends 'front.html.twig' %}
 
 {% block body %}
-    <h1>Publicationdon creation</h1>
 
-    {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <input type="submit" value="Create" />
-    {{ form_end(form) }}
 
-    <ul>
-        <li>
+            <div class="row">
+
+                <div class="col">
+                    <div class="search-wrapper">
+
+                        {{ form_start(form) }}
+                        <form class="search-form" action="#">
+
+
+                            {{ form_widget(form) }}
+                            <input type="submit" class="button border-0 mt-3">
+
+
+                        </form>{{ form_end(form) }}
+                    </div>
+
+                </div>
+            </div>
+
+
             <a href="{{ path('publicationdon_index') }}">Back to the list</a>
-        </li>
-    </ul>
+
 {% endblock %}

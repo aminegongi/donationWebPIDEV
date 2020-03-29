@@ -7,7 +7,6 @@ parameters:
     database_password: null
     mailer_transport: smtp
     mailer_host: in-v3.mailjet.com
-    mailer_user:     10e3b34097c6fcea97b7e5910cea4a36
+    mailer_user: 10e3b34097c6fcea97b7e5910cea4a36
     mailer_password: 1828c7ebdec66b463032892c9770d468
     secret: ThisTokenIsNotSoSecretChangeIt
-

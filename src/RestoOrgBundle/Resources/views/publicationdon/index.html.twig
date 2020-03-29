@@ -1,23 +1,48 @@
-{#{% extends 'front.html.twig' %} #}
-{{ dump(publicationDons) }}
+{% extends 'front.html.twig' %}
+
 {% block body %}
+    {{ dump(connectedUser.id) }}
 
         {% for pd in publicationDons %}
-            {#photo#}{{ pd.ajoutePar.prenom }}{{ pd.ajoutePar.nom }}{{ pd.ajoutePar.numtel }}
 
-                {{ pd.titre }}
-             {{ pd.description }}
-               {% if pd.datePublication %}{{ pd.datePublication|ago  }}{% endif %}
-            {% if pd.nbrePlat %} Nous avons besoin de {{ pd.nbrePlat }} pour nourir {{ pd.nbrePlat }}{% endif %}
+            <div class="owl-item active" style="width: 950px; margin-right: 30px; ">
+                <div class="testimonial__item" style="background-color:rgba(129,178,255,0.3) ; border-color: #0b2e13; border-width: 10px; ">
+                    <div class="row">
+                        <div class="col-12 col-md-8">
+                            <div class="row">
+                                <div class="col">
+                                    <img class="nav-img" src="/donationwebpidev/web/front/img/img.jpg" alt="">
+                                </div>
+                                <div class="col">
+                                    <div class="row">{{ pd.ajoutePar.prenom }} {{ pd.ajoutePar.nom }}</div>
+                                    <div class="row">{#{{ pd.ajoutePar.roles }}#} Restaurant</div>
+                                </div>
+                            </div>
 
-               
-                            <a href="{{ path('publicationdon_show', { 'id': pd.id }) }}">show</a>
-                    
-                            <a href="{{ path('publicationdon_edit', { 'id': pd.id }) }}">edit</a>
-          
+                        </div>
+                        <div class="col-6 col-md-4">{ pd.ajoutePar.numtel }}</div>
+                    </div>
+                    <div class="row">
+                        {{  pd.titre }}
+                    </div>
+                    <div class="row">
+                        {{ pd.description |raw }}
+                    </div>
+                    <div class="row">
+                        <div class="col-6 col-md-4"> {% if pd.datePublication %}{{ pd.datePublication|ago  }}{% endif %}</div>
+                        <div class="col-12 col-md-8">{% if pd.nbrePlat %} Nous avons besoin de {{ pd.nbrePlat }} pour nourir {{ pd.nbrePlat }}{% endif %}</div>
+                    </div>
+                </div>
+            </div>
+
+{% if(connectedUser.id==pd.ajoutePar.id) %}
+ <a href="{{ path('publicationdon_edit', { 'id': pd.id }) }}">edit</a>
+{% endif %}
+            <hr>
         {% endfor %}
 
 
             <a href="{{ path('publicationdon_new') }}">Create a new pd</a>
 
 {% endblock %}
+
