@@ -10,4 +10,55 @@ namespace NewsletterBundle\Repository;
  */
 class InscriNewsRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function findNbInscri()
+    {
+        $conn = $this->getEntityManager()
+            ->getConnection();
+        $sql="select count(*) as nbin from inscri_news";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetch(0);
+    }
+
+    public function findNbInscriAj()
+    {
+        $conn = $this->getEntityManager()
+            ->getConnection();
+        $sql="select count(*) as nbin from inscri_news where date(dateInscri)=CURRENT_DATE";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetch(0);
+    }
+
+    public function findNbInscriparDate()
+    {
+        $conn = $this->getEntityManager()
+            ->getConnection();
+        $sql="select date(dateInscri) as date ,count(*) as nbin from inscri_news GROUP BY date(dateInscri)";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
+    public function findMaxCountry()
+    {
+        $conn = $this->getEntityManager()
+            ->getConnection();
+        $sql="SELECT pays as pp , COUNT(*) as cc FROM `inscri_news` GROUP BY pays ORDER BY COUNT(*) DESC LIMIT 1";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
+    public function findLastInscri()
+    {
+        $conn = $this->getEntityManager()
+            ->getConnection();
+        $sql="SELECT a_mail as mail , dateInscri as di , pays as pp FROM `inscri_news` ORDER BY dateInscri DESC LIMIT 1";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
+
 }

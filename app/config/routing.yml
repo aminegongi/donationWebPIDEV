@@ -23,7 +23,7 @@ newsletterF:
 
 user:
     resource: "@UserBundle/Resources/config/routing.yml"
-    prefix:   /user
+    prefix:   /admin/user
 
 hayt:
     resource: "@haytBundle/Controller/"

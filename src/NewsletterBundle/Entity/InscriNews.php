@@ -36,6 +36,21 @@ class InscriNews
     private $dateInscri;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="pays", type="string", length=255)
+     */
+    private $pays;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="a_ip", type="string", length=255)
+     */
+    private $ip;
+
+
+    /**
      * Get id
      *
      * @return int
@@ -91,5 +106,54 @@ class InscriNews
     public function getDateInscri()
     {
         return $this->dateInscri;
+    }
+
+
+    /**
+     * Set pays
+     *
+     * @param string $pays
+     *
+     * @return InscriNews
+     */
+    public function setPays($pays)
+    {
+        $this->pays = $pays;
+
+        return $this;
+    }
+
+    /**
+     * Get pays
+     *
+     * @return string
+     */
+    public function getPays()
+    {
+        return $this->pays;
+    }
+
+    /**
+     * Set ip
+     *
+     * @param string $ip
+     *
+     * @return InscriNews
+     */
+    public function setIp($ip)
+    {
+        $this->ip = $ip;
+
+        return $this;
+    }
+
+    /**
+     * Get ip
+     *
+     * @return string
+     */
+    public function getIp()
+    {
+        return $this->ip;
     }
 }

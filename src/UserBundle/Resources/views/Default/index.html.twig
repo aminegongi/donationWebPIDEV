@@ -1,1 +1,83 @@
-Hello World!
+
+{% extends "base.html.twig" %}
+
+
+
+{% block body %}
+
+    <!-- page content -->
+    <div class="right_col" role="main" >
+        <div class="">
+            <div class="page-title">
+                <div class="title_left">
+                    <h3>Les Utilisateurs</h3>
+                </div>
+                <div class="title_right">
+                    <div class="col-md-5 col-sm-5  form-group pull-right top_search">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Recherche(ajax)...">
+                            <span class="input-group-btn">
+                      <button class="btn btn-default" type="button">Go!</button>
+                    </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <style>
+                .absolute-center {
+                    display: -ms-flexbox;
+                    display: -webkit-flex;
+                    display: flex;
+
+                    -ms-flex-align: center;
+                    -webkit-align-items: center;
+                    -webkit-box-align: center;
+
+                    align-items: center;
+
+                }
+            </style>
+                <div class="row">
+                {%  for user in listU %}
+                    {% if user.roles['0'] != 'ROLE_ADMIN' %}
+                        <div class="col-md-3   widget widget_tally_box">
+                        <div class="x_panel fixed_height_390">
+                            <div class="x_content">
+                                <div class="flex">
+                                    <ul class="list-inline widget_profile_box absolute-center">
+                                        <li>
+                                            {% if user.image is null %}
+                                                <img src="{{ asset('gentelella-master/production/images/user.png') }}" alt="{{user.username}}" class="img-circle profile_img">
+                                            {% else %}
+                                                <img src="{{ asset('uploads/UserImg/'~  user.image ) }}" alt="{{user.username}}" class="img-circle profile_img">
+                                            {% endif %}
+                                        </li>
+                                    </ul>
+                                </div>
+                                {% if user.roles['0'] == 'ROLE_US' %}
+                                    <h3 class="name" style="margin: 0px">{{user.nom ~ user.prenom}}</h3>
+                                {% else %}
+                                    <h3 class="name" style="margin: 0px">{{user.nom}}</h3>
+                                {% endif %}
+                                <hr>
+                                <div style="align: left;">
+                                    <p>
+                                        If you've decided to go in development mode and tweak all of this a bit, there are few things you should do.
+                                    </p>
+                                    <p>
+                                        If you've decided to go in development mode and tweak all of this a bit, there are few things you should do.
+                                    </p>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <!-- /page content -->
+
+{% endblock %}
