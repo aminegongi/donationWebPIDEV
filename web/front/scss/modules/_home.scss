@@ -1,4 +1,9 @@
-
+.fixingBody{
+  position: relative;
+  top: 100px;
+  text-align: center;
+  margin-bottom: 100px;
+}
 .service-card{
   background: #f8f8ff;
   @include transition;

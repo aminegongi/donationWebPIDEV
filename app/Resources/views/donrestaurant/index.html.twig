@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Donrestaurants list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Iddon</th>
+                <th>Idresto</th>
+                <th>Iduser</th>
+                <th>Montant</th>
+                <th>Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for donRestaurant in donRestaurants %}
+            <tr>
+                <td><a href="{{ path('donrestaurant_show', { 'idDon': donRestaurant.idDon }) }}">{{ donRestaurant.idDon }}</a></td>
+                <td>{{ donRestaurant.idResto }}</td>
+                <td>{{ donRestaurant.idUser }}</td>
+                <td>{{ donRestaurant.montant }}</td>
+                <td>{% if donRestaurant.date %}{{ donRestaurant.date|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('donrestaurant_show', { 'idDon': donRestaurant.idDon }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('donrestaurant_edit', { 'idDon': donRestaurant.idDon }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('donrestaurant_new') }}">Create a new donRestaurant</a>
+        </li>
+    </ul>
+{% endblock %}

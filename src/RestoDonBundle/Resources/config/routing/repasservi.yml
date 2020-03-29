@@ -1,0 +1,24 @@
+repasservi_index:
+    path:     /
+    defaults: { _controller: "RestoDonBundle:RepasServi:index" }
+    methods:  GET
+
+repasservi_show:
+    path:     /{idResto}/show
+    defaults: { _controller: "RestoDonBundle:RepasServi:show" }
+    methods:  GET
+
+repasservi_new:
+    path:     /new
+    defaults: { _controller: "RestoDonBundle:RepasServi:new" }
+    methods:  [GET, POST]
+
+repasservi_edit:
+    path:     /{idResto}/edit
+    defaults: { _controller: "RestoDonBundle:RepasServi:edit" }
+    methods:  [GET, POST]
+
+repasservi_delete:
+    path:     /{idResto}/delete
+    defaults: { _controller: "RestoDonBundle:RepasServi:delete" }
+    methods:  DELETE

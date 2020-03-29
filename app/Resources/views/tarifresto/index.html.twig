@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Tarifrestos list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Idresto</th>
+                <th>Tarif</th>
+                <th>Portefeuillevirtuel</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for tarifResto in tarifRestos %}
+            <tr>
+                <td><a href="{{ path('tarifresto_show', { 'idResto': tarifResto.idResto }) }}">{{ tarifResto.idResto }}</a></td>
+                <td>{{ tarifResto.tarif }}</td>
+                <td>{{ tarifResto.portefeuilleVirtuel }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('tarifresto_show', { 'idResto': tarifResto.idResto }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('tarifresto_edit', { 'idResto': tarifResto.idResto }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('tarifresto_new') }}">Create a new tarifResto</a>
+        </li>
+    </ul>
+{% endblock %}
