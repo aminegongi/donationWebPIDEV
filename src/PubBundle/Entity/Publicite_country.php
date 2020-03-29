@@ -23,7 +23,7 @@ class Publicite_country
 
     /**
      * @ORM\ManyToOne(targetEntity="Pub")
-     * @ORM\JoinColumn(name="idPublicite", referencedColumnName="id")
+     * @ORM\JoinColumn(name="idPublicite", referencedColumnName="id",onDelete="CASCADE")
      **/
     private $idPublicite;
 

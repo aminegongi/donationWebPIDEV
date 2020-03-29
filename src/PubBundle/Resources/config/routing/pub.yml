@@ -26,3 +26,7 @@ update_map:
     path:     /map{idPub}
     defaults: { _controller: "PubBundle:Publicite_country:updateMap" }
     methods:  [GET, POST]
+test_rec:
+    path:     /rec
+    defaults: { _controller: "PubBundle:Pub:rec" }
+    methods:  GET

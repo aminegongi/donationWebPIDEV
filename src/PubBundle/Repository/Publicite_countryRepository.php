@@ -24,7 +24,15 @@ class Publicite_countryRepository extends \Doctrine\ORM\EntityRepository
         $sql="select country_code , nbrClick from apps_countries INNER JOIN publicite_country on publicite_country.idCountry=apps_countries.id WHERE publicite_country.idPublicite =:ii ";
         $stmt = $conn->prepare($sql);
         $stmt->execute(array('ii' => $i));
-
         return $stmt->fetchAll();
+    }
+    public function insertNewPubCountry($idPub,$idCountry)
+    {
+        $conn = $this->getEntityManager()
+            ->getConnection();
+        $sql="INSERT INTO `publicite_country`(`nbrClick`, `idPublicite`, `idCountry`) VALUES (0,:idPub,:idCountry)";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute(array('idPub' => $idPub,'idCountry'=>$idCountry));
+
     }
 }

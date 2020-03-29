@@ -10,4 +10,14 @@ namespace PubBundle\Repository;
  */
 class PubRepository extends \Doctrine\ORM\EntityRepository
 {
+    public  function randomPub()
+    {
+
+        $conn = $this->getEntityManager()
+            ->getConnection();
+        $sql="select * from Publicite order by rand() limit 1 ";
+        $stmt = $conn->prepare($sql);
+
+        return $stmt->fetchAll();
+    }
 }

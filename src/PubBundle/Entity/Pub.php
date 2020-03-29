@@ -57,13 +57,6 @@ class Pub
     private $image;
 
 
-    /**
-     * @ORM\OneToMany(targetEntity="Apps_countries", mappedBy="id_country")
-     *
-     * @ORM\Column(type="string")
-     */
-    private $country;
-
 
     /**
      * Get id

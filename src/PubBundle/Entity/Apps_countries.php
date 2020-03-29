@@ -35,12 +35,7 @@ class Apps_countries
      */
     private $countryName;
 
-    /**
-     * @ORM\OneToMany(targetEntity="Pub", mappedBy="idPublicite")
-     *
-     * @ORM\Column(type="string")
-     */
-    private $pub;
+
 
     /**
      * Get id
@@ -100,21 +95,7 @@ class Apps_countries
         return $this->countryName;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getPub()
-    {
-        return $this->pub;
-    }
 
-    /**
-     * @param mixed $pub
-     */
-    public function setPub($pub)
-    {
-        $this->pub = $pub;
-    }
 
 
 }

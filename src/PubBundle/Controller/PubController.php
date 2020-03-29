@@ -2,10 +2,15 @@
 
 namespace PubBundle\Controller;
 
+use PubBundle\Entity\Apps_countries;
 use PubBundle\Entity\Pub;
+use PubBundle\Entity\Publicite_country;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\String\Slugger\SluggerInterface;
+use Symfony\Component\Process\Process;
+use Symfony\Component\Process\Exception\ProcessFailedException;
+
 
 /**
  * Pub controller.
@@ -64,6 +69,10 @@ class PubController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($pub);
             $em->flush();
+            $countriesList=$this->getDoctrine()->getRepository(Apps_countries::class)->findAll();
+            foreach ($countriesList as $c){
+                $this->getDoctrine()->getRepository(Publicite_country::class)->insertNewPubCountry($pub->getId(),$c->getId());
+            }
 
             return $this->redirectToRoute('pub_index');
         }
@@ -166,4 +175,26 @@ class PubController extends Controller
             ->getForm()
         ;
     }
+
+    public function recAction()
+    {
+
+        $process = new Process(['python.py', '27']);
+        $process->run();
+        if (!$process->isSuccessful()) {
+            throw new ProcessFailedException($process);
+        }
+        $renderVar=$process->getOutput();
+        if($renderVar==-1)
+        {   echo "Random Pub";
+            $all=$this->getDoctrine()->getRepository(Pub::class)->findAll();
+            $pubRec = $all[(array_rand($all))];
+
+        }else{
+        $pubRec=$this->getDoctrine()->getRepository(Pub::class)->find($renderVar);
+        }
+
+        return $this->render('@Pub/pub/show.html.twig',array('var'=>$pubRec));
+    }
+
 }
