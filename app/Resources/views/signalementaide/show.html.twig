@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Signalementaide</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ signalementAide.id }}</td>
+            </tr>
+            <tr>
+                <th>Iddemande</th>
+                <td>{{ signalementAide.idDemande }}</td>
+            </tr>
+            <tr>
+                <th>Iduser</th>
+                <td>{{ signalementAide.idUser }}</td>
+            </tr>
+            <tr>
+                <th>Raison</th>
+                <td>{{ signalementAide.raison }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ signalementAide.description }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('signalementaide_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('signalementaide_edit', { 'id': signalementAide.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

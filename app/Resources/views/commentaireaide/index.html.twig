@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Commentaireaides list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Iduser</th>
+                <th>Iddemande</th>
+                <th>Texte</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for commentaireAide in commentaireAides %}
+            <tr>
+                <td><a href="{{ path('commentaireaide_show', { 'id': commentaireAide.id }) }}">{{ commentaireAide.id }}</a></td>
+                <td>{{ commentaireAide.idUser }}</td>
+                <td>{{ commentaireAide.idDemande }}</td>
+                <td>{{ commentaireAide.texte }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('commentaireaide_show', { 'id': commentaireAide.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('commentaireaide_edit', { 'id': commentaireAide.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('commentaireaide_new') }}">Create a new commentaireAide</a>
+        </li>
+    </ul>
+{% endblock %}

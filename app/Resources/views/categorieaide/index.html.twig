@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Categorieaides list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Icone</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for categorieAide in categorieAides %}
+            <tr>
+                <td><a href="{{ path('categorieaide_show', { 'id': categorieAide.id }) }}">{{ categorieAide.id }}</a></td>
+                <td>{{ categorieAide.nom }}</td>
+                <td>{{ categorieAide.icone }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('categorieaide_show', { 'id': categorieAide.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('categorieaide_edit', { 'id': categorieAide.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('categorieaide_new') }}">Create a new categorieAide</a>
+        </li>
+    </ul>
+{% endblock %}

@@ -1,0 +1,24 @@
+commentaireaide_index:
+    path:     /
+    defaults: { _controller: "AideBundle:CommentaireAide:index" }
+    methods:  GET
+
+commentaireaide_show:
+    path:     /{id}/show
+    defaults: { _controller: "AideBundle:CommentaireAide:show" }
+    methods:  GET
+
+commentaireaide_new:
+    path:     /new
+    defaults: { _controller: "AideBundle:CommentaireAide:new" }
+    methods:  [GET, POST]
+
+commentaireaide_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "AideBundle:CommentaireAide:edit" }
+    methods:  [GET, POST]
+
+commentaireaide_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "AideBundle:CommentaireAide:delete" }
+    methods:  DELETE

@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Signalementaides list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Iddemande</th>
+                <th>Iduser</th>
+                <th>Raison</th>
+                <th>Description</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for signalementAide in signalementAides %}
+            <tr>
+                <td><a href="{{ path('signalementaide_show', { 'id': signalementAide.id }) }}">{{ signalementAide.id }}</a></td>
+                <td>{{ signalementAide.idDemande }}</td>
+                <td>{{ signalementAide.idUser }}</td>
+                <td>{{ signalementAide.raison }}</td>
+                <td>{{ signalementAide.description }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('signalementaide_show', { 'id': signalementAide.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('signalementaide_edit', { 'id': signalementAide.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('signalementaide_new') }}">Create a new signalementAide</a>
+        </li>
+    </ul>
+{% endblock %}

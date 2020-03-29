@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Participationaide</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ participationAide.id }}</td>
+            </tr>
+            <tr>
+                <th>Iduser</th>
+                <td>{{ participationAide.idUser }}</td>
+            </tr>
+            <tr>
+                <th>Iddemande</th>
+                <td>{{ participationAide.idDemande }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('participationaide_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('participationaide_edit', { 'id': participationAide.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

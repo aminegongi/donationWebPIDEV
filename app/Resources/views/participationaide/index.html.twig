@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Participationaides list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Iduser</th>
+                <th>Iddemande</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for participationAide in participationAides %}
+            <tr>
+                <td><a href="{{ path('participationaide_show', { 'id': participationAide.id }) }}">{{ participationAide.id }}</a></td>
+                <td>{{ participationAide.idUser }}</td>
+                <td>{{ participationAide.idDemande }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('participationaide_show', { 'id': participationAide.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('participationaide_edit', { 'id': participationAide.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('participationaide_new') }}">Create a new participationAide</a>
+        </li>
+    </ul>
+{% endblock %}

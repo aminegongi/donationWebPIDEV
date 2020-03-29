@@ -1,0 +1,24 @@
+signalementaide_index:
+    path:     /
+    defaults: { _controller: "AideBundle:SignalementAide:index" }
+    methods:  GET
+
+signalementaide_show:
+    path:     /{id}/show
+    defaults: { _controller: "AideBundle:SignalementAide:show" }
+    methods:  GET
+
+signalementaide_new:
+    path:     /new
+    defaults: { _controller: "AideBundle:SignalementAide:new" }
+    methods:  [GET, POST]
+
+signalementaide_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "AideBundle:SignalementAide:edit" }
+    methods:  [GET, POST]
+
+signalementaide_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "AideBundle:SignalementAide:delete" }
+    methods:  DELETE

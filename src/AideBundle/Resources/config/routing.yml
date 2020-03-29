@@ -1,3 +1,27 @@
+aide_signalementaide:
+    resource: "@AideBundle/Resources/config/routing/signalementaide.yml"
+    prefix:   /signalementaide
+
+aide_reactionaide:
+    resource: "@AideBundle/Resources/config/routing/reactionaide.yml"
+    prefix:   /reactionaide
+
+aide_participationaide:
+    resource: "@AideBundle/Resources/config/routing/participationaide.yml"
+    prefix:   /participationaide
+
+aide_demandeaide:
+    resource: "@AideBundle/Resources/config/routing/demandeaide.yml"
+    prefix:   /demandeaide
+
+aide_commentaireaide:
+    resource: "@AideBundle/Resources/config/routing/commentaireaide.yml"
+    prefix:   /commentaireaide
+
+aide_categorieaide:
+    resource: "@AideBundle/Resources/config/routing/categorieaide.yml"
+    prefix:   /categorieaide
+
 aide_homepage:
     path:     /
     defaults: { _controller: AideBundle:Default:index }

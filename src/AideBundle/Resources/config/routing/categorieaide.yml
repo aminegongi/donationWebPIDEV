@@ -1,0 +1,24 @@
+categorieaide_index:
+    path:     /
+    defaults: { _controller: "AideBundle:CategorieAide:index" }
+    methods:  GET
+
+categorieaide_show:
+    path:     /{id}/show
+    defaults: { _controller: "AideBundle:CategorieAide:show" }
+    methods:  GET
+
+categorieaide_new:
+    path:     /new
+    defaults: { _controller: "AideBundle:CategorieAide:new" }
+    methods:  [GET, POST]
+
+categorieaide_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "AideBundle:CategorieAide:edit" }
+    methods:  [GET, POST]
+
+categorieaide_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "AideBundle:CategorieAide:delete" }
+    methods:  DELETE

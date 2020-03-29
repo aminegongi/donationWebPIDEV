@@ -1,0 +1,24 @@
+participationaide_index:
+    path:     /
+    defaults: { _controller: "AideBundle:ParticipationAide:index" }
+    methods:  GET
+
+participationaide_show:
+    path:     /{id}/show
+    defaults: { _controller: "AideBundle:ParticipationAide:show" }
+    methods:  GET
+
+participationaide_new:
+    path:     /new
+    defaults: { _controller: "AideBundle:ParticipationAide:new" }
+    methods:  [GET, POST]
+
+participationaide_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "AideBundle:ParticipationAide:edit" }
+    methods:  [GET, POST]
+
+participationaide_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "AideBundle:ParticipationAide:delete" }
+    methods:  DELETE

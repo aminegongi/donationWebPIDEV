@@ -1,0 +1,24 @@
+demandeaide_index:
+    path:     /
+    defaults: { _controller: "AideBundle:DemandeAide:index" }
+    methods:  GET
+
+demandeaide_show:
+    path:     /{id}/show
+    defaults: { _controller: "AideBundle:DemandeAide:show" }
+    methods:  GET
+
+demandeaide_new:
+    path:     /new
+    defaults: { _controller: "AideBundle:DemandeAide:new" }
+    methods:  [GET, POST]
+
+demandeaide_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "AideBundle:DemandeAide:edit" }
+    methods:  [GET, POST]
+
+demandeaide_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "AideBundle:DemandeAide:delete" }
+    methods:  DELETE
