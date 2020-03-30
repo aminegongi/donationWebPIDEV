@@ -8,6 +8,6 @@ class DefaultController extends Controller
 {
     public function indexAction()
     {
-        return $this->render('CagnotteBundle:Default:index.html.twig');
+        return $this->render('@Cagnotte/Default/index.html.twig');
     }
 }
