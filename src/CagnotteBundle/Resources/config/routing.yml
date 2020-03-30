@@ -1,0 +1,3 @@
+cagnotte_homepage:
+    path:     /
+    defaults: { _controller: CagnotteBundle:Default:index }

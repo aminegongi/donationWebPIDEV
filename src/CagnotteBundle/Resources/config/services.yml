@@ -1,0 +1,4 @@
+services:
+#    cagnotte.example:
+#        class: CagnotteBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]
