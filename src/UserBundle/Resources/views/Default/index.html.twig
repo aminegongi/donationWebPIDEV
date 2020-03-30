@@ -56,18 +56,31 @@
                                     </ul>
                                 </div>
                                 {% if user.roles['0'] == 'ROLE_US' %}
-                                    <h3 class="name" style="margin: 0px">{{user.nom ~ user.prenom}}</h3>
+                                    <h3 class="name" style="margin: 0px">{{user.nom ~' '~ user.prenom}}</h3>
                                 {% else %}
                                     <h3 class="name" style="margin: 0px">{{user.nom}}</h3>
                                 {% endif %}
                                 <hr>
                                 <div style="align: left;">
-                                    <p>
-                                        If you've decided to go in development mode and tweak all of this a bit, there are few things you should do.
-                                    </p>
-                                    <p>
-                                        If you've decided to go in development mode and tweak all of this a bit, there are few things you should do.
-                                    </p>
+                                    <ul style="padding: 3px">
+                                        <li>
+                                            Nombre de Point : <b>{{ user.pointXP }}</b>
+                                        </li>
+                                        <li>
+                                            Numéro Téléphone : <b>{{ user.numTel }}</b>
+                                        </li>
+                                        <li>
+                                            Adresse :<b> {{ user.pays }},{{ user.ville }}</b>
+                                        </li>
+                                        {% if user.roles['0'] != 'ROLE_US' %}
+                                            <li>
+                                                Facebook :<a href="{{user.pageFB }}" ><b> {{ user.pageFB }}</b></a>
+                                            </li>
+                                            <li>
+                                                Site Web :<a href="{{ user.siteWeb }}" ><b> {{ user.siteWeb }}</b></a>
+                                            </li>
+                                        {% endif %}
+                                    </ul>
                                 </div>
 
                             </div>
@@ -75,9 +88,12 @@
                     </div>
                     {% endif %}
                 {% endfor %}
+
             </div>
+            <div class="text-center">{{ knp_pagination_render(listU) }}</div>
         </div>
     </div>
     <!-- /page content -->
+
 
 {% endblock %}

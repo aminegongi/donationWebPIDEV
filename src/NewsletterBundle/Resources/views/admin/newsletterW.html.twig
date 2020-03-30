@@ -90,7 +90,7 @@
                                     <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Libelle Newsletter<span class="required">*</span>
                                     </label>
                                     <div class="col-md-6 col-sm-6 ">
-                                        {{ form_widget(form.libelle, {'attr':{'class': 'form-control'}}) }}
+                                        {{ form_widget(form.libelle, {'attr':{'class': 'form-control' , 'pattern':'[A-Za-z]' , 'title': 'a-z akaahaw'}}) }}
                                     </div>
                                 </div>
                                 <div class="item form-group">
