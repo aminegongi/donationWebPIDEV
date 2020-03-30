@@ -1,3 +1,7 @@
+cagnotte:
+    resource: "@CagnotteBundle/Resources/config/routing.yml"
+    prefix:   /
+
 resto_org:
     resource: "@RestoOrgBundle/Resources/config/routing/publicationdon.yml"
     prefix:   /RestoOrg

@@ -27,6 +27,7 @@ class AppKernel extends Kernel
             new RestoOrgBundle\RestoOrgBundle(),
             new Knp\Bundle\TimeBundle\KnpTimeBundle(),
             new FOS\CKEditorBundle\FOSCKEditorBundle(),
+            new CagnotteBundle\CagnotteBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
