@@ -54,7 +54,11 @@
                                     <tr>
                                         <td>{{ NW.libelle }}</td>
                                         <td>{{ NW.objetMail }}</td>
-                                        <td>{{ NW.corpsID.titre }}</td>
+                                        {% if NW.corpsID is null %}
+                                            <td><strike> Template Supp </strike></td>
+                                        {% else %}
+                                            <td>{{ NW.corpsID.titre }}</td>
+                                        {% endif %}
                                         <td>{{ NW.dateAjout|date }}</td>
                                         {% if NW.dateEnvoi is null %}
                                             <td> <a href="{{path('newsletterW',{ 'id':NW.id,'action':'Envoi'} )}}"><i class="fa fa-edit"></i> Envoyé ? </a> </td>
@@ -86,11 +90,13 @@
                         <div class="x_content">
                             <br />
                             {{ form_start(form) }}
+                                {{ form_errors(form) }}
                                 <div class="item form-group">
                                     <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Libelle Newsletter<span class="required">*</span>
                                     </label>
                                     <div class="col-md-6 col-sm-6 ">
                                         {{ form_widget(form.libelle, {'attr':{'class': 'form-control' }}) }}
+
                                     </div>
                                 </div>
                                 <div class="item form-group">

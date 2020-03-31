@@ -4,11 +4,15 @@ namespace NewsletterBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
+use Symfony\Component\Validator\Constraints as Assert;
 /**
  * NewsletterW
  *
  * @ORM\Table(name="newsletter_w")
  * @ORM\Entity(repositoryClass="NewsletterBundle\Repository\NewsletterWRepository")
+ * @UniqueEntity("libelle")
  */
 class NewsletterW
 {
@@ -37,7 +41,7 @@ class NewsletterW
 
     /**
      * @ORM\ManyToOne(targetEntity="NewsHTMLBuilder")
-     * @ORM\JoinColumn(name="corpsMailID", referencedColumnName="id")
+     * @ORM\JoinColumn(name="corpsMailID", referencedColumnName="id" , onDelete="SET NULL")
      */
     private $corpsID;
 

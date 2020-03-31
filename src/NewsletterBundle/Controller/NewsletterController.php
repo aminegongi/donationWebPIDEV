@@ -49,7 +49,7 @@ class NewsletterController extends Controller
                 $nw = $em->getRepository(NewsletterW::class)->find($id);
                 $message = (new \Swift_Message($nw->getObjetMail()))
                     ->setFrom(['amine.gongi@esprit.tn' => 'DoNation Newsletter'])
-                    ->setTo('amine.gongi@esprit.tn')
+                    ->setTo('goamine3@gmail.com')
                     ->setBody($nw->getCorpsID()->getCorpsHTML(),'text/html')
                 ;
 
@@ -59,6 +59,13 @@ class NewsletterController extends Controller
 
                 return  $this->redirectToRoute('newsletterW');
             }
+
+            /*
+             * ->setTo([
+            'vavoxa8807@gotkmail.com',
+            'neila.gongi@mfcpole.com.tn',
+                    ])
+             */
 
         }
         else{

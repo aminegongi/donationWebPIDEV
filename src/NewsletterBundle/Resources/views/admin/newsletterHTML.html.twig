@@ -150,7 +150,7 @@
                                             </div>
                                         </td>
                                         <td>{{ NHB.dateAjout | date }}</td>
-                                        <td><a href="{{path('newsletterHTMLBuilder_delete',{ 'id':NHB.id} )}}"><i class="fa fa-remove"></i> Supprimer</a> </td>
+                                        <td><a onclick="return confirm('Voulez-vous vraiment supprimer {{ NHB.titre }}?');" href="{{path('newsletterHTMLBuilder_delete',{ 'id':NHB.id} )}}"><i class="fa fa-remove"></i> Supprimer</a> </td>
                                     </tr>
                                 {% endfor %}
 
