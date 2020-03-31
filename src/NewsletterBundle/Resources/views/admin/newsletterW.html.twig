@@ -57,9 +57,9 @@
                                         <td>{{ NW.corpsID.titre }}</td>
                                         <td>{{ NW.dateAjout|date }}</td>
                                         {% if NW.dateEnvoi is null %}
-                                            <td> <a href="{{path('newsletterW',{ 'id':NW.id,'action':'Envoi'} )}}"><i class="fa fa-edit"></i>Envoyé </a> </td>
+                                            <td> <a href="{{path('newsletterW',{ 'id':NW.id,'action':'Envoi'} )}}"><i class="fa fa-edit"></i> Envoyé ? </a> </td>
                                             <td> <a href="{{path('newsletterW',{ 'id':NW.id,'action':'Modifier'} )}}"><i class="fa fa-edit"></i> Modifier </a>
-                                            <a href="{{path('newsletterW',{ 'id':NW.id,'action':'Supprimer'} )}}"><i class="fa fa-remove"></i> Supprimer</a> </td>
+                                            <a href="{{path('newsletterW',{ 'id':NW.id,'action':'Supprimer'} )}}" onclick="return confirm('Voulez-vous vraiment supprimer {{ NW.libelle }}?');"  ><i class="fa fa-remove"></i> Supprimer </a> </td>
                                         {% else %}
                                             <td>{{ NW.dateEnvoi|date }}</td>
                                             <td><a style="pointer-events: none;" href="#"><i ></i> Newsletter Archivée </a> </td>
@@ -90,7 +90,7 @@
                                     <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Libelle Newsletter<span class="required">*</span>
                                     </label>
                                     <div class="col-md-6 col-sm-6 ">
-                                        {{ form_widget(form.libelle, {'attr':{'class': 'form-control' , 'pattern':'[A-Za-z]' , 'title': 'a-z akaahaw'}}) }}
+                                        {{ form_widget(form.libelle, {'attr':{'class': 'form-control' }}) }}
                                     </div>
                                 </div>
                                 <div class="item form-group">
