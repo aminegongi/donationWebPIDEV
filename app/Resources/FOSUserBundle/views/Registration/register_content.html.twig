@@ -1,0 +1,41 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+<div class="login-slide slide login-style1">
+
+    {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
+
+
+    <div class="form-group">
+        {{ form_widget(form.email, {'attr':{'class': 'form-control' ,'placeholder': 'form.email'|trans  }}) }}
+    </div>
+    <div class="form-group">
+        {{ form_widget(form.username, {'attr':{'class': 'form-control','placeholder': 'form.username'|trans  }}) }}
+    </div>
+    <div class="form-group">
+        {{ form_widget(form.numTel, {'attr':{'class': 'form-control','placeholder': 'Numéro de téléphone'  }}) }}
+    </div>
+    <div class="form-group">
+        {{ form_widget(form.plainPassword.first, {'attr':{'class': 'form-control' ,'placeholder': 'Mot de Passe'  }}) }}
+    </div>
+    <div class="form-group">
+        {{ form_widget(form.plainPassword.second, {'attr':{'class': 'form-control' ,'placeholder': 'Confirmer votre Mot de Passe'|trans  }}) }}
+    </div>
+    <div class="form-group">
+        <label class="label">Vous étes ?</label>
+        {{ form_widget(form.roles, {'attr':{'class': 'form-control' }}) }}
+    </div>
+    <div class="form-group">
+        <label class="label">Recevoir notre Newsletter ? </label>
+        {{ form_widget(form.yesNews, {'attr':{'class': 'form-control'}}) }}
+    </div>
+
+
+    <div class="form-group">
+        <input class="submit" type="submit" value="{{ 'registration.submit'|trans }}" />
+    </div>
+    {{ form_end(form) }}
+    <div class="sign-up-txt">
+        Vous avez un Compte ? <a href="{{ path('fos_user_security_login') }}" class="login-click">login</a>
+    </div>
+
+</div>
