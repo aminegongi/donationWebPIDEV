@@ -33,9 +33,11 @@
         Vous n'avez pas de Compte ?
         <a href="{{ path('fos_user_registration_register') }}" class="sign-up-click"> Inscription </a>
     </div>
+
     <div class="forgot-txt">
-        <a class="forgot-password-click">Forgot Password</a>
+        <a href="{{ path('fos_user_resetting_request') }}" class="forgot-password-click">Forgot Password</a>
     </div>
+
     <div class="login-with">
         <h3>Inscription </h3>
         <ul class="social-login-btn">

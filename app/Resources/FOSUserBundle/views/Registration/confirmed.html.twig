@@ -2,9 +2,20 @@
 
 {% trans_default_domain 'FOSUserBundle' %}
 
+{% block titre %} DoNation - Merci ❤ {% endblock titre %}
 {% block fos_user_content %}
-    <p>{{ 'registration.confirmed'|trans({'%username%': user.username}) }}</p>
-    {% if targetUrl %}
-    <p><a href="{{ targetUrl }}">{{ 'registration.back'|trans }}</a></p>
-    {% endif %}
+<div class="login-slide slide login-style1">
+
+        <h2> Merci ❤❤❤ </h2>
+    <br>
+        <p>{{ 'registration.confirmed'|trans({'%username%': user.username}) }}</p>
+        {% if targetUrl %}
+            <p><a href="{{ targetUrl }}">{{ 'registration.back'|trans }}</a></p>
+        {% endif %}
+
+    <div class="form-group">
+        <input class="submit" style="height: 40px; letter-spacing: 0;" type="submit" value="à l'acceuil ❤ " />
+    </div>
+
+</div>
 {% endblock fos_user_content %}

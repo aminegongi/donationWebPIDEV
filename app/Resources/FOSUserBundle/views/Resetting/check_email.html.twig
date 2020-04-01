@@ -2,8 +2,19 @@
 
 {% trans_default_domain 'FOSUserBundle' %}
 
+{% block titre %} DoNation - Récuperation Mot de passe {% endblock titre %}
 {% block fos_user_content %}
-<p>
-{{ 'resetting.check_email'|trans({'%tokenLifetime%': tokenLifetime})|nl2br }}
-</p>
-{% endblock %}
+    <div class="login-slide slide login-style1">
+
+        <h2> Merci ❤❤❤ </h2>
+        <br>
+        <p>
+            {{ 'resetting.check_email'|trans({'%tokenLifetime%': tokenLifetime})|nl2br }}
+        </p>
+
+        <div class="form-group">
+            <input class="submit" style="height: 40px; letter-spacing: 0;" type="submit" value="à l'acceuil ❤ " />
+        </div>
+
+    </div>
+{% endblock fos_user_content %}

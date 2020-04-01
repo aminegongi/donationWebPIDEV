@@ -88,8 +88,8 @@ fos_user:
     service:
         mailer: fos_user.mailer.twig_swift
     from_email:
-        address: "aminegongiesprit@gmail.com"
-        sender_name: "amineDN"
+        address: "amine.gongi@esprit.tn"
+        sender_name: "DoNation_no_reply"
 
 knp_paginator:
     page_range: 5
