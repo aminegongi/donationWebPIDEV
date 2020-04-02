@@ -65,6 +65,13 @@ class NewsletterW
      */
     private $dateAjout;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="listeA", type="string" , length=255)
+     */
+    private $listeA;
+
 
     /**
      * Get id
@@ -221,4 +228,22 @@ class NewsletterW
     {
         return $this->addBy;
     }
+
+    /**
+     * @return string
+     */
+    public function getListeA()
+    {
+        return $this->listeA;
+    }
+
+    /**
+     * @param string $listeA
+     */
+    public function setListeA($listeA)
+    {
+        $this->listeA = $listeA;
+    }
+
+
 }

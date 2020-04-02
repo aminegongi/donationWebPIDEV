@@ -40,8 +40,10 @@ class NewsletterInscriController extends Controller
         $maxCont =$em->findMaxCountry();
         $lastI = $em->findLastInscri();
         $list = $em->findAll();
+        $parPays = $em->findInscriPays();
+        $parDate = $em->findInscriDate();
         return  $this->render('@Newsletter/admin/newsletterInscri.html.twig',array(
-            'listIN'=>$list,'nbin'=>$nb,'nbaj'=>$nbAj,'$nbpd'=>$nbpd,'mxCnt'=>$maxCont,'last'=>$lastI
+            'listIN'=>$list,'nbin'=>$nb,'nbaj'=>$nbAj,'$nbpd'=>$nbpd,'mxCnt'=>$maxCont,'last'=>$lastI,'pays'=>$parPays,'date'=>$parDate
         ));
     }
 }
