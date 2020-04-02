@@ -45,7 +45,7 @@ class PublicationDon
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="datePublication", type="datetime",options={"default": "CURRENT_TIMESTAMP"},nullable=true)
+     * @ORM\Column(name="datePublication", type="datetime", options={"default": "CURRENT_TIMESTAMP"} ,nullable=true )
      */
     private $datePublication;
 

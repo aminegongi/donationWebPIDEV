@@ -1,48 +1,198 @@
 {% extends 'front.html.twig' %}
 
 {% block body %}
-    {{ dump(connectedUser.id) }}
 
+    <div class="container">
+        <div class="row">
+    <div class="col-lg-8 mb-5 mb-lg-0">
         {% for pd in publicationDons %}
 
-            <div class="owl-item active" style="width: 950px; margin-right: 30px; ">
-                <div class="testimonial__item" style="background-color:rgba(129,178,255,0.3) ; border-color: #0b2e13; border-width: 10px; ">
-                    <div class="row">
-                        <div class="col-12 col-md-8">
-                            <div class="row">
-                                <div class="col">
-                                    <img class="nav-img" src="/donationwebpidev/web/front/img/img.jpg" alt="">
-                                </div>
-                                <div class="col">
-                                    <div class="row">{{ pd.ajoutePar.prenom }} {{ pd.ajoutePar.nom }}</div>
-                                    <div class="row">{#{{ pd.ajoutePar.roles }}#} Restaurant</div>
-                                </div>
-                            </div>
 
-                        </div>
-                        <div class="col-6 col-md-4">{ pd.ajoutePar.numtel }}</div>
-                    </div>
-                    <div class="row">
-                        {{  pd.titre }}
-                    </div>
-                    <div class="row">
-                        {{ pd.description |raw }}
-                    </div>
-                    <div class="row">
-                        <div class="col-6 col-md-4"> {% if pd.datePublication %}{{ pd.datePublication|ago  }}{% endif %}</div>
-                        <div class="col-12 col-md-8">{% if pd.nbrePlat %} Nous avons besoin de {{ pd.nbrePlat }} pour nourir {{ pd.nbrePlat }}{% endif %}</div>
-                    </div>
-                </div>
+        <article class="blog_item" style="border-top-width: 3px; border-top-color: #0e90d2; border-top-style: groove; background-color: #000a9c08;">
+            <div class="blog_item_img"  >
+                <ul href="#" class="blog_item_date" style="opacity: revert; background-color: #ffffff00; margin-top: 40px; display: flex; bottom: -80px; left: 0px ;">
+                    <li><img  src="/donationwebpidev/web/front/img/img.jpg" alt="" class="center" style="border-radius: 40px ; width: 60px; height: 60px; "></li>
+                    <ul style="color: #0b0b0b; margin-left:10px;text-align: left;">
+                        <li>{{ pd.ajoutePar.nom }} {{ pd.ajoutePar.prenom }}</li>
+                        <li>{% if (pd.ajoutePar.roles.0 == "ROLE_RES") %}
+                            Restaurant
+                            {% else %}
+                             Organisation
+                                {% endif %}
+                        </li>
+                    </ul>
+
+                </ul>
             </div>
 
-{% if(connectedUser.id==pd.ajoutePar.id) %}
- <a href="{{ path('publicationdon_edit', { 'id': pd.id }) }}">edit</a>
-{% endif %}
-            <hr>
+            <div class="blog_details">
+                <a class="d-inline-block" href="single-blog.html">
+                    <h2>{{ pd.titre }}</h2>
+                </a>
+                <p>{{ pd.description| raw  }}</p>
+                <p>{% if pd.nbrePlat %} Nous avons besoin de {{ pd.nbrePlat }} pour nourir {{ pd.nbrePlat }}{% endif %}</p>
+                <ul class="blog-info-link">
+                    <li><a href="#"><i class="far fa-user"></i> {% if pd.datePublication %}{{ pd.datePublication|ago  }}{% endif %}</a></li>
+                    <li><a href="#"><i class="far fa-comments"></i>{{ pd.ajoutePar.numtel }} </a></li>
+                </ul>
+            </div>
+        </article>
+        {% if(connectedUser.id==pd.ajoutePar.id) %}
+            <a href="{{ path('publicationdon_edit', { 'id': pd.id }) }}">edit</a>
+        {% endif %}
+        <hr>
+
         {% endfor %}
 
 
             <a href="{{ path('publicationdon_new') }}">Create a new pd</a>
 
+    </div>
+    </div>
+    </div>
+
+
+
+
+    <div class="container">
+
+        <!-- Trigger the modal with a button -->
+
+        <button id="clickB" type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" style="display: none;" data-backdrop="static" data-keyboard="false" >Open Modal</button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+
+                        <h4 class="modal-title" id="TitrePub" ></h4>
+                    </div>
+                    <div class="modal-body" >
+                        <p id="PubContent" style="display: none;"></p>
+                        <a id="ImageRedirectToPub" target="_blank" href="">
+                        <img style="  width: 100%; height: auto;"  id="pubImageContent" src="" >
+                        </a>
+                    </div>
+                    <div class="modal-footer">
+                        <button  id ="closeB" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+
+
+
 {% endblock %}
 
+{% block javascripts %}
+    <script type="text/javascript">
+        eachTime=10;
+        var x=eachTime ;
+        var pause =false;
+        function displayPub(eachTime){
+
+            var jj=Math.floor(Math.random() * 100);
+            setInterval(function() {
+                x++;
+                if(x%eachTime==0 && pause==false){
+                    $.ajax({
+                        url:        '{{ path('after_request') }}',
+                        type:       'POST',
+                        dataType:   'json',
+                        async:      false,
+
+                        success: function(data) {
+
+
+                            var image = data.image;
+                            var titre = data.titre;
+                            var idPub = data.idPub;
+                            document.getElementById("ImageRedirectToPub").href=data.description;
+
+                            dispayModal(image,titre,idPub);
+
+
+
+                        },
+                    });
+
+                }
+            }, 1 * 1000);
+        }
+        displayPub(eachTime);
+
+
+    </script>
+
+    <script type="text/javascript">
+
+        function dispayModal(image,titre,idPub){
+            var i=0;
+            document.getElementById("clickB").click();pause=true;
+            document.getElementById("TitrePub").innerHTML = titre;
+
+            document.getElementById("pubImageContent").src ="http://localhost/donationwebpidev/web/uploads/imagesPubs/"+ image; // a changer lors hebergeemtn !!
+
+
+            setInterval(function() {
+
+                i=i+1;
+
+            }, 1 * 1000);
+
+            document.getElementById("closeB").onclick = function(e){
+                e.preventDefault();
+
+
+                $.ajax({
+                    url:        '{{ path('after_request_update') }}',
+                    type:       'POST',
+                    dataType:   'json',
+                    data:       {durre:i,idPub:idPub},
+                    async:      false,
+
+                });
+                pause=false;
+                x=0;
+                return ;
+            };
+
+            document.getElementById("ImageRedirectToPub").onclick=function () {
+                $.get("http://ip-api.com/json/", function (response) {
+                    countryCode = response.countryCode ;
+                    //alert(idPub+" "+countryCode);
+                    $.ajax({
+                        url:        '{{ path('after_requestIP') }}',
+                        type:       'POST',
+                        dataType:   'json',
+                        data:       {countryCode:countryCode,idPub:idPub},
+                        async:      true,
+
+                    });
+                });
+
+
+            }
+
+        }
+
+    </script>
+
+
+
+    <script type="text/javascript">
+
+
+    </script>
+
+{% endblock %}

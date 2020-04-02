@@ -23,13 +23,13 @@ class Pub_user
 
     /**
      * @ORM\ManyToOne(targetEntity="Pub")
-     * @ORM\JoinColumn(name="idPub", referencedColumnName="id",onDelete="NO ACTION")
+     * @ORM\JoinColumn(name="idPub", referencedColumnName="id",onDelete="CASCADE")
      **/
     private $idPub;
 
     /**
      * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User")
-     * @ORM\JoinColumn(name="idUser", referencedColumnName="id",onDelete="NO ACTION")
+     * @ORM\JoinColumn(name="idUser", referencedColumnName="id",onDelete="CASCADE")
      **/
     private $idUser;
 

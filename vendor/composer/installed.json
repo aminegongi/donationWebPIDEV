@@ -1134,6 +1134,48 @@
         ]
     },
     {
+        "name": "ip2location/ip2location-php",
+        "version": "8.2.2",
+        "version_normalized": "8.2.2.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/chrislim2888/IP2Location-PHP-Module.git",
+            "reference": "9cbb8ab32b940523ea5b08ca3bab7adc4dde019f"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/chrislim2888/IP2Location-PHP-Module/zipball/9cbb8ab32b940523ea5b08ca3bab7adc4dde019f",
+            "reference": "9cbb8ab32b940523ea5b08ca3bab7adc4dde019f",
+            "shasum": ""
+        },
+        "time": "2020-03-25T00:20:36+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "classmap": [
+                "IP2Location.php"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "IP2Location",
+                "email": "support@ip2location.com",
+                "homepage": "http://www.ip2location.com"
+            }
+        ],
+        "description": "[Official Release] IP2Location PHP API to get location info from IPv4 and IPv6 address.",
+        "homepage": "http://www.ip2location.com",
+        "keywords": [
+            "geolocation",
+            "ip2location",
+            "ip2locationlite"
+        ]
+    },
+    {
         "name": "jdorn/sql-formatter",
         "version": "v1.2.17",
         "version_normalized": "1.2.17.0",

@@ -20,6 +20,7 @@
         "friendsofsymfony/ckeditor-bundle": "^1.2",
         "friendsofsymfony/user-bundle": "~2.0",
         "incenteev/composer-parameter-handler": "^2.0",
+        "ip2location/ip2location-php": "^8.2",
         "knplabs/knp-paginator-bundle": "^3.0",
         "knplabs/knp-time-bundle": "^1.10",
         "sensio/distribution-bundle": "^5.0.19",

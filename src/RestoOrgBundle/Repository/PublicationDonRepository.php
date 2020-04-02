@@ -10,4 +10,12 @@ namespace RestoOrgBundle\Repository;
  */
 class PublicationDonRepository extends \Doctrine\ORM\EntityRepository
 {
+    public  function updateRecSystem($idUser,$idPub,$durre)
+    {
+        $conn = $this->getEntityManager()
+            ->getConnection();
+        $sql="UPDATE `pub_user` SET`durre`=:d WHERE (`idPub`=:p AND`idUser`=:u )";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute(array('u' =>$idUser ,'p'=>$idPub,'d'=>$durre));
+    }
 }

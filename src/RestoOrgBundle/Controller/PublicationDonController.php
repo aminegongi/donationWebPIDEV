@@ -1,12 +1,19 @@
 <?php
 
 namespace RestoOrgBundle\Controller;
+use \Datetime;
+use PubBundle\Entity\Pub;
+use PubBundle\Entity\Publicite_country;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use RestoOrgBundle\Entity\PublicationDon;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Process\Process;
+use Symfony\Component\Process\Exception\ProcessFailedException;
 use Symfony\Component\HttpFoundation\Request;
+
 
 /**
  * Publicationdon controller.
@@ -18,13 +25,13 @@ class PublicationDonController extends Controller
      * Lists all publicationDon entities.
      *
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
         $publicationDons = $em->getRepository('RestoOrgBundle:PublicationDon')->findAll();
 
-        return $this->render('@RestoOrg/publicationdon/index.html.twig', array('publicationDons' => $publicationDons,'connectedUser'=>$this->getUser()));
+        return $this->render('@RestoOrg/publicationdon/index.html.twig', array('publicationDons' => $publicationDons,'connectedUser'=>$this->getUser(),"ip"=> $_SERVER['REMOTE_ADDR']));
     }
 
     /**
@@ -48,8 +55,9 @@ class PublicationDonController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            dump($this->getUser());
+            //dump($this->getUser());
             $publicationDon->setAjoutePar($this->getUser());
+            
             $em->persist($publicationDon);
             $em->flush();
 
@@ -137,5 +145,54 @@ class PublicationDonController extends Controller
             ->setMethod('DELETE')
             ->getForm()
         ;
+    }
+    public function afterRequestAction(Request $request){
+        #go to the script and get idPub to display , if -1 go to random Pub
+        $connectedUser = $this->getUser()->getId();
+        $process = new Process(['python.py', $connectedUser]);#change User Id to Connected User !
+        $process->run();
+        if (!$process->isSuccessful()) {
+            throw new ProcessFailedException($process);
+        }
+        $renderVar=$process->getOutput();
+        if($renderVar==-1)
+        {
+            $all=$this->getDoctrine()->getRepository(Pub::class)->findAll();
+            $pubRec = $all[(array_rand($all))];
+
+        }else{
+            $pubRec=$this->getDoctrine()->getRepository(Pub::class)->find($renderVar);
+        }
+        $titre = $pubRec->getTitre();
+        $idPub= $pubRec->getId();
+        $imagePub=  $pubRec->getImage();
+        $description=$pubRec->getDescription();
+
+        return new JsonResponse(array('image' =>$imagePub,'titre'=>$titre,'idPub'=>$idPub,'description'=>$description));
+
+    }
+    public function recAction(Request $request){
+
+
+        return $this->render('@RestoOrg/publicationdon/recTest.html.twig', array('test'=>"e"
+        ));
+
+    }
+    public function afterRequestUpdateAction(Request $request){
+
+        $durre = $request->get('durre');
+        $idPub= $request->get('idPub');
+        $this->getDoctrine()->getRepository(PublicationDon::class)->updateRecSystem($this->getUser()->getId(),$idPub,$durre);#change User Id to Connected User !
+        #need some conditions to determine if the result is accurate or not , exp : check if the durre is > to 100  : that means that is not real !
+          return new JsonResponse(array('ok'=>"ok"));;
+
+    }
+    public function afterRequestIPAction(Request $request){
+        $countryCode = $request->get('countryCode');
+        $idPub = $request->get('idPub');
+        dump($countryCode);
+        #Repository
+        $this->getDoctrine()->getRepository(Publicite_country::class)->updateNbrClick($idPub,$countryCode);
+         return new JsonResponse(array('ok'=>"ok"));
     }
 }

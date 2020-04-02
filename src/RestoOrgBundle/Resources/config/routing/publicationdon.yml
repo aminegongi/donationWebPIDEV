@@ -22,3 +22,17 @@ publicationdon_delete:
     path:     /{id}/delete
     defaults: { _controller: "RestoOrgBundle:PublicationDon:delete" }
     methods:  DELETE
+rec_test:
+    path:     /rec
+    defaults: { _controller: "RestoOrgBundle:PublicationDon:rec" }
+    methods:  GET
+after_request:
+    path:     /afterRequest
+    defaults: { _controller: "RestoOrgBundle:PublicationDon:afterRequest" }
+after_request_update:
+    path:     /afterRequestUpdate
+    defaults: { _controller: "RestoOrgBundle:PublicationDon:afterRequestUpdate" }
+after_requestIP:
+    path:     /afterRequestIP
+    defaults: { _controller: "RestoOrgBundle:PublicationDon:afterRequestIP" }
+

@@ -35,4 +35,15 @@ class Publicite_countryRepository extends \Doctrine\ORM\EntityRepository
         $stmt->execute(array('idPub' => $idPub,'idCountry'=>$idCountry));
 
     }
+
+    public function updateNbrClick($idPub,$countryCode)
+    {
+        $conn = $this->getEntityManager()
+            ->getConnection();
+        $sql="UPDATE publicite_country set nbrClick=nbrClick +1 where (idPublicite=:x and idCountry in (select id from apps_countries WHERE country_code=:y)) ";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute(array('x' => $idPub,'y'=>$countryCode));
+
+    }
+
 }

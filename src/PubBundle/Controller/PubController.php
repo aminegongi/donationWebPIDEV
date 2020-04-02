@@ -178,7 +178,7 @@ class PubController extends Controller
 
     public function recAction()
     {
-
+        #go to the script and get idPub to display , if -1 go to random Pub
         $process = new Process(['python.py', '27']);
         $process->run();
         if (!$process->isSuccessful()) {
@@ -193,6 +193,7 @@ class PubController extends Controller
         }else{
         $pubRec=$this->getDoctrine()->getRepository(Pub::class)->find($renderVar);
         }
+
 
         return $this->render('@Pub/pub/show.html.twig',array('var'=>$pubRec));
     }

@@ -1,0 +1,127 @@
+{{ dump(test) }}
+<html>
+<head>
+    <title>jQuery Hello World</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- Trigger the modal with a button -->
+
+    <button id="clickB" type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" style="display: none;"  data-backdrop="static" data-keyboard="false">Open Modal</button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+
+                    <h4 class="modal-title" id="TitrePub"></h4>
+                </div>
+                <div class="modal-body" >
+                    <p id="PubContent" style="display: none;"></p>
+                    <img style="  width: 100%; height: auto;"  id="pubImageContent" src="" >
+                </div>
+                <div class="modal-footer">
+                    <button  id ="closeB" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+
+
+<p id="p1">Hello World!</p>
+
+
+
+
+</body>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</html>
+<script type="text/javascript">
+
+    eachTime=10;
+    var x=eachTime ;
+    var pause =false;
+    function displayPub(eachTime){
+
+        var jj=Math.floor(Math.random() * 100);
+        setInterval(function() {
+            x++;
+            if(x%eachTime==0 && pause==false){
+                $.ajax({
+                    url:        '{{ path('after_request') }}',
+                    type:       'POST',
+                    dataType:   'json',
+                    async:      false,
+
+                    success: function(data) {
+
+
+                        var image = data.image;
+                        var titre = data.titre;
+                        var idPub = data.idPub;
+                        dispayModal(image,titre,idPub);
+
+
+
+                    },
+                });
+
+            }
+        }, 1 * 1000);
+    }
+    displayPub(eachTime);
+
+
+</script>
+
+
+
+<script type="text/javascript">
+
+    function dispayModal(image,titre,idPub){
+        var i=0;
+        document.getElementById("clickB").click();pause=true;
+        document.getElementById("TitrePub").innerHTML = titre;
+
+        document.getElementById("pubImageContent").src ="http://localhost/donationwebpidev/web/uploads/imagesPubs/"+ image; // a changer lors hebergeemtn !!
+
+
+        setInterval(function() {
+
+            i=i+1;
+
+        }, 1 * 1000);
+
+        document.getElementById("closeB").onclick = function(e){
+            e.preventDefault();
+
+
+            $.ajax({
+                url:        '{{ path('after_request_update') }}',
+                type:       'POST',
+                dataType:   'json',
+                data:       {durre:i,idPub:idPub},
+                async:      false,
+
+            });
+            pause=false;
+            x=0;
+            return ;
+        };
+    }
+</script>
