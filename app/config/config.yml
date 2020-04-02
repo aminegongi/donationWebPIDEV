@@ -90,6 +90,9 @@ fos_user:
     from_email:
         address: "amine.gongi@esprit.tn"
         sender_name: "DoNation_no_reply"
+    registration:
+        confirmation:
+            enabled: true
 
 knp_paginator:
     page_range: 5

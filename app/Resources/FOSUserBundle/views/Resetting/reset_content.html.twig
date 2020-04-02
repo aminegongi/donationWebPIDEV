@@ -1,8 +1,19 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
-{{ form_start(form, { 'action': path('fos_user_resetting_reset', {'token': token}), 'attr': { 'class': 'fos_user_resetting_reset' } }) }}
-    {{ form_widget(form) }}
-    <div>
-        <input type="submit" value="{{ 'resetting.reset.submit'|trans }}" />
+<div class="login-slide slide login-style1">
+
+    <h2>Récupération de Votre Mot de Passe</h2>
+    <br>
+    {{ form_start(form, { 'action': path('fos_user_resetting_reset', {'token': token}), 'attr': { 'class': 'fos_user_resetting_reset' } }) }}
+    <div class="form-group">
+        {{ form_widget(form.plainPassword.first, {'attr':{'class': 'form-control' ,'placeholder': 'Votre Noveau Mot de Passe'  }}) }}
     </div>
-{{ form_end(form) }}
+    <div class="form-group">
+        {{ form_widget(form.plainPassword.second, {'attr':{'class': 'form-control','placeholder': 'Confirmer votre mot de passe'  }}) }}
+    </div>
+    <div>
+        <input class="submit" type="submit" value="{{ 'resetting.reset.submit'|trans }}" />
+    </div>
+    {{ form_end(form) }}
+
+</div>
