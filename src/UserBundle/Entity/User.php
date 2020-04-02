@@ -44,7 +44,7 @@ class User extends BaseUser
     /**
      * @ORM\Column(name="image",nullable=true , type="string",length=255)
      */
-    private $image;
+    private $image="user.png";
 
     /**
      * @ORM\Column(name="pointXP",nullable=true , type="integer")
