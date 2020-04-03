@@ -1,3 +1,15 @@
 cagnotte_homepage:
     path:     /
-    defaults: { _controller: CagnotteBundle:Default:index }
+    defaults: { _controller: CagnotteBundle:cagnotte:index }
+
+cagnotte_new:
+    path:     /new
+    defaults: { _controller: CagnotteBundle:cagnotte:new }
+
+cagnotte_edit:
+    path:     /edit/{id}
+    defaults: { _controller: CagnotteBundle:cagnotte:edit }
+
+cagnotte_delete:
+    path:     /delete/{id}
+    defaults: { _controller: CagnotteBundle:cagnotte:delete }

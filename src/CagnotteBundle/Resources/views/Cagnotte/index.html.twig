@@ -1,0 +1,45 @@
+{% extends "front.html.twig" %}
+
+
+{% block body %}
+
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Nom</th>
+            <th>Categorie</th>
+            <th>Date de creation</th>
+            <th>Date de debut</th>
+            <th>Date d'expiration</th>
+            <th>Montant demandé en DT</th>
+            <th>Montant actuel en DT</th>
+            <th>ID Proprietaire</th>
+            <th>ID Organisation</th>
+            <th>Etat</th>
+            <th>Modifier</th>
+            <th>Supprimer</th>
+        </tr>
+
+
+        {%  for c in cagnottes %}
+            <tr>
+                <td>{{ c.id }}</td>
+                <td>{{ c.nom }}</td>
+                <td>{{ c.idCategorie }}</td>
+                <td>{{ c.dateDeCreation|date('d-m-Y') }}</td>
+                <td>{{ c.dateDeDebut|date('d-m-Y') }}</td>
+                <td>{{ c.dateDeFin|date('d-m-Y') }}</td>
+                <td>{{ c.montantDemande }}</td>
+                <td>{{ c.montantActuel }}</td>
+                <td>{{ c.idProprietaire }}</td>
+                <td>{{ c.idOrganisation }}</td>
+                <td>{{ c.etat }}</td>
+                <td><a href="{{ path('cagnotte_edit',{'id': c.id }) }}" >Modifier</a></td>
+                <td><a href="{{ path('cagnotte_delete',{'id': c.id }) }}" >Supprimer</a></td>
+
+            </tr>
+        {% endfor %}
+    </table>
+    <button onclick="window.location.href = 'new';">Ajouter Cagnotte</button>
+
+{% endblock %}
