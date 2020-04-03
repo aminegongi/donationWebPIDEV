@@ -37,6 +37,20 @@ class TarifResto
 
 
     /**
+     * Set idResto
+     *
+     * @param \Integer $idResto
+     *
+     * @return RepasServi
+     */
+    public function setIdResto($idResto)
+    {
+        $this->idResto = $idResto;
+
+        return $this;
+    }
+
+    /**
      * Get id
      *
      * @return int

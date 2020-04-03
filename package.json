@@ -24,6 +24,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@material/textfield": "^5.1.0",
     "bootstrap": "^4.4.1",
     "jquery": "^3.4.1",
     "node-sass": "^4.13.1",

@@ -40,6 +40,20 @@ class RepasServi
     }
 
     /**
+     * Set idResto
+     *
+     * @param \Integer $idResto
+     *
+     * @return RepasServi
+     */
+    public function setIdResto($idResto)
+    {
+        $this->idResto = $idResto;
+
+        return $this;
+    }
+
+    /**
      * Set date
      *
      * @param \DateTime $date
