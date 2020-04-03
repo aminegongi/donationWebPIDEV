@@ -1,9 +1,12 @@
-{% extends 'base.html.twig' %}
+{% extends 'front.html.twig' %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('front/scss/aide/css/root.css') }}">
+{% endblock %}
 
 {% block body %}
-    <h1>Demandeaides list</h1>
+    <h1>Liste des demandes d'aide</h1>
 
-    <table>
+    <table class="table table-striped jambo_table bulk_action">
         <thead>
             <tr>
                 <th>Id</th>

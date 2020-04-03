@@ -1,14 +1,11 @@
-{% extends 'front.html.twig' %}
+{% extends 'dash.html.twig' %}
 
-{% block body %}
-    <h1>Categorieaide</h1>
+{% block content %}
+    <h1>Categorie {{ categorieAide.nom }}</h1>
 
-    <table>
+    <table class="table table-striped jambo_table bulk_action">
         <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ categorieAide.id }}</td>
-            </tr>
+
             <tr>
                 <th>Nom</th>
                 <td>{{ categorieAide.nom }}</td>

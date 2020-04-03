@@ -1,28 +1,34 @@
-{% extends 'base.html.twig' %}
+{% extends 'dash.html.twig' %}
 
-{% block body %}
-    <h1>Categorieaides list</h1>
+{% block content %}
+    <h1>Liste des catégories des demandes d'aide</h1>
 
-    <table>
+    <table class="table table-striped jambo_table bulk_action">
         <thead>
             <tr>
-                <th>Id</th>
+
                 <th>Nom</th>
                 <th>Icone</th>
-                <th>Actions</th>
+                <th>Action</th>
+
             </tr>
         </thead>
         <tbody>
         {% for categorieAide in categorieAides %}
             <tr>
-                <td><a href="{{ path('categorieaide_show', { 'id': categorieAide.id }) }}">{{ categorieAide.id }}</a></td>
+
                 <td>{{ categorieAide.nom }}</td>
-                <td>{{ categorieAide.icone }}</td>
+
+
+                <td><img src="{{ asset('gentelella-master/production/images/'~ categorieAide.nom ~ '.jpg') }}" alt="tutodidacte" /></td>
                 <td>
                     <ul>
                         <li>
                             <a href="{{ path('categorieaide_show', { 'id': categorieAide.id }) }}">show</a>
                         </li>
+
+
+
                         <li>
                             <a href="{{ path('categorieaide_edit', { 'id': categorieAide.id }) }}">edit</a>
                         </li>
@@ -38,4 +44,5 @@
             <a href="{{ path('categorieaide_new') }}">Create a new categorieAide</a>
         </li>
     </ul>
+
 {% endblock %}

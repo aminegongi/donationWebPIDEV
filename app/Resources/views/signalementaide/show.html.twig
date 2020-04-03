@@ -1,22 +1,15 @@
-{% extends 'base.html.twig' %}
+{% extends 'front.html.twig' %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('front/scss/aide/css/root.css') }}">
+{% endblock %}
 
 {% block body %}
-    <h1>Signalementaide</h1>
+    <h1>Nous analysons votre signalement le plus tôt possible</h1>
+    <h2>merci pour votre collaboration</h2>
 
     <table>
         <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ signalementAide.id }}</td>
-            </tr>
-            <tr>
-                <th>Iddemande</th>
-                <td>{{ signalementAide.idDemande }}</td>
-            </tr>
-            <tr>
-                <th>Iduser</th>
-                <td>{{ signalementAide.idUser }}</td>
-            </tr>
+
             <tr>
                 <th>Raison</th>
                 <td>{{ signalementAide.raison }}</td>

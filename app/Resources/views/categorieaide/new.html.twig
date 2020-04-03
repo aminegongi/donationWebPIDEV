@@ -1,15 +1,16 @@
-{% extends 'front.html.twig' %}
+{% extends 'base.html.twig' %}
 
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('front/scss/aide/css/root.css') }}">
 {% endblock %}
 
-{% block body %}
+{% block content %}
 
-    <h1>Categorieaide creation</h1>
+    <h1>Créer une nouvelle catégorie </h1>
 <br/>
     {{ form_start(form) }}
-        {{ form_widget(form) }}
+        {{ form_widget(form.nom, {'attr':{'placeholder': 'saisir nom categorie' }}) }}
+    {{ form_widget(form.icone, {'attr':{'placeholder': 'choisir icone' }}) }}
         <input type="submit" value="Create" />
     {{ form_end(form) }}
 
