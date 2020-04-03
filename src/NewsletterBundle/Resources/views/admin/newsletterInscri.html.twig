@@ -57,7 +57,7 @@
                                     <div class="clearfix"></div>
                                 </div>
                                 <div class="x_content">
-                                    <canvas id="newsPays"></canvas>
+                                    <div id="curve_pays_chart" style="width: 900px; height: 500px"></div>
                                 </div>
                             </div>
                         </div>
@@ -67,54 +67,15 @@
                         <div class="col-md-12 col-sm-12 ">
                             <div class="x_panel">
                                 <div class="x_title">
-                                    <h2>Visitors location <small>geo-presentation</small></h2>
+                                    <h2> Les Inscris par Date <small> connaitre vos actions </small></h2>
                                     <ul class="nav navbar-right panel_toolbox">
                                         <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                                        </li>
-                                        <li class="dropdown">
-                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                <a class="dropdown-item" href="#">Settings 1</a>
-                                                <a class="dropdown-item" href="#">Settings 2</a>
-                                            </div>
-                                        </li>
-                                        <li><a class="close-link"><i class="fa fa-close"></i></a>
                                         </li>
                                     </ul>
                                     <div class="clearfix"></div>
                                 </div>
                                 <div class="x_content">
-                                    <div class="dashboard-widget-content">
-                                        <div class="col-md-4 hidden-small">
-                                            <h2 class="line_30">125.7k Views from 60 countries</h2>
-
-                                            <table class="countries_list">
-                                                <tbody>
-                                                <tr>
-                                                    <td>United States</td>
-                                                    <td class="fs15 fw700 text-right">33%</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>France</td>
-                                                    <td class="fs15 fw700 text-right">27%</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Germany</td>
-                                                    <td class="fs15 fw700 text-right">16%</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Spain</td>
-                                                    <td class="fs15 fw700 text-right">11%</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Britain</td>
-                                                    <td class="fs15 fw700 text-right">10%</td>
-                                                </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                        <div id="world-map-gdp" class="col-md-8 col-sm-12 " style="height:230px;"></div>
-                                    </div>
+                                    <div id="curve_date_chart" style="width: 900px; height: 500px"></div>
                                 </div>
                             </div>
                         </div>
@@ -162,43 +123,64 @@
         </div>
     </div>
     <!-- /page content -->
+    {% for pp in date %}
+        [{{ pp.d | date('d/m/Y') }},  {{ pp.c }}],
+    {% endfor %}
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
-    <script>
-        new Chart(document.getElementById("newsPays"), {
-            type: 'line',
-            data: {
-                labels: [1500,1600,1700,1750,1800,1850,1900,1950,1999,2050],
-                datasets: [{
-                    data: [86,114,106,106,107,111,133,221,783,2478],
-                    label: "Africa",
-                    borderColor: "#3e95cd",
-                    fill: false
-                }, {
-                    data: [282,350,411,502,635,809,947,1402],
-                    label: "Asia",
-                    borderColor: "#8e5ea2",
-                    fill: false
-                }, {
-                    data: [168,170,178,190,203,276,408,547,675,734],
-                    label: "Europe",
-                    borderColor: "#3cba9f",
-                    fill: false
-                }, {
-                    data: [40,20,10,16,24,38,74,167,508,784],
-                    label: "Latin America",
-                    borderColor: "#e8c3b9",
-                    fill: false
-                }, {
-                    data: [6,3,2,2,7,26,82,172,312,433],
-                    label: "North America",
-                    borderColor: "#c45850",
-                    fill: false
-                }
-                ]
+
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script type="text/javascript">
+            google.charts.load('current', {'packages':['corechart']});
+            google.charts.setOnLoadCallback(drawChart);
+
+            function drawChart() {
+                var data = google.visualization.arrayToDataTable([
+                    ['Date Inscription', 'Nombre d\'inscription' ],
+                    {% for pp in date %}
+                    ['{{  pp.d | date('d/m/Y') }}',   {{ pp.c }}],
+                    {% endfor %}
+                ]);
+
+                var options = {
+                    title: 'Inscription Newsletter par Date',
+                    curveType: 'function',
+                    legend: { position: 'bottom' }
+                };
+
+                var chart = new google.visualization.LineChart(document.getElementById('curve_date_chart'));
+
+                chart.draw(data, options);
             }
-        });
+        </script>
+
+    <script type="text/javascript">
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+            var data = google.visualization.arrayToDataTable([
+                ['Date Inscription', 'Nombre d\'inscription' ],
+                {% for pp in pays %}
+                ['{{  pp.p }}',   {{ pp.c }}],
+                {% endfor %}
+            ]);
+
+            var options = {
+                title: 'Inscription Newsletter par pays',
+                legend: { position: 'bottom' },
+                pieHole: 0.6
+            };
+
+            var chart = new google.visualization.PieChart(document.getElementById('curve_pays_chart'));
+
+            chart.draw(data, options);
+        }
     </script>
+
+
+
+
+
 
 
 {% endblock %}

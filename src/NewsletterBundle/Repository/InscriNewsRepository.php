@@ -60,5 +60,23 @@ class InscriNewsRepository extends \Doctrine\ORM\EntityRepository
         return $stmt->fetchAll();
     }
 
+    public function findInscriDate()
+    {
+        $conn = $this->getEntityManager()
+            ->getConnection();
+        $sql="SELECT DATE(dateInscri) as d , COUNT(*) as c  FROM `inscri_news` GROUP BY DATE(dateInscri)";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
 
+    public function findInscriPays()
+    {
+        $conn = $this->getEntityManager()
+            ->getConnection();
+        $sql="SELECT pays as p , COUNT(*) as c FROM `inscri_news` GROUP BY pays";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
 }

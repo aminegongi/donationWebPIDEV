@@ -46,10 +46,14 @@ class NewsletterController extends Controller
             }
             else if ($action=="Envoi"){
                 $nw = new NewsletterW();
+
                 $nw = $em->getRepository(NewsletterW::class)->find($id);
+
+                $ss = explode(",",$nw->getListeA());
+
                 $message = (new \Swift_Message($nw->getObjetMail()))
                     ->setFrom(['amine.gongi@esprit.tn' => 'DoNation Newsletter'])
-                    ->setTo('vavoxa8807@gotkmail.com')
+                    ->setTo($ss)
                     ->setBody($nw->getCorpsID()->getCorpsHTML(),'text/html')
                 ;
 
@@ -58,6 +62,7 @@ class NewsletterController extends Controller
                 $em->getRepository(NewsletterW::class)->setDateEnvoi($id);
 
                 return  $this->redirectToRoute('newsletterW');
+
             }
 
             /*
@@ -78,16 +83,33 @@ class NewsletterController extends Controller
         $form = $this->createForm(NewsletterWType::class,$nw);
         $form=$form->handleRequest($req);
         if($form->isSubmitted() and $form->isValid()){
+            $pays = $req->request->get('_qui');
+            if($pays == "all")
+                $p_m=$em->getRepository(NewsletterW::class)->getMailInscri();
+            else
+                $p_m=$em->getRepository(NewsletterW::class)->getMailPaysInscri($pays);
+            $ar = array();
+            foreach ( $p_m as $pp){
+                foreach ($pp as $p){
+                    array_push($ar,$p);
+                }
+            }
+            $mm = implode(',',$ar);
+
+            $nw->setListeA($mm);
             $em = $this->getDoctrine()->getManager();
             $em->persist($nw);
             $em->flush();
+
             $action="Ajouter";
             return  $this->redirectToRoute('newsletterW');
         }
         $em=$this->getDoctrine()->getRepository(NewsletterW::class);
+
+        $pays=$em->getPaysInscri();
         $list = $em->findAll();
         return  $this->render('@Newsletter/admin/newsletterW.html.twig',array(
-            'listNW'=>$list,'form'=>$form->createView(),'action'=>$action
+            'listNW'=>$list,'form'=>$form->createView(),'action'=>$action,'pays'=>$pays
         ));
     }
 

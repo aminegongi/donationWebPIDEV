@@ -8,7 +8,9 @@
     <h1>Donrestaurant creation</h1>
 
     {{ form_start(form) }}
-        {{ form_widget(form) }}
+        {{ form_widget(form.idResto, {'attr':{'placeholder': 'idResto' }}) }}
+        {{ form_widget(form.idUser, {'attr':{'placeholder': 'idUser' }}) }}
+        {{ form_widget(form.montant, {'attr':{'placeholder': 'Montant' }}) }}
         <input type="submit" value="Create" />
     {{ form_end(form) }}
 

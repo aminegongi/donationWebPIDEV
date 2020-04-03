@@ -17,4 +17,31 @@ class NewsletterWRepository extends \Doctrine\ORM\EntityRepository
         );
         $q->execute();
     }
+    public function getPaysInscri()
+    {
+        $conn = $this->getEntityManager()
+            ->getConnection();
+        $sql="SELECT DISTINCT(pays) as p FROM inscri_news ";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+    public function getMailPaysInscri($pays)
+    {
+        $conn = $this->getEntityManager()
+            ->getConnection();
+        $sql="SELECT a_mail as m FROM `inscri_news` WHERE  UPPER(pays)=UPPER('".$pays."')";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+    public function getMailInscri()
+    {
+        $conn = $this->getEntityManager()
+            ->getConnection();
+        $sql="SELECT a_mail as m FROM `inscri_news`";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
 }
