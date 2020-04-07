@@ -17,7 +17,7 @@ class PublicationDonType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
             $builder->add('titre',null,['attr' => ['class' => 'form-control'],])->add('description',CKEditorType::class,array('config' => array('toolbar' => 'basic'),),['attr' => ['class' => 'form-control'],])
-            ->add('datePublication', HiddenType::class);
+            ;
 
     }/**
      * {@inheritdoc}

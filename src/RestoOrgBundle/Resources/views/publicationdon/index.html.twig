@@ -4,7 +4,11 @@
 
     <div class="container">
         <div class="row">
-    <div class="col-lg-8 mb-5 mb-lg-0">
+
+    <div class="col">
+        <div class="col"><a href="{{ path('publicationdon_new') }}">
+                <i class="fas fa-feather fa-2x"> Ajoutez votre unique publication & Aidez les autres !</i>
+            </a></div>
         {% for pd in publicationDons %}
 
 
@@ -34,21 +38,25 @@
                 <ul class="blog-info-link">
                     <li><a href="#"><i class="far fa-user"></i> {% if pd.datePublication %}{{ pd.datePublication|ago  }}{% endif %}</a></li>
                     <li><a href="#"><i class="far fa-comments"></i>{{ pd.ajoutePar.numtel }} </a></li>
+            {% if(connectedUser.id==pd.ajoutePar.id) %} <li><a style="color: #0e90d2 ;" href="{{ path('publicationdon_edit', { 'id': pd.id }) }}"><i class="fas fa-edit" ></i> Vous Pensez à modifier votre publication ?</a></li>{% endif %}
                 </ul>
             </div>
         </article>
-        {% if(connectedUser.id==pd.ajoutePar.id) %}
-            <a href="{{ path('publicationdon_edit', { 'id': pd.id }) }}">edit</a>
-        {% endif %}
+
+
+
         <hr>
 
         {% endfor %}
 
 
-            <a href="{{ path('publicationdon_new') }}">Create a new pd</a>
+
 
     </div>
     </div>
+
+    </div>
+
     </div>
 
 
