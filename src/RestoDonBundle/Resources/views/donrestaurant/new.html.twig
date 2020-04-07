@@ -1,0 +1,60 @@
+{% extends 'front.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('front/scss/restoDon/css/root.css') }}">
+{% endblock %}
+
+{% block body %}
+    <h1>Donrestaurant creation</h1>
+
+    {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+
+    {{  dump(form) }}
+
+    <div class="form-group" style="display: none;">
+        <label for="{{ form.idResto.vars.id }}">id Resto</label>
+        <input type="text" style="border: solid 1px var(--my-color);" class="form-control" id="{{ form.idResto.vars.id }}" name="{{ form.idResto.vars.full_name }}" value="{{ user }}">
+        {{ form_errors(form.idResto) }}
+        {% do form.idResto.setRendered %}
+    </div>
+
+    <div class="form-group">
+        <label for="{{ form.idUser.vars.id }}">id User</label>
+        <input type="number" style="border: solid 1px var(--my-color);" class="form-control" id="{{ form.idUser.vars.id }}" name="{{ form.idUser.vars.full_name }}" value="utilisateur">
+        {{ form_errors(form.idUser) }}
+        {% do form.idUser.setRendered %}
+    </div>
+
+    <div class="form-group">
+        <label for="{{ form.montant.vars.id }}">Montant</label>
+        <input type="number" style="border: solid 1px var(--my-color);" class="form-control" id="{{ form.montant.vars.id }}" name="{{ form.montant.vars.full_name }}" value="monnaie">
+        {{ form_errors(form.montant) }}
+        {% do form.montant.setRendered %}
+    </div>
+
+    <div class="form-group" style="display: none;">
+        {{ form_label(form.date, 'Date') }}
+        {{ form_widget(form.date) }}
+        {{ form_errors(form.date) }}
+        {% do form.date.setRendered %}
+    </div>
+
+        <input type="submit" value="Create" />
+
+    {{ form_end(form) }}
+
+    <ul>
+        <li>
+            <a href="{{ path('donrestaurant_index') }}">Back to the list</a>
+        </li>
+    </ul>
+{% endblock %}
+
+
+{% block javascripts %}
+{#    <script>#}
+{#        var dt = new Date();#}
+{#        var x = document.getElementById("hamza");#}
+{#        x.value = dt.toISOString().slice(0,16);#}
+{#    </script>#}
+{% endblock %}

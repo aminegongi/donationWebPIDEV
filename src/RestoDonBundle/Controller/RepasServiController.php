@@ -22,7 +22,7 @@ class RepasServiController extends Controller
 
         $repasServis = $em->getRepository('RestoDonBundle:RepasServi')->findAll();
 
-        return $this->render('repasservi/index.html.twig', array(
+        return $this->render('@RestoDon/repasservi/index.html.twig', array(
             'repasServis' => $repasServis,
         ));
     }
@@ -45,7 +45,7 @@ class RepasServiController extends Controller
             return $this->redirectToRoute('repasservi_show', array('idResto' => $repasServi->getIdresto()));
         }
 
-        return $this->render('repasservi/new.html.twig', array(
+        return $this->render('@RestoDon/repasservi/new.html.twig', array(
             'repasServi' => $repasServi,
             'form' => $form->createView(),
         ));
@@ -59,7 +59,7 @@ class RepasServiController extends Controller
     {
         $deleteForm = $this->createDeleteForm($repasServi);
 
-        return $this->render('repasservi/show.html.twig', array(
+        return $this->render('@RestoDon/repasservi/show.html.twig', array(
             'repasServi' => $repasServi,
             'delete_form' => $deleteForm->createView(),
         ));
@@ -81,7 +81,7 @@ class RepasServiController extends Controller
             return $this->redirectToRoute('repasservi_edit', array('idResto' => $repasServi->getIdresto()));
         }
 
-        return $this->render('repasservi/edit.html.twig', array(
+        return $this->render('@RestoDon/repasservi/edit.html.twig', array(
             'repasServi' => $repasServi,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),

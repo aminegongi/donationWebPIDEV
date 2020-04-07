@@ -22,7 +22,7 @@ class TarifRestoController extends Controller
 
         $tarifRestos = $em->getRepository('RestoDonBundle:TarifResto')->findAll();
 
-        return $this->render('tarifresto/index.html.twig', array(
+        return $this->render('@RestoDon/tarifresto/index.html.twig', array(
             'tarifRestos' => $tarifRestos,
         ));
     }
@@ -45,7 +45,7 @@ class TarifRestoController extends Controller
             return $this->redirectToRoute('tarifresto_show', array('idResto' => $tarifResto->getIdresto()));
         }
 
-        return $this->render('tarifresto/new.html.twig', array(
+        return $this->render('@RestoDon/tarifresto/new.html.twig', array(
             'tarifResto' => $tarifResto,
             'form' => $form->createView(),
         ));
@@ -59,7 +59,7 @@ class TarifRestoController extends Controller
     {
         $deleteForm = $this->createDeleteForm($tarifResto);
 
-        return $this->render('tarifresto/show.html.twig', array(
+        return $this->render('@RestoDon/tarifresto/show.html.twig', array(
             'tarifResto' => $tarifResto,
             'delete_form' => $deleteForm->createView(),
         ));
@@ -81,7 +81,7 @@ class TarifRestoController extends Controller
             return $this->redirectToRoute('tarifresto_edit', array('idResto' => $tarifResto->getIdresto()));
         }
 
-        return $this->render('tarifresto/edit.html.twig', array(
+        return $this->render('@RestoDon/tarifresto/edit.html.twig', array(
             'tarifResto' => $tarifResto,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
