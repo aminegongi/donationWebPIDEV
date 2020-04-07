@@ -86,7 +86,7 @@
 
                     <div class="nav-item dropdown submenu" style="width: fit-content;">
                         <a href="#" class="nav-link dropdown-toggle" aria-haspopup="true" data-toggle="dropdown" aria-expanded="false">
-                            <img class="nav-img" src="{{ asset('uploads/UserImg/')~ user.image }}" alt="">
+                            <img class="nav-img" src="{{ asset('uploads/UserImg/')~ app.user.image }}" alt="">
                             {% if(app.user.nom in null) %}
                                 {{ app.user.username }}
                             {% else %}
