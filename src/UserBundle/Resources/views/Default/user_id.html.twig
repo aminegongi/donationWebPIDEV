@@ -1,0 +1,378 @@
+{% extends 'front.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('front/scss/gongi/css/root.css') }}">
+
+    <style>
+        @import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,700");
+
+
+        .cover {
+            height: 200px;
+            background: {{code}};
+        }
+        .btn {
+            cursor: pointer;
+        }
+        .btn.btn-primary {
+            background: {{code}};
+            border-color: {{code}};
+        }
+        .btn.btn-primary:hover {
+            background: black 60%;
+            border-color: black;
+        }
+        .btn.btn-primary:focus {
+            background: {{code}};
+            border-color: {{code}};
+        }
+
+        .bg-primary {
+            background: {{code}} !important;
+        }
+
+        .small {
+            color: rgba(45, 104, 47, 0.8);
+        }
+
+        .card {
+            border: none;
+            border-top: 5px solid lightgray;
+            border-radius: 0;
+            margin-bottom: 30px;
+        }
+        .card .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 500;
+        }
+        .card .row {
+            width: 100%;
+        }
+
+        .alert {
+            margin-bottom: 30px;
+        }
+
+        a.action {
+            text-transform: uppercase;
+            font-size: 11px;
+            font-weight: 500;
+            color: {{code}};
+        }
+        a.action:hover {
+            color: {{code}};
+        }
+
+        #left {
+            margin-top: -150px;
+            flex: 0 0 300px;
+        }
+
+        #user .fa {
+            font-size: 20px;
+        }
+        #user #userImage {
+            background: {{code}};
+            height: 200px;
+        }
+        #user #renew {
+            display: block;
+            width: 100%;
+        }
+        #user .row {
+            width: auto;
+        }
+
+        #connections .list {
+            margin: 15px 30px;
+        }
+        #connections .list .list-item {
+            width: 30px;
+            height: 30px;
+            margin: 5px;
+            background: {{code}};
+            color: #ffffff;
+            cursor: pointer;
+        }
+        #connections .list .list-item:hover {
+            background: {{code}};
+        }
+
+        #upcomingEvents .view {
+            flex: 0 0 60px;
+        }
+
+        #goals .row .details {
+            flex: 0 0 60px;
+        }
+
+        .signup {
+            flex: 0 0 125px;
+        }
+
+        #recentActivity em {
+            font-style: normal;
+            color: {{code}};
+        }
+        #recentActivity .right {
+            flex: 0 0 100px;
+            height: 100%;
+        }
+        #recentActivity .right .view {
+            display: flex;
+            justify-content: center;
+        }
+
+        .icon {
+            position: relative;
+            flex: 0 0 40px;
+            text-align: center;
+            flex-shrink: 0;
+            margin-right: 10px;
+            font: normal normal normal 14px/1 FontAwesome;
+        }
+        .icon.warning:after {
+            content: "";
+            color: {{code}};
+            position: absolute;
+            font-size: 18px;
+            top: 3px;
+            left: 28px;
+        }
+        .icon .fa-stack-1x {
+            color: #ffffff;
+        }
+
+        .center {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 50%;
+            max-width: 200px;
+            height: auto;
+        }
+
+        @media (max-width: 768px) {
+            .navbar-nav.actions {
+                position: absolute;
+                right: 70px;
+            }
+        }
+    </style>
+
+{% endblock %}
+
+{% block body %}
+    <div class="cover"></div>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md" id="left">
+                <div class="card" id="user">
+                    <div class="card-header" style="justify-content: unset;"><small>Username:</small>{{ user.username }}</div>
+                    <img class="center" style=" width: 160px; height: auto;" src="{{ asset('uploads/UserImg/')~ user.image }}" />
+                    <div class="card-block">
+                        {% if user.nom is null %}
+                            <h4 class="card-title">{{user.username}}</h4>
+                        {% else %}
+                            <h4 class="card-title">{{user.nom}} {{user.prenom}}</h4>
+                        {% endif %}
+                        <div class="row">
+                            <div class="col">
+                                {% if user.roles[0] == 'ROLE_US' %}
+                                    <div class="font-weight"> Utilisateur Simple ❤</div>
+                                {% elseif user.roles[0] == 'ROLE_RES' %}
+                                    <div class="font-weight"> Restaurant ❤ </div>
+                                {% elseif user.roles[0] == 'ROLE_ORG' %}
+                                    <div class="font-weight"> Organisation ❤</div>
+                                {% elseif user.roles[0] == 'ROLE_ENT' %}
+                                    <div class="font-weight"> Entreprise ❤</div>
+                                {% else %}
+                                    <div class="font-weight">❤ Le Boss ❤</div>
+                                {% endif %}
+
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-1"><i class="fa fa-envelope"></i></div>
+                            <div class="col">{{user.email}}</div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-1"><i class="fa fa-phone"></i></div>
+                            <div class="col">{{user.numTel}}</div>
+                        </div>
+                        {% if user.pays is not null %}
+                            <div class="row mt-2">
+                                <div class="col-1"><i class="fa fa-map-marker"></i></div>
+                                <div class="col"><small>Adresse:</small>{{ user.pays~', '~user.ville}}</div>
+                            </div>
+                        {% endif %}
+                        {% if user.dateNaissance is not null %}
+                            <div class="row mt-2">
+                                <div class="col"><small>Date Naissance:</small> {{ user.dateNaissance | date('d/m/Y')}} </div>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-md">
+
+                <div class="row mt-4">
+
+                    <div class="col-lg-6">
+                        <div class="card" id="goals">
+                            <div class="card-header">Des Statistiques </div>
+
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="card" id="upcomingEvents">
+                            <div class="card-header">Envoyé un SMS<a class="action" >Seulement pour urgence</a></div>
+                            <ul class="list-group">
+
+                                <li class="list-group-item">
+                                    <div class="row no-gutters">
+                                        <div class="col">
+                                            <div class="row">
+                                                <div class="col">Merci , de vous connecter sur la plateforme</div>
+                                            </div>
+                                        </div>
+                                        <div class="col view"><a class="btn btn-primary" style="color: white;" >Envoyé</a></div>
+                                    </div>
+                                </li>
+
+                                <li class="list-group-item">
+                                    <div class="row no-gutters">
+                                        <div class="col">
+                                            <div class="row">
+                                                <div class="col">Lorsque vous aurez du temps , je souhaiterai communiquer avec vous </div>
+                                            </div>
+                                        </div>
+                                        <div class="col view"><a class="btn btn-primary" style="color: white;">Envoyé</a></div>
+                                    </div>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="alert bg-primary text-white">
+                            <div class="row">
+                                <div class="col-lg">
+                                    <div class="row">
+                                        <div class="col">Zone chat </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="card" id="recentActivity">
+                            <div class="card-header">La Discussion<a class="action" > pour vous permettre de vous rapprocher</a></div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock body %}
+
+{% block footer %}
+    <!-- ================ start footer Area ================= -->
+    <footer class="footer-area" style="--first-color: var(--my-color);">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3  col-md-6 col-sm-6">
+                    <div class="single-footer-widget">
+                        <h6>About Agency</h6>
+                        <p style="color: white;">
+                            The world has become so fast paced that people don’t want to stand by reading a page of information to be  they would much rather look at a presentation and understand
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="single-footer-widget">
+                        <h6>Navigation Links</h6>
+                        <div class="row">
+                            <div class="col" >
+                                <ul>
+                                    <li style="color: white;" ><a href="#">Home</a></li>
+                                    <li style="color: white;" ><a href="#">Feature</a></li>
+                                    <li style="color: white;" ><a href="#">Services</a></li>
+                                    <li style="color: white;" ><a href="#">Portfolio</a></li>
+                                </ul>
+                            </div>
+                            <div class="col">
+                                <ul>
+                                    <li style="color: white;" ><a href="#">Team</a></li>
+                                    <li style="color: white;" ><a href="#">Pricing</a></li>
+                                    <li style="color: white;" ><a href="#">Blog</a></li>
+                                    <li style="color: white;" ><a href="#">Contact</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3  col-md-6 col-sm-6">
+                    <div class="single-footer-widget">
+                        <h6>Newsletter</h6>
+                        <p style="color: white;">
+                            For business professionals caught between high OEM price and mediocre print and graphic output.
+                        </p>
+                        <div id="mc_embed_signup">
+                            <form action="{{ path('nInscriF') }}" method="post" class="subscription relative">
+                                <div class="input-group d-flex flex-row">
+                                    <input name="_email" placeholder="Email Address" style="color: white;" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email Address '" required="" type="email">
+                                    <button class="btn bb-btn"><span class="lnr lnr-location"></span></button>
+                                </div>
+                                <div class="mt-10 info"></div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3  col-md-6 col-sm-6">
+                    <div class="single-footer-widget mail-chimp">
+                        <h6 class="mb-20">InstaFeed</h6>
+                        <ul class="instafeed d-flex flex-wrap">
+                            <li><img src="{{ asset('front/img/instagram/i1.jpg') }}" alt=""></li>
+                            <li><img src="{{ asset('front/img/instagram/i2.jpg') }}" alt=""></li>
+                            <li><img src="{{ asset('front/img/instagram/i3.jpg') }}" alt=""></li>
+                            <li><img src="{{ asset('front/img/instagram/i4.jpg') }}" alt=""></li>
+                            <li><img src="{{ asset('front/img/instagram/i5.jpg') }}" alt=""></li>
+                            <li><img src="{{ asset('front/img/instagram/i6.jpg') }}" alt=""></li>
+                            <li><img src="{{ asset('front/img/instagram/i7.jpg') }}" alt=""></li>
+                            <li><img src="{{ asset('front/img/instagram/i8.jpg') }}" alt=""></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="row align-items-center">
+                    <p class="col-lg-8 col-sm-12 footer-text m-0 text-center text-lg-left" style="color: white;" ><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+                    <div class="col-lg-4 col-sm-12 footer-social text-center text-lg-right">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-dribbble"></i></a>
+                        <a href="#"><i class="fab fa-behance"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- ================ End footer Area ================= -->
+{% endblock footer %}

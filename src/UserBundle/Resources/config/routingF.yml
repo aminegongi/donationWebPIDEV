@@ -1,0 +1,6 @@
+user_profil:
+    path:     /profil
+    defaults: { _controller: UserBundle:Default:show }
+UserAutreProfil:
+    path:     /profil/{id}
+    defaults: { _controller: UserBundle:Default:showOUser }

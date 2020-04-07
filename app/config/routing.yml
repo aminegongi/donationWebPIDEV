@@ -29,6 +29,10 @@ user:
     resource: "@UserBundle/Resources/config/routing.yml"
     prefix:   /admin/user
 
+userFront:
+    resource: "@UserBundle/Resources/config/routingF.yml"
+    prefix:   /user
+
 hayt:
     resource: "@haytBundle/Controller/"
     type:     annotation
