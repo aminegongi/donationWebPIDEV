@@ -1,5 +1,45 @@
 {% extends "@FOSUser/layoutPr.html.twig" %}
+{% block stylesheets %}
+    {{ parent() }}
 
+    <style>
+        ::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        ::-webkit-scrollbar-track {
+            width: 5px;
+            background: #f5f5f5;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            width: 1em;
+            background-color: #ddd;
+            outline: 1px solid slategrey;
+            border-radius: 1rem;
+        }
+
+        .text-small {
+            font-size: 0.9rem;
+        }
+
+        .messages-box,
+        .chat-box {
+            height: 510px;
+            overflow-y: scroll;
+        }
+
+        .rounded-lg {
+            border-radius: 0.5rem;
+        }
+
+        input::placeholder {
+            font-size: 0.9rem;
+            color: #999;
+        }
+
+    </style>
+{% endblock %}
 {% block fos_user_content %}
 {% include "@FOSUser/Profile/show_content.html.twig" %}
 {% endblock fos_user_content %}

@@ -4,8 +4,6 @@
     <link rel="stylesheet" href="{{ asset('front/scss/gongi/css/root.css') }}">
 
     <style>
-        @import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,700");
-
 
         .cover {
             height: 200px;
@@ -249,114 +247,40 @@
                 </div>
             </div>
             <div class="col-md">
-                <div class="row mt-4">
-                    <div class="col font-weight-bold">[Association Name]</div>
-                </div>
-                <div class="row mt-4">
-                    <div class="col-lg-6">
-                        <div class="card" id="upcomingEvents">
-                            <div class="card-header">Upcoming Events<a class="action" href="#">All Upcoming</a></div>
-                            <ul class="list-group">
-                                <li class="list-group-item">
-                                    <div class="row no-gutters">
-                                        <div class="col">
-                                            <div class="row">
-                                                <div class="col">Greater Atlanta Chamber of Commerce 2015</div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col small">March 15th, 2015</div>
-                                            </div>
+                {% block blasaProfile %}
+                    <br>
+                    {#<div class="row">
+                        <div class="col">
+                            <div class="alert bg-primary text-white"><button class="close" data-dismiss="alert"></button>
+                                <div class="row">
+                                    <div class="col-lg">
+                                        <div class="row">
+                                            <div class="col">Zone chat</div>
                                         </div>
-                                        <div class="col view"><button class="btn btn-primary">View</button></div>
-                                    </div>
-                                </li>
-                                <li class="list-group-item">
-                                    <div class="row no-gutters">
-                                        <div class="col">
-                                            <div class="row">
-                                                <div class="col">Wednesday Potluck Dinner, Chicago Chapter</div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col small">March 15th, 2015</div>
-                                            </div>
+                                        <div class="row my-2">
+                                            <div class="col small text-white"> vous avez ici toutes les discussions</div>
                                         </div>
-                                        <div class="col view"><button class="btn btn-primary">View</button></div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="card" id="goals">
-                            <div class="card-header">Goals<a class="action" href="#">Set New Goal</a></div>
-                            <ul class="list-group">
-                                <li class="list-group-item">
-                                    <div class="row no-gutters">
-                                        <div class="col">March 2015 Donations</div>
-                                        <div class="col text-right">$300.00</div>
-                                    </div>
-                                    <div class="row my-2">
-                                        <div class="col">
-                                            <div class="progress">
-                                                <div class="progress-bar" style="width:63%;"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row no-gutters">
-                                        <div class="col small">$221.34 collected! 63% of your goal</div>
-                                        <div class="col details text-right"><a class="action" href="#">Details</a></div>
-                                    </div>
-                                </li>
-                                <li class="list-group-item">
-                                    <div class="row no-gutters">
-                                        <div class="col">Event Fundraising</div>
-                                        <div class="col text-right">$1,500.00</div>
-                                    </div>
-                                    <div class="row my-2">
-                                        <div class="col">
-                                            <div class="progress">
-                                                <div class="progress-bar" style="width:14%;"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row no-gutters">
-                                        <div class="col small">$221.34 collected! 14% of your goal</div>
-                                        <div class="col details text-right"><a class="action" href="#">Details</a></div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <div class="alert bg-primary text-white"><button class="close" data-dismiss="alert"></button>
-                            <div class="row">
-                                <div class="col-lg">
-                                    <div class="row">
-                                        <div class="col">2015 Innovation Conference</div>
-                                    </div>
-                                    <div class="row my-2">
-                                        <div class="col small text-white">Interesting speakers, delicious food, do not miss this event!</div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <div class="card" id="recentActivity">
-                            <div class="card-header">Recent Activity<a class="action" href="#">All Activity</a></div>
-                            {% block fos_user_content %}
-                            {% endblock fos_user_content %}
+                    </div>#}
+
+                    <div class="row">
+                        <div class="col">
+                            <div class="card" id="recentActivity">
+                                <div class="card-header">Votre Espace Conversation<a class="action" href="#"> pour vous connecter avec les autres</a></div>
+                                {% block fos_user_content %}
+                                {% endblock fos_user_content %}
+                            </div>
                         </div>
                     </div>
-                </div>
+                {% endblock blasaProfile %}
             </div>
         </div>
     </div>
 {% endblock body %}
+
 {% block footer %}
     <!-- ================ start footer Area ================= -->
     <footer class="footer-area" style="--first-color: var(--my-color);">
