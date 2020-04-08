@@ -1,6 +1,15 @@
 user_profil:
     path:     /profil
     defaults: { _controller: UserBundle:Default:show }
+
 UserAutreProfil:
     path:     /profil/{id}
     defaults: { _controller: UserBundle:Default:showOUser }
+
+send_add_message:
+    path:     /send_msg
+    defaults: { _controller: UserBundle:Conversation:send_add }
+
+get_convs:
+    path:     /get_convs
+    defaults: { _controller: UserBundle:Conversation:getConvs }
