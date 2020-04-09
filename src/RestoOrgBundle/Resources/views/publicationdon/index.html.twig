@@ -14,8 +14,8 @@
 
         <article class="blog_item" style="border-top-width: 3px; border-top-color: #0e90d2; border-top-style: groove; background-color: #000a9c08;">
             <div class="blog_item_img"  >
-                <ul href="#" class="blog_item_date" style="opacity: revert; background-color: #ffffff00; margin-top: 40px; display: flex; bottom: -80px; left: 0px ;">
-                    <li><img  src="/donationwebpidev/web/front/img/img.jpg" alt="" class="center" style="border-radius: 40px ; width: 60px; height: 60px; "></li>
+                <ul href="{{path('UserAutreProfil',{ 'id':pd.ajoutePar.id} )}}" class="blog_item_date" style="opacity: revert; background-color: #ffffff00; margin-top: 40px; display: flex; bottom: -80px; left: 0px ;">
+                    <li><img  src="{{ asset('uploads/UserImg') ~ pd.ajoutePar.image }}" alt="" class="center" style="border-radius: 40px ; width: 60px; height: 60px; "></li>
                     <ul style="color: #0b0b0b; margin-left:10px;text-align: left;">
                         <li>{{ pd.ajoutePar.nom }} {{ pd.ajoutePar.prenom }}</li>
                         <li>{% if (pd.ajoutePar.roles.0 == "ROLE_RES") %}
