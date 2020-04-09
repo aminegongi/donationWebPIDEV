@@ -87,11 +87,11 @@
                     <div class="nav-item dropdown submenu" style="width: fit-content;">
                         <a href="#" class="nav-link dropdown-toggle" aria-haspopup="true" data-toggle="dropdown" aria-expanded="false">
                             <img class="nav-img" src="{{ asset('uploads/UserImg/')~ app.user.image }}" alt="">
-                            {% if(app.user.nom in null) %}
-                                {{ app.user.username }}
-                            {% else %}
+                            {#{% if(app.user.nom in null) %}
                                 {{ app.user.nom ~' '~app.user.prenom }}
-                            {% endif %}
+                            {% else %}#}
+                                 {{ app.user.username }}
+                            {#{% endif %}#}
                         </a>
                         <ul class="dropdown-menu">
                             <li class="nav-item">

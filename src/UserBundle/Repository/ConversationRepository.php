@@ -39,7 +39,7 @@ class ConversationRepository extends \Doctrine\ORM\EntityRepository
     public function getSRConversation($rec,$sen)
     {
         $q=$this->getEntityManager()->createQuery(
-            "Select c from UserBundle:Conversation c where (c.receiver='$rec' and c.sender='$sen') or (c.receiver='$sen' and c.sender='$rec')"
+            "Select c from UserBundle:Conversation c where (c.receiver='$rec' and c.sender='$sen') or (c.receiver='$sen' and c.sender='$rec') order by c.id ASC"
         );
         return $q->getResult();
     }

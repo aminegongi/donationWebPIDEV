@@ -33,7 +33,6 @@ class ConversationController extends Controller
         $idr=$req->request->get('to');
         $me = $this->container->get('security.token_storage')->getToken()->getUser();
         $idme=$me->getId();
-
         $ar = $this->getDoctrine()->getRepository(Conversation::class)->getSRConversation($idr,$idme);
 
         $code='';
@@ -61,20 +60,6 @@ class ConversationController extends Controller
 
     public function getlistConvAction(Request $req)
     {
-        /*
-        $me = $this->container->get('security.token_storage')->getToken()->getUser();
-        $idme=$me->getId();
-        $ar = $this->getDoctrine()->getRepository(Conversation::class)->getlistConDQL($idme);
-        $code='';
-        foreach ($ar as $conv){
-            $img = $conv->getSender()->getImage();
-            $code .= '<div class="media w-50 mb-3"><img src="../../uploads/UserImg/'.$img.'" alt="user" width="50" class="rounded-circle">';
-            $code .= '<div class="media-body ml-3"> <div class="bg-light rounded py-2 px-3 mb-2">';
-            $code .= '<p class="text-small mb-0 text-muted"> '.$conv->getMessage().'</p> </div>';
-            $code .= '<p class="small text-muted">'.$conv->getDateEnvoi()->format('d M | H:i').'</p></div></div>';
-        }
-        */
-
         $idr=2;
         $me = $this->container->get('security.token_storage')->getToken()->getUser();
         $idme=$me->getId();
@@ -83,13 +68,15 @@ class ConversationController extends Controller
 
         $code='';
         foreach ($ar as $conv ){
+            if($conv->getSender()->getId() != $idme) {
                 $img = $conv->getSender()->getImage();
-                $code .= '<a onclick=" to='.$conv->getSender()->getId().'" class="list-group-item list-group-item-action list-group-item-light rounded-0">';
-                $code .= '<div class="media"><img src="../../uploads/UserImg/'.$img.'" alt="user" width="50" class="rounded-circle">';
+                $code .= '<a onclick=" to=' . $conv->getSender()->getId() . '" class="list-group-item list-group-item-action list-group-item-light rounded-0">';
+                $code .= '<div class="media"><img src="../../uploads/UserImg/' . $img . '" alt="user" width="50" class="rounded-circle">';
                 $code .= '<div class="media-body ml-4">';
                 $code .= '<div class="d-flex align-items-center justify-content-between mb-1">';
-                $code .= '<h6 class="mb-0">'.$conv->getSender()->getUsername().'</h6><small class="small font-weight">'.$conv->getDateEnvoi()->format('d M').'</small></div>';
-                $code .= '<p class="font-italic mb-0 text-small" style=" font-size: 12px; text-align: left;width: 150px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis; " >'.$conv->getMessage().'</p></div></div></a>';
+                $code .= '<h6 class="mb-0">' . $conv->getSender()->getUsername() . '</h6><small class="small font-weight">' . $conv->getDateEnvoi()->format('d M') . '</small></div>';
+                $code .= '<p class="font-italic mb-0 text-small" style=" font-size: 12px; text-align: left;width: 150px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis; " >' . $conv->getMessage() . '</p></div></div></a>';
+            }
         }
 
         return new JsonResponse(array(
