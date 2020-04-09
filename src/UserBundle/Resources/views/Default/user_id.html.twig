@@ -1,11 +1,12 @@
 {% extends 'front.html.twig' %}
 
 {% block stylesheets %}
+    {{ parent() }}
+
     <link rel="stylesheet" href="{{ asset('front/scss/gongi/css/root.css') }}">
 
     <style>
         @import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,700");
-
 
         .cover {
             height: 200px;
@@ -161,6 +162,43 @@
             }
         }
     </style>
+    <style>
+        ::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        ::-webkit-scrollbar-track {
+            width: 5px;
+            background: #f5f5f5;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            width: 1em;
+            background-color: #ddd;
+            outline: 1px solid slategrey;
+            border-radius: 1rem;
+        }
+
+        .text-small {
+            font-size: 0.9rem;
+        }
+
+        .messages-box,
+        .chat-box {
+            height: 510px;
+            overflow-y: scroll;
+        }
+
+        .rounded-lg {
+            border-radius: 0.5rem;
+        }
+
+        input::placeholder {
+            font-size: 0.9rem;
+            color: #999;
+        }
+
+    </style>
 
 {% endblock %}
 
@@ -280,7 +318,81 @@
                     <div class="col">
                         <div class="card" id="recentActivity">
                             <div class="card-header">La Discussion<a class="action" > pour vous permettre de vous rapprocher</a></div>
+                            <div class="container" style="padding-right: 0px;" >
+                                <div class="row rounded-lg overflow-hidden shadow">
+                                    <!-- Chat Box-->
+                                    <div class="col-12 px-0">
 
+                                        <div id="conv" class="px-4 py-5 chat-box bg-white">
+
+                                        </div>
+
+                                        <!-- Typing area -->
+                                        <form method="post" class="bg-light" onsubmit="return sendData();" >
+                                            <div class="input-group">
+                                                <input type="text" id="message" placeholder="Type a message" required aria-describedby="button-addon2" class="form-control rounded-0 border-0 py-4 bg-light">
+                                                <div class="input-group-append">
+                                                    <button id="button-addon2" type="submit" class="btn btn-link"> <i class="fa fa-paper-plane" style="color: {{ code }};" ></i></button>
+                                                </div>
+                                            </div>
+                                        </form>
+
+
+                                        <script>
+                                            var to={{user.id}}  ;
+
+                                            function sendData()
+                                            {
+                                                var msg = document.getElementById("message").value;
+                                                console.log(msg);
+
+                                                $.ajax({
+                                                    type: 'post',
+                                                    url: '{{ path('send_add_message') }}',
+                                                    data: {
+                                                        msg:msg,
+                                                        to:to
+                                                    },
+                                                    cache: false,
+                                                    success: function(data) {
+                                                        console.log('Send Ok');
+                                                        document.getElementById("message").value="";
+                                                        laConversation();
+                                                    },
+                                                    error: function(XMLHttpRequest, textStatus, errorThrown) {
+                                                        alert("Status: " + textStatus); alert("Error: " + errorThrown);
+                                                    }
+                                                });
+                                                return false;
+                                            }
+
+
+
+                                            var myVar = setInterval(function(){ laConversation() }, 1000);
+                                            function laConversation() {
+                                                var element = document.getElementById("conv");
+                                                element.scrollTop = element.scrollHeight;
+                                                var data ='';
+                                                $.ajax({
+                                                    type: 'POST',
+                                                    url: '{{ path('get_convs')}}',
+                                                    data: {
+                                                        to: to
+                                                    },
+                                                    success: function(response){
+                                                        if( da != response ){
+                                                            $('#conv').html(response.ch);
+                                                            var element = document.getElementById("conv");
+                                                            element.scrollTop = element.scrollHeight;
+                                                            var da = data;
+                                                        }
+                                                    }
+                                                });
+                                            }
+                                        </script>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

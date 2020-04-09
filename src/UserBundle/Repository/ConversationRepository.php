@@ -35,6 +35,7 @@ class ConversationRepository extends \Doctrine\ORM\EntityRepository
         return $q->getResult();
     }
 
+    /*-----------------------------------------------------*/
     public function getSRConversation($rec,$sen)
     {
         $q=$this->getEntityManager()->createQuery(
@@ -43,16 +44,33 @@ class ConversationRepository extends \Doctrine\ORM\EntityRepository
         return $q->getResult();
     }
 
-    public function getInContact($re)
+
+
+    public function getInConversation($conna)
     {
-        $rec= $this->getReceiver($re);
-        $sen = $this->getSender($re);
-
-        $ic[] = array_merge($sen, $rec);
-        $ii = array_unique($ic);
-
-        return $sen;
+        $conn = $this->getEntityManager()->getConnection();
+        $sql="select Max(dateEnvoi) as dd ,message,sender,receiver,id from conversation where (sender=".$conna." or receiver=".$conna.") Group BY sender,receiver ORDER by dd DESC";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll();
     }
 
+    public function getAllConversation($mee)
+    {
+        $q=$this->getEntityManager()->createQuery(
+            "Select c , Max(c.dateEnvoi) as HIDDEN dd from UserBundle:Conversation c where (c.receiver='".$mee."' or c.sender='".$mee."') Group BY c.sender, c.receiver Order by dd DESC"
+        );
+        return $q->getResult();
+    }
 
+    public function getlistConDQL($conna)
+    {
+        $q=$this->getEntityManager()->createQuery(
+            "Select c , Max(c.dateEnvoi) as HIDDEN date from UserBundle:Conversation c where (c.receiver=".$conna." or c.sender=".$conna.") Group BY c.sender, c.receiver ORDER by date DESC"
+        );
+
+        return $q->getResult();
+    }
+
+    //"Select c , Max(c.dateEnvoi) as dd  from UserBundle:Conversation c where (c.receiver='$conna' or c.sender='$conna') Group BY c.sender, c.receiver ORDER by dd DESC"
 }

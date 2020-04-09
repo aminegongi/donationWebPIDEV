@@ -13,3 +13,7 @@ send_add_message:
 get_convs:
     path:     /get_convs
     defaults: { _controller: UserBundle:Conversation:getConvs }
+
+list_convs:
+    path:     /list_convs
+    defaults: { _controller: UserBundle:Conversation:getlistConv }
