@@ -12,7 +12,7 @@ class cagnotteController extends Controller{
     public function indexAction(){
         $tab=$this->getUser()->getRoles();
         $userRole=$tab[0];
-        if (($userRole == 'ROLE_US'){
+        if ($userRole == 'ROLE_US'){
             $em = $this->getDoctrine()->getManager();
 
             $cagnottes = $em->getRepository('CagnotteBundle:cagnotte')->findAll();
@@ -26,7 +26,7 @@ class cagnotteController extends Controller{
     public function newAction(Request $request){
         $tab=$this->getUser()->getRoles();
         $userRole=$tab[0];
-        if (($userRole == 'ROLE_US'){
+        if ($userRole == 'ROLE_US'){
             $cagnotte = new cagnotte();
             $form = $this->createForm(cagnotteType::class, $cagnotte);
             $form->handleRequest($request);
@@ -44,7 +44,7 @@ class cagnotteController extends Controller{
     public function editAction(Request $request, $id){
         $tab=$this->getUser()->getRoles();
         $userRole=$tab[0];
-        if (($userRole == 'ROLE_US'){
+        if ($userRole == 'ROLE_US'){
             $em = $this->getDoctrine()->getManager();
             $cagnotte = $em->getRepository('CagnotteBundle:cagnotte')->find($id);
             $form = $this->createForm(cagnotteType::class, $cagnotte);
@@ -65,7 +65,7 @@ class cagnotteController extends Controller{
     public function deleteAction($id){
         $tab=$this->getUser()->getRoles();
         $userRole=$tab[0];
-        if (($userRole == 'ROLE_US'){
+        if ($userRole == 'ROLE_US'){
             $em = $this->getDoctrine()->getManager();
             $cagnotte = $em->getRepository('CagnotteBundle:cagnotte')->find($id);
             $em->remove($cagnotte);
