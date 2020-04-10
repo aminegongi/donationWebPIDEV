@@ -10,51 +10,68 @@ use Symfony\Component\HttpFoundation\Request;
 
 class cagnotteController extends Controller{
     public function indexAction(){
-        $em = $this->getDoctrine()->getManager();
+        $tab=$this->getUser()->getRoles();
+        $userRole=$tab[0];
+        if (($userRole == 'ROLE_US'){
+            $em = $this->getDoctrine()->getManager();
 
-        $cagnottes = $em->getRepository('CagnotteBundle:cagnotte')->findAll();
+            $cagnottes = $em->getRepository('CagnotteBundle:cagnotte')->findAll();
 
-        return $this->render('@Cagnotte/Cagnotte/index.html.twig', array(
-            'cagnottes' => $cagnottes));
+            return $this->render('@Cagnotte/Cagnotte/index.html.twig', array(
+                'cagnottes' => $cagnottes,
+                'userRole' => $userRole));
+        }
     }
 
     public function newAction(Request $request){
-        $cagnotte = new cagnotte();
-        $form = $this->createForm(cagnotteType::class, $cagnotte);
-        $form->handleRequest($request);
+        $tab=$this->getUser()->getRoles();
+        $userRole=$tab[0];
+        if (($userRole == 'ROLE_US'){
+            $cagnotte = new cagnotte();
+            $form = $this->createForm(cagnotteType::class, $cagnotte);
+            $form->handleRequest($request);
 
-        if ($form->isSubmitted()){
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($cagnotte);
-            $em->flush();
-            return $this->redirectToRoute('cagnotte_homepage');
+            if ($form->isSubmitted()){
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($cagnotte);
+                $em->flush();
+                return $this->redirectToRoute('cagnotte_homepage');
+            }
+            return $this->render("@Cagnotte/Cagnotte/ajouterCagnotte.html.twig", array('form'=>$form->createView()));
         }
-        return $this->render("@Cagnotte/Cagnotte/ajouterCagnotte.html.twig", array('form'=>$form->createView()));
     }
 
     public function editAction(Request $request, $id){
-        $em=$this->getDoctrine()->getManager();
-        $cagnotte = $em->getRepository('CagnotteBundle:cagnotte')->find($id);
-        $form=$this->createForm(cagnotteType::class, $cagnotte);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
+        $tab=$this->getUser()->getRoles();
+        $userRole=$tab[0];
+        if (($userRole == 'ROLE_US'){
             $em = $this->getDoctrine()->getManager();
-            $em->persist($cagnotte);
-            $em->flush();
-            $this->addFlash('info', 'Created Successfully !');
-            return $this->redirectToRoute('cagnotte_homepage');
-        }
+            $cagnotte = $em->getRepository('CagnotteBundle:cagnotte')->find($id);
+            $form = $this->createForm(cagnotteType::class, $cagnotte);
+            $form->handleRequest($request);
 
-        return $this->render('@Cagnotte/Cagnotte/modifierCagnotte.html.twig',array('form' => $form->createView()));
+            if ($form->isSubmitted() && $form->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($cagnotte);
+                $em->flush();
+                $this->addFlash('info', 'Created Successfully !');
+                return $this->redirectToRoute('cagnotte_homepage');
+            }
+
+            return $this->render('@Cagnotte/Cagnotte/modifierCagnotte.html.twig', array('form' => $form->createView()));
+        }
     }
 
     public function deleteAction($id){
-        $em= $this->getDoctrine()->getManager();
-        $cagnotte = $em->getRepository('CagnotteBundle:cagnotte')->find($id);
-        $em->remove($cagnotte);
-        $em->flush();
-        return $this->redirectToRoute('cagnotte_homepage');
+        $tab=$this->getUser()->getRoles();
+        $userRole=$tab[0];
+        if (($userRole == 'ROLE_US'){
+            $em = $this->getDoctrine()->getManager();
+            $cagnotte = $em->getRepository('CagnotteBundle:cagnotte')->find($id);
+            $em->remove($cagnotte);
+            $em->flush();
+            return $this->redirectToRoute('cagnotte_homepage');
+        }
     }
 
     public function paymentAction(Request $request, $id){
