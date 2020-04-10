@@ -2,6 +2,8 @@
 
 namespace RestoDonBundle\Repository;
 
+use Doctrine\ORM\EntityRepository;
+
 /**
  * DonRestaurantRepository
  *
@@ -10,4 +12,17 @@ namespace RestoDonBundle\Repository;
  */
 class DonRestaurantRepository extends \Doctrine\ORM\EntityRepository
 {
+
+    public function findAllDONATORNAME($userName) {
+
+        return $this->getEntityManager()
+            ->createQuery(
+            'SELECT id
+    FROM UserBundle:User id
+    WHERE id.username = :username'
+        )->setParameter('username', $userName)
+            -> getResult();
+
+}
+
 }

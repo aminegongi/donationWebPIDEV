@@ -48,6 +48,7 @@ class TarifRestoController extends Controller
         return $this->render('@RestoDon/tarifresto/new.html.twig', array(
             'tarifResto' => $tarifResto,
             'form' => $form->createView(),
+            'user' => $user = $this->get('security.token_storage')->getToken()->getUser()->getId(),
         ));
     }
 
@@ -78,7 +79,7 @@ class TarifRestoController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('tarifresto_edit', array('idResto' => $tarifResto->getIdresto()));
+            return $this->redirectToRoute('tarifresto_edit', array('idTarif' => $tarifResto->getIdTarif()));
         }
 
         return $this->render('@RestoDon/tarifresto/edit.html.twig', array(
@@ -116,7 +117,7 @@ class TarifRestoController extends Controller
     private function createDeleteForm(TarifResto $tarifResto)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('tarifresto_delete', array('idResto' => $tarifResto->getIdresto())))
+            ->setAction($this->generateUrl('tarifresto_delete', array('idTarif' => $tarifResto->getIdTarif())))
             ->setMethod('DELETE')
             ->getForm()
         ;

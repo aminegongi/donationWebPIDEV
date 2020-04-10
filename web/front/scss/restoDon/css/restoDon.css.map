@@ -8,9 +8,9 @@
 	],
 	"sourcesContent": [
 		"@import \"test1\";\n@import \"test2\";",
-		"h1\n{\nsize: 20px;\n}\n\n.khedmet\n{\n  background: var(--my-color);\n}",
+		"h1\n{\nsize: 20px;\n}\n\n.khedmet\n{\n  background: var(--my-color);\n}\n\n.erreur\n{\n  color: darkred;\n}",
 		"h2\n{\n    color: black;\n}"
 	],
 	"names": [],
-	"mappings": "ACAA,AAAA,EAAE,CACF;EACA,IAAI,EAAE,IAAI,GACT;;AAED,AAAA,QAAQ,CACR;EACE,UAAU,EAAE,eAAe,GAC5B;;ACRD,AAAA,EAAE,CACF;EACI,KAAK,EAAE,KAAK,GACf"
+	"mappings": "ACAA,AAAA,EAAE,CACF;EACA,IAAI,EAAE,IAAI,GACT;;AAED,AAAA,QAAQ,CACR;EACE,UAAU,EAAE,eAAe,GAC5B;;AAED,AAAA,OAAO,CACP;EACE,KAAK,EAAE,OAAO,GACf;;ACbD,AAAA,EAAE,CACF;EACI,KAAK,EAAE,KAAK,GACf"
 }

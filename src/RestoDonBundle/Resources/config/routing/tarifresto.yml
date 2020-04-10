@@ -4,7 +4,7 @@ tarifresto_index:
     methods:  GET
 
 tarifresto_show:
-    path:     /{idResto}/show
+    path:     /{idTarif}/show
     defaults: { _controller: "RestoDonBundle:TarifResto:show" }
     methods:  GET
 
@@ -14,11 +14,11 @@ tarifresto_new:
     methods:  [GET, POST]
 
 tarifresto_edit:
-    path:     /{idResto}/edit
+    path:     /{idTarif}/edit
     defaults: { _controller: "RestoDonBundle:TarifResto:edit" }
     methods:  [GET, POST]
 
 tarifresto_delete:
-    path:     /{idResto}/delete
+    path:     /{idTarif}/delete
     defaults: { _controller: "RestoDonBundle:TarifResto:delete" }
     methods:  DELETE

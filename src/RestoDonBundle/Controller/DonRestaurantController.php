@@ -5,6 +5,7 @@ namespace RestoDonBundle\Controller;
 use RestoDonBundle\Entity\DonRestaurant;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use FOS\UserBundle\Doctrine\UserManager;
 
 /**
  * Donrestaurant controller.
@@ -33,10 +34,25 @@ class DonRestaurantController extends Controller
      */
     public function newAction(Request $request)
     {
+
+
+
         $donRestaurant = new Donrestaurant();
         $donRestaurant -> setDate(new \DateTime("-1 hour"));
         $form = $this->createForm('RestoDonBundle\Form\DonRestaurantType', $donRestaurant);
         $form->handleRequest($request);
+
+//        if ($form->isSubmitted()) {
+//            $userName = $donRestaurant -> getIdUser();
+//            $idUser = $this->getDoctrine()->getRepository(DonRestaurant::class)->findAllDONATORNAME($userName);
+//            $donRestaurant -> setIdUser($idUser);
+//        }
+
+//        if ($form->isSubmitted()){
+//            $value = $donRestaurant -> getIdUser();
+//            $user = $this->get('fos_user.user_manager')->findUserByUsernameOrEmail($form->get($idUser))->getId();
+//            $donRestaurant -> setIdUser($user);
+//        }
 
         if ($form->isSubmitted() && $form->isValid()) {
             $donRestaurant -> setDate(new \DateTime("-1 hour"));

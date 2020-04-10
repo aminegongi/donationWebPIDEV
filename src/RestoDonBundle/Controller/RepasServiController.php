@@ -34,20 +34,24 @@ class RepasServiController extends Controller
     public function newAction(Request $request)
     {
         $repasServi = new Repasservi();
+        $repasServi -> setDate(new \DateTime("-1 hour"));
         $form = $this->createForm('RestoDonBundle\Form\RepasServiType', $repasServi);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $repasServi -> setDate(new \DateTime("-1 hour"));
             $em = $this->getDoctrine()->getManager();
             $em->persist($repasServi);
             $em->flush();
 
-            return $this->redirectToRoute('repasservi_show', array('idResto' => $repasServi->getIdresto()));
+            return $this->redirectToRoute('repasservi_show', array('idRepas' => $repasServi->getIdRepas()));
         }
 
         return $this->render('@RestoDon/repasservi/new.html.twig', array(
             'repasServi' => $repasServi,
             'form' => $form->createView(),
+            'user' => $user = $this->get('security.token_storage')->getToken()->getUser()->getId(),
+            'time' => strftime("%d-%m-%Y %H:%M"),
         ));
     }
 
@@ -78,7 +82,7 @@ class RepasServiController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('repasservi_edit', array('idResto' => $repasServi->getIdresto()));
+            return $this->redirectToRoute('repasservi_edit', array('idRepas' => $repasServi->getIdRepas()));
         }
 
         return $this->render('@RestoDon/repasservi/edit.html.twig', array(
@@ -116,7 +120,7 @@ class RepasServiController extends Controller
     private function createDeleteForm(RepasServi $repasServi)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('repasservi_delete', array('idResto' => $repasServi->getIdresto())))
+            ->setAction($this->generateUrl('repasservi_delete', array('idRepas' => $repasServi->getIdRepas())))
             ->setMethod('DELETE')
             ->getForm()
         ;

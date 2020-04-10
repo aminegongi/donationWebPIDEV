@@ -4,6 +4,9 @@ h1 {
 .khedmet {
   background: var(--my-color); }
 
+.erreur {
+  color: darkred; }
+
 h2 {
   color: black; }
 

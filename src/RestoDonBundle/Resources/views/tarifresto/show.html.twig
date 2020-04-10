@@ -7,7 +7,7 @@
 {% block body %}
     <h1>Tarifresto</h1>
 
-    <table>
+    <table style="justify-content: center; margin-left: 40%;">
         <tbody>
             <tr>
                 <th>Idresto</th>
@@ -29,7 +29,7 @@
             <a href="{{ path('tarifresto_index') }}">Back to the list</a>
         </li>
         <li>
-            <a href="{{ path('tarifresto_edit', { 'idResto': tarifResto.idResto }) }}">Edit</a>
+            <a href="{{ path('tarifresto_edit', { 'idTarif': tarifResto.idTarif }) }}">Edit</a>
         </li>
         <li>
             {{ form_start(delete_form) }}

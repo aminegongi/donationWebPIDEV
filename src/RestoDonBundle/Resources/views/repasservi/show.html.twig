@@ -5,9 +5,9 @@
 {% endblock %}
 
 {% block body %}
-    <h1>Repasservi</h1>
+    <h1 style="color: var(--my-color);">Repasservi</h1>
 
-    <table>
+    <table style="justify-content: center; margin-left: 42%;">
         <tbody>
             <tr>
                 <th>Idresto</th>
@@ -20,16 +20,18 @@
         </tbody>
     </table>
 
-    <ul>
+    <ul style=" margin-top: 3%;">
         <li>
-            <a href="{{ path('repasservi_index') }}">Back to the list</a>
+            <a style="color: var(--my-color); letter-spacing: 0.4rem; font-weight: bold;" href="{{ path('repasservi_index') }}">Back to the list</a>
         </li>
         <li>
-            <a href="{{ path('repasservi_edit', { 'idResto': repasServi.idResto }) }}">Edit</a>
+            <a class="button button-hero mt-4" style="color: white; background-color: var(--my-color);" href="{{ path('repasservi_edit', { 'idRepas': repasServi.idRepas }) }}">Edit</a>
         </li>
         <li>
             {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
+            <div style="color: var(--my-color);">
+                <input class="button button-hero mt-4" style="color: white; background-color: var(--my-color);" type="submit" value="Delete">
+            </div>
             {{ form_end(delete_form) }}
         </li>
     </ul>
