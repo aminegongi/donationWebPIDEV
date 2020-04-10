@@ -27,7 +27,6 @@ class InscriNews
      * @ORM\Column(name="a_mail", type="string", length=255)
      */
     private $aMail;
-
     /**
      * @var \DateTime
      *

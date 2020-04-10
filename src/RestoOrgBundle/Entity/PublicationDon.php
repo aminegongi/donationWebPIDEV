@@ -159,18 +159,14 @@ class PublicationDon
     }
 
     /**
-     * Set datePublication
-     *
      * @param \DateTime $datePublication
-     *
-     * @return PublicationDon
      */
     public function setDatePublication($datePublication)
     {
         $this->datePublication = $datePublication;
-    
-        return $this;
     }
+
+    
 
     /**
      * Get datePublication

@@ -12,9 +12,9 @@
                     <div class="title_right">
                         <div class="col-md-5 col-sm-5   form-group pull-right top_search">
                             <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Search for...">
+                                <input type="text" id="searchInput" class="form-control" placeholder="Search for...">
                                 <span class="input-group-btn">
-                        <button class="btn btn-default" type="button">Go!</button>
+
                     </span>
                             </div>
                         </div>
@@ -42,9 +42,9 @@
                             </div>
                             <div class="x_content">
 
-                                <div class="row">
+                                <div class="row" id="rowPub">
                                     {% for pub in pubs %}
-                                    <div class="col-md-55">
+                                    <div id="pubCard" class="col-md-55" value="{{ pub.titre }}">
                                         <div class="thumbnail">
                                             <div class="image view view-first">
                                                 <img style="width: 100%; display: block;" src="{{ asset('uploads/imagesPubs/' ~ pub.image) }}" alt="image">
@@ -79,3 +79,17 @@
 
 {% endblock %}
 
+{% block javascript %}
+{{ parent() }}
+<script>
+$(document).ready(function(){
+  $("#searchInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#rowPub #pubCard").filter(function() {
+
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+</script>
+{% endblock %}

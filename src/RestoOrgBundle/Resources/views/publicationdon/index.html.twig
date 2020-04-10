@@ -4,16 +4,27 @@
 
     <div class="container">
         <div class="row">
-    <div class="col-lg-8 mb-5 mb-lg-0">
+
+    <div class="col">
+        <div class="col"><a href="{{ path('publicationdon_new') }}">
+                <i class="fas fa-feather fa-2x"> Ajoutez votre unique publication & Aidez les autres !</i>
+            </a></div>
         {% for pd in publicationDons %}
 
 
         <article class="blog_item" style="border-top-width: 3px; border-top-color: #0e90d2; border-top-style: groove; background-color: #000a9c08;">
             <div class="blog_item_img"  >
-                <ul href="#" class="blog_item_date" style="opacity: revert; background-color: #ffffff00; margin-top: 40px; display: flex; bottom: -80px; left: 0px ;">
-                    <li><img  src="/donationwebpidev/web/front/img/img.jpg" alt="" class="center" style="border-radius: 40px ; width: 60px; height: 60px; "></li>
+                <ul class="blog_item_date" style="opacity: revert; background-color: #ffffff00; margin-top: 40px; display: flex; bottom: -80px; left: 0px ;">
+                    <li>
+                        <a href="{{path('UserAutreProfil',{ 'id':pd.ajoutePar.id} )}}" >
+                        <img  src="{{ asset('uploads/UserImg/') ~ pd.ajoutePar.image }}" alt="" class="center" style="border-radius: 40px ; width: 60px; height: 60px; "></a>
+                    </li>
                     <ul style="color: #0b0b0b; margin-left:10px;text-align: left;">
-                        <li>{{ pd.ajoutePar.nom }} {{ pd.ajoutePar.prenom }}</li>
+                        {% if pd.ajoutePar.nom is not null %}
+                            <li>{{ pd.ajoutePar.nom }} {{ pd.ajoutePar.prenom }}</li>
+                        {% else %}
+                            <li>{{ pd.ajoutePar.username }}</li>
+                        {% endif %}
                         <li>{% if (pd.ajoutePar.roles.0 == "ROLE_RES") %}
                             Restaurant
                             {% else %}
@@ -34,21 +45,25 @@
                 <ul class="blog-info-link">
                     <li><a href="#"><i class="far fa-user"></i> {% if pd.datePublication %}{{ pd.datePublication|ago  }}{% endif %}</a></li>
                     <li><a href="#"><i class="far fa-comments"></i>{{ pd.ajoutePar.numtel }} </a></li>
+            {% if(connectedUser.id==pd.ajoutePar.id) %} <li><a style="color: #0e90d2 ;" href="{{ path('publicationdon_edit', { 'id': pd.id }) }}"><i class="fas fa-edit" ></i> Vous Pensez à modifier votre publication ?</a></li>{% endif %}
                 </ul>
             </div>
         </article>
-        {% if(connectedUser.id==pd.ajoutePar.id) %}
-            <a href="{{ path('publicationdon_edit', { 'id': pd.id }) }}">edit</a>
-        {% endif %}
+
+
+
         <hr>
 
         {% endfor %}
 
 
-            <a href="{{ path('publicationdon_new') }}">Create a new pd</a>
+
 
     </div>
     </div>
+
+    </div>
+
     </div>
 
 
