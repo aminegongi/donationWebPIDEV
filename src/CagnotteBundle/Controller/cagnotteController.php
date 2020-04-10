@@ -21,6 +21,9 @@ class cagnotteController extends Controller{
                 'cagnottes' => $cagnottes,
                 'userRole' => $userRole));
         }
+        else{
+            return $this->render('@Cagnotte/Cagnotte/error.html.twig');
+        }
     }
 
     public function newAction(Request $request){
@@ -38,6 +41,9 @@ class cagnotteController extends Controller{
                 return $this->redirectToRoute('cagnotte_homepage');
             }
             return $this->render("@Cagnotte/Cagnotte/ajouterCagnotte.html.twig", array('form'=>$form->createView()));
+        }
+        else{
+            return $this->render('@Cagnotte/Cagnotte/error.html.twig');
         }
     }
 
@@ -60,6 +66,9 @@ class cagnotteController extends Controller{
 
             return $this->render('@Cagnotte/Cagnotte/modifierCagnotte.html.twig', array('form' => $form->createView()));
         }
+        else{
+            return $this->render('@Cagnotte/Cagnotte/error.html.twig');
+        }
     }
 
     public function deleteAction($id){
@@ -71,6 +80,9 @@ class cagnotteController extends Controller{
             $em->remove($cagnotte);
             $em->flush();
             return $this->redirectToRoute('cagnotte_homepage');
+        }
+        else{
+            return $this->render('@Cagnotte/Cagnotte/error.html.twig');
         }
     }
 
