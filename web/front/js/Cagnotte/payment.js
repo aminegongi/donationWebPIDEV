@@ -5,7 +5,7 @@ var elements = stripe.elements();
 var style = {
     base: {
         // Add your base input styles here. For example:
-        fontSize: '20px',
+        fontSize: '50px',
         color: '#45ff13',
     },
 };
