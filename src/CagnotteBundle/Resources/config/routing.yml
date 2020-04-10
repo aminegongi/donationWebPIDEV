@@ -13,3 +13,7 @@ cagnotte_edit:
 cagnotte_delete:
     path:     /delete/{id}
     defaults: { _controller: CagnotteBundle:cagnotte:delete }
+
+cagnotte_payment:
+    path:     /{id}/payment
+    defaults: { _controller: CagnotteBundle:cagnotte:payment }

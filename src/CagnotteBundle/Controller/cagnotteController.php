@@ -46,7 +46,7 @@ class cagnotteController extends Controller{
             return $this->redirectToRoute('cagnotte_homepage');
         }
 
-        return $this->render('@Cagnotte/Cagnotte/modifierCagnotte.html.twig',array('form'=> $form->createView()));
+        return $this->render('@Cagnotte/Cagnotte/modifierCagnotte.html.twig',array('form' => $form->createView()));
     }
 
     public function deleteAction($id){
@@ -55,5 +55,21 @@ class cagnotteController extends Controller{
         $em->remove($cagnotte);
         $em->flush();
         return $this->redirectToRoute('cagnotte_homepage');
+    }
+
+    public function paymentAction(Request $request, $id){
+       /* // Set your secret key. Remember to switch to your live secret key in production!
+        // See your keys here: https://dashboard.stripe.com/account/apikeys
+        \Stripe\Stripe::setApiKey('sk_test_7tajuF5Z10s0ok3SuF49voRi00w7jjH6x0');
+
+        // Token is created using Stripe Checkout or Elements!
+        // Get the payment token ID submitted by the form:
+        $charge = \Stripe\Charge::create([
+            'amount' => 999,
+            'currency' => 'usd',
+            'description' => 'Example charge',
+            'source' => $request->request->get('stripeToken'),
+        ]);*/
+        return $this->render('@Cagnotte/Cagnotte/payment.html.twig',array('id' => $id));
     }
 }
