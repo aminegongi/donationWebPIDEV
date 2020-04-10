@@ -103,8 +103,12 @@ class cagnotteController extends Controller{
         }
     }
 
-    public function donateAction(Request $request, $id){
-       /* // Set your secret key. Remember to switch to your live secret key in production!
+    public function donateAction($id){
+        return $this->render('@Cagnotte/Cagnotte/donate.html.twig',array('id' => $id));
+    }
+
+    public function chargeAction(Request $request){
+        //Set your secret key. Remember to switch to your live secret key in production!
         // See your keys here: https://dashboard.stripe.com/account/apikeys
         \Stripe\Stripe::setApiKey('sk_test_7tajuF5Z10s0ok3SuF49voRi00w7jjH6x0');
 
@@ -115,7 +119,6 @@ class cagnotteController extends Controller{
             'currency' => 'usd',
             'description' => 'Example charge',
             'source' => $request->request->get('stripeToken'),
-        ]);*/
-        return $this->render('@Cagnotte/Cagnotte/donate.html.twig',array('id' => $id));
+        ]);
     }
 }

@@ -18,6 +18,10 @@ cagnotte_show:
     path:     /show/{id}
     defaults: { _controller: CagnotteBundle:cagnotte:show }
 
-cagnotte_payment:
+cagnotte_donate:
     path:     /{id}/donate
     defaults: { _controller: CagnotteBundle:cagnotte:donate }
+
+cagnotte_charge:
+    path:     /{id}/charge
+    defaults: { _controller: CagnotteBundle:cagnotte:charge }
