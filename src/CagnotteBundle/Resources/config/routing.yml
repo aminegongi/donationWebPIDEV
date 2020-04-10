@@ -14,6 +14,10 @@ cagnotte_delete:
     path:     /delete/{id}
     defaults: { _controller: CagnotteBundle:cagnotte:delete }
 
+cagnotte_show:
+    path:     /show/{id}
+    defaults: { _controller: CagnotteBundle:cagnotte:show }
+
 cagnotte_payment:
-    path:     /{id}/payment
-    defaults: { _controller: CagnotteBundle:cagnotte:payment }
+    path:     /{id}/donate
+    defaults: { _controller: CagnotteBundle:cagnotte:donate }

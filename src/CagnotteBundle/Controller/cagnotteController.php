@@ -40,7 +40,7 @@ class cagnotteController extends Controller{
                 $em->flush();
                 return $this->redirectToRoute('cagnotte_homepage');
             }
-            return $this->render("@Cagnotte/Cagnotte/ajouterCagnotte.html.twig", array('form'=>$form->createView()));
+            return $this->render("@Cagnotte/Cagnotte/add.html.twig", array('form'=>$form->createView()));
         }
         else{
             return $this->render('@Cagnotte/Cagnotte/error.html.twig');
@@ -64,7 +64,7 @@ class cagnotteController extends Controller{
                 return $this->redirectToRoute('cagnotte_homepage');
             }
 
-            return $this->render('@Cagnotte/Cagnotte/modifierCagnotte.html.twig', array('form' => $form->createView()));
+            return $this->render('@Cagnotte/Cagnotte/edit.html.twig', array('form' => $form->createView()));
         }
         else{
             return $this->render('@Cagnotte/Cagnotte/error.html.twig');
@@ -86,7 +86,24 @@ class cagnotteController extends Controller{
         }
     }
 
-    public function paymentAction(Request $request, $id){
+    public function showAction($id){
+        $tab=$this->getUser()->getRoles();
+        $userRole=$tab[0];
+        if ($userRole == 'ROLE_US'){
+            $em = $this->getDoctrine()->getManager();
+
+            $selected = $em->getRepository('CagnotteBundle:cagnotte')->find($id);
+
+            return $this->render('@Cagnotte/Cagnotte/show.html.twig', array(
+                'selected' => $selected,
+                'userRole' => $userRole));
+        }
+        else{
+            return $this->render('@Cagnotte/Cagnotte/error.html.twig');
+        }
+    }
+
+    public function donateAction(Request $request, $id){
        /* // Set your secret key. Remember to switch to your live secret key in production!
         // See your keys here: https://dashboard.stripe.com/account/apikeys
         \Stripe\Stripe::setApiKey('sk_test_7tajuF5Z10s0ok3SuF49voRi00w7jjH6x0');
@@ -99,6 +116,6 @@ class cagnotteController extends Controller{
             'description' => 'Example charge',
             'source' => $request->request->get('stripeToken'),
         ]);*/
-        return $this->render('@Cagnotte/Cagnotte/payment.html.twig',array('id' => $id));
+        return $this->render('@Cagnotte/Cagnotte/donate.html.twig',array('id' => $id));
     }
 }

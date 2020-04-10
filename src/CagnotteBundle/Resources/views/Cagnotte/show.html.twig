@@ -1,0 +1,37 @@
+{% extends "front.html.twig" %}
+
+
+{% block body %}
+    <table border="1">
+        <tr>
+            <td>ID</td>
+            <th>Nom</th>
+            <th>Categorie</th>
+            <th>Date de creation</th>
+            <th>Date de debut</th>
+            <th>Date d'expiration</th>
+            <th>Montant demandé en DT</th>
+            <th>Montant actuel en DT</th>
+            <th>ID Proprietaire</th>
+            <th>ID Organisation</th>
+            <th>Etat</th>
+        </tr>
+
+
+            <tr>
+                <td>{{ selected.id }}</td>
+                <td>{{ selected.nom }}</td>
+                <td>{{ selected.idCategorie }}</td>
+                <td>{{ selected.dateDeCreation|date('d-m-Y') }}</td>
+                <td>{{ selected.dateDeDebut|date('d-m-Y') }}</td>
+                <td>{{ selected.dateDeFin|date('d-m-Y') }}</td>
+                <td>{{ selected.montantDemande }}</td>
+                <td>{{ selected.montantActuel }}</td>
+                <td>{{ selected.idProprietaire }}</td>
+                <td>{{ selected.idOrganisation }}</td>
+                <td>{{ selected.etat }}</td>
+            </tr>
+    </table>
+    <button onclick="window.location.href = '../{{ selected.id }}/donate';">Donate</button>
+
+{% endblock %}
