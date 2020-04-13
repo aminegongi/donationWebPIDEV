@@ -45,7 +45,9 @@
                 <ul class="blog-info-link">
                     <li><a href="#"><i class="far fa-user"></i> {% if pd.datePublication %}{{ pd.datePublication|ago  }}{% endif %}</a></li>
                     <li><a href="#"><i class="far fa-comments"></i>{{ pd.ajoutePar.numtel }} </a></li>
+                    {% if (connectedUser is not null) %}
             {% if(connectedUser.id==pd.ajoutePar.id) %} <li><a style="color: #0e90d2 ;" href="{{ path('publicationdon_edit', { 'id': pd.id }) }}"><i class="fas fa-edit" ></i> Vous Pensez à modifier votre publication ?</a></li>{% endif %}
+               {% endif %}
                 </ul>
             </div>
         </article>
@@ -210,4 +212,7 @@
 
     </script>
 
+{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('front/scss/restOrg/css/root.css') }}">
 {% endblock %}

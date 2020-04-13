@@ -13,7 +13,7 @@
 
 
                             {{ form_widget(form) }}
-                            <input type="submit" class="button border-0 mt-3">
+                            <input type="submit" class="button border-0 mt-3" style="background-color: #0c5460;">
 
 
                         </form>{{ form_end(form) }}
@@ -25,4 +25,7 @@
 
 
 
+{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('front/scss/restOrg/css/root.css') }}">
 {% endblock %}
