@@ -279,7 +279,7 @@
                                                 <div class="col">Merci , de vous connecter sur la plateforme</div>
                                             </div>
                                         </div>
-                                        <div class="col view"><a class="btn btn-primary" style="color: white;" >Envoyé</a></div>
+                                        <div class="col view"><a onclick="sendSMS(0)" class="btn btn-primary" style="color: white;" >Envoyé</a></div>
                                     </div>
                                 </li>
 
@@ -287,13 +287,38 @@
                                     <div class="row no-gutters">
                                         <div class="col">
                                             <div class="row">
-                                                <div class="col">Lorsque vous aurez du temps , je souhaiterai communiquer avec vous </div>
+                                                <div class="col">Lorsque vous aurez du temps , je souhaiterais communiquer avec vous </div>
                                             </div>
                                         </div>
-                                        <div class="col view"><a class="btn btn-primary" style="color: white;">Envoyé</a></div>
+                                        <div class="col view"><a onclick="sendSMS(0)" class="btn btn-primary" style="color: white;">Envoyé</a></div>
                                     </div>
                                 </li>
-
+                                <script>
+                                    function sendSMS(x){
+                                        var msg='';
+                                        if(x == 0)
+                                            msg ='Merci , de vous connecter sur la plateforme';
+                                        else
+                                            msg = 'Lorsque vous aurez du temps, je souhaiterais communiquer avec vous';
+                                        $.ajax({
+                                            type: 'post',
+                                            url: '{{ path('user_smsSend') }}',
+                                            data: {
+                                                msg:msg,
+                                                to:{{user.numTel}}
+                                            },
+                                            cache: false,
+                                            success: function(data) {
+                                                console.log(data.ok);
+                                                alert('SMS envoyé');
+                                            },
+                                            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                                                //alert("Status: " + textStatus); alert("Error: " + errorThrown);
+                                                alert('Probléme envoi SMS');
+                                            }
+                                        });
+                                    }
+                                </script>
                             </ul>
                         </div>
                     </div>
@@ -377,6 +402,7 @@
                                                     type: 'POST',
                                                     url: '{{ path('get_convs')}}',
                                                     data: {
+                                                        profo:'profil',
                                                         to: to
                                                     },
                                                     success: function(response){
