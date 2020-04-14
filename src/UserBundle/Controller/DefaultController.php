@@ -4,7 +4,9 @@ namespace UserBundle\Controller;
 
 use FOS\UserBundle\Model\UserInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use UserBundle\Entity\User;
 
@@ -49,6 +51,34 @@ class DefaultController extends Controller
             'user' => $user,'code' =>$cc[$i]
         ));
     }
+
+    public function smsSendAction(Request $req)
+    {
+        $conn = $this->container->get('security.token_storage')->getToken()->getUser();
+        $to=$req->request->get('to');
+        $to='+'.$to;
+        $msg =$req->request->get('msg');
+        $cs ='@voice.clicksend.com';
+        if(isset($to,$msg,$conn)){
+            $too=$to.$cs;
+            $mg = $msg.'/ envoyé grace à la plateforme DoNation.tn par Username: '.$conn->getUsername().' et mail: '.$conn->getEmail();
+            $message = (new \Swift_Message(' '))
+                ->setFrom('amine.gongi@esprit.tn')
+                ->setTo($too)
+                ->setBody($mg,'text/plain')
+            ;
+            $this->get('mailer')->send($message);
+            $ok=$too;
+        }
+        else{
+            $ok='non';
+        }
+
+        return new JsonResponse(array(
+            'ok'=>$ok
+        ));
+    }
+
 
 
 }
