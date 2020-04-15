@@ -1,7 +1,7 @@
 {% extends 'front.html.twig' %}
 
 {% block body %}
-
+    <a href="{{ path('publicationdon_index') }}"><i class="fas fa-list-ul fa-2x"> Retour aux publications </i></a>
 
             <div class="row">
 
@@ -13,7 +13,7 @@
 
 
                             {{ form_widget(form) }}
-                            <input type="submit" class="button border-0 mt-3">
+                            <input type="submit" class="button border-0 mt-3" style="background-color: #0c5460;">
 
 
                         </form>{{ form_end(form) }}
@@ -23,6 +23,9 @@
             </div>
 
 
-            <a href="{{ path('publicationdon_index') }}">Back to the list</a>
 
+
+{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('front/scss/restOrg/css/root.css') }}">
 {% endblock %}

@@ -1,6 +1,7 @@
 {% extends 'front.html.twig' %}
 
 {% block body %}
+    <a href="{{ path('publicationdon_index') }}"><i class="fas fa-list-ul fa-2x"> Retour aux publications </i></a>
 
     <div class="row">
 
@@ -12,7 +13,7 @@
 
 
                     {{ form_widget(edit_form) }}
-                    <input type="submit" class="button border-0 mt-3">
+                    <input type="submit" class="button border-0 mt-3" style="background-color: #0c5460;">
 
 
                 </form>{{ form_end(edit_form) }}
@@ -22,8 +23,11 @@
     </div>
 
 
-    <a href="{{ path('publicationdon_index') }}">Back to the list</a>
+
     {{ form_start(delete_form) }}
-    <input type="submit" value="Delete">
+    <input type="submit" value="Supprimer définitivement" class="button border-0 mt-3" style="background-color: red ; opacity: 0.6;">
     {{ form_end(delete_form) }}
+{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('front/scss/restOrg/css/root.css') }}">
 {% endblock %}
