@@ -1,9 +1,13 @@
 {% extends 'dash.html.twig' %}
 
 {% block content %}
-    <h1>Categorieaide edit</h1>
+
+    {{ dump(edit_form.nom) }}
+{#
+    <h1>Modifier categorie</h1>
 
     {{ form_start(edit_form) }}
+
         {{ form_widget(edit_form) }}
         <input type="submit" value="Edit" />
     {{ form_end(edit_form) }}
@@ -18,4 +22,86 @@
             {{ form_end(delete_form) }}
         </li>
     </ul>
+
+
+
+
+#}
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div>
+        <div class="">
+            <h3>Créer une nouvelle catégorie</h3>
+        </div>
+
+        <div class="row">
+            <div class="x_panel">
+                <div class="x_content">
+
+                    {{ form_start(edit_form) }}
+
+
+
+                    <div class="item form-group">
+                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="{{ edit_form.nom.vars.id }}">Nom</label>
+                        <input class="col-md-6 col-sm-6 form-control"   type="text"   id="{{ edit_form.nom.vars.id }}" name="{{ edit_form.nom.vars.full_name }} " value="{{ edit_form.nom.vars.value }}" >
+                        {{ form_errors(edit_form.nom) }}
+
+                        {% do edit_form.nom.setRendered %}
+                    </div>
+
+
+
+                    <div class="item form-group">
+                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="{{ edit_form.icone.vars.id }}">Icone</label>
+
+                        <input class="col-md-6 col-sm-6 " type="file"    type="text"   id="{{ edit_form.icone.vars.id }}" name="{{ edit_form.icone.vars.full_name }}" >
+
+                        {{ form_errors(edit_form.icone) }}
+
+                        {% do edit_form.icone.setRendered %}
+                    </div>
+
+
+                    <div class="ln_solid"></div>
+
+
+                    <div class="item form-group">
+                        <div class="col-md-6 col-sm-6 offset-md-3">
+                            <button class="btn btn-primary" type="reset"><i class="fa fa-refresh"> </i> Réinitialiser</button>
+                            <input class="btn btn-success" type="submit" value="Modifier" />
+
+                        </div>
+                    </div>
+
+                    <a href="{{ path('categorieaide_index') }}">Back to the list</a>
+
+
+
+
+                    {{ form_end(edit_form) }}
+
+
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+
 {% endblock %}
