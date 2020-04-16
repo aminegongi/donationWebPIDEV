@@ -151,12 +151,13 @@ class PublicationDonController extends Controller
     public function afterRequestAction(Request $request){
         #go to the script and get idPub to display , if -1 go to random Pub
         $connectedUser = $this->getUser()->getId();
-        $process = new Process(['python.py', $connectedUser]);#change User Id to Connected User !
-        $process->run();
-        if (!$process->isSuccessful()) {
-            throw new ProcessFailedException($process);
-        }
-        $renderVar=$process->getOutput();
+//        $process = new Process(['python.py', $connectedUser]);#change User Id to Connected User !
+//        $process->run();
+//        if (!$process->isSuccessful()) {
+//            throw new ProcessFailedException($process);
+//        }
+//        $renderVar=$process->getOutput();
+        $renderVar=-1 ; # rendervar forced to 1 ; pour validation seuelemnt .
         if($renderVar==-1)
         {
             $all=$this->getDoctrine()->getRepository(Pub::class)->findAll();
