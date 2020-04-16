@@ -57,6 +57,8 @@ class PublicationDonController extends Controller
             $em = $this->getDoctrine()->getManager();
             //dump($this->getUser());
             $publicationDon->setAjoutePar($this->getUser());
+            $publicationDon->setDatePublication(new \DateTime());
+            $publicationDon->setEtat(1);
             
             $em->persist($publicationDon);
             $em->flush();
