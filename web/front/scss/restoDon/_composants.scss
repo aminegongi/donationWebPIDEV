@@ -1,3 +1,30 @@
+.RestoDon-home-right, .RestoDon-home-left {
+  flex-direction: column;
+  width: 50%;
+  height: 100%;
+}
+
+#RestoDon-home-barbecue {
+  width: 80%;
+  height: 20%;
+}
+
+.RestoDon-home-content {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+}
+.RestoDon-home {
+  display: flex;
+  flex-direction: column;
+  h1{
+    color: var(--my-color);
+    margin-bottom: 4%;
+  }
+  --first-color: var(--my-color);
+}
+
 #background-fit {
   margin-right: 30%;
 }
