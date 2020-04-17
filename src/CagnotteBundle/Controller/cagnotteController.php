@@ -134,6 +134,11 @@ class cagnotteController extends Controller{
             'description' => 'donation.tn',
             'source' => $request->request->get('stripeToken'),
         ]);
+        $em = $this->getDoctrine()->getManager();
+        $cagnotte = $em->getRepository('CagnotteBundle:cagnotte')->find($id);
+        $cagnotte->setMontantActuel($cagnotte->getMontantActuel() + $montant);
+        $em->persist($cagnotte);
+        $em->flush();
         return $this->redirectToRoute('cagnotte_homepage');
     }
 
