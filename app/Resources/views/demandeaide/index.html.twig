@@ -91,6 +91,7 @@
                     />
                     <br/>
                     <h5 class="card-title">{{ demandeAide.titre }}</h5>
+                    <em class="card-title">{{ demandeAide.idCategorie.nom }}</em>
                     <div class="card-body">
                         <p class="card-text"
                            style="
@@ -121,7 +122,9 @@
                             </div>
                             <small class="text-muted">9 mins</small>
                         </div>
+
                     </div>
+                    <small>{{ demandeAide.idUser }}</small>
                 </div>
             </div>
 
