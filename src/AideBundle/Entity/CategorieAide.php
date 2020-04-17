@@ -93,5 +93,9 @@ class CategorieAide
     {
         return $this->icone;
     }
+
+    public function __toString() {
+        return $this->nom;
+    }
 }
 

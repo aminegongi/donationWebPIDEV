@@ -1,0 +1,75 @@
+{% extends 'front.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('front/scss/restoDon/css/root.css') }}">
+    <link rel="stylesheet" href="{{ asset('front/scss/restoDon/css/restoDon.css') }}">
+{% endblock %}
+
+{% block body %}
+<div id="body-new-don">
+    <h1>Donrestaurant edit</h1>
+    <div id="form" style="--first-color: var(--my-color); justify-content: center;">
+    {{ form_start(edit_form) }}
+
+
+        <div class="formulaire-div-basics-svg" style="display: none;">
+            {#        <label class="formulaire-label" for="{{ form.idResto.vars.id }}">id Resto</label>#}
+            <input type="text" class="formulaire-input" id="{{ edit_form.idResto.vars.id }}" name="{{ edit_form.idResto.vars.full_name }}" value="{{ user }}">
+            {{ form_errors(edit_form.idResto) }}
+            {% do edit_form.idResto.setRendered %}
+        </div>
+
+        <div class="formulaire-div-basics-svg">
+            {#        <label class="formulaire-label" for="userMail">Utilisateur</label>#}
+            <input type="hidden" autofocus readonly required  class="formulaire-input trick-cursor-none" id="{{ edit_form.idUser.vars.id }}" name="{{ edit_form.idUser.vars.full_name }}" value="{{ edit_form.idUser.vars.value }}">
+            <input type="text" autofocus readonly required  class="formulaire-input trick-cursor-none" id="userMail" name="userMail" placeholder="{{ edit_form.idUser.vars.data }}">
+            {{ form_errors(edit_form.idUser) }}
+            {% do edit_form.idUser.setRendered %}
+        </div>
+
+        <div class="formulaire-div-basics-svg">
+            {#        <label class="formulaire-label" for="{{ form.montant.vars.id }}">Montant</label>#}
+            <input type="number" min="0.00" step="0.05" class="formulaire-input" id="{{ edit_form.montant.vars.id }}" name="{{ edit_form.montant.vars.full_name }}" placeholder="montant">
+            <span class="span-erreur"></span>
+            {{ form_errors(edit_form.montant) }}
+            {% do edit_form.montant.setRendered %}
+        </div>
+
+        <div class="formulaire-div-basics-svg" style="display: none;">
+            {{ form_label(edit_form.date, 'Date') }}
+            {{ form_widget(edit_form.date) }}
+            {{ form_errors(edit_form.date) }}
+            {% do edit_form.date.setRendered %}
+        </div>
+        <ul>
+            <li id="background-fit-don">
+                <table>
+                    <tr>
+                        <input class="button button-hero mt-4" style="color: white;" type="submit" value="Edit" />
+                    </tr>
+                    {{ form_end(edit_form) }}
+                    <tr>
+                        {{ form_start(delete_form) }}
+                        <input class="button button-hero mt-4" style="color: #B33A3A;" type="submit" value="Delete" />
+                        {{ form_end(delete_form) }}
+                    </tr>
+                </table>
+            </li>
+            <li class="link-list-style" id="background-fit-don">
+                <a class="link-list" href="{{ path('donrestaurant_index') }}">Back to the list</a>
+            </li>
+        </ul>
+
+
+    </div>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        document.getElementById("{{ edit_form.montant.vars.id }}").value = {{ edit_form.montant.vars.data }} ;
+        document.getElementById("{{ edit_form.montant.vars.id }}").onselect( ()=>{
+
+        } );
+    </script>
+{% endblock %}

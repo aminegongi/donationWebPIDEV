@@ -1,0 +1,48 @@
+{% extends 'front.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('front/scss/restoDon/css/root.css') }}">
+{% endblock %}
+
+{% block body %}
+    <h1>Donrestaurant</h1>
+
+    <table style="justify-content: center; margin-left: 40%;">
+        <tbody>
+            <tr>
+                <th>Iddon</th>
+                <td>{{ donRestaurant.idDon }}</td>
+            </tr>
+            <tr>
+                <th>Idresto</th>
+                <td>{{ donRestaurant.idResto }}</td>
+            </tr>
+            <tr>
+                <th>Iduser</th>
+                <td>{{ donRestaurant.idUser }}</td>
+            </tr>
+            <tr>
+                <th>Montant</th>
+                <td>{{ donRestaurant.montant }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{% if donRestaurant.date %}{{ donRestaurant.date|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('donrestaurant_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('donrestaurant_edit', { 'idDon': donRestaurant.idDon }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

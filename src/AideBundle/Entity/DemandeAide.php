@@ -22,17 +22,15 @@ class DemandeAide
     private $id;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="id_categorie", type="integer")
-     */
+     * @ORM\ManyToOne(targetEntity="AideBundle\Entity\CategorieAide")
+     * @ORM\JoinColumn(name="id_categorie", referencedColumnName="id")
+     **/
     private $idCategorie;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="id_user", type="integer")
-     */
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User")
+     * @ORM\JoinColumn(name="id_user", referencedColumnName="id")
+     **/
     private $idUser;
 
     /**
@@ -248,5 +246,6 @@ class DemandeAide
     {
         return $this->photo;
     }
+
 }
 

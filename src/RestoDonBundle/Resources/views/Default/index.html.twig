@@ -1,1 +1,28 @@
-Hello World!
+{% extends 'front.html.twig' %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="{{ asset('front/scss/restoDon/css/root.css') }}">
+<link rel="stylesheet" href="{{ asset('front/scss/restoDon/css/restoDon.css') }}">
+{% endblock %}
+
+{% block body %}
+    <section class="RestoDon-home">
+        <h1>Bienvenue à votre espace "Donation"</h1>
+        <div class="RestoDon-home-content">
+
+            <div class="RestoDon-home-left">
+                <label for="tarif"></label>
+                <input type="text" readonly class="formulaire-input trick-cursor-none" style="width: 40%;" id="tarif" name="tarif" value="{{ tarif }}">
+                <input type="text" readonly class="formulaire-input trick-cursor-none" style="background-color: {{ couleurPortefeuille }}; color: {{ couleurPT }}; width: 40%;" id="porteFeuille" name="porteFeuille" value="{{ porteFeuille }}">
+                <a class="button button-hero mt-4" href="{{ path('donrestaurant_index') }}">Donation</a>
+                <a class="button button-hero mt-4" href="{{ path('repasservi_index') }}">Repas</a>
+                <a class="button button-hero mt-4" href="{{ path('tarifresto_index') }}">Tarif</a>
+            </div>
+
+            <div class="RestoDon-home-right">
+                <img id="RestoDon-home-barbecue" src="{{ asset('front/images/barbecue.svg') }}" alt="barbecue image" >
+            </div>
+
+        </div>
+    </section>
+{% endblock %}

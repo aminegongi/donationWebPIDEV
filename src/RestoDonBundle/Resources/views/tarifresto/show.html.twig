@@ -1,0 +1,40 @@
+{% extends 'front.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('front/scss/restoDon/css/root.css') }}">
+{% endblock %}
+
+{% block body %}
+    <h1>Tarifresto</h1>
+
+    <table style="justify-content: center; margin-left: 40%;">
+        <tbody>
+            <tr>
+                <th>Idresto</th>
+                <td>{{ tarifResto.idResto }}</td>
+            </tr>
+            <tr>
+                <th>Tarif</th>
+                <td>{{ tarifResto.tarif }}</td>
+            </tr>
+            <tr>
+                <th>Portefeuillevirtuel</th>
+                <td>{{ tarifResto.portefeuilleVirtuel }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('tarifresto_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('tarifresto_edit', { 'idTarif': tarifResto.idTarif }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

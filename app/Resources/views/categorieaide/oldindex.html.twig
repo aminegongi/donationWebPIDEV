@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+
+{% block content %}
+    <h1>Liste des catégories des demandes d'aide</h1>
+
+    <table class="table table-striped jambo_table bulk_action">
+        <thead>
+        <tr>
+
+            <th>Nom</th>
+            <th>Icone</th>
+            <th>Action</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        {% for categorieAide in categorieAides %}
+            <tr>
+
+                <td>{{ categorieAide.nom }}</td>
+
+
+                <td><img style="width: 5%; display: block;" src="{{ asset('uploads/imagesAide/' ~ categorieAide.icone) }}" alt="image"></td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('categorieaide_show', { 'id': categorieAide.id }) }}">show</a>
+                        </li>
+
+
+
+                        <li>
+                            <a href="{{ path('categorieaide_edit', { 'id': categorieAide.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('categorieaide_new') }}">Create a new categorieAide</a>
+        </li>
+    </ul>
+
+
+
+{% endblock %}

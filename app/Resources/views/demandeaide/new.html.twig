@@ -1,14 +1,140 @@
+
 {% extends 'front.html.twig' %}
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('front/scss/aide/css/root.css') }}">
 {% endblock %}
 
 {% block body %}
-    <h1>Demandeaide creation</h1>
+    <h1>Créer une nouvelle demande d'aide </h1>
 
     {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <input type="submit" value="Create" />
+
+
+   {# {{ dump(form.idCategorie.vars) }} #}
+
+
+
+    <div style="display: none" class=" form-group">
+        <label for="{{ form.idUser.vars.id }}">id User</label>
+        <input type="text"  style="width: 200px; left: 50%;" class="form-control" id="{{ form.idUser.vars.id }}" name="{{ form.idUser.vars.full_name }}" value="{{ user }}">
+        {{ form_errors(form.idUser) }}
+
+        {% do form.idUser.setRendered %}
+    </div>
+
+
+    <div class="form-group" style="display: flex; flex-direction: row; justify-content: center; width: 32%; margin-left: 32%;">
+        <label style=" font-size: 20px; width:100%;" for="{{ form.idCategorie.vars.id }}">Nom categorie</label>
+
+        <select class="form-control"   style=" margin-left: 10%" id="{{ form.idCategorie.vars.id }}" name="{{ form.idCategorie.vars.full_name }}" >
+            {% for element in categories %}
+
+                <option value="{{  element.id }}" >{{element.Nom}}</option>
+
+            {% endfor %}
+        </select>
+
+        {{ form_errors(form.idCategorie) }}
+
+        {% do form.idCategorie.setRendered %}
+    </div>
+
+
+    <div class="form-group" style="display: flex; flex-direction: row; justify-content: center; width: 32%; margin-left: 32%;">
+        <label style=" font-size: 20px; width:100%;" for="{{ form.titre.vars.id }}">Titre</label>
+        <input class="form-control"   type="text" style=" margin-left: 10%"  id="{{ form.titre.vars.id }}" name="{{ form.titre.vars.full_name }}" >
+        {{ form_errors(form.titre) }}
+
+        {% do form.titre.setRendered %}
+    </div>
+
+{#
+    <div class="form-group" style="display: flex; flex-direction: row; justify-content: center; width: 32%; margin-left: 32%;">
+        <label  style=" font-size: 20px; width:100%;" for="{{ form.description.vars.id }}">Description</label>
+        <input class="form-control"   type="text" style=" margin-left: 10%" type="text"   id="{{ form.description.vars.id }}" name="{{ form.description.vars.full_name }}" >
+        {{ form_errors(form.description) }}
+
+        {% do form.description.setRendered %}
+    </div>
+#}
+
+
+    <div class="form-group" style="display: flex; flex-direction: row; justify-content: center; width:52%; margin-left: 32%;">
+        <label  style=" font-size: 20px; margin-left: 5%; " for="{{ form.description.vars.id }}">Description</label>
+     {#   <input class="form-control"   type="text" style=" margin-left: 10%" type="text"   id="{{ form.description.vars.id }}" name="{{ form.description.vars.full_name }}" >#}
+
+
+        <textarea class="form-control"   id="{{ form.description.vars.id }}" name="{{ form.description.vars.full_name }}"  style="margin-left: 10%;" rows="4"></textarea>
+
+
+
+
+        {{ form_errors(form.description) }}
+
+        {% do form.description.setRendered %}
+    </div>
+
+
+
+
+    <div class="form-group" style="display: flex; flex-direction: row; justify-content: center; width: 32%; margin-left: 32%;">
+        <label style=" font-size: 20px; width:100%;" for="{{ form.photo.vars.id }}">Photo</label>
+        <input type="file" class="form-control" class="form-control"   type="text" style=" margin-left: 10%; width: 100%"  id="{{ form.photo.vars.id }}" name="{{ form.photo.vars.full_name }}" >
+        {{ form_errors(form.photo) }}
+
+        {% do form.photo.setRendered %}
+    </div>
+
+
+    <div class="form-group" style="display: none">
+        <label for="{{ form.etat.vars.id }}">etat</label>
+        <input type="text" style="width: fit-content; margin-left: 40%" class="form-control" id="{{ form.etat.vars.id }}" name="{{ form.etat.vars.full_name }}" value="valide">
+        {{ form_errors(form.etat) }}
+
+        {% do form.etat.setRendered %}
+    </div>
+
+
+
+    <div class="form-group" style="display: none">
+        <label for="{{ form.nbReactions.vars.id }}">nbReactions</label>
+        <input type="text" style="width: fit-content; margin-left: 40%" class="form-control" id="{{ form.nbReactions.vars.id }}" name="{{ form.nbReactions.vars.full_name }}" value="0">
+        {{ form_errors(form.nbReactions) }}
+
+        {% do form.nbReactions.setRendered %}
+    </div>
+
+
+
+
+
+{#
+
+    <select  id="{{form.idCategorie.vars.id}}" name="{{form.idCategorie.vars.full_name}}" value="3">
+        {% for element in arr %}
+
+            <option value="{{element}}" >{{element}}</option>
+
+        {% endfor %}
+    </select>
+
+
+#}
+
+
+        <input class="button button-hero mt-4" type="submit" style="
+  background-color: var(--my-color);
+  color: white;
+  width: 20%;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+
+
+ " value="Publier" />
+
     {{ form_end(form) }}
 
     <ul>
@@ -16,4 +142,10 @@
             <a href="{{ path('demandeaide_index') }}">Back to the list</a>
         </li>
     </ul>
+
+
+
+
+
+
 {% endblock %}

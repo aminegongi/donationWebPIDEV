@@ -1,48 +1,56 @@
-{% extends 'dash.html.twig' %}
+{% extends 'base.html.twig' %}
+
 
 {% block content %}
-    <h1>Liste des catégories des demandes d'aide</h1>
 
-    <table class="table table-striped jambo_table bulk_action">
-        <thead>
-            <tr>
-
-                <th>Nom</th>
-                <th>Icone</th>
-                <th>Action</th>
-
-            </tr>
-        </thead>
-        <tbody>
+    <h1>Liste des catégories des demandes d'aide <a class="btn btn-primary btn-sm"  style="margin-left: 10%; font-size: medium; background-color:#4CAF50"  href="{{ path('categorieaide_new') }}"> <i class="fa fa-plus-circle"> </i> Ajouter une catégorie</a></h1>
+<div class="">
+<div class="row">
+    <div class="x_panel">
+        <div class="x_content">
+            <div class="clearfix"></div>
+            <div class="clearfix"></div>
         {% for categorieAide in categorieAides %}
-            <tr>
 
-                <td>{{ categorieAide.nom }}</td>
+            <div class="col-md-4 col-sm-4  profile_details">
+                <div class="well profile_view">
+                    <div class="col-sm-12">
+                        <h3 class="brief"><i>{{ categorieAide.nom }}</i></h3>
+                        <div class="left col-sm-7">
+                            <h2>Totale des demandes:{{ total[categorieAide.id][categorieAide.id] }}</h2>
+                            <p><strong>confirmées: </strong> {{ totalConf[categorieAide.id][categorieAide.id] }}</p>
+                            <p><strong>signalées: </strong>{{ totalSig[categorieAide.id][categorieAide.id] }}</p>
+                        </div>
+                        <div class="right col-sm-5 text-center">
+                            <img src="{{ asset('uploads/imagesAide/' ~ categorieAide.icone) }}" alt="" class="img-circle img-fluid" style="max-width:100px;width:100%">
+                        </div>
+                    </div>
+                    <div class=" bottom text-center">
+                        <div class=" col-sm-6 emphasis">
+                            <p class="ratings">
+                                <a>4.0</a>
+                                <a href="#"><span class="fa fa-star"></span></a>
+                                <a href="#"><span class="fa fa-star"></span></a>
+                                <a href="#"><span class="fa fa-star"></span></a>
+                                <a href="#"><span class="fa fa-star"></span></a>
+                                <a href="#"><span class="fa fa-star-o"></span></a>
+                            </p>
+                        </div>
+                        <div class=" col-sm-6 emphasis">
 
+                            <a class="btn btn-primary btn-sm" href="{{ path('categorieaide_edit', { 'id': categorieAide.id }) }}"><i class="fa fa-cogs"> </i> Modifier</a>
 
-                <td><img src="{{ asset('gentelella-master/production/images/'~ categorieAide.nom ~ '.jpg') }}" alt="tutodidacte" /></td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('categorieaide_show', { 'id': categorieAide.id }) }}">show</a>
-                        </li>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-
-
-                        <li>
-                            <a href="{{ path('categorieaide_edit', { 'id': categorieAide.id }) }}">edit</a>
-                        </li>
-                    </ul>
-                </td>
-            </tr>
         {% endfor %}
-        </tbody>
-    </table>
 
-    <ul>
-        <li>
-            <a href="{{ path('categorieaide_new') }}">Create a new categorieAide</a>
-        </li>
-    </ul>
+        </div>
+    </div>
+</div>
+
+</div>
 
 {% endblock %}

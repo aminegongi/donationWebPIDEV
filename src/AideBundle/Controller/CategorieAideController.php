@@ -3,8 +3,11 @@
 namespace AideBundle\Controller;
 
 use AideBundle\Entity\CategorieAide;
+use AideBundle\Entity\DemandeAide;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\File\File;
+
 
 /**
  * Categorieaide controller.
@@ -22,9 +25,22 @@ class CategorieAideController extends Controller
 
         $categorieAides = $em->getRepository('AideBundle:CategorieAide')->findAll();
 
+
+        $total = $this->nbDmndEachCat();
+        $totalSig = $this->nbDmndSigEachCat();
+        $totalConf = $this->nbDmndConfEachCat();
+        
+
         return $this->render('categorieaide/index.html.twig', array(
             'categorieAides' => $categorieAides,
+            'total' => $total,
+            'totalSig'=>$totalSig,
+            'totalConf'=>$totalConf,
+
         ));
+
+
+
     }
 
     /**
@@ -38,6 +54,38 @@ class CategorieAideController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+
+            $imageFile = $form->get('icone')->getData();
+            if ($imageFile) {
+                $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
+                // this is needed to safely include the file name as part of the URL
+
+                $newFilename = $originalFilename.'-'.uniqid().'.'.$imageFile->guessExtension();
+
+                // Move the file to the directory where brochures are stored
+                try {
+                    $imageFile->move(
+                        $this->getParameter('AideImages_directory'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                    // ... handle exception if something happens during file upload
+                }
+
+                // updates the 'brochureFilename' property to store the PDF file name
+                // instead of its contents
+                $categorieAide->setIcone($newFilename);
+            }
+
+
+
+
+
+
+
+
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($categorieAide);
             $em->flush();
@@ -71,11 +119,55 @@ class CategorieAideController extends Controller
      */
     public function editAction(Request $request, CategorieAide $categorieAide)
     {
+
+
         $deleteForm = $this->createDeleteForm($categorieAide);
         $editForm = $this->createForm('AideBundle\Form\CategorieAideType', $categorieAide);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
+
+
+
+
+            $imageFile = $editForm->get('icone')->getData();
+            if ($imageFile) {
+                $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
+                // this is needed to safely include the file name as part of the URL
+
+                $newFilename = $originalFilename.'-'.uniqid().'.'.$imageFile->guessExtension();
+
+                // Move the file to the directory where brochures are stored
+                try {
+                    $imageFile->move(
+                        $this->getParameter('AideImages_directory'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                    // ... handle exception if something happens during file upload
+                }
+
+                // updates the 'brochureFilename' property to store the PDF file name
+                // instead of its contents
+                $categorieAide->setIcone($newFilename);
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('categorieaide_edit', array('id' => $categorieAide->getId()));
@@ -85,6 +177,7 @@ class CategorieAideController extends Controller
             'categorieAide' => $categorieAide,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
+
         ));
     }
 
@@ -121,4 +214,91 @@ class CategorieAideController extends Controller
             ->getForm()
         ;
     }
+
+    // retourne le nombre de demandes totale pour chaque categorie
+    public function nbDmndEachCat(){
+
+        $em = $this->getDoctrine()->getManager();
+        $categorieAides = $em->getRepository('AideBundle:CategorieAide')->findAll();
+
+        $arrIdCat= array();
+        //initialized with one element at index 0
+        //to start adding later from index 1 not 0 same IDs as categories index = id of one categorie
+        //prevent view's error
+        $arrRes= array('a');
+
+        foreach ($categorieAides as $categorie) {
+
+            array_push($arrIdCat, $categorie->getId());
+        }
+
+        foreach ($arrIdCat as $idCategorie) {
+            $nbDmnds = $em->getRepository('AideBundle:DemandeAide')->nbDmndParCat($idCategorie);
+            array_push($arrRes, [$idCategorie => $nbDmnds]);
+        }
+
+        return $arrRes;
+
+    }
+
+
+
+    // retourne le nombre de demandes signalées pour chaque categorie
+    public function nbDmndSigEachCat(){
+
+        $em = $this->getDoctrine()->getManager();
+        $categorieAides = $em->getRepository('AideBundle:CategorieAide')->findAll();
+
+        $arrIdCat= array();
+        //initialized with one element at index 0
+        //to start adding later from index 1 not 0 same IDs as categories index = id of one categorie
+        //prevent view's error
+        $arrRes= array('a');
+
+        foreach ($categorieAides as $categorie) {
+
+            array_push($arrIdCat, $categorie->getId());
+        }
+
+        foreach ($arrIdCat as $idCategorie) {
+            $nbDmnds = $em->getRepository('AideBundle:DemandeAide')->nbDmndSigParCat($idCategorie);
+            array_push($arrRes, [$idCategorie => $nbDmnds]);
+        }
+
+        return $arrRes;
+
+    }
+
+
+    // retourne le nombre de demandes confirmées pour chaque categorie
+    public function nbDmndConfEachCat(){
+
+        $em = $this->getDoctrine()->getManager();
+        $categorieAides = $em->getRepository('AideBundle:CategorieAide')->findAll();
+
+        $arrIdCat= array();
+        //initialized with one element at index 0
+        //to start adding later from index 1 not 0 same IDs as categories index = id of one categorie
+        //prevent view's error
+        $arrRes= array('a');
+
+        foreach ($categorieAides as $categorie) {
+
+            array_push($arrIdCat, $categorie->getId());
+        }
+
+        foreach ($arrIdCat as $idCategorie) {
+            $nbDmnds = $em->getRepository('AideBundle:DemandeAide')->nbDmndConfParCat($idCategorie);
+            array_push($arrRes, [$idCategorie => $nbDmnds]);
+        }
+
+        return $arrRes;
+
+    }
+
+
+
+
+
+
 }

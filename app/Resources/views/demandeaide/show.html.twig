@@ -19,8 +19,6 @@
                 <td>{{ demandeAide.description }}</td>
             </tr>
             <tr>
-                <th>Etat</th>
-                <td>{{ demandeAide.etat }}</td>
             </tr>
             <tr>
                 <th>Nbreactions</th>
@@ -28,7 +26,7 @@
             </tr>
             <tr>
                 <th>Photo</th>
-                <td>{{ demandeAide.photo }}</td>
+                <td><img style="width: 25%; display: block;" src="{{ asset('uploads/imagesAide/' ~ demandeAide.photo) }}" alt="image"></td>
             </tr>
         </tbody>
     </table>
