@@ -4,7 +4,6 @@
 {% block body %}
     <table border="1">
         <tr>
-            <td>ID</td>
             <th>Nom</th>
             <th>Categorie</th>
             <th>Date de creation</th>
@@ -14,12 +13,10 @@
             <th>Montant actuel en DT</th>
             <th>ID Proprietaire</th>
             <th>ID Organisation</th>
-            <th>Etat</th>
         </tr>
 
 
             <tr>
-                <td>{{ selected.id }}</td>
                 <td>{{ selected.nom }}</td>
                 <td>{{ selected.idCategorie }}</td>
                 <td>{{ selected.dateDeCreation|date('d-m-Y') }}</td>
@@ -29,9 +26,12 @@
                 <td>{{ selected.montantActuel }}</td>
                 <td>{{ selected.idProprietaire }}</td>
                 <td>{{ selected.idOrganisation }}</td>
-                <td>{{ selected.etat }}</td>
             </tr>
     </table>
-    <button onclick="window.location.href = '../{{ selected.id }}/donate';">Donate</button>
+    {% if (selected.etat == 1) %}
+        <button onclick="window.location.href = '../{{ selected.id }}/donate';">Donate</button>
+    {% elseif (userRole == "ROLE_ORG") %}
+        <button onclick="window.location.href = '../{{ selected.id }}/take';">Prendre en charge</button>
+    {% endif %}
 
 {% endblock %}

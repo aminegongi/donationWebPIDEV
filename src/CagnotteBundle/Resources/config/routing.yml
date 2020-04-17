@@ -25,3 +25,7 @@ cagnotte_donate:
 cagnotte_charge:
     path:     /{id}/charge
     defaults: { _controller: CagnotteBundle:cagnotte:charge }
+
+cagnotte_take:
+    path:     /{id}/take
+    defaults: { _controller: CagnotteBundle:cagnotte:take }
