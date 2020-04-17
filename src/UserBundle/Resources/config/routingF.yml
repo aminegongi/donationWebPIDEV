@@ -2,6 +2,10 @@ user_profil:
     path:     /profil
     defaults: { _controller: UserBundle:Default:show }
 
+user_smsSend:
+    path:     /smsSend
+    defaults: { _controller: UserBundle:Default:smsSend }
+
 UserAutreProfil:
     path:     /profil/{id}
     defaults: { _controller: UserBundle:Default:showOUser }

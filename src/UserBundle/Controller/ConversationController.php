@@ -31,6 +31,7 @@ class ConversationController extends Controller
     public function getConvsAction(Request $req)
     {
         $idr=$req->request->get('to');
+        $pro =$req->request->get('profo');
         $me = $this->container->get('security.token_storage')->getToken()->getUser();
         $idme=$me->getId();
         $ar = $this->getDoctrine()->getRepository(Conversation::class)->getSRConversation($idr,$idme);
@@ -39,7 +40,10 @@ class ConversationController extends Controller
         foreach ($ar as $conv ){
             if($conv->getReceiver()->getId() == $idme){
                 $img = $conv->getSender()->getImage();
-                $code .= '<div class="media w-50 mb-3"><img src="../../uploads/UserImg/'.$img.'" alt="user" width="50" class="rounded-circle">';
+                if(isset($pro))
+                    $code .= '<div class="media w-50 mb-3"><img src="../../../uploads/UserImg/'.$img.'" alt="user" width="50" class="rounded-circle">';
+                else
+                    $code .= '<div class="media w-50 mb-3"><img src="../../uploads/UserImg/'.$img.'" alt="user" width="50" class="rounded-circle">';
                 $code .= '<div class="media-body ml-3"> <div class="bg-light rounded py-2 px-3 mb-2">';
                 $code .= '<p class="text-small mb-0 text-muted"> '.$conv->getMessage().'</p> </div>';
                 $code .= '<p class="small text-muted">'.$conv->getDateEnvoi()->format('d M | H:i').'</p></div></div>';
@@ -60,7 +64,7 @@ class ConversationController extends Controller
 
     public function getlistConvAction(Request $req)
     {
-        $idr=2;
+
         $me = $this->container->get('security.token_storage')->getToken()->getUser();
         $idme=$me->getId();
 

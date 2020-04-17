@@ -37,7 +37,7 @@
             </div>
 
             <div class="blog_details">
-                <a class="d-inline-block" href="single-blog.html">
+                <a class="d-inline-block" >
                     <h2>{{ pd.titre }}</h2>
                 </a>
                 <p>{{ pd.description| raw  }}</p>
@@ -45,7 +45,9 @@
                 <ul class="blog-info-link">
                     <li><a href="#"><i class="far fa-user"></i> {% if pd.datePublication %}{{ pd.datePublication|ago  }}{% endif %}</a></li>
                     <li><a href="#"><i class="far fa-comments"></i>{{ pd.ajoutePar.numtel }} </a></li>
+                    {% if (connectedUser is not null) %}
             {% if(connectedUser.id==pd.ajoutePar.id) %} <li><a style="color: #0e90d2 ;" href="{{ path('publicationdon_edit', { 'id': pd.id }) }}"><i class="fas fa-edit" ></i> Vous Pensez à modifier votre publication ?</a></li>{% endif %}
+               {% endif %}
                 </ul>
             </div>
         </article>
@@ -156,7 +158,7 @@
             document.getElementById("clickB").click();pause=true;
             document.getElementById("TitrePub").innerHTML = titre;
 
-            document.getElementById("pubImageContent").src ="http://localhost/donationwebpidev/web/uploads/imagesPubs/"+ image; // a changer lors hebergeemtn !!
+            document.getElementById("pubImageContent").src ="http://localhost/donationLastTry/web/uploads/imagesPubs/"+ image; // a changer lors hebergeemtn !!
 
 
             setInterval(function() {
@@ -210,4 +212,7 @@
 
     </script>
 
+{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('front/scss/restOrg/css/root.css') }}">
 {% endblock %}

@@ -1,4 +1,4 @@
-#! C:\Users\Ahmed Fourati\AppData\Local\Programs\Python\Python37-32\python.exe
+#! C:\Users\Amine Gongi\AppData\Local\Programs\Python\Python38\python.exe
 import mysql.connector
 import numpy as np
 np.set_printoptions(precision=3)

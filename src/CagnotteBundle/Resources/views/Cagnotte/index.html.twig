@@ -2,7 +2,6 @@
 
 
 {% block body %}
-
     <table border="1">
         <tr>
             <th>ID</th>
@@ -24,7 +23,7 @@
         {%  for c in cagnottes %}
             <tr>
                 <td>{{ c.id }}</td>
-                <td>{{ c.nom }}</td>
+                <td><a href="{{ path('cagnotte_show',{'id': c.id }) }}" >{{ c.nom }}</a></td>
                 <td>{{ c.idCategorie }}</td>
                 <td>{{ c.dateDeCreation|date('d-m-Y') }}</td>
                 <td>{{ c.dateDeDebut|date('d-m-Y') }}</td>
