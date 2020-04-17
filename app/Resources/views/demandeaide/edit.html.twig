@@ -1,21 +1,167 @@
-{% extends 'base.html.twig' %}
+{% extends 'front.html.twig' %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('front/scss/aide/css/root.css') }}">
+{% endblock %}
 
 {% block body %}
-    <h1>Demandeaide edit</h1>
+    <h1>Modifier votre demande d'aide</h1>
 
     {{ form_start(edit_form) }}
-        {{ form_widget(edit_form) }}
-        <input type="submit" value="Edit" />
+
+
+
+
+    <div style="display: none">
+        <label for="{{ edit_form.idUser.vars.id }}">id User</label>
+        <input type="text"  style="width: 200px; left: 50%;" class="form-control" id="{{ edit_form.idUser.vars.id }}" name="{{ edit_form.idUser.vars.full_name }}" value="{{ user }}">
+        {{ form_errors(edit_form.idUser) }}
+
+        {% do edit_form.idUser.setRendered %}
+    </div>
+
+    <div class="form-group" style="display: flex; flex-direction: row; justify-content: center; width: 32%; margin-left: 32%;">
+        <label style=" font-size: 20px; width:100%;" for="{{ edit_form.idCategorie.vars.id }}">Categorie</label>
+
+
+        {# <input type="text" style="width: 200px; left: 50%;" class="form-control" id="{{ form.idCategorie.vars.id }}" name="{{ form.idCategorie.vars.full_name }}" value="2">#}
+
+
+
+        <select class="form-control"   style=" margin-left: 10%" id="{{ edit_form.idCategorie.vars.id }}" name="{{ edit_form.idCategorie.vars.full_name }}" >
+            {% for element in categories %}
+                {% if element != demandeAide.idCategorie %}
+                <option value="{{  element.id }}" >{{element.Nom}}</option>
+                {% endif %}
+            {% endfor %}
+
+            <option selected="selected">
+                {{demandeAide.idCategorie}}
+            </option>
+        </select>
+
+
+
+
+        {{ form_errors(edit_form.idCategorie) }}
+
+        {% do edit_form.idCategorie.setRendered %}
+    </div>
+
+
+    <div class="form-group" style="display: flex; flex-direction: row; justify-content: center; width: 32%; margin-left: 32%;" >
+        <label style=" font-size: 20px; width:100%;" for="{{ edit_form.titre.vars.id }}">Titre</label>
+        <input type="text" class="form-control"   type="text" style=" margin-left: 10%" id="{{ edit_form.titre.vars.id }}" name="{{ edit_form.titre.vars.full_name }}" value="{{demandeAide.titre}}">
+        {{ form_errors(edit_form.titre) }}
+
+        {% do edit_form.titre.setRendered %}
+    </div>
+
+
+    <div class="form-group" style="display: flex; flex-direction: row; justify-content: center; width: 32%; margin-left: 32%;" >
+        <label style=" font-size: 20px; width:100%;" for="{{ edit_form.description.vars.id }}">Description</label>
+        <input type="text" style=" margin-left: 10%" class="form-control" id="{{ edit_form.description.vars.id }}" name="{{ edit_form.description.vars.full_name }}" value="{{demandeAide.description}}">
+        {{ form_errors(edit_form.description) }}
+
+        {% do edit_form.description.setRendered %}
+    </div>
+
+
+    <div class="form-group" style="display: flex; flex-direction: row; justify-content: center; width: 32%; margin-left: 32%;" >
+        <label style=" font-size: 20px; width:100%;" for="{{ edit_form.photo.vars.id }}">Photo</label>
+        <input type="file" style=" margin-left: 10% left: 50%;" class="form-control" id="{{ edit_form.photo.vars.id }}" name="{{ edit_form.photo.vars.full_name }}" value="{{demandeAide.photo}}">
+
+        {{ form_errors(edit_form.photo) }}
+
+        {% do edit_form.photo.setRendered %}
+    </div>
+
+
+    <div style="display: none">
+        <label for="{{ edit_form.etat.vars.id }}">etat</label>
+        <input type="text" style="width: 200px; left: 50%;" class="form-control" id="{{ edit_form.etat.vars.id }}" name="{{ edit_form.etat.vars.full_name }}" value="valide">
+        {{ form_errors(edit_form.etat) }}
+
+        {% do edit_form.etat.setRendered %}
+    </div>
+
+
+
+    <div style="display: none">
+        <label for="{{ edit_form.nbReactions.vars.id }}">nbReactions</label>
+        <input type="text" style="width: 200px; left: 50%;" class="form-control" id="{{ edit_form.nbReactions.vars.id }}" name="{{ edit_form.nbReactions.vars.full_name }}" value="0">
+        {{ form_errors(edit_form.nbReactions) }}
+
+        {% do edit_form.nbReactions.setRendered %}
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div style=" display: flex; flex-direction: row; justify-content: center ;" >
+
+
+
+    <a class="button button-hero mt-4" style="margin-right: 2%; background-color: var(--my-color);
+  color: white;
+  width: 20%;
+  color: white;
+  padding: 14px 20px;
+  border: none;
+  border-radius: 4px;" href="{{ path('demandeaide_index') }}">Retour à la liste</a>
+
+
+
+
+    <input type="submit" class="button button-hero mt-4" value="Modifier"
+    style="margin-right: 2%;
+  background-color: #4CAF50;
+  color: white;
+  width: 10%;
+  color: white;
+  padding: 14px 20px;
+
+  border: none;
+  border-radius: 4px;" />
     {{ form_end(edit_form) }}
 
-    <ul>
-        <li>
-            <a href="{{ path('demandeaide_index') }}">Back to the list</a>
-        </li>
-        <li>
+
+
+
+
+
+
+
+
+
+
             {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
+            <input  class="button button-hero mt-4" type="submit" style="
+  background-color: var(--my-color);
+  color: white;
+  width: 100%;
+  color: white;
+  padding: 14px 20px;
+
+  border: none;
+  border-radius: 4px;
+
+
+ " value="Supprimer">
             {{ form_end(delete_form) }}
-        </li>
-    </ul>
+
+</div>
 {% endblock %}

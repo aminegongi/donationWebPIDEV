@@ -10,4 +10,5 @@ namespace AideBundle\Repository;
  */
 class CategorieAideRepository extends \Doctrine\ORM\EntityRepository
 {
+
 }

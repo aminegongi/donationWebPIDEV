@@ -1,20 +1,25 @@
 {% extends 'front.html.twig' %}
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('front/scss/aide/css/root.css') }}">
-{% endblock %}
 
+
+
+
+{% endblock %}
+{#
 {% block body %}
+
+
     <h1>Liste des demandes d'aide</h1>
 
     <table class="table table-striped jambo_table bulk_action">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Idcategorie</th>
-                <th>Iduser</th>
+
+                <th>Categorie</th>
+                <th>publiée par</th>
                 <th>Titre</th>
                 <th>Description</th>
-                <th>Etat</th>
                 <th>Nbreactions</th>
                 <th>Photo</th>
                 <th>Actions</th>
@@ -23,15 +28,16 @@
         <tbody>
         {% for demandeAide in demandeAides %}
             <tr>
-                <td><a href="{{ path('demandeaide_show', { 'id': demandeAide.id }) }}">{{ demandeAide.id }}</a></td>
-                <td>{{ demandeAide.idCategorie }}</td>
+
+                <td>{{ demandeAide.idCategorie.nom }}</td>
                 <td>{{ demandeAide.idUser }}</td>
                 <td>{{ demandeAide.titre }}</td>
                 <td>{{ demandeAide.description }}</td>
-                <td>{{ demandeAide.etat }}</td>
                 <td>{{ demandeAide.nbReactions }}</td>
-                <td>{{ demandeAide.photo }}</td>
-                <td>
+                <td><img  style="width: 25%;" src="{{ asset('uploads/imagesAide/' ~ demandeAide.photo) }}" alt="image"><td>
+
+
+              <td>
                     <ul>
                         <li>
                             <a href="{{ path('demandeaide_show', { 'id': demandeAide.id }) }}">show</a>
@@ -47,8 +53,87 @@
     </table>
 
     <ul>
+
+        <li>
+            <div class="text-center">{{ knp_pagination_render(demandeAides) }}</div>
+        </li>
+
         <li>
             <a href="{{ path('demandeaide_new') }}">Create a new demandeAide</a>
         </li>
     </ul>
+
+
+
+
+
+{% endblock %}
+#}
+
+
+{% block body %}
+
+
+    <h1>Liste des demandes d'aide</h1>
+    <br/>
+
+    <div class="container">
+        <div class="row">
+        {% for demandeAide in demandeAides %}
+
+            <div class="col-md-4">
+                <div class="card mb-4 box-shadow">
+                    <img
+                            class="card-img-top"
+                            style="max-width:500px;width:100%;max-height:200px;"
+                            src="{{ asset('uploads/imagesAide/' ~ demandeAide.photo) }}"
+                            alt="Card image cap"
+                    />
+                    <br/>
+                    <h5 class="card-title">{{ demandeAide.titre }}</h5>
+                    <em class="card-title">{{ demandeAide.idCategorie.nom }}</em>
+                    <div class="card-body">
+                        <p class="card-text"
+                           style="
+                           overflow: hidden;
+                            text-overflow: ellipsis;
+                            display: -webkit-box;
+                            line-height: 18px;
+                            max-height: 32px;
+
+            /* The number of lines to be displayed */
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical; ">
+                            {{ demandeAide.description }}
+                        </p>
+                        <div
+                                class="d-flex justify-content-between align-items-center"
+                        >
+                            <div class="btn-group">
+
+                                <a class="btn btn-sm btn-outline-secondary" href="{{ path('demandeaide_show', { 'id': demandeAide.id }) }}">Détails</a>
+
+
+
+
+                                <a  class="btn btn-sm btn-outline-secondary" href="{{ path('demandeaide_edit', { 'id': demandeAide.id }) }}"> Modifier</a>
+
+
+                            </div>
+                            <small class="text-muted">9 mins</small>
+                        </div>
+
+                    </div>
+                    <small>{{ demandeAide.idUser }}</small>
+                </div>
+            </div>
+
+        {% endfor %}
+
+        </div>
+    </div>
+    <br/>
+    <div class="text-center">{{ knp_pagination_render(demandeAides) }}</div>
+    <br/>
+
 {% endblock %}

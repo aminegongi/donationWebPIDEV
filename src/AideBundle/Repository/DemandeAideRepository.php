@@ -10,4 +10,73 @@ namespace AideBundle\Repository;
  */
 class DemandeAideRepository extends \Doctrine\ORM\EntityRepository
 {
+    //retourne nombre de demande totale pour une categorie
+    public function nbDmndParCat($idCategorie){
+
+        $query = $this->createQueryBuilder('d')
+                      ->where('d.idCategorie = :idcat')
+                      ->setParameters(array(
+                          'idcat'=>$idCategorie,
+                      ))
+                      ->select('count(d.id)')
+                      ->getQuery();
+
+
+        return $query->getSingleScalarResult();
+
+    }
+
+
+    //retourne nombre de demande signalée pour une categorie
+    public function nbDmndSigParCat($idCategorie){
+
+        $query = $this->createQueryBuilder('d')
+            ->where('d.idCategorie = :idcat')
+            ->andWhere('d.etat = :signalee')
+            ->setParameters(array(
+                'idcat'=>$idCategorie,
+                'signalee'=>'signalee',
+            ))
+            ->select('count(d.id)')
+            ->getQuery();
+
+
+        return $query->getSingleScalarResult();
+
+    }
+
+    //retourne nombre de demande confirmée pour une categorie
+    public function nbDmndConfParCat($idCategorie){
+
+        $query = $this->createQueryBuilder('d')
+            ->where('d.idCategorie = :idcat')
+            ->andWhere('d.etat = :confirmee')
+            ->setParameters(array(
+                'idcat'=>$idCategorie,
+                'confirmee'=>'confirmee',
+            ))
+            ->select('count(d.id)')
+            ->getQuery();
+
+
+        return $query->getSingleScalarResult();
+
+    }
+/*
+    //mupdate le nombre de reaction pour une demande
+    public function addReaction($idDemande){
+        $query = $this->createQueryBuilder('d')
+                      ->update()
+                      ->set('u.nbReactions', '?1')
+                      ->where('d.id = ?2')
+                      ->setParameter(1,'1')
+                      ->setParameter(2, $idDemande)
+                      ->getQuery()
+                      ->execute();
+
+
+    }
+*/
+
+
 }
