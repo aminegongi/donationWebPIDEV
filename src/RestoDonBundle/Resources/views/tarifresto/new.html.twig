@@ -1,0 +1,50 @@
+{% extends 'front.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('front/scss/restoDon/css/root.css') }}">
+    <link rel="stylesheet" href="{{ asset('front/scss/restoDon/css/restoDon.css') }}">
+{% endblock %}
+
+{% block body %}
+<div id="body-new-tarif">
+    <h1 style="color: var(--my-color);">Ajouter un tarif à votre restaurant</h1>
+
+        <div id="form" style="--first-color: var(--my-color); justify-content: center;">
+    {{ form_start(form) }}
+
+
+        <div class="formulaire-div-basics-svg" style="display: none;">
+{#            <label class="formulaire-label" for="{{ form.idResto.vars.id }}">id Resto</label>#}
+            <input type="text" class="formulaire-input" id="{{ form.idResto.vars.id }}" name="{{ form.idResto.vars.full_name }}" value="{{ user }}">
+            <div class="form-error" style="color: red;">
+            {{ form_errors(form.idResto) }}
+            </div>
+            {% do form.idResto.setRendered %}
+        </div>
+
+            <div class="formulaire-div-basics-svg">
+                {#            <label class="formulaire-label" for="{{ form.portefeuilleVirtuel.vars.id }}">portefeuilleVirtuel</label>#}
+                <input type="number" readonly class="formulaire-input trick-cursor-none" id="{{ form.portefeuilleVirtuel.vars.id }}" name="{{ form.portefeuilleVirtuel.vars.full_name }}" value="{{ form.portefeuilleVirtuel.vars.data }}">
+                {{ form_errors(form.portefeuilleVirtuel) }}
+                {% do form.portefeuilleVirtuel.setRendered %}
+            </div>
+
+
+        <div class="formulaire-div-basics-svg">
+{#            <label class="formulaire-label" for="{{ form.tarif.vars.id }}">Tarif</label>#}
+            <input type="number" min="0.00" step="0.05" required class="formulaire-input" id="{{ form.tarif.vars.id }}" name="{{ form.tarif.vars.full_name }}" placeholder="Votre tarif">
+            {{ form_errors(form.tarif) }}
+            {% do form.tarif.setRendered %}
+        </div>
+
+
+        <input class="button button-hero mt-4" id="background-fit-tarif" style="color: white;" type="submit" value="Create" />
+    {{ form_end(form) }}
+        </div>
+    <ul class="link-list-style">
+        <li>
+            <a class="link-list" id="background-fit-tarif" href="{{ path('tarifresto_index') }}">Back to the list</a>
+        </li>
+    </ul>
+</div>
+{% endblock %}

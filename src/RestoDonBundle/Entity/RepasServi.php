@@ -15,10 +15,17 @@ class RepasServi
     /**
      * @var int
      *
-     * @ORM\Column(name="idResto", type="integer")
+     * @ORM\Column(name="idRepas", type="integer")
      * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
      *
      */
+    private $idRepas;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User")
+     * @ORM\JoinColumn(name="idResto", referencedColumnName="id")
+     **/
     private $idResto;
 
     /**
@@ -28,11 +35,19 @@ class RepasServi
      */
     private $date;
 
+    /**
+     * @return int
+     */
+    public function getIdRepas()
+    {
+        return $this->idRepas;
+    }
+
+
+
 
     /**
-     * Get idResto
-     *
-     * @return int
+     * @return mixed
      */
     public function getIdResto()
     {
@@ -40,11 +55,7 @@ class RepasServi
     }
 
     /**
-     * Set idResto
-     *
-     * @param \Integer $idResto
-     *
-     * @return RepasServi
+     * @param mixed $idResto
      */
     public function setIdResto($idResto)
     {

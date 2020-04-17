@@ -3,6 +3,7 @@
 namespace RestoDonBundle\Controller;
 
 use RestoDonBundle\Entity\RepasServi;
+use RestoDonBundle\Entity\TarifResto;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -22,7 +23,7 @@ class RepasServiController extends Controller
 
         $repasServis = $em->getRepository('RestoDonBundle:RepasServi')->findAll();
 
-        return $this->render('repasservi/index.html.twig', array(
+        return $this->render('@RestoDon/repasservi/index.html.twig', array(
             'repasServis' => $repasServis,
         ));
     }
@@ -34,20 +35,67 @@ class RepasServiController extends Controller
     public function newAction(Request $request)
     {
         $repasServi = new Repasservi();
+        $repasServi -> setDate(new \DateTime("-1 hour"));
         $form = $this->createForm('RestoDonBundle\Form\RepasServiType', $repasServi);
         $form->handleRequest($request);
 
+        try {
+            $user = $this->get('security.token_storage')->getToken()->getUser()->getId();
+            $tarifResto = $this->getDoctrine()->getRepository(TarifResto::class)->findByIdResto($user)[0];
+            $porteF = (float)$tarifResto->getPortefeuilleVirtuel();
+            $tarif = (float)$tarifResto->getTarif();
+            if ($porteF >= $tarif){
+                $x = $porteF / $tarif;
+                $count = floor($x);
+                $state = "";
+                $couleur= 'var(--my-color)';
+            } else {
+                $count = 0;
+                $state = "disabled";
+                $couleur= '#B33A3A';
+            }
+            $title = "$count Repas à servir!";
+        } catch (\Exception $e){
+            return $this->render('@RestoDon/repasservi/new.html.twig', array(
+                'repasServi' => $repasServi,
+                'form' => $form->createView(),
+                'user' => $user = $this->get('security.token_storage')->getToken()->getUser()->getId(),
+                'time' => strftime("%d-%m-%Y %H:%M"),
+                'title' => "Vous devez ajouter un tarif à votre restaurant",
+                'state' => 'disabled',
+                'couleur' => "#B33A3A",
+            ));
+        }
+
+
         if ($form->isSubmitted() && $form->isValid()) {
+            try {
+                $user = $this->get('security.token_storage')->getToken()->getUser()->getId();
+                $tarifResto = $this->getDoctrine()->getRepository(TarifResto::class)->findByIdResto($user)[0];
+                $porteF = (float)$tarifResto->getPortefeuilleVirtuel();
+                $tarif = (float)$tarifResto->getTarif();
+                $newPortF = $porteF - $tarif;
+                $this->getDoctrine()->getRepository(TarifResto::class)->UpdatePorteFeuille($newPortF,$user)->execute();
+            } catch (\Exception $e){
+                var_dump("erreur servir repas");
+            }
+            $repasServi -> setDate(new \DateTime("-1 hour"));
             $em = $this->getDoctrine()->getManager();
             $em->persist($repasServi);
             $em->flush();
 
-            return $this->redirectToRoute('repasservi_show', array('idResto' => $repasServi->getIdresto()));
+            return $this->redirectToRoute('repasservi_show', array('idRepas' => $repasServi->getIdRepas()));
+
         }
 
-        return $this->render('repasservi/new.html.twig', array(
+        return $this->render('@RestoDon/repasservi/new.html.twig', array(
             'repasServi' => $repasServi,
             'form' => $form->createView(),
+            'user' => $user = $this->get('security.token_storage')->getToken()->getUser()->getId(),
+            'time' => strftime("%d-%m-%Y %H:%M"),
+            'title' => $title,
+            'state' => $state,
+            'couleur' => $couleur,
         ));
     }
 
@@ -59,7 +107,7 @@ class RepasServiController extends Controller
     {
         $deleteForm = $this->createDeleteForm($repasServi);
 
-        return $this->render('repasservi/show.html.twig', array(
+        return $this->render('@RestoDon/repasservi/show.html.twig', array(
             'repasServi' => $repasServi,
             'delete_form' => $deleteForm->createView(),
         ));
@@ -78,10 +126,10 @@ class RepasServiController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('repasservi_edit', array('idResto' => $repasServi->getIdresto()));
+            return $this->redirectToRoute('repasservi_edit', array('idRepas' => $repasServi->getIdRepas()));
         }
 
-        return $this->render('repasservi/edit.html.twig', array(
+        return $this->render('@RestoDon/repasservi/edit.html.twig', array(
             'repasServi' => $repasServi,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
@@ -116,7 +164,7 @@ class RepasServiController extends Controller
     private function createDeleteForm(RepasServi $repasServi)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('repasservi_delete', array('idResto' => $repasServi->getIdresto())))
+            ->setAction($this->generateUrl('repasservi_delete', array('idRepas' => $repasServi->getIdRepas())))
             ->setMethod('DELETE')
             ->getForm()
         ;

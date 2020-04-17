@@ -453,53 +453,66 @@ h3, .h3 {
 	============================================================================================ */ }
 
 @media (max-width: 1300px) {
-  .pub-small {
-    background: var(--first-color);
-    opacity: 0.3;
+  /*.pub-small
+	{
+		background: var(--first-color) ;
+		opacity: 0.3;
+		position: relative !important;
+		bottom: auto !important;
+		top: auto !important;
+		orientation: portrait;
+		max-width: 100% !important;
+		width: 100% !important;   
+		max-height: 100% !important;
+		height: 100% !important;
+		z-idex: 0 !important;
+		display: grid !important;
+		right: 0 !important;
+		left: 0 !important;
+		margin-top: 0 !important;
+		margin-left: 0 !important;
+		margin-right: 0 !important;
+		margin-bottom: 0 !important;
+		overflow: auto;
+		justify-content: center;
+		
+			p
+			{
+				margin-top: 4vh !important;
+			}
+		
+	}
+
+	.pub-sticky
+{
+    
+	background: var(--first-color) ;
+	opacity: 0.5;
     position: relative !important;
     bottom: auto !important;
     top: auto !important;
-    orientation: portrait;
-    max-width: 100% !important;
-    width: 100% !important;
-    max-height: 100% !important;
+	orientation: portrait;
+	max-width: 100% !important;
+	min-height: auto !important;
+	width: 100% !important;   
+	max-height: 40% !important;
     height: 100% !important;
     z-idex: 0 !important;
     display: grid !important;
     right: 0 !important;
     left: 0 !important;
-    margin-top: 0 !important;
-    margin-left: 0 !important;
-    margin-right: 0 !important;
+	margin-top: 0 !important;
+	margin-left: 0 !important;
+	margin-right: 0 !important;
     margin-bottom: 0 !important;
     overflow: auto;
-    justify-content: center; }
-    .pub-small p {
-      margin-top: 4vh !important; }
-  .pub-sticky {
-    background: var(--first-color);
-    opacity: 0.5;
-    position: relative !important;
-    bottom: auto !important;
-    top: auto !important;
-    orientation: portrait;
-    max-width: 100% !important;
-    min-height: auto !important;
-    width: 100% !important;
-    max-height: 40% !important;
-    height: 100% !important;
-    z-idex: 0 !important;
-    display: grid !important;
-    right: 0 !important;
-    left: 0 !important;
-    margin-top: 0 !important;
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-    margin-bottom: 0 !important;
-    overflow: auto;
-    justify-content: center; }
-    .pub-sticky p {
-      margin-top: 4vh !important; } }
+	justify-content: center;
+	p
+	{
+		margin-top: 4vh !important;
+	}
+
+}*/ }
 
 @media (max-width: 1199px) {
   /* Main Menu Area css
@@ -899,9 +912,9 @@ h3, .h3 {
 	============================================================================================ */
 .fixingBody {
   position: relative;
-  top: 100px;
+  top: 150px;
   text-align: center;
-  margin-bottom: 100px; }
+  margin-bottom: 250px; }
 
 .service-card {
   background: #f8f8ff;

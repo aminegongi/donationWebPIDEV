@@ -4,7 +4,7 @@ repasservi_index:
     methods:  GET
 
 repasservi_show:
-    path:     /{idResto}/show
+    path:     /{idRepas}/show
     defaults: { _controller: "RestoDonBundle:RepasServi:show" }
     methods:  GET
 
@@ -14,11 +14,11 @@ repasservi_new:
     methods:  [GET, POST]
 
 repasservi_edit:
-    path:     /{idResto}/edit
+    path:     /{idRepas}/edit
     defaults: { _controller: "RestoDonBundle:RepasServi:edit" }
     methods:  [GET, POST]
 
 repasservi_delete:
-    path:     /{idResto}/delete
+    path:     /{idRepas}/delete
     defaults: { _controller: "RestoDonBundle:RepasServi:delete" }
     methods:  DELETE

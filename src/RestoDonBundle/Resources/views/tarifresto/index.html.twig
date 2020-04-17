@@ -4,10 +4,10 @@
     <link rel="stylesheet" href="{{ asset('front/scss/restoDon/css/root.css') }}">
 {% endblock %}
 
-{% block content %}
+{% block body %}
     <h1>Tarifrestos list</h1>
 
-    <table>
+    <table style="justify-content: center; margin-left: 39%;">
         <thead>
             <tr>
                 <th>Idresto</th>
@@ -19,16 +19,16 @@
         <tbody>
         {% for tarifResto in tarifRestos %}
             <tr>
-                <td><a href="{{ path('tarifresto_show', { 'idResto': tarifResto.idResto }) }}">{{ tarifResto.idResto }}</a></td>
+                <td><a href="{{ path('tarifresto_show', { 'idTarif': tarifResto.idTarif }) }}">{{ tarifResto.idResto }}</a></td>
                 <td>{{ tarifResto.tarif }}</td>
                 <td>{{ tarifResto.portefeuilleVirtuel }}</td>
                 <td>
                     <ul>
                         <li>
-                            <a href="{{ path('tarifresto_show', { 'idResto': tarifResto.idResto }) }}">show</a>
+                            <a href="{{ path('tarifresto_show', { 'idTarif': tarifResto.idTarif }) }}">show</a>
                         </li>
                         <li>
-                            <a href="{{ path('tarifresto_edit', { 'idResto': tarifResto.idResto }) }}">edit</a>
+                            <a href="{{ path('tarifresto_edit', { 'idTarif': tarifResto.idTarif }) }}">edit</a>
                         </li>
                     </ul>
                 </td>

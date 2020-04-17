@@ -10,4 +10,47 @@ namespace RestoDonBundle\Repository;
  */
 class TarifRestoRepository extends \Doctrine\ORM\EntityRepository
 {
+
+    public function findByIdResto($idResto) {
+
+        return $this->getEntityManager()
+            ->createQuery(
+                'SELECT tarifResto
+    FROM RestoDonBundle:TarifResto tarifResto
+    WHERE tarifResto.idResto = :idResto'
+            )->setParameter('idResto', $idResto)
+            -> getResult();
+
+    }
+
+    public function UpdatePorteFeuille($value, $idResto)
+    {
+
+        $qB = $this->getEntityManager()->createQueryBuilder();
+        $qB ->update('RestoDonBundle:TarifResto', 'T')
+            ->set('T.portefeuilleVirtuel', '?1')
+            ->where('T.idResto = ?2')
+            ->setParameter(1, $value)
+            ->setParameter(2, $idResto);
+
+        return $qB->getQuery();
+
+    }
+
+    public function UpdateTarif($value, $idResto)
+    {
+
+        $qB = $this->getEntityManager()->createQueryBuilder();
+        $qB ->update('RestoDonBundle:TarifResto', 'T')
+            ->set('T.tarif', '?1')
+            ->where('T.idResto = ?2')
+            ->setParameter(1, $value)
+            ->setParameter(2, $idResto);
+
+        return $qB->getQuery();
+
+    }
+
+
+
 }

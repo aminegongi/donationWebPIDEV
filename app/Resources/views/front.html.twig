@@ -58,7 +58,7 @@
                 <ul class="nav navbar-nav menu_nav justify-content-end justify-content-start" >
                     <!--         <li class="nav-item active"><a class="nav-link" href="index.html">Home</a></li> -->
 
-                    <li class="nav-item"><a class="nav-link" href="#">Cagnotte</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ path('cagnotte_homepage') }}">Cagnotte</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ path('demandeaide_index') }}">Aide</a>
                     <li class="nav-item submenu dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
@@ -72,7 +72,7 @@
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                            aria-expanded="false">Restaurant</a>
                         <ul class="dropdown-menu">
-                            <li class="nav-item"><a class="nav-link" href="#">Donation</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{ path('resto_don_homepage') }}">Donation</a></li>
                             <li class="nav-item"><a href="{{ path('publicationdon_index') }}" class="nav-link" href="#">Organisation</a></li>
                         </ul>
                     </li>

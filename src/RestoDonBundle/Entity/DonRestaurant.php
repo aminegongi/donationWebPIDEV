@@ -21,18 +21,17 @@ class DonRestaurant
      */
     private $idDon;
 
+
     /**
-     * @var int
-     *
-     * @ORM\Column(name="idResto", type="integer")
-     */
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User")
+     * @ORM\JoinColumn(name="idResto", referencedColumnName="id")
+     **/
     private $idResto;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="idUser", type="integer")
-     */
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User")
+     * @ORM\JoinColumn(name="idUser", referencedColumnName="id")
+     **/
     private $idUser;
 
     /**
@@ -61,11 +60,7 @@ class DonRestaurant
     }
 
     /**
-     * Set idResto
-     *
-     * @param integer $idResto
-     *
-     * @return DonRestaurant
+     * @param mixed $idResto
      */
     public function setIdResto($idResto)
     {
@@ -75,9 +70,7 @@ class DonRestaurant
     }
 
     /**
-     * Get idResto
-     *
-     * @return int
+     * @return mixed
      */
     public function getIdResto()
     {
@@ -85,11 +78,7 @@ class DonRestaurant
     }
 
     /**
-     * Set idUser
-     *
-     * @param integer $idUser
-     *
-     * @return DonRestaurant
+     * @param mixed $idUser
      */
     public function setIdUser($idUser)
     {
@@ -99,9 +88,7 @@ class DonRestaurant
     }
 
     /**
-     * Get idUser
-     *
-     * @return int
+     * @return mixed
      */
     public function getIdUser()
     {

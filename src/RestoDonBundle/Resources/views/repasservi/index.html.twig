@@ -1,13 +1,13 @@
 {% extends 'front.html.twig' %}
 
 {% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('front/scss/aide/css/root.css') }}">
+    <link rel="stylesheet" href="{{ asset('front/scss/restoDon/css/root.css') }}">
 {% endblock %}
 
 {% block body %}
     <h1>Repasservis list</h1>
 
-    <table>
+    <table style="justify-content: center; margin-left: 40%;">
         <thead>
             <tr>
                 <th>Idresto</th>
@@ -18,15 +18,15 @@
         <tbody>
         {% for repasServi in repasServis %}
             <tr>
-                <td><a href="{{ path('repasservi_show', { 'idResto': repasServi.idResto }) }}">{{ repasServi.idResto }}</a></td>
+                <td><a href="{{ path('repasservi_show', { 'idRepas': repasServi.idRepas }) }}">{{ repasServi.idResto }}</a></td>
                 <td>{% if repasServi.date %}{{ repasServi.date|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>
                     <ul>
                         <li>
-                            <a href="{{ path('repasservi_show', { 'idResto': repasServi.idResto }) }}">show</a>
+                            <a href="{{ path('repasservi_show', { 'idRepas': repasServi.idRepas }) }}">show</a>
                         </li>
                         <li>
-                            <a href="{{ path('repasservi_edit', { 'idResto': repasServi.idResto }) }}">edit</a>
+                            <a href="{{ path('repasservi_edit', { 'idRepas': repasServi.idRepas }) }}">edit</a>
                         </li>
                     </ul>
                 </td>

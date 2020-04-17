@@ -1,0 +1,221 @@
+@media (min-width:1619px){
+  #background-fit-tarif{
+    margin-right: 20%;
+  }
+}
+
+@media (max-width:1619px){
+  .formulaire-div-basics-svg{
+    margin-left: 20%;
+  }
+
+  #background-fit-tarif{
+    margin-right: 20%;
+  }
+
+  #background-fit-don {
+    margin-right: 20%;
+  }
+}
+
+@media (max-width:1300px){
+  .formulaire-div-basics-svg{
+    margin-left: 20%;
+  }
+
+  #background-fit-tarif{
+    margin-right: 20%;
+  }
+
+  #background-fit-don {
+    margin-right: 20%;
+  }
+
+  #body-new-don{
+    --first-color: var(--my-color);
+    //background: url("image-de-secours.png");
+    background-image: url(/front/images/Don.svg);
+    background-size: 500px;
+    background-repeat: no-repeat;
+    background-position: right;
+  }
+
+  #body-new-tarif{
+    --first-color: var(--my-color);
+    min-height: 380px;
+    //background: url("image-de-secours.png");
+    background-image: url(/front/images/Wallet.svg);
+    background-size: 450px;
+    background-repeat: no-repeat;
+    background-position: right;
+  }
+
+  #body-new-repasServi{
+    --first-color: var(--my-color);
+    min-height: 380px;
+    //background: url("image-de-secours.png");
+    background-image: url(/front/images/Servir.svg);
+    background-size: 350px;
+    background-repeat: no-repeat;
+    background-position: right;
+  }
+}
+
+@media (max-width:1199px){
+  .formulaire-div-basics-svg{
+    margin-left: 10%;
+  }
+
+  #background-fit-tarif{
+    margin-right: 40% !important;
+  }
+
+  #background-fit-don {
+    margin-right: 40%;
+  }
+
+  #body-new-don{
+    --first-color: var(--my-color);
+    //background: url("image-de-secours.png");
+    background-image: url(/front/images/Don.svg);
+    background-size: 430px;
+    background-repeat: no-repeat;
+    background-position: right;
+  }
+
+  #body-new-tarif{
+    --first-color: var(--my-color);
+    min-height: 380px;
+    //background: url("image-de-secours.png");
+    background-image: url(/front/images/Wallet.svg);
+    background-size: 430px;
+    background-repeat: no-repeat;
+    background-position: right;
+  }
+}
+
+@media (max-width:1150px){
+  .formulaire-div-basics-svg{
+    margin-left: 10%;
+  }
+
+  #background-fit-tarif{
+    margin-right: 40% !important;
+  }
+
+  #background-fit-don {
+    margin-right: 40%;
+  }
+
+  #body-new-don{
+    --first-color: var(--my-color);
+    //background: url("image-de-secours.png");
+    background-image: url(/front/images/Don.svg);
+    background-size: 400px;
+    background-repeat: no-repeat;
+    background-position: right;
+  }
+
+  #body-new-repasServi{
+    --first-color: var(--my-color);
+    min-height: 380px;
+    //background: url("image-de-secours.png");
+    background-image: url(/front/images/Servir.svg);
+    background-size: 260px;
+    background-repeat: no-repeat;
+    background-position: right;
+  }
+}
+
+@media (max-width:1099px){
+  .formulaire-div-basics-svg{
+    margin-left: 10%;
+  }
+
+  #background-fit-tarif{
+    margin-right: 40% !important;
+  }
+  #background-fit-don {
+    margin-right: 40%;
+  }
+}
+
+@media (max-width:991px){
+  .formulaire-div-basics-svg{
+    margin-left: -5%;
+  }
+
+  #background-fit-tarif{
+    margin-right: 70% !important;
+  }
+
+  #background-fit-repasServi{
+    margin-right: 30%;
+  }
+
+  #background-fit-don {
+    margin-right: 70%;
+  }
+}
+
+@media (max-width:767px){
+
+  .formulaire-div-basics-svg{
+    margin-left: 30%;
+  }
+
+  #background-fit-tarif{
+    margin-right: 0% !important;
+  }
+
+  #background-fit-repasServi{
+    margin-right: 0%;
+  }
+
+  #background-fit-don {
+    margin-right: 0%;
+  }
+
+  #body-new-tarif{
+    --first-color: var(--my-color);
+    min-height: 380px;
+    //background: url("image-de-secours.png");
+    background-image: none ;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right;
+  }
+
+  #body-new-repasServi{
+    --first-color: var(--my-color);
+    min-height: 380px;
+    //background: url("image-de-secours.png");
+    background-image: none;
+    background-size: auto;
+    background-repeat: no-repeat;
+    background-position: right;
+  }
+
+  #body-new-don{
+    --first-color: var(--my-color);
+    min-height: 380px;
+    //background: url("image-de-secours.png");
+    background-image: none;
+    background-size: auto;
+    background-repeat: no-repeat;
+    background-position: right;
+  }
+}
+
+@media (max-width:600px){
+
+}
+
+@media (max-width:575px){
+
+}
+
+@media (max-width:480px){
+
+}
+
