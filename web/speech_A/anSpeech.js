@@ -6,12 +6,17 @@ if (annyang) {
     annyang.addCommands({
         'ouvrir la cagnotte': function() {
             console.log('-----------Cagnotte-----------');
+            window.location.href = 'http://localhost/donationLastTry/web/app_dev.php/Cagnotte/'
         },
         'ouvrir la plateforme d\'aide': function() {
             console.log('-----------Aide-----------');
+            window.location.href = 'http://localhost/donationLastTry/web/app_dev.php/aide/demandeaide/'
         },
         'ouvrir resto organisation': function() {
             window.location.href = 'http://localhost/donationLastTry/web/app_dev.php/RestoOrg/'
+        },
+        'ouvrir resto dent': function() {
+            window.location.href = 'http://localhost/donationLastTry/web/app_dev.php/RestoDon/'
         },
         'ouvrir mon profil': function() {
             window.location.href = 'http://localhost/donationLastTry/web/app_dev.php/user/profil'
