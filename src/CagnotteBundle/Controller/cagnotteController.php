@@ -128,12 +128,14 @@ class cagnotteController extends Controller{
         // Get the payment token ID submitted by the form:
         //$montant = $request->request->get("montant");
         $montant = $_POST["montant"];
+        $montant = $montant * 100;
         $charge = \Stripe\Charge::create([
             'amount' => $montant,
             'currency' => 'usd',
             'description' => 'donation.tn',
             'source' => $request->request->get('stripeToken'),
         ]);
+        $montant = $montant / 100;
         $em = $this->getDoctrine()->getManager();
         $cagnotte = $em->getRepository('CagnotteBundle:cagnotte')->find($id);
         $cagnotte->setMontantActuel($cagnotte->getMontantActuel() + $montant);
