@@ -16,11 +16,27 @@ class DemandeAideController extends Controller
      * Lists all demandeAide entities.
      *
      */
-    public function indexAction()
-    {
+    public function indexAction(Request $request)
+    {/*
         $em = $this->getDoctrine()->getManager();
 
         $demandeAides = $em->getRepository('AideBundle:DemandeAide')->findAll();
+
+        $idcat ='';
+        return $this->render('demandeaide/index.html.twig', array(
+            'demandeAides' => $demandeAides,
+            'categorieAides' => $this->getCategorie($idcat),
+            'categories' => $this->allCategories(),
+        ));
+    */
+        $em = $this->getDoctrine()->getManager();
+
+        $listeDemandeAides = $em->getRepository('AideBundle:DemandeAide')->findAll();
+        $demandeAides  = $this->get('knp_paginator')->paginate(
+            $listeDemandeAides,
+            $request->query->get('page', 1)/*le numéro de la page à afficher*/,
+            9/*nbre d'éléments par page*/
+        );
 
         $idcat ='';
         return $this->render('demandeaide/index.html.twig', array(

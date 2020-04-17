@@ -3,6 +3,7 @@
 namespace AideBundle\Controller;
 
 use AideBundle\Entity\CategorieAide;
+use AideBundle\Entity\DemandeAide;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\File\File;
@@ -24,9 +25,22 @@ class CategorieAideController extends Controller
 
         $categorieAides = $em->getRepository('AideBundle:CategorieAide')->findAll();
 
+
+        $total = $this->nbDmndEachCat();
+        $totalSig = $this->nbDmndSigEachCat();
+        $totalConf = $this->nbDmndConfEachCat();
+        
+
         return $this->render('categorieaide/index.html.twig', array(
             'categorieAides' => $categorieAides,
+            'total' => $total,
+            'totalSig'=>$totalSig,
+            'totalConf'=>$totalConf,
+
         ));
+
+
+
     }
 
     /**
@@ -200,4 +214,91 @@ class CategorieAideController extends Controller
             ->getForm()
         ;
     }
+
+    // retourne le nombre de demandes totale pour chaque categorie
+    public function nbDmndEachCat(){
+
+        $em = $this->getDoctrine()->getManager();
+        $categorieAides = $em->getRepository('AideBundle:CategorieAide')->findAll();
+
+        $arrIdCat= array();
+        //initialized with one element at index 0
+        //to start adding later from index 1 not 0 same IDs as categories index = id of one categorie
+        //prevent view's error
+        $arrRes= array('a');
+
+        foreach ($categorieAides as $categorie) {
+
+            array_push($arrIdCat, $categorie->getId());
+        }
+
+        foreach ($arrIdCat as $idCategorie) {
+            $nbDmnds = $em->getRepository('AideBundle:DemandeAide')->nbDmndParCat($idCategorie);
+            array_push($arrRes, [$idCategorie => $nbDmnds]);
+        }
+
+        return $arrRes;
+
+    }
+
+
+
+    // retourne le nombre de demandes signalées pour chaque categorie
+    public function nbDmndSigEachCat(){
+
+        $em = $this->getDoctrine()->getManager();
+        $categorieAides = $em->getRepository('AideBundle:CategorieAide')->findAll();
+
+        $arrIdCat= array();
+        //initialized with one element at index 0
+        //to start adding later from index 1 not 0 same IDs as categories index = id of one categorie
+        //prevent view's error
+        $arrRes= array('a');
+
+        foreach ($categorieAides as $categorie) {
+
+            array_push($arrIdCat, $categorie->getId());
+        }
+
+        foreach ($arrIdCat as $idCategorie) {
+            $nbDmnds = $em->getRepository('AideBundle:DemandeAide')->nbDmndSigParCat($idCategorie);
+            array_push($arrRes, [$idCategorie => $nbDmnds]);
+        }
+
+        return $arrRes;
+
+    }
+
+
+    // retourne le nombre de demandes confirmées pour chaque categorie
+    public function nbDmndConfEachCat(){
+
+        $em = $this->getDoctrine()->getManager();
+        $categorieAides = $em->getRepository('AideBundle:CategorieAide')->findAll();
+
+        $arrIdCat= array();
+        //initialized with one element at index 0
+        //to start adding later from index 1 not 0 same IDs as categories index = id of one categorie
+        //prevent view's error
+        $arrRes= array('a');
+
+        foreach ($categorieAides as $categorie) {
+
+            array_push($arrIdCat, $categorie->getId());
+        }
+
+        foreach ($arrIdCat as $idCategorie) {
+            $nbDmnds = $em->getRepository('AideBundle:DemandeAide')->nbDmndConfParCat($idCategorie);
+            array_push($arrRes, [$idCategorie => $nbDmnds]);
+        }
+
+        return $arrRes;
+
+    }
+
+
+
+
+
+
 }
