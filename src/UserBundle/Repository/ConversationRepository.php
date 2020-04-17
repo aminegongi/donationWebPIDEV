@@ -66,7 +66,7 @@ class ConversationRepository extends \Doctrine\ORM\EntityRepository
     public function getlistConDQL($conna)
     {
         $q=$this->getEntityManager()->createQuery(
-            "Select c , Max(c.dateEnvoi) as HIDDEN date from UserBundle:Conversation c where (c.receiver=".$conna." or c.sender=".$conna.") Group BY c.sender, c.receiver ORDER by date DESC"
+            "Select c , Max(c.dateEnvoi) as HIDDEN date from UserBundle:Conversation c where (c.receiver=".$conna." or c.sender=".$conna.") Group BY c.sender, c.receiver order by c.id DESC"
         );
 
         return $q->getResult();
