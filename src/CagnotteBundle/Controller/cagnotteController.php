@@ -139,6 +139,9 @@ class cagnotteController extends Controller{
         $em = $this->getDoctrine()->getManager();
         $cagnotte = $em->getRepository('CagnotteBundle:cagnotte')->find($id);
         $cagnotte->setMontantActuel($cagnotte->getMontantActuel() + $montant);
+        if ($cagnotte->getMontantActuel() >= $cagnotte->getMontantDemande() ){
+            $cagnotte->setEtat(2);
+        }
         $em->persist($cagnotte);
         $em->flush();
         return $this->redirectToRoute('cagnotte_homepage');
