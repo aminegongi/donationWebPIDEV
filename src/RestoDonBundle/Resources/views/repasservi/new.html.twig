@@ -2,22 +2,23 @@
 
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('front/scss/restoDon/css/root.css') }}">
+    <link rel="stylesheet" href="{{ asset('front/scss/restoDon/css/restoDon.css') }}">
 {% endblock %}
 
 {% block body %}
-    <section>
-    <h1 style="color: var(--my-color);">Repasservi creation</h1>
-
+<div id="body-new-repasServi">
+    <h1>{{ title }}</h1>
+    <div id="formulaire-div">
     {{ form_start(form) }}
 
-        <div class="form-group" style="display: none;">
-            <label for="{{ form.idResto.vars.id }}">id Resto</label>
-            <input type="text" style="border: solid 1px var(--my-color);" class="form-control" id="{{ form.idResto.vars.id }}" name="{{ form.idResto.vars.full_name }}" value="{{ user }}">
+        <div class="formulaire-div-basics" style="display: none;">
+{#            <label class="formulaire-label" for="{{ form.idResto.vars.id }}">id Resto</label>#}
+            <input type="text" class="formulaire-input" id="{{ form.idResto.vars.id }}" name="{{ form.idResto.vars.full_name }}" value="{{ user }}">
             {{ form_errors(form.idResto) }}
             {% do form.idResto.setRendered %}
         </div>
 
-        <div class="form-group" style="display: none;">
+        <div class="formulaire-div-basics" style="display: none;">
             {{ form_label(form.date, 'Date') }}
             {{ form_widget(form.date) }}
             {{ form_errors(form.date) }}
@@ -25,13 +26,14 @@
         </div>
 
 
-        <input class="button button-hero mt-4" style="color: white; background-color: var(--my-color);" type="submit" value="Create" />
+        <input class="button button-hero mt-4" {{ state }} id="background-fit-repasServi" style="color: white; background-color: {{ couleur }};" type="submit" value="Create" />
     {{ form_end(form) }}
+    </div>
 
-    <ul style=" margin-top: 2%;">
+    <ul class="link-list-style" id="background-fit-repasServi" style=" margin-top: 2%;">
         <li>
-            <a style="color: var(--my-color); letter-spacing: 0.4rem; font-weight: bold;" href="{{ path('repasservi_index') }}">Back to the list</a>
+            <a class="link-list" href="{{ path('repasservi_index') }}">Back to the list</a>
         </li>
     </ul>
-    </section>
+</div>
 {% endblock %}

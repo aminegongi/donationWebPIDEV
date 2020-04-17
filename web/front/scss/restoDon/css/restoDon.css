@@ -1,13 +1,349 @@
-h1 {
-  size: 20px; }
+#background-fit {
+  margin-right: 30%; }
 
-.khedmet {
-  background: var(--my-color); }
+#background-fit-don {
+  margin-right: 20%; }
 
-.erreur {
-  color: darkred; }
+#background-fit-tarif {
+  margin-right: 30%; }
 
-h2 {
-  color: black; }
+#body-new-don {
+  --first-color: var(--my-color);
+  background-image: url(/front/images/Don.svg);
+  background-size: 500px;
+  background-repeat: no-repeat;
+  background-position: right; }
+
+#body-new-repasServi {
+  --first-color: var(--my-color);
+  min-height: 380px;
+  background-image: url(/front/images/Servir.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: right; }
+
+#body-new-tarif {
+  --first-color: var(--my-color);
+  min-height: 380px;
+  background-image: url(/front/images/Wallet.svg);
+  background-size: 500px;
+  background-repeat: no-repeat;
+  background-position: right; }
+
+#body-new h1 {
+  color: var(--my-color); }
+
+#body-new-don h1 {
+  color: var(--my-color); }
+
+#body-new-repasServi h1 {
+  color: var(--my-color); }
+
+#body-new-tarif h1 {
+  color: var(--my-color); }
+
+.formulaire-div {
+  --first-color: var(--my-color);
+  justify-content: center;
+  background-color: indianred; }
+
+.formulaire-div-basics {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 40%;
+  height: 4rem;
+  margin-left: 30%; }
+
+.formulaire-div-basics-svg {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 40%;
+  height: 4rem;
+  margin-left: 20%; }
+
+.formulaire-label {
+  font-size: 20px;
+  text-align: center;
+  width: 30%;
+  margin-right: -15%; }
+
+.formulaire-input {
+  font-size: 23px;
+  color: dimgray;
+  border: solid 3px var(--my-color);
+  border-radius: 20px;
+  width: 70%;
+  height: 60%;
+  align-self: center;
+  text-align: center;
+  margin-left: 5%; }
+
+input[type=number] {
+  -moz-appearance: textfield;
+  appearance: textfield; }
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0; }
+
+.span-erreur {
+  color: palevioletred;
+  font-size: 20px;
+  margin-left: 2%; }
+
+.link-list-style {
+  margin-top: 5%; }
+
+.link-list {
+  color: var(--my-color);
+  letter-spacing: 0.4rem;
+  font-weight: bold; }
+
+.link-list:hover {
+  font-size: 16px;
+  color: var(--my-color);
+  letter-spacing: 0.4rem;
+  font-weight: bold; }
+
+[data-tooltip] {
+  display: inline-block;
+  position: relative;
+  cursor: default;
+  padding: 4px; }
+
+/* Tooltip styling */
+[data-tooltip]:before {
+  content: attr(data-tooltip);
+  display: none;
+  position: absolute;
+  background: indianred;
+  color: #fff;
+  padding: 4px 8px;
+  font-size: 14px;
+  line-height: 1.4;
+  min-width: 100px;
+  text-align: center;
+  border-radius: 4px; }
+
+/* Dynamic horizontal centering */
+[data-tooltip-position="top"]:before,
+[data-tooltip-position="bottom"]:before {
+  left: 50%;
+  -ms-transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%); }
+
+/* Dynamic vertical centering */
+[data-tooltip-position="right"]:before,
+[data-tooltip-position="left"]:before {
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%); }
+
+[data-tooltip-position="top"]:before {
+  bottom: 100%;
+  margin-bottom: 6px; }
+
+[data-tooltip-position="right"]:before {
+  left: 100%;
+  margin-left: 6px; }
+
+[data-tooltip-position="bottom"]:before {
+  top: 100%;
+  margin-top: 6px; }
+
+[data-tooltip-position="left"]:before {
+  right: 100%;
+  margin-right: 6px; }
+
+/* Tooltip arrow styling/placement */
+[data-tooltip]:after {
+  content: '';
+  display: none;
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid; }
+
+/* Dynamic horizontal centering for the tooltip */
+[data-tooltip-position="top"]:after,
+[data-tooltip-position="bottom"]:after {
+  left: 50%;
+  margin-left: -6px; }
+
+/* Dynamic vertical centering for the tooltip */
+[data-tooltip-position="right"]:after,
+[data-tooltip-position="left"]:after {
+  top: 50%;
+  margin-top: -6px; }
+
+[data-tooltip-position="top"]:after {
+  bottom: 100%;
+  border-width: 6px 6px 0;
+  border-top-color: indianred; }
+
+[data-tooltip-position="right"]:after {
+  left: 100%;
+  border-width: 6px 6px 6px 0;
+  border-right-color: indianred; }
+
+[data-tooltip-position="bottom"]:after {
+  top: 100%;
+  border-width: 0 6px 6px;
+  border-bottom-color: indianred; }
+
+[data-tooltip-position="left"]:after {
+  right: 100%;
+  border-width: 6px 0 6px 6px;
+  border-left-color: indianred; }
+
+/* Show the tooltip when hovering */
+[data-tooltip]:hover:before,
+[data-tooltip]:hover:after {
+  display: block;
+  z-index: 50; }
+
+.trick-cursor-none {
+  cursor: none; }
+
+@media (min-width: 1619px) {
+  #background-fit-tarif {
+    margin-right: 20%; } }
+
+@media (max-width: 1619px) {
+  .formulaire-div-basics-svg {
+    margin-left: 20%; }
+  #background-fit-tarif {
+    margin-right: 20%; }
+  #background-fit-don {
+    margin-right: 20%; } }
+
+@media (max-width: 1300px) {
+  .formulaire-div-basics-svg {
+    margin-left: 20%; }
+  #background-fit-tarif {
+    margin-right: 20%; }
+  #background-fit-don {
+    margin-right: 20%; }
+  #body-new-don {
+    --first-color: var(--my-color);
+    background-image: url(/front/images/Don.svg);
+    background-size: 500px;
+    background-repeat: no-repeat;
+    background-position: right; }
+  #body-new-tarif {
+    --first-color: var(--my-color);
+    min-height: 380px;
+    background-image: url(/front/images/Wallet.svg);
+    background-size: 450px;
+    background-repeat: no-repeat;
+    background-position: right; }
+  #body-new-repasServi {
+    --first-color: var(--my-color);
+    min-height: 380px;
+    background-image: url(/front/images/Servir.svg);
+    background-size: 350px;
+    background-repeat: no-repeat;
+    background-position: right; } }
+
+@media (max-width: 1199px) {
+  .formulaire-div-basics-svg {
+    margin-left: 10%; }
+  #background-fit-tarif {
+    margin-right: 40% !important; }
+  #background-fit-don {
+    margin-right: 40%; }
+  #body-new-don {
+    --first-color: var(--my-color);
+    background-image: url(/front/images/Don.svg);
+    background-size: 430px;
+    background-repeat: no-repeat;
+    background-position: right; }
+  #body-new-tarif {
+    --first-color: var(--my-color);
+    min-height: 380px;
+    background-image: url(/front/images/Wallet.svg);
+    background-size: 430px;
+    background-repeat: no-repeat;
+    background-position: right; } }
+
+@media (max-width: 1150px) {
+  .formulaire-div-basics-svg {
+    margin-left: 10%; }
+  #background-fit-tarif {
+    margin-right: 40% !important; }
+  #background-fit-don {
+    margin-right: 40%; }
+  #body-new-don {
+    --first-color: var(--my-color);
+    background-image: url(/front/images/Don.svg);
+    background-size: 400px;
+    background-repeat: no-repeat;
+    background-position: right; }
+  #body-new-repasServi {
+    --first-color: var(--my-color);
+    min-height: 380px;
+    background-image: url(/front/images/Servir.svg);
+    background-size: 260px;
+    background-repeat: no-repeat;
+    background-position: right; } }
+
+@media (max-width: 1099px) {
+  .formulaire-div-basics-svg {
+    margin-left: 10%; }
+  #background-fit-tarif {
+    margin-right: 40% !important; }
+  #background-fit-don {
+    margin-right: 40%; } }
+
+@media (max-width: 991px) {
+  .formulaire-div-basics-svg {
+    margin-left: -5%; }
+  #background-fit-tarif {
+    margin-right: 70% !important; }
+  #background-fit-repasServi {
+    margin-right: 30%; }
+  #background-fit-don {
+    margin-right: 70%; } }
+
+@media (max-width: 767px) {
+  .formulaire-div-basics-svg {
+    margin-left: 30%; }
+  #background-fit-tarif {
+    margin-right: 0% !important; }
+  #background-fit-repasServi {
+    margin-right: 0%; }
+  #background-fit-don {
+    margin-right: 0%; }
+  #body-new-tarif {
+    --first-color: var(--my-color);
+    min-height: 380px;
+    background-image: none;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right; }
+  #body-new-repasServi {
+    --first-color: var(--my-color);
+    min-height: 380px;
+    background-image: none;
+    background-size: auto;
+    background-repeat: no-repeat;
+    background-position: right; }
+  #body-new-don {
+    --first-color: var(--my-color);
+    min-height: 380px;
+    background-image: none;
+    background-size: auto;
+    background-repeat: no-repeat;
+    background-position: right; } }
 
 /*# sourceMappingURL=restoDon.css.map */

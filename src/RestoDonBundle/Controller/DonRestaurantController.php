@@ -3,6 +3,7 @@
 namespace RestoDonBundle\Controller;
 
 use RestoDonBundle\Entity\DonRestaurant;
+use RestoDonBundle\Entity\TarifResto;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\UserBundle\Doctrine\UserManager;
@@ -35,7 +36,7 @@ class DonRestaurantController extends Controller
     public function newAction(Request $request)
     {
 
-
+        $user = $this->get('security.token_storage')->getToken()->getUser()->getId();
 
         $donRestaurant = new Donrestaurant();
         $donRestaurant -> setDate(new \DateTime("-1 hour"));
@@ -44,9 +45,35 @@ class DonRestaurantController extends Controller
 
 //        if ($form->isSubmitted()) {
 //            $userName = $donRestaurant -> getIdUser();
-//            $idUser = $this->getDoctrine()->getRepository(DonRestaurant::class)->findAllDONATORNAME($userName);
+//            $ss = $_POST["restodonbundle_donrestaurant"]["idUser"];
+//            $idUser = $this->getDoctrine()->getRepository(DonRestaurant::class)->findAllDONATORNAME($ss)[0]->getId();
 //            $donRestaurant -> setIdUser($idUser);
+//            var_dump($donRestaurant);
+//
 //        }
+
+        if ($form->isSubmitted()) {
+            $idResto = $donRestaurant -> getIdResto();
+            $ss = $_POST["userMail"];
+            try {
+
+                $idUser = $this->getDoctrine()->getRepository(DonRestaurant::class)->findAllDONATORNAME($ss)[0];
+                $donRestaurant->setIdUser($idUser);
+                $resto = $this->getDoctrine()->getRepository(TarifResto::class)->findByIdResto($idResto)[0];
+                $porteF = $resto->getPortefeuilleVirtuel() + $donRestaurant -> getMontant();
+                $hh = $this->getDoctrine()->getRepository(TarifResto::class)->UpdatePorteFeuille($porteF,$idResto);
+//                var_dump($hh);
+//                die();
+            } catch (\Exception $e) {
+                return $this->render('@RestoDon/donrestaurant/new.html.twig', array(
+                    'donRestaurant' => $donRestaurant,
+                    'form' => $form->createView(),
+                    'user' => $user = $this->get('security.token_storage')->getToken()->getUser()->getId(),
+                    'time' => strftime("%d-%m-%Y %H:%M"),
+                    'erreur' => "X"
+                ));
+            }
+        }
 
 //        if ($form->isSubmitted()){
 //            $value = $donRestaurant -> getIdUser();
@@ -55,7 +82,14 @@ class DonRestaurantController extends Controller
 //        }
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $idResto = $donRestaurant -> getIdResto();
+            $ss = $_POST["userMail"];
+            $idUser = $this->getDoctrine()->getRepository(DonRestaurant::class)->findAllDONATORNAME($ss)[0];
+            $donRestaurant -> setIdUser($idUser);
             $donRestaurant -> setDate(new \DateTime("-1 hour"));
+            $resto = $this->getDoctrine()->getRepository(TarifResto::class)->findByIdResto($idResto)[0];
+            $porteF = $resto->getPortefeuilleVirtuel() + $donRestaurant -> getMontant();
+            $this->getDoctrine()->getRepository(TarifResto::class)->UpdatePorteFeuille($porteF,$user)->execute();
             $em = $this->getDoctrine()->getManager();
             $em->persist($donRestaurant);
             $em->flush();
@@ -68,6 +102,7 @@ class DonRestaurantController extends Controller
             'form' => $form->createView(),
             'user' => $user = $this->get('security.token_storage')->getToken()->getUser()->getId(),
             'time' => strftime("%d-%m-%Y %H:%M"),
+            'erreur' => ""
         ));
     }
 
@@ -105,6 +140,8 @@ class DonRestaurantController extends Controller
             'donRestaurant' => $donRestaurant,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
+            'user' => $user = $this->get('security.token_storage')->getToken()->getUser()->getId(),
+
         ));
     }
 

@@ -6,48 +6,58 @@
 {% endblock %}
 
 {% block body %}
-    <div id="body">
-    <h1 style="color: var(--my-color);">Donrestaurant creation</h1>
-<div id="form" style="--first-color: var(--my-color); justify-content: center;">
+    <div id="body-new-don">
+    <h1>Faire un don est tellement bon !</h1>
+<div id="formulaire-div">
     {{ form_start(form) }}
 
+{#    <div class="container">#}
+{#        <div class="row">#}
+{#            {% for i in 0..1 %}#}
+{#    {{ include("@RestoDon/donrestaurant/test.html.twig") }}#}
+{#            {% endfor %}#}
+{#        </div>#}
+{#    </div>#}
 
 
-    <div class="form-group" style="display: none;">
-        <label for="{{ form.idResto.vars.id }}">id Resto</label>
-        <input type="text" style="border: solid 1px var(--my-color);" class="form-control" id="{{ form.idResto.vars.id }}" name="{{ form.idResto.vars.full_name }}" value="{{ user }}">
+    <div class="formulaire-div-basics-svg" style="display: none;">
+{#        <label class="formulaire-label" for="{{ form.idResto.vars.id }}">id Resto</label>#}
+        <input type="text" class="formulaire-input" id="{{ form.idResto.vars.id }}" name="{{ form.idResto.vars.full_name }}" value="{{ user }}">
         {{ form_errors(form.idResto) }}
         {% do form.idResto.setRendered %}
     </div>
 
-    <div class="form-group" style="display: flex; flex-direction: row; justify-content: center; width: 24%; margin-left: 37%; margin-right: 32%;">
-        <label style="margin-left: 14%; margin-top: 3%; font-size: 20px;" for="{{ form.idUser.vars.id }}">Utilisateur</label>
-        <input type="text" required style="border: solid 1px var(--my-color); width: fit-content; margin-left: 36%;" class="form-control" id="{{ form.idUser.vars.id }}" name="{{ form.idUser.vars.full_name }}" value="utilisateur">
+    <div class="formulaire-div-basics-svg">
+{#        <label class="formulaire-label" for="userMail">Utilisateur</label>#}
+        <input type="hidden" autofocus required style="border: solid 1px var(--my-color); width: fit-content; margin-left: 36%;" class="form-control" id="{{ form.idUser.vars.id }}" name="{{ form.idUser.vars.full_name }}" placeholder="utilisateur">
+        <input type="text" autofocus required class="formulaire-input" id="userMail" name="userMail" placeholder="bénévole">
+        <span class="span-erreur" data-tooltip="Identifiant incorrect" data-tooltip-position="right">{{ erreur }}</span>
         {{ form_errors(form.idUser) }}
         {% do form.idUser.setRendered %}
     </div>
 
-    <div class="form-group" style="display: flex; flex-direction: row; justify-content: center; width: 24%; margin-left: 37%; margin-right: 32%;">
-        <label style="margin-left: 14%; margin-top: 3%; font-size: 20px;" for="{{ form.montant.vars.id }}">Montant</label>
-        <input type="number" style="border: solid 1px var(--my-color); width: fit-content; margin-left: 40%;" class="form-control" id="{{ form.montant.vars.id }}" name="{{ form.montant.vars.full_name }}" value="monnaie">
+    <div class="formulaire-div-basics-svg">
+{#        <label class="formulaire-label" for="{{ form.montant.vars.id }}">Montant</label>#}
+        <input type="number" min="0.00" step="0.05" class="formulaire-input" id="{{ form.montant.vars.id }}" name="{{ form.montant.vars.full_name }}" placeholder="montant">
+        <span class="span-erreur"></span>
         {{ form_errors(form.montant) }}
         {% do form.montant.setRendered %}
     </div>
 
-    <div class="form-group" style="display: none;">
+    <div class="formulaire-div-basics-svg" style="display: none;">
         {{ form_label(form.date, 'Date') }}
         {{ form_widget(form.date) }}
         {{ form_errors(form.date) }}
         {% do form.date.setRendered %}
     </div>
-    <div>
+    <div id="background-fit-don">
         <input class="button button-hero mt-4" style="color: white;" type="submit" value="Create"/>
     </div>
     {{ form_end(form) }}
 </div>
-    <ul style="margin-top: 5%;">
+    <ul class="link-list-style" id="background-fit-don">
         <li>
-            <a style="color: var(--my-color); letter-spacing: 0.4rem; font-weight: bold;" href="{{ path('donrestaurant_index') }}">Back to the list</a>
+            <a class="link-list" href="{{ path('donrestaurant_index') }}">Back to the list</a>
         </li>
     </ul>
     </div>

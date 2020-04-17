@@ -39,9 +39,9 @@ class TarifResto
     /**
      * @var string
      *
-     * @ORM\Column(name="portefeuille_virtuel", type="decimal", precision=9, scale=3, nullable=true)
+     * @ORM\Column(name="portefeuille_virtuel", type="decimal", precision=9, scale=3, options={"default" : 0})
      */
-    private $portefeuilleVirtuel = 0.000;
+    private $portefeuilleVirtuel= 0.000;
 
 
     /**
