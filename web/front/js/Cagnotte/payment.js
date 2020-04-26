@@ -14,6 +14,7 @@ var style = {
 var card = elements.create('card', {style: style});
 
 // Add an instance of the card Element into the `card-element` <div>.
+
 card.mount('#card-element');
 
 // Create a token or display an error when the form is submitted.

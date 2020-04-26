@@ -15,14 +15,9 @@ class cagnotteType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('nom')
-            ->add('dateDeCreation')
             ->add('dateDeDebut')
             ->add('dateDeFin')
             ->add('montantDemande')
-            ->add('montantActuel')
-            ->add('idProprietaire')
-            ->add('idOrganisation')
-            ->add('etat')
             ->add('idCategorie')
             ->add('Sauvegarder', SubmitType::class);
     }/**

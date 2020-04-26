@@ -1,44 +1,91 @@
 {% extends "front.html.twig" %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('front/scss/cagnotte/css/root.css') }}">
+{% endblock %}
 
 {% block body %}
-    <table border="1">
-        <tr>
-            <th>ID</th>
-            <th>Nom</th>
-            <th>Categorie</th>
-            <th>Date de creation</th>
-            <th>Date de debut</th>
-            <th>Date d'expiration</th>
-            <th>Montant demandé en DT</th>
-            <th>Montant actuel en DT</th>
-            <th>ID Proprietaire</th>
-            <th>ID Organisation</th>
-            <th>Etat</th>
-            <th>Modifier</th>
-            <th>Supprimer</th>
-        </tr>
+    <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel" pause>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="{{ asset('front/img/Cagnotte/charity.jpg') }}" class="d-block w-100" alt="...">
+            </div>
 
+            <div class="carousel-caption d-none d-md-block" style="bottom: 50%">
+                <button class="btn btn-outline-danger" onclick="window.location.href = 'new';">Commencer une Cagnotte</button>
+            </div>
+        </div>
+    </div>
 
-        {%  for c in cagnottes %}
-            <tr>
-                <td>{{ c.id }}</td>
-                <td><a href="{{ path('cagnotte_show',{'id': c.id }) }}" >{{ c.nom }}</a></td>
-                <td>{{ c.idCategorie }}</td>
-                <td>{{ c.dateDeCreation|date('d-m-Y') }}</td>
-                <td>{{ c.dateDeDebut|date('d-m-Y') }}</td>
-                <td>{{ c.dateDeFin|date('d-m-Y') }}</td>
-                <td>{{ c.montantDemande }}</td>
-                <td>{{ c.montantActuel }}</td>
-                <td>{{ c.idProprietaire }}</td>
-                <td>{{ c.idOrganisation }}</td>
-                <td>{{ c.etat }}</td>
-                <td><a href="{{ path('cagnotte_edit',{'id': c.id }) }}" >Modifier</a></td>
-                <td><a href="{{ path('cagnotte_delete',{'id': c.id }) }}" >Supprimer</a></td>
-
-            </tr>
-        {% endfor %}
-    </table>
-    <button onclick="window.location.href = 'new';">Ajouter Cagnotte</button>
-
+    <div class="container h-100">
+        <div class="row h-100 align-items-center">
+            <div class="col-12 text-center">
+                <h1 class="font-weight-light">Les cagnottes ouvertes</h1>
+                <p class="lead">Un peu d'aide nous fait grand bien.</p>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="container">
+        <div class="row">
+            {%  for c in cagnottes %}
+                {% if (userRole == "ROLE_US") %}
+                    {% if ((c.etat  == 1 ) or (c.etat == 2)) %}
+                        <div class="col-6 mx-auto col-md-6 order-md-2">
+                        </div>
+                        <div class="col-md-6 order-md-1 text-center text-md-left pr-md-5">
+                            <h1 class="mb-3 bd-text-purple-bright" style="color:#8B0000">{{ c.nom }}</h1>
+                            <p class="lead">
+                                Montant demandé: {{ c.montantDemande }} DT<br>
+                                Montant achevé: {{ c.montantActuel }} DT
+                            </p>
+                            <p class="lead mb-4">
+                                {% if (c.etat == 1) %}
+                                    Prise en charge par l'organisation: {{ c.idOrganisation }}
+                                {% else %}
+                                    La cagnotte a atteint le montant demandé.
+                                {% endif %}
+                            </p>
+                            <div class="row mx-n2">
+                                <div class="col-md px-2">
+                                    <a href="{{ path('cagnotte_show',{'id': c.id }) }}" class="btn btn-lg btn-outline-secondary w-75 mb-3"">Plus de details</a>
+                                </div>
+                            </div>
+                            <p class="text-muted mb-0">
+                                <br>
+                            </p>
+                        </div>
+                    {% endif %}
+                {% endif %}
+                {% if (userRole == "ROLE_ORG") %}
+                    <div class="col-6 mx-auto col-md-6 order-md-2">
+                    </div>
+                    <div class="col-md-6 order-md-1 text-center text-md-left pr-md-5">
+                        <h1 class="mb-3 bd-text-purple-bright" style="color:#8B0000">{{ c.nom }}</h1>
+                        <p class="lead">
+                            Montant demandé: {{ c.montantDemande }} DT<br>
+                            Montant achevé: {{ c.montantActuel }} DT
+                        </p>
+                        <p class="lead mb-4">
+                            {% if (c.etat == 0) %}
+                                N'est pas encore prise en charge
+                            {% elseif (c.etat == 1) %}
+                                Prise en charge par l'organisation: {{ c.idOrganisation }}
+                            {% else %}
+                                La cagnotte a atteint le montant demandé.
+                            {% endif %}
+                        </p>
+                        <div class="row mx-n2">
+                            <div class="col-md px-2">
+                                <a href="{{ path('cagnotte_show',{'id': c.id }) }}" class="btn btn-lg btn-outline-secondary w-75 mb-3"">Plus de details</a>
+                            </div>
+                        </div>
+                        <p class="text-muted mb-0">
+                            <br>
+                        </p>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
 {% endblock %}
