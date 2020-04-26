@@ -25,5 +25,17 @@ class DonRestaurantRepository extends \Doctrine\ORM\EntityRepository
 
 }
 
+    public function findRestoById($id) {
+
+        return $this->getEntityManager()
+            ->createQuery(
+                'SELECT id
+    FROM UserBundle:User id
+    WHERE id.id = :id'
+            )->setParameter('id', $id)
+            -> getResult();
+
+    }
+
 
 }

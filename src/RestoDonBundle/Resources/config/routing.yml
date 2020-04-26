@@ -13,3 +13,12 @@ resto_don_donrestaurant:
 resto_don_homepage:
     path:     /
     defaults: { _controller: RestoDonBundle:Default:index }
+
+jsonRestaurant:
+    path: /ListMapResto
+    defaults: { _controller: RestoDonBundle:Default:jsonRestaurant }
+
+newmobile:
+    path:     /newmobile
+    defaults: { _controller: "RestoDonBundle:DonRestaurantMobile:new" }
+    methods: [GET, POST]
