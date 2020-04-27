@@ -9,16 +9,17 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\UserBundle\Doctrine\UserManager;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
 
 class DonRestaurantMobileController extends Controller
 {
-//    RestoDon/newmobile?resto=x&username=pseudoname&montant=x.xxx
+//    RestoDon/newDonMobile?resto=x&username=pseudoname&montant=x.xxx
     public function newAction(Request $request)
     {
 
-        $user = $this->get('security.token_storage')->getToken()->getUser()->getId();
+
 
         $donRestaurant = new Donrestaurant();
         $donRestaurant -> setDate(new \DateTime("-1 hour"));
@@ -29,7 +30,10 @@ class DonRestaurantMobileController extends Controller
             $theArray = array('errur'=>'resto');
             $serializer = new serializer([new ObjectNormalizer()]);
             $formatted = $serializer->normalize($theArray);
-            return  new JsonResponse($formatted);
+            $formatted = json_encode($formatted, JSON_UNESCAPED_SLASHES);
+            $response = new Response();
+            $response->setContent($formatted);
+            return $response;
         }
 
 
@@ -60,7 +64,10 @@ class DonRestaurantMobileController extends Controller
                 );
                 $serializer = new serializer([new ObjectNormalizer()]);
                 $formatted = $serializer->normalize($theArray);
-                return  new JsonResponse($formatted);
+                $formatted = json_encode($formatted, JSON_UNESCAPED_SLASHES);
+                $response = new Response();
+                $response->setContent($formatted);
+                return $response;
             }
 
 
@@ -89,15 +96,11 @@ class DonRestaurantMobileController extends Controller
             );
             $serializer = new serializer([new ObjectNormalizer()]);
             $formatted = $serializer->normalize($theArray);
-            return  new JsonResponse($formatted);
+            $formatted = json_encode($formatted, JSON_UNESCAPED_SLASHES);
+            $response = new Response();
+            $response->setContent($formatted);
+            return $response;
 
 
-        $theInitArray = array(
-            'donRestaurant' => $donRestaurant,
-            'user' => $user = $this->get('security.token_storage')->getToken()->getUser()->getId()
-        );
-        $serializer = new serializer([new ObjectNormalizer()]);
-        $formatted = $serializer->normalize($theInitArray);
-        return  new JsonResponse($formatted);
     }
 }
