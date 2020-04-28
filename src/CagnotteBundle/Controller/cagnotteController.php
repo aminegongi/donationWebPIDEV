@@ -114,22 +114,36 @@ class cagnotteController extends Controller{
     }
 
     public function donateAction($id){
-        return $this->render('@Cagnotte/Cagnotte/donate.html.twig',array('id' => $id));
+        $em = $this->getDoctrine()->getManager();
+        $cagnotte = $em->getRepository('CagnotteBundle:cagnotte')->find($id);
+        return $this->render('@Cagnotte/Cagnotte/donate.html.twig',array('selected' => $cagnotte));
     }
 
-    public function chargeAction(Request $request){
+    public function chargeAction(Request $request, $id){
         //Set your secret key. Remember to switch to your live secret key in production!
         // See your keys here: https://dashboard.stripe.com/account/apikeys
         \Stripe\Stripe::setApiKey('sk_test_7tajuF5Z10s0ok3SuF49voRi00w7jjH6x0');
 
         // Token is created using Stripe Checkout or Elements!
         // Get the payment token ID submitted by the form:
+        //$montant = $request->request->get("montant");
+        $montant = $_POST["montant"];
+        $montant = $montant * 100;
         $charge = \Stripe\Charge::create([
-            'amount' => 5000,
+            'amount' => $montant,
             'currency' => 'usd',
-            'description' => 'Donation',
+            'description' => 'donation.tn',
             'source' => $request->request->get('stripeToken'),
         ]);
+        $montant = $montant / 100;
+        $em = $this->getDoctrine()->getManager();
+        $cagnotte = $em->getRepository('CagnotteBundle:cagnotte')->find($id);
+        $cagnotte->setMontantActuel($cagnotte->getMontantActuel() + $montant);
+        if ($cagnotte->getMontantActuel() >= $cagnotte->getMontantDemande() ){
+            $cagnotte->setEtat(2);
+        }
+        $em->persist($cagnotte);
+        $em->flush();
         return $this->redirectToRoute('cagnotte_homepage');
     }
 

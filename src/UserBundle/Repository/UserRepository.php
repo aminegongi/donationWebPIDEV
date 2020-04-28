@@ -10,4 +10,46 @@ namespace UserBundle\Repository;
  */
 class UserRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function UserMailR($mail)
+    {
+        $q=$this->getEntityManager()->createQuery(
+            "Select u from UserBundle:User u where u.email='".$mail."'  "
+        );
+        return $q->getResult();
+    }
+
+    public function CheckactiverCompteR($mail,$ctoken)
+    {
+
+        $q=$this->getEntityManager()->createQuery(
+            "select u from UserBundle:User u where (u.email='".$mail."' and u.confirmationToken='".$ctoken."') "
+        );
+        return $q->getResult();
+    }
+
+    public function activerCompteR($mail,$ctoken)
+    {
+        $q=$this->getEntityManager()->createQuery(
+            "update UserBundle:User u set u.enabled=1 where (u.email='".$mail."' and u.confirmationToken='".$ctoken."') "
+        );
+        $q->execute();
+    }
+
+    public function chechMail($mail)
+    {
+        $q=$this->getEntityManager()->createQuery(
+            "select u from UserBundle:User u where u.email='".$mail."' "
+        );
+        return $q->getResult();
+    }
+
+    public function chechUsername($un)
+    {
+        $q=$this->getEntityManager()->createQuery(
+            "select u from UserBundle:User u where u.username='".$un."' "
+        );
+        return $q->getResult();
+    }
+
+
 }

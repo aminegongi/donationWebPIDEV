@@ -21,3 +21,24 @@ get_convs:
 list_convs:
     path:     /list_convs
     defaults: { _controller: UserBundle:Conversation:getlistConv }
+
+mob_getUserID:
+    path:     /api/getUserID
+    defaults: { _controller: UserBundle:UserMob:getUserId }
+
+mob_getUserMail:
+    path:     /api/getUserMail
+    defaults: { _controller: UserBundle:UserMob:getUserMail }
+
+mob_login:
+    path:     /api/login
+    defaults: { _controller: UserBundle:UserMob:login }
+
+mob_activer:
+    path:     /api/activer
+    defaults: { _controller: UserBundle:UserMob:activerCompte }
+
+mob_inscri:
+    path:     /api/inscri
+    defaults: { _controller: UserBundle:UserMob:Inscription }
+

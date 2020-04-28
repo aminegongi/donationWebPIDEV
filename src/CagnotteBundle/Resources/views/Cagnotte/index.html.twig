@@ -1,5 +1,8 @@
 {% extends "front.html.twig" %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('front/scss/cagnotte/css/root.css') }}">
+{% endblock %}
 
 {% block body %}
     <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel" pause>
@@ -27,7 +30,7 @@
         <div class="row">
             {%  for c in cagnottes %}
                 {% if (userRole == "ROLE_US") %}
-                    {% if (c.etat  == 1 ) %}
+                    {% if ((c.etat  == 1 ) or (c.etat == 2)) %}
                         <div class="col-6 mx-auto col-md-6 order-md-2">
                         </div>
                         <div class="col-md-6 order-md-1 text-center text-md-left pr-md-5">
@@ -37,7 +40,11 @@
                                 Montant achevé: {{ c.montantActuel }} DT
                             </p>
                             <p class="lead mb-4">
-                                Prise en charge par l'organisation: {{ c.idOrganisation }}
+                                {% if (c.etat == 1) %}
+                                    Prise en charge par l'organisation: {{ c.idOrganisation }}
+                                {% else %}
+                                    La cagnotte a atteint le montant demandé.
+                                {% endif %}
                             </p>
                             <div class="row mx-n2">
                                 <div class="col-md px-2">
@@ -62,8 +69,10 @@
                         <p class="lead mb-4">
                             {% if (c.etat == 0) %}
                                 N'est pas encore prise en charge
-                            {% else %}
+                            {% elseif (c.etat == 1) %}
                                 Prise en charge par l'organisation: {{ c.idOrganisation }}
+                            {% else %}
+                                La cagnotte a atteint le montant demandé.
                             {% endif %}
                         </p>
                         <div class="row mx-n2">

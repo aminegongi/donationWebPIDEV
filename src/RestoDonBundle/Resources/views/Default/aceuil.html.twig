@@ -1,0 +1,30 @@
+{% extends 'front.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('front/scss/restoDon/css/root.css') }}">
+    <link rel="stylesheet" href="{{ asset('front/scss/restoDon/css/restoDon.css') }}">
+    <link href="https://api.mapbox.com/mapbox-gl-js/v1.9.1/mapbox-gl.css" rel="stylesheet" />
+{% endblock %}
+
+{% block body %}
+    <style>
+        #map { width: 100%; height: 40%; visibility: visible; border-radius: 60vh; }
+    </style>
+
+    <div id="map" style="height: 60vh; width: 60vh; left: 100vh;"></div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="https://api.mapbox.com/mapbox-gl-js/v1.9.1/mapbox-gl.js"></script>
+    <script>
+        mapboxgl.accessToken = 'pk.eyJ1Ijoic2FmcmF0aXgiLCJhIjoiY2s4dGppaTl1MDB0bTNpcnp3MWRuZTd3MSJ9.4N2a8yFjGEvHPuAjmOV03w';
+        var map = new mapboxgl.Map({
+            container: 'map', // container id
+            style: 'mapbox://styles/safratix/ck98tdmjj02gl1imril3odsxl/draft', // stylesheet location
+            center: [-73.5804, 45.53483], // starting position [lng, lat]
+            pitch: 60, // pitch in degrees
+            bearing: -60, // bearing in degrees
+            zoom: 16 // starting zoom
+        });
+    </script>
+{% endblock %}

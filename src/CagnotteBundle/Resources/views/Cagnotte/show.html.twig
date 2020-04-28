@@ -1,5 +1,8 @@
 {% extends "front.html.twig" %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('front/scss/cagnotte/css/root.css') }}">
+{% endblock %}
 
 {% block body %}
     <div class="container">
@@ -33,7 +36,7 @@
                     <div class="col-md px-2">
                         {% if (selected.etat == 1) %}
                             <a href="../{{ selected.id }}/donate" class="btn btn-lg btn-outline-secondary w-100 mb-3"">Je me sens généreux</a>
-                        {% elseif (userRole == "ROLE_ORG") %}
+                        {% elseif ((userRole == "ROLE_ORG") and (selected.etat == 0)) %}
                             <a href="../{{ selected.id }}/take" class="btn btn-lg btn-outline-secondary w-100 mb-3"">Prendre en charge</a>
                         {% endif %}
                     </div>

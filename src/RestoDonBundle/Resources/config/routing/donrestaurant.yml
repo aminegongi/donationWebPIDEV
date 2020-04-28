@@ -22,3 +22,4 @@ donrestaurant_delete:
     path:     /{idDon}/delete
     defaults: { _controller: "RestoDonBundle:DonRestaurant:delete" }
     methods:  DELETE
+
