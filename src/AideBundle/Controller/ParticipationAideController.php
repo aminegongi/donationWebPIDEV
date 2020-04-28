@@ -2,6 +2,7 @@
 
 namespace AideBundle\Controller;
 
+use AideBundle\Entity\DemandeAide;
 use AideBundle\Entity\ParticipationAide;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -31,13 +32,32 @@ class ParticipationAideController extends Controller
      * Creates a new participationAide entity.
      *
      */
-    public function newAction(Request $request)
+    public function newAction(Request $request, $id)
     {
+        $user = $this->get('security.token_storage')->getToken()->getUser();
+
+        $idDmnd = $this->getDoctrine()->getRepository(DemandeAide::class)->find($id);
+
+//        var_dump($idDmnd);
+//        die();
+
+
+
         $participationAide = new Participationaide();
         $form = $this->createForm('AideBundle\Form\ParticipationAideType', $participationAide);
         $form->handleRequest($request);
 
+        if ($form->isSubmitted() ) {
+            $participationAide->setIdDemande($idDmnd);
+            $participationAide->setIdUser($user);
+        }
+
+
         if ($form->isSubmitted() && $form->isValid()) {
+
+//            $participationAide->setIdDemande($idDmnd);
+//            $participationAide->setIdUser($user);
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($participationAide);
             $em->flush();
@@ -48,6 +68,8 @@ class ParticipationAideController extends Controller
         return $this->render('participationaide/new.html.twig', array(
             'participationAide' => $participationAide,
             'form' => $form->createView(),
+            'idDmnd'=> $id,
+
         ));
     }
 

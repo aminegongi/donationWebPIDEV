@@ -4,7 +4,10 @@ namespace AideBundle\Controller;
 
 use AideBundle\Entity\DemandeAide;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
 
 /**
  * Demandeaide controller.
@@ -45,6 +48,30 @@ class DemandeAideController extends Controller
             'categories' => $this->allCategories(),
         ));
     }
+
+    public function findAllForOneCatAction(Request $request, $id){
+
+        $em = $this->getDoctrine()->getManager();
+
+        $listeDemandeAides = $em->getRepository('AideBundle:DemandeAide')->findByIdCategorie($id);
+        $demandeAides  = $this->get('knp_paginator')->paginate(
+            $listeDemandeAides,
+            $request->query->get('page', 1)/*le numéro de la page à afficher*/,
+            9/*nbre d'éléments par page*/
+        );
+
+        $idcat ='';
+        return $this->render('demandeaide/index.html.twig', array(
+            'demandeAides' => $demandeAides,
+            'categorieAides' => $this->getCategorie($idcat),
+            'categories' => $this->allCategories(),
+        ));
+    }
+
+
+
+
+
 
     /**
      * Creates a new demandeAide entity.
@@ -113,6 +140,7 @@ class DemandeAideController extends Controller
     public function showAction(DemandeAide $demandeAide)
     {
         $deleteForm = $this->createDeleteForm($demandeAide);
+
 
         return $this->render('demandeaide/show.html.twig', array(
             'demandeAide' => $demandeAide,
@@ -224,4 +252,8 @@ class DemandeAideController extends Controller
         $categorieAide = $em->getRepository('AideBundle:CategorieAide')->find($id);
         return $categorieAide;
     }
+
+
+
+
 }

@@ -9,7 +9,7 @@ participationaide_show:
     methods:  GET
 
 participationaide_new:
-    path:     /new
+    path:     /{id}/new
     defaults: { _controller: "AideBundle:ParticipationAide:new" }
     methods:  [GET, POST]
 
@@ -22,3 +22,21 @@ participationaide_delete:
     path:     /{id}/delete
     defaults: { _controller: "AideBundle:ParticipationAide:delete" }
     methods:  DELETE
+
+
+participationaide_all:
+    path:     /all
+    defaults: { _controller: "AideBundle:ParticipationAideMobile:index" }
+    methods:  GET
+
+#Return all participations for a specific demande
+participationaide_find:
+    path:     /find/{id}
+    defaults: { _controller: "AideBundle:ParticipationAideMobile:findAllForOne" }
+    methods:  GET
+
+
+participationaide_add:
+    path:     /add
+    defaults: { _controller: "AideBundle:ParticipationAideMobile:add" }
+    methods:  [GET, POST]

@@ -111,12 +111,16 @@
                         >
                             <div class="btn-group">
 
-                                <a class="btn btn-sm btn-outline-secondary" href="{{ path('demandeaide_show', { 'id': demandeAide.id }) }}">Détails</a>
+                                {#<a class="btn btn-sm btn-outline-secondary" href="{{ path('demandeaide_show', { 'id': demandeAide.id }) }}">Détails</a>#}
 
+                                <a class="btn btn-sm btn-outline-secondary" href="{{ path('participationaide_new', { 'id': demandeAide.id }) }}">Participer</a>
 
 
 
                                 <a  class="btn btn-sm btn-outline-secondary" href="{{ path('demandeaide_edit', { 'id': demandeAide.id }) }}"> Modifier</a>
+
+
+
 
 
                             </div>

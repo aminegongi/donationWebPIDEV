@@ -21,18 +21,18 @@ class ParticipationAide
      */
     private $id;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id_user", type="integer")
-     */
-    private $idUser;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="id_demande", type="integer")
-     */
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User")
+     * @ORM\JoinColumn(name="id_user", referencedColumnName="id")
+     **/
+    private $idUser;
+
+
+    /**
+     * @ORM\ManyToOne(targetEntity="AideBundle\Entity\DemandeAide")
+     * @ORM\JoinColumn(name="id_demande", referencedColumnName="id")
+     **/
     private $idDemande;
 
 
