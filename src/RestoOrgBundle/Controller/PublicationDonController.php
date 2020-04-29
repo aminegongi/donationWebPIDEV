@@ -236,4 +236,29 @@ class PublicationDonController extends Controller
         return new JsonResponse($formatted);
 
     }
+
+
+
+    public function editPublicationApiAction(Request $request){
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $publicationDon = $entityManager->getRepository(PublicationDon::class)->find($request->get("id"));
+
+        if (!$publicationDon) {
+            throw $this->createNotFoundException(
+                'No product found for id '
+            );
+        }
+
+        $publicationDon->setTitre($request->get("titre"));
+        $publicationDon->setDescription($request->get("description"));
+        if($request->get("nbrePlat")!=-1) {
+            $publicationDon->setNbrePlat($request->get("nbrePlat"));
+        }
+        $entityManager->flush();
+        $serializer= new Serializer([new ObjectNormalizer()]);
+        $formatted= $serializer->normalize($publicationDon);
+        return new JsonResponse($formatted);
+
+    }
 }

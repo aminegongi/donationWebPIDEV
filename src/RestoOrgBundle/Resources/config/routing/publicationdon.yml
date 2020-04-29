@@ -41,3 +41,7 @@ api_get_all:
 api_add_publication:
     path:     /addPublicationApi
     defaults: { _controller: "RestoOrgBundle:PublicationDon:addPublicationApi" }
+api_edit_publication:
+    path:     /editPublicationApi
+    defaults: { _controller: "RestoOrgBundle:PublicationDon:editPublicationApi" }
+
