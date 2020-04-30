@@ -17,6 +17,8 @@ class UserMobController extends Controller
     public function getUserIdAction(Request $req){
         $idu = $req->get('id');
         $user = $this->getDoctrine()->getRepository(User::class)->find($idu);
+        //$user->setDateNaissance($user->getDateNaissance()->format('Y-m-d'));
+
         $ser = new Serializer([new ObjectNormalizer()]);
         $json = $ser->normalize($user);
         return new JsonResponse($json);
@@ -25,6 +27,7 @@ class UserMobController extends Controller
     public function getUserMailAction(Request $req){
         $mail = $req->get('mail');
         $user = $this->getDoctrine()->getRepository(User::class)->UserMailR($mail);
+        //$user->setDateNaissance($user->getDateNaissance()->format('Y-m-d'));
         $ser = new Serializer([new ObjectNormalizer()]);
         $json = $ser->normalize($user);
         return new JsonResponse($json);
