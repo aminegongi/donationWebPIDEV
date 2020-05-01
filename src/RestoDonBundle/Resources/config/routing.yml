@@ -36,4 +36,4 @@ getTarifmobile:
 newTarifmobile:
     path:     /newTarifMobile
     defaults: { _controller: "RestoDonBundle:TarifRestoMobile:new" }
-    methods: GET
+    methods: [GET, POST]
