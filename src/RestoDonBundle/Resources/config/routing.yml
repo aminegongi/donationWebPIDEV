@@ -18,6 +18,10 @@ jsonRestaurant:
     path: /ListMapResto
     defaults: { _controller: RestoDonBundle:Default:jsonRestaurant }
 
+jsonRestaurantMobile:
+    path: /ListMapRestoMobile
+    defaults: { _controller: RestoDonBundle:Default:jsonRestaurantMobile }
+
 newDonmobile:
     path:     /newDonMobile
     defaults: { _controller: "RestoDonBundle:DonRestaurantMobile:new" }
@@ -36,4 +40,9 @@ getTarifmobile:
 newTarifmobile:
     path:     /newTarifMobile
     defaults: { _controller: "RestoDonBundle:TarifRestoMobile:new" }
+    methods: [GET, POST]
+
+mobileMapAllResto:
+    path:     /mobileMapAllResto
+    defaults: { _controller: "RestoDonBundle:Default:mobileMap" }
     methods: [GET, POST]

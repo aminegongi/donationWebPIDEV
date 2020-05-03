@@ -91,7 +91,7 @@ class DonRestaurantMobileController extends Controller
             $em->flush();
 
             $theArray = array(
-                'errur'=>'null',
+                'erreur'=>'null',
                 'idDon' => $donRestaurant->getIddon(),
             );
             $serializer = new serializer([new ObjectNormalizer()]);

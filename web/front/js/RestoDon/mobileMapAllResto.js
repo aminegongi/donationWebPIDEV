@@ -74,11 +74,11 @@ geojson.features.forEach(function(marker) {
             centred = el.id;
         }else{
             if ( lastClicked === el.id ){
-            toggleSidebar('left');
-            map.flyTo({
-                center: marker.geometry.coordinates,
-                speed: 0.2
-            });
+                toggleSidebar('left');
+                map.flyTo({
+                    center: marker.geometry.coordinates,
+                    speed: 0.2
+                });
                 lastClicked = el.id;
                 centred = el.id;
             } else {
@@ -91,12 +91,12 @@ geojson.features.forEach(function(marker) {
                     lastClicked = el.id;
                     centred = el.id;
                 } else{
-                map.flyTo({
-                    center: marker.geometry.coordinates,
-                    speed: 0.2
-                });
-                lastClicked = el.id;
-                centred = el.id;
+                    map.flyTo({
+                        center: marker.geometry.coordinates,
+                        speed: 0.2
+                    });
+                    lastClicked = el.id;
+                    centred = el.id;
                 }
             }
         }
