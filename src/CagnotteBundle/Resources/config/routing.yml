@@ -29,3 +29,8 @@ cagnotte_charge:
 cagnotte_take:
     path:     /{id}/take
     defaults: { _controller: CagnotteBundle:cagnotte:take }
+
+cagnotte_new_mobile:
+    path:     /newCagnotteMobile
+    defaults: { _controller: CagnotteBundle:cagnotteMobile:new }
+    methods: [GET, POST]

@@ -21,8 +21,11 @@
                     Commencée par: {{ selected.idProprietaire }}<br>
                     {% if (selected.etat == 0) %}
                         N'est pas encore prise en charge
-                    {% else %}
+                    {% elseif (selected.etat == 1) %}
                         Prise en charge par l'organisation: {{ selected.idOrganisation }}
+                    {% endif %}
+                    {% if (selected.etat == 2) %}
+                        La cagnotte a atteint le montant demandé.
                     {% endif %}
                 </p>
                 <p class="lead mb-4">
