@@ -33,8 +33,18 @@ class UserMobController extends Controller
         return new JsonResponse($json);
     }
 
+    public function getTokenByMailAction(Request $req){
+        $mail = $req->get('mail');
+        $user = $this->getDoctrine()->getRepository(User::class)->UserMailR($mail);
+        $tt = $user['0']->getConfirmationToken();
+        $ser = new Serializer([new ObjectNormalizer()]);
+        $json = $ser->normalize($tt);
+        return new JsonResponse($json);
+    }
+
     public function loginAction(Request $req){
         $user = new User;
+
         //encodage bcrypt : $encoded = $encoderService->encodePassword($user, $plainPassword);
         $mail = $req->get('mail');
         $pass = $req->get('pass');
@@ -107,6 +117,7 @@ class UserMobController extends Controller
             }
             else {
                 $user = new User();
+
                 $user->setUsername($un);
                 $user->setUsernameCanonical(strtolower($un));
                 $user->setEmail($mail);
@@ -133,6 +144,49 @@ class UserMobController extends Controller
 
         $ser = new Serializer([new ObjectNormalizer()]);
         $json = $ser->normalize($ret);
+        return new JsonResponse($json);
+    }
+
+    public function ModifierCompteUSAction(Request $req){
+        $id = $req->get('id');
+
+        $nom = $req->get('no');
+        $prenom = $req->get('pr');
+        $pays = $req->get('pa');
+        $ville = $req->get('vi');
+        //$dateNaissance = $req->get('dn');
+        $genre = $req->get('ge');
+        $image = $req->get('im');
+
+        $fb = $req->get('fb');
+        $siteweb = $req->get('sw');
+        $desc = $req->get('de');
+        $long = $req->get('lo');
+        $lat = $req->get('la');
+
+        $em = $this->getDoctrine()->getManager();
+        $user = $em->getRepository(User::class)->find($id);
+
+        $user->setPays($pays);
+        $user->setVille($ville);
+        $user->setImage($image);
+        if(!empty($nom) || isset($nom)){
+            $user->setNom($nom);
+            $user->setPrenom($prenom);
+            $user->setGenre($genre);
+        }
+        else{
+            $user->setPageFB($fb);
+            $user->setSiteWeb($siteweb);
+            $user->setDescription($desc);
+            $user->setLongitude($long);
+            $user->setLatitude($lat);
+        }
+
+        $em->flush();
+
+        $ser = new Serializer([new ObjectNormalizer()]);
+        $json = $ser->normalize($user);
         return new JsonResponse($json);
     }
 

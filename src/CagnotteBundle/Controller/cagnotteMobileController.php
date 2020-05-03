@@ -75,6 +75,7 @@ class cagnotteMobileController extends Controller
         $ret = "Cagnotte ajoutee";
         $json = $ser->normalize($ret);
         return new JsonResponse($json);
+    }
 
     public function deleteAction($id){
         $tab=$this->getUser()->getRoles();

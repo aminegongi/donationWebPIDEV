@@ -42,3 +42,11 @@ mob_inscri:
     path:     /api/inscri
     defaults: { _controller: UserBundle:UserMob:Inscription }
 
+mob_token:
+    path:     /api/tokenMail
+    defaults: { _controller: UserBundle:UserMob:getTokenByMail }
+
+mob_ModUs:
+    path:     /api/modus
+    defaults: { _controller: UserBundle:UserMob:ModifierCompteUS }
+
