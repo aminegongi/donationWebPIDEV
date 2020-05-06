@@ -19,8 +19,9 @@ class TarifRestoMobileController extends Controller
     public function getAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        $resto = $this->getDoctrine()->getRepository(TarifResto::class)->findByIdResto($request->get("resto"))[0];
+
         try {
+            $resto = $this->getDoctrine()->getRepository(TarifResto::class)->findByIdResto($request->get("resto"))[0];
             $tarifResto = $em->getRepository('RestoDonBundle:TarifResto')->find($resto);
 
             $thisArray = array(

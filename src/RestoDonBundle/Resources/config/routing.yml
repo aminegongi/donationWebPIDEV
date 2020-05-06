@@ -27,9 +27,24 @@ newDonmobile:
     defaults: { _controller: "RestoDonBundle:DonRestaurantMobile:new" }
     methods: [GET, POST]
 
+listDonmobile:
+    path:     /listDonMobile
+    defaults: { _controller: "RestoDonBundle:DonRestaurantMobile:listDon" }
+    methods: [GET, POST]
+
 newRepasmobile:
     path:     /newRepasMobile
     defaults: { _controller: "RestoDonBundle:RepasServiMobile:new" }
+    methods: [GET, POST]
+
+listRepasMobile:
+    path:     /listRepasMobile
+    defaults: { _controller: "RestoDonBundle:RepasServiMobile:listRepasMobile" }
+    methods: [GET, POST]
+
+deleteRepasmobile:
+    path:     /deleteRepasMobile
+    defaults: { _controller: "RestoDonBundle:RepasServiMobile:deleteRepasMobile" }
     methods: [GET, POST]
 
 getTarifmobile:

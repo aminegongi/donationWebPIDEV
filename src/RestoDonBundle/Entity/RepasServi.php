@@ -36,6 +36,15 @@ class RepasServi
     private $date;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="tarif", type="decimal", precision=9, scale=3)
+     */
+    private $tarif;
+
+
+
+    /**
      * @return int
      */
     public function getIdRepas()
@@ -69,13 +78,11 @@ class RepasServi
      *
      * @param \DateTime $date
      *
-     * @return RepasServi
      */
     public function setDate($date)
     {
         $this->date = $date;
 
-        return $this;
     }
 
     /**
@@ -86,6 +93,30 @@ class RepasServi
     public function getDate()
     {
         return $this->date;
+    }
+
+    /**
+     * * Get tarif
+     *
+     * @return string
+     */
+    public function getTarif()
+    {
+        return $this->tarif;
+    }
+
+    /**
+     * * Set date
+     *
+     * @param string $tarif
+     *
+     * * @return RepasServi
+     */
+    public function setTarif($tarif)
+    {
+        $this->tarif = $tarif;
+
+        return $this;
     }
 }
 

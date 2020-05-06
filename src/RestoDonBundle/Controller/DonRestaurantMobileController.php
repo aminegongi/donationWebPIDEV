@@ -103,4 +103,33 @@ class DonRestaurantMobileController extends Controller
 
 
     }
+    // /RestoDon/listDon?resto=x
+    public function listDonAction(Request $request)
+    {
+        try {
+            $listDon = $this->getDoctrine()->getRepository(DonRestaurant::class)->findByIdResto($request->get("resto"));
+            $theArray = array(
+                'erreur'=>'null',
+                'listDon'=>$listDon
+            );
+            $serializer = new serializer([new ObjectNormalizer()]);
+            $formatted = $serializer->normalize($theArray);
+            $formatted = json_encode($formatted, JSON_UNESCAPED_SLASHES);
+            $response = new Response();
+            $response->setContent($formatted);
+            return $response;
+        } catch(\Exception $ex){
+            $listDon = $this->getDoctrine()->getRepository(DonRestaurant::class)->findByIdResto($request->get("resto"));
+            $theArray = array(
+                'erreur'=>'resto',
+                'listDon'=>$listDon
+            );
+            $serializer = new serializer([new ObjectNormalizer()]);
+            $formatted = $serializer->normalize($theArray);
+            $formatted = json_encode($formatted, JSON_UNESCAPED_SLASHES);
+            $response = new Response();
+            $response->setContent($formatted);
+            return $response;
+        }
+    }
 }

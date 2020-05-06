@@ -60,6 +60,7 @@ class RepasServiMobileController extends Controller
                 $tarifResto = $this->getDoctrine()->getRepository(TarifResto::class)->findByIdResto($user)[0];
                 $porteF = (float)$tarifResto->getPortefeuilleVirtuel();
                 $tarif = (float)$tarifResto->getTarif();
+                $repasServi->setTarif($tarif);
                 $newPortF = $porteF - $tarif;
                 $this->getDoctrine()->getRepository(TarifResto::class)->UpdatePorteFeuille($newPortF, $user)->execute();
             } catch (\Exception $e) {
@@ -101,6 +102,50 @@ class RepasServiMobileController extends Controller
             return $response;
         }
 
+
+    }
+
+    // /RestoDon/deleteRepasMobile?repas=x
+    public function deleteRepasMobileAction(Request $request){
+
+        try {
+            $repasServi = $this->getDoctrine()->getRepository(RepasServi::class)->findByIdRepas($request->get("repas"))[0];
+            $tarifResto = $this->getDoctrine()->getRepository(TarifResto::class)->findByIdResto($repasServi->getIdResto())[0];
+            $porteF = (float)$tarifResto->getPortefeuilleVirtuel();
+            $montantAajouter = $repasServi->getTarif();
+            $newPorteF = $porteF + $montantAajouter;
+            $this->getDoctrine()->getRepository(TarifResto::class)->UpdatePorteFeuille($newPorteF, $repasServi->getIdResto())->execute();
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($repasServi);
+            $em->flush();
+            $thisArray = array('erreur' => 'null');
+            $serializer = new serializer([new ObjectNormalizer()]);
+            $formatted = $serializer->normalize($thisArray);
+            $formatted = json_encode($formatted, JSON_UNESCAPED_SLASHES);
+            $response = new Response();
+            $response->setContent($formatted);
+            return $response;
+        }catch(\Exception $exception){
+            $thisArray = array('erreur' => 'repas');
+            $serializer = new serializer([new ObjectNormalizer()]);
+            $formatted = $serializer->normalize($thisArray);
+            $formatted = json_encode($formatted, JSON_UNESCAPED_SLASHES);
+            $response = new Response();
+            $response->setContent($formatted);
+            return $response;
+        }
+    }
+
+    //  /RestoDon/listRepasMobile?resto=x
+    public function listRepasMobileAction(Request $request){
+
+        $repasServis = $this->getDoctrine()->getManager()->getRepository('RestoDonBundle:RepasServi')->findByIdResto($request->get("resto"));
+        $serializer = new serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($repasServis);
+        $formatted = json_encode($formatted, JSON_UNESCAPED_SLASHES);
+        $response = new Response();
+        $response->setContent($formatted);
+        return $response;
 
     }
 }
