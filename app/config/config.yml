@@ -104,3 +104,22 @@ knp_paginator:
     template:
         pagination: '@KnpPaginator/Pagination/twitter_bootstrap_v3_pagination.html.twig'
         sortable: '@KnpPaginator/Pagination/sortable_link.html.twig'
+
+
+endroid_qr_code:
+    writer: 'png'
+    size: 300
+    margin: 30
+    foreground_color: { r: 255, g: 255, b: 255 }
+    background_color: { r: 9, g: 152, b: 124 }
+    error_correction_level: low # low, medium, quartile or high
+    encoding: UTF-8
+    label: Donation
+    label_font_size: 30
+    label_alignment: center # left, center or right
+    label_margin: { b: 20 , t: 20 }
+    logo_width: 150
+    logo_height: 200
+    validate_result: false # checks if the result is readable
+    writer_options:
+        exclude_xml_declaration: true
