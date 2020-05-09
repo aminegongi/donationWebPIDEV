@@ -110,8 +110,8 @@ endroid_qr_code:
     writer: 'png'
     size: 300
     margin: 30
-    foreground_color: { r: 255, g: 255, b: 255 }
-    background_color: { r: 9, g: 152, b: 124 }
+    foreground_color: { r: 9, g: 152, b: 124 }
+    background_color: { r: 255, g: 255, b: 255 }
     error_correction_level: low # low, medium, quartile or high
     encoding: UTF-8
     label: Donation
