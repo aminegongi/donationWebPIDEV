@@ -22,3 +22,16 @@ reactionaide_delete:
     path:     /{id}/delete
     defaults: { _controller: "AideBundle:ReactionAide:delete" }
     methods:  DELETE
+
+
+#Return all reaction for a specific demande
+reactionaide_find:
+    path:     /find/{id}
+    defaults: { _controller: "AideBundle:ReactionAideMobile:findAllForOne" }
+    methods:  GET
+
+
+reactionaide_add:
+    path:     /add
+    defaults: { _controller: "AideBundle:ReactionAideMobile:add" }
+    methods:  [GET, POST]
