@@ -60,6 +60,22 @@ class DemandeAideMobileController extends Controller
 
     }
 
+    public function findMesDemandesAction($iduser){
+        //$idUser = $this->get('security.token_storage')->getToken()->getUser()->getId();
+
+        $em = $this->getDoctrine()->getManager();
+        $listeDemandeAides = $em->getRepository('AideBundle:DemandeAide')->findByIdUser($iduser);
+
+        $res =  array(
+            'demandeAides' => $listeDemandeAides,
+
+        );
+
+        $serializer= new Serializer([new ObjectNormalizer()]);
+        $formated = $serializer->normalize($res);
+        return new JsonResponse($formated);
+    }
+
 
     public function addAction(Request $request)
     {

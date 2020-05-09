@@ -26,4 +26,4 @@ categorieaide_delete:
 
 categorieaide_all:
     path:     /all
-    defaults: { _controller: "AideBundle:CategorieAide:all" }
+    defaults: { _controller: "AideBundle:CategorieAideMobile:index" }

@@ -39,6 +39,11 @@ demandeaide_find:
     defaults: { _controller: "AideBundle:DemandeAideMobile:find" }
     methods:  GET
 
+demandeaide_findmine:
+    path:     /findmine/{iduser}
+    defaults: { _controller: "AideBundle:DemandeAideMobile:findMesDemandes" }
+    methods:  GET
+
 
 demandeaide_findallforonecat:
     path:     /findallforonecat/{id}

@@ -17,7 +17,7 @@ class ParticipationAideMobileController extends Controller
     public function addAction(Request $request){
 
         $participationAide = new ParticipationAide();
-        $participationAide->setIdUser($this->get('security.token_storage')->getToken()->getUser());
+        $participationAide->setIdUser($this->getUtilisateur($request->get('user')));
         $participationAide->setIdDemande($this->getDemande($request->get('demande')));
 
         $em = $this->getDoctrine()->getManager();
@@ -49,6 +49,12 @@ class ParticipationAideMobileController extends Controller
         $em = $this->getDoctrine()->getManager();
         $demandeAide = $em->getRepository('AideBundle:DemandeAide')->find($id);
         return $demandeAide;
+    }
+
+    public function getUtilisateur($id){
+        $em = $this->getDoctrine()->getManager();
+        $user = $em->getRepository('UserBundle:User')->find($id);
+        return $user;
     }
 
 }
