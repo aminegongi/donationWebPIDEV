@@ -45,6 +45,23 @@ class ParticipationAideMobileController extends Controller
 
     }
 
+
+
+    public function deleteAction(Request $request){
+        $idDmnd = $this->getDemande($request->get('demande'));
+        $idUser = $this->getUtilisateur($request->get('user'));
+
+
+        $em = $this->getDoctrine()->getManager();
+
+        $participationAide = $em->getRepository('AideBundle:ParticipationAide')->findOneBy(array('idUser' => $idUser, 'idDemande' => $idDmnd));
+
+        $em->remove($participationAide);
+        $em->flush();
+
+        return $this->findAllForOneAction($idDmnd);
+    }
+
     public function getDemande($id){
         $em = $this->getDoctrine()->getManager();
         $demandeAide = $em->getRepository('AideBundle:DemandeAide')->find($id);

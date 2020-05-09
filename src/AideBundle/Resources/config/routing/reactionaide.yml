@@ -35,3 +35,9 @@ reactionaide_add:
     path:     /add
     defaults: { _controller: "AideBundle:ReactionAideMobile:add" }
     methods:  [GET, POST]
+
+
+reactionaide_remove:
+    path:     /delete
+    defaults: { _controller: "AideBundle:ReactionAideMobile:delete" }
+    methods:  [GET, POST]

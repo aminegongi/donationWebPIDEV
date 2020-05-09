@@ -40,3 +40,9 @@ participationaide_add:
     path:     /add
     defaults: { _controller: "AideBundle:ParticipationAideMobile:add" }
     methods:  [GET, POST]
+
+
+participationaide_remove:
+    path:     /delete
+    defaults: { _controller: "AideBundle:ParticipationAideMobile:delete" }
+    methods:  [GET, POST]

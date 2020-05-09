@@ -48,6 +48,20 @@ class ReactionAideMobileController extends Controller
     }
 
 
+    public function deleteAction(Request $request){
+        $idDmnd = $this->getDemande($request->get('demande'));
+        $idUser = $this->getUtilisateur($request->get('user'));
+
+
+        $em = $this->getDoctrine()->getManager();
+
+        $reactionAide = $em->getRepository('AideBundle:ReactionAide')->findOneBy(array('idUser' => $idUser, 'idDemande' => $idDmnd));
+
+        $em->remove($reactionAide);
+        $em->flush();
+
+        return $this->findAllForOneAction($idDmnd);
+    }
 
 
     public function getDemande($id){
