@@ -45,6 +45,21 @@ class ParticipationAideMobileController extends Controller
 
     }
 
+    // return all participation for a specific user
+    public function findAllforOneUser($idUser){
+
+        $em = $this->getDoctrine()->getManager();
+
+        $participationAides = $em->getRepository('AideBundle:ParticipationAide')->findByIdUser($idUser);
+
+        $res = array(
+            'participationAides' => $participationAides,
+        );
+        $serializer= new Serializer([new ObjectNormalizer()]);
+        $formated = $serializer->normalize($res);
+        return new JsonResponse($formated);
+
+    }
 
 
     public function deleteAction(Request $request){

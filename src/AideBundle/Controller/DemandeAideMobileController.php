@@ -19,9 +19,23 @@ class DemandeAideMobileController extends Controller
 
         $listeDemandeAides = $em->getRepository('AideBundle:DemandeAide')->findAll();
 
+
+        $mesDemandesPart = $this->findMesPartDmndAction($request->get('user'));
+
+        $mesDemandesReact = $this->findMesReactDmndAction($request->get('user'));
+
+        $demandesWithStatus = $this->insertStatus($listeDemandeAides,$mesDemandesPart,$mesDemandesReact);
+
         $idcat ='';
         $res =  array(
+
+            'demandeWithStatus' =>  $demandesWithStatus,
+
             'demandeAides' => $listeDemandeAides,
+
+            'demandePart' => $mesDemandesPart,
+
+            'demandeReact' => $mesDemandesReact,
 
             'categories' => $this->allCategories(),
         );
@@ -76,6 +90,37 @@ class DemandeAideMobileController extends Controller
         return new JsonResponse($formated);
     }
 
+    //mes participations ==> retourne les demandes
+    public function findMesPartDmndAction($idUser){
+        $em = $this->getDoctrine()->getManager();
+        $mesParticipatons = $em->getRepository('AideBundle:ParticipationAide')->findByIdUser($idUser);
+
+        $demandes = array();
+
+        foreach ($mesParticipatons as $part) {
+            $dmnd = $part->getIdDemande();
+            array_push($demandes, $dmnd);
+        }
+
+        return $demandes;
+    }
+
+
+    //mes reactions ==> retourne les demandes
+    public function findMesReactDmndAction($idUser){
+        $em = $this->getDoctrine()->getManager();
+        $mesReactios = $em->getRepository('AideBundle:ReactionAide')->findByIdUser($idUser);
+
+        $demandes = array();
+
+        foreach ($mesReactios as $react) {
+            $dmnd = $react->getIdDemande();
+            array_push($demandes, $dmnd);
+        }
+
+        return $demandes;
+    }
+
 
     public function addAction(Request $request)
     {
@@ -103,7 +148,41 @@ class DemandeAideMobileController extends Controller
     }
 
 
+    public function insertStatus($demandeAides, $mesDemandesPart, $mesDemandesReact){
 
+        $res = array();
+
+
+
+
+        foreach ($demandeAides as $dmnd) {
+
+            $status = "none";
+
+            if (in_array($dmnd, $mesDemandesPart)) {
+               $status = "p" ;
+            }
+
+            if (in_array($dmnd, $mesDemandesReact)) {
+                if($status == "none"){
+                    $status = "r" ;
+                }
+                else {
+                    $status = $status . "r";
+                }
+            }
+
+            $dmndArr = array("demande" => $dmnd, "status" => $status);
+
+            array_push($res, $dmndArr);
+        }
+
+
+
+
+        return $res;
+
+    }
 
 
 
