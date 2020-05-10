@@ -44,4 +44,10 @@ api_add_publication:
 api_edit_publication:
     path:     /editPublicationApi
     defaults: { _controller: "RestoOrgBundle:PublicationDon:editPublicationApi" }
+api_delete_publication:
+    path:     /deletePublicationApi
+    defaults: { _controller: "RestoOrgBundle:PublicationDon:deletePublicationApi" }
+api_rec:
+    path:     /recApi
+    defaults: { _controller: "RestoOrgBundle:PublicationDon:recApi" }
 
