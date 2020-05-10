@@ -41,3 +41,9 @@ reactionaide_remove:
     path:     /delete
     defaults: { _controller: "AideBundle:ReactionAideMobile:delete" }
     methods:  [GET, POST]
+
+
+reactionaide_nombre:
+    path:     /count
+    defaults: { _controller: "AideBundle:ReactionAideMobile:nbReactForDmnd" }
+    methods:  [GET, POST]

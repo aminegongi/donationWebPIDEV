@@ -64,6 +64,26 @@ class ReactionAideMobileController extends Controller
     }
 
 
+
+    public function nbReactForDmndAction(Request $request){
+
+        $idDmnd = $this->getDemande($request->get('demande'));
+
+        $em = $this->getDoctrine()->getManager();
+
+        $nbReactionAides = $em->getRepository('AideBundle:ReactionAide')->nbReactParDmnd($idDmnd);
+
+        $res = array(
+            'nbReactions' => $nbReactionAides,
+        );
+        $serializer= new Serializer([new ObjectNormalizer()]);
+        $formated = $serializer->normalize($res);
+        return new JsonResponse($formated);
+
+    }
+
+
+
     public function getDemande($id){
         $em = $this->getDoctrine()->getManager();
         $demandeAide = $em->getRepository('AideBundle:DemandeAide')->find($id);
