@@ -79,9 +79,20 @@ class DemandeAideMobileController extends Controller
 
         $em = $this->getDoctrine()->getManager();
         $listeDemandeAides = $em->getRepository('AideBundle:DemandeAide')->findByIdUser($iduser);
+        $react=array();
+
+        foreach ($listeDemandeAides as $dmnd) {
+
+            $nbReaction = $this->getNbReaction($dmnd->getId());
+            $dmndArr = array("demande" => $dmnd, "nbReaction" => $nbReaction);
+
+            array_push($react, $dmndArr);
+        }
+
+
 
         $res =  array(
-            'demandeAides' => $listeDemandeAides,
+            'demandeAides' => $react,
 
         );
 
@@ -147,7 +158,7 @@ class DemandeAideMobileController extends Controller
         return new JsonResponse($formated);
     }
 
-
+    //insert status and number of reacts
     public function insertStatus($demandeAides, $mesDemandesPart, $mesDemandesReact){
 
         $res = array();
@@ -172,7 +183,8 @@ class DemandeAideMobileController extends Controller
                 }
             }
 
-            $dmndArr = array("demande" => $dmnd, "status" => $status);
+            $nbReaction = $this->getNbReaction($dmnd->getId());
+            $dmndArr = array("demande" => $dmnd, "status" => $status, "nbReaction" => $nbReaction);
 
             array_push($res, $dmndArr);
         }
@@ -185,8 +197,13 @@ class DemandeAideMobileController extends Controller
     }
 
 
+    // return nb reaction for specific dmnd
+    public function getNbReaction($idDmnd){
 
-
+        $em = $this->getDoctrine()->getManager();
+        $nbReactionAides = $em->getRepository('AideBundle:ReactionAide')->nbReactParDmnd($idDmnd);
+        return $nbReactionAides;
+}
 
 
 
@@ -207,6 +224,7 @@ class DemandeAideMobileController extends Controller
         $user = $em->getRepository('UserBundle:User')->find($id);
         return $user;
     }
+
 
 
 
