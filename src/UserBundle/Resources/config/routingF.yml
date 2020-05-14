@@ -42,3 +42,24 @@ mob_inscri:
     path:     /api/inscri
     defaults: { _controller: UserBundle:UserMob:Inscription }
 
+mob_token:
+    path:     /api/tokenMail
+    defaults: { _controller: UserBundle:UserMob:getTokenByMail }
+
+mob_ModUs:
+    path:     /api/modus
+    defaults: { _controller: UserBundle:UserMob:ModifierCompteUS }
+
+mob_chatAffichage:
+    path:     /11chat
+    defaults: { _controller: UserBundle:UserMob:disCchat }
+
+mob_chatSend:
+    path:     /chatSend
+    defaults: { _controller: UserBundle:UserMob:sendChat }
+
+mob_chatList:
+    path:     /chatList
+    defaults: { _controller: UserBundle:UserMob:listConv }
+
+

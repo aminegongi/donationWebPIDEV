@@ -13,6 +13,9 @@ use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Process\Process;
 use Symfony\Component\Process\Exception\ProcessFailedException;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
+use UserBundle\Entity\User;
 
 
 /**
@@ -57,7 +60,7 @@ class PublicationDonController extends Controller
             $em = $this->getDoctrine()->getManager();
             //dump($this->getUser());
             $publicationDon->setAjoutePar($this->getUser());
-            $publicationDon->setDatePublication(new \DateTime());
+            $publicationDon->setDatePublication(new \DateTime('now'));
             $publicationDon->setEtat(1);
             
             $em->persist($publicationDon);
@@ -198,4 +201,106 @@ class PublicationDonController extends Controller
         $this->getDoctrine()->getRepository(Publicite_country::class)->updateNbrClick($idPub,$countryCode);
          return new JsonResponse(array('ok'=>"ok"));
     }
+    public function getAllApiAction(Request $request){
+        $em = $this->getDoctrine()->getManager();
+
+        $publicationDons = $em->getRepository('RestoOrgBundle:PublicationDon')->findAll();
+        foreach ($publicationDons as $pd){
+            $pd->setDatePublication($pd->getDatePublication()->format('Y-m-d H:i'));
+        }
+        $serializer= new Serializer([new ObjectNormalizer()]);
+        $formatted= $serializer->normalize($publicationDons);
+        return new JsonResponse($formatted);
+    }
+    public function addPublicationApiAction(Request $request){
+        $em = $this->getDoctrine()->getManager();
+        $publicationDon = new Publicationdon();
+        $publicationDon->setDatePublication(new \DateTime('now+1 hours'));
+        $publicationDon->setEtat(1);
+
+        $publicationDon->setTitre($request->get("titre"));
+        $publicationDon->setDescription($request->get("description"));
+        if($request->get("nbrePlat")!=-1) {
+            $publicationDon->setNbrePlat($request->get("nbrePlat"));
+            $publicationDon->setType("AppelAuDon");
+        }
+        else{
+            $publicationDon->setType("OffreDon");
+        }
+        $userId = $this->getDoctrine()->getRepository(User::class)->find($request->get("ajoutePar"));
+        $publicationDon->setAjoutePar($userId);
+        $em->persist($publicationDon);
+        $em->flush();
+        $serializer= new Serializer([new ObjectNormalizer()]);
+        $formatted= $serializer->normalize($publicationDon);
+        return new JsonResponse($formatted);
+
+    }
+
+
+
+    public function editPublicationApiAction(Request $request){
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $publicationDon = $entityManager->getRepository(PublicationDon::class)->find($request->get("id"));
+
+        if (!$publicationDon) {
+            throw $this->createNotFoundException(
+                'No product found for id '
+            );
+        }
+
+        $publicationDon->setTitre($request->get("titre"));
+        $publicationDon->setDescription($request->get("description"));
+        if($request->get("nbrePlat")!=-1) {
+            $publicationDon->setNbrePlat($request->get("nbrePlat"));
+        }
+        $entityManager->flush();
+        $serializer= new Serializer([new ObjectNormalizer()]);
+        $formatted= $serializer->normalize($publicationDon);
+        return new JsonResponse($formatted);
+
+    }
+    public function deletePublicationApiAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $publicationDon = $em->getRepository(PublicationDon::class)->find($request->get("id"));
+        if (!$publicationDon) {
+            throw $this->createNotFoundException(
+                'No product found for id '
+            );
+        }
+        $em->remove($publicationDon);
+        $em->flush();
+        $serializer= new Serializer([new ObjectNormalizer()]);
+        $formatted= $serializer->normalize($publicationDon);
+        return new JsonResponse($formatted);
+    }
+    public function recApiAction(Request $request){
+        #go to the script and get idPub to display , if -1 go to random Pub
+        $connectedUser = $request->get("id");
+//        $process = new Process(['python.py', $connectedUser]);#change User Id to Connected User !
+//        $process->run();
+//        if (!$process->isSuccessful()) {
+//            throw new ProcessFailedException($process);
+//        }
+//        $renderVar=$process->getOutput();
+        $renderVar=-1 ; # rendervar forced to 1 ; pour validation seuelemnt .
+        if($renderVar==-1)
+        {
+            $all=$this->getDoctrine()->getRepository(Pub::class)->findAll();
+            $pubRec = $all[(array_rand($all))];
+
+        }else{
+            $pubRec=$this->getDoctrine()->getRepository(Pub::class)->find($renderVar);
+        }
+
+        $pubRec->setCountry(null);
+
+        $serializer= new Serializer([new ObjectNormalizer()]);
+        $formatted= $serializer->normalize($pubRec);
+        return new JsonResponse($formatted);
+
+    }
+
 }

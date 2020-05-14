@@ -18,7 +18,46 @@ jsonRestaurant:
     path: /ListMapResto
     defaults: { _controller: RestoDonBundle:Default:jsonRestaurant }
 
-newmobile:
-    path:     /newmobile
+jsonRestaurantMobile:
+    path: /ListMapRestoMobile
+    defaults: { _controller: RestoDonBundle:Default:jsonRestaurantMobile }
+
+newDonmobile:
+    path:     /newDonMobile
     defaults: { _controller: "RestoDonBundle:DonRestaurantMobile:new" }
+    methods: [GET, POST]
+
+listDonmobile:
+    path:     /listDonMobile
+    defaults: { _controller: "RestoDonBundle:DonRestaurantMobile:listDon" }
+    methods: [GET, POST]
+
+newRepasmobile:
+    path:     /newRepasMobile
+    defaults: { _controller: "RestoDonBundle:RepasServiMobile:new" }
+    methods: [GET, POST]
+
+listRepasMobile:
+    path:     /listRepasMobile
+    defaults: { _controller: "RestoDonBundle:RepasServiMobile:listRepasMobile" }
+    methods: [GET, POST]
+
+deleteRepasmobile:
+    path:     /deleteRepasMobile
+    defaults: { _controller: "RestoDonBundle:RepasServiMobile:deleteRepasMobile" }
+    methods: [GET, POST]
+
+getTarifmobile:
+    path:     /getTarifMobile
+    defaults: { _controller: "RestoDonBundle:TarifRestoMobile:get" }
+    methods: [GET, POST]
+
+newTarifmobile:
+    path:     /newTarifMobile
+    defaults: { _controller: "RestoDonBundle:TarifRestoMobile:new" }
+    methods: [GET, POST]
+
+mobileMapAllResto:
+    path:     /mobileMapAllResto
+    defaults: { _controller: "RestoDonBundle:Default:mobileMap" }
     methods: [GET, POST]

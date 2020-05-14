@@ -1,0 +1,85 @@
+#map {
+  width: 20vh;
+  height: 20vh;
+  visibility: visible;
+  position: center;
+
+
+}
+.mapboxgl-popup {
+  max-width: 30%;
+}
+
+.rounded-rect {
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 0 50px -25px black;
+}
+
+.flex-center {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flex-center.left {
+  bottom: 0px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.flex-center.right {
+  right: 0px;
+}
+
+.sidebar-content {
+  position: absolute;
+  width: 95%;
+  height: 95%;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 32px;
+  color: gray;
+}
+
+.sidbear-toggle {
+  position: absolute;
+  width: 1.3em;
+  height: 1.3em;
+  overflow: visible;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sidbear-toggle.left {
+  right: -1.5em;
+}
+
+.sidbear-toggle.right {
+  left: -1.5em;
+}
+
+.sidbear-toggle:hover {
+  color: #0aa1cf;
+  cursor: pointer;
+}
+
+.sidebar {
+  transition: transform 1s;
+  z-index: 1;
+  width: 5%;
+  height: 30%;
+}
+
+/*
+The sidebar styling has them "expanded" by default, we use CSS transforms to push them offscreen
+The toggleSidebar() function removes this class from the element in order to expand it.
+*/
+.left.collapsed {
+  transform: translatey(400px);
+}
+
+.right.collapsed {
+  transform: translateX(295px);
+}

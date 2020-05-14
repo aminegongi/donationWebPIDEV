@@ -151,4 +151,92 @@ class DefaultController extends Controller
             return $response;
         }
 
+        public function mobileMapAction(){
+            return $this->render('@RestoDon/Default/mobileMapAllResto.html', array(
+                'allRestoJSON' => $this->jsonRestaurant()
+            ));
+        }
+
+    public function jsonRestaurantMobile(){
+
+        $allResto = $this->getDoctrine()->getRepository(tarifResto::class)->findAll();
+        $numResto = 1;
+        $allRestoArray = array();
+        foreach ($allResto as $item){
+//            $restoFor = $allResto[$item];
+            $restoID = $item->getIdResto();
+            $username = $restoID->getUsername();
+            $role = $restoID->getRoles();
+            $longitude = $restoID->getLongitude();
+            $latitude = $restoID->getLatitude();
+            $web = $restoID->getSiteWeb();
+            $fb = $restoID->getPageFB();
+            $img = $restoID->getImage();
+
+
+//                $type = json_encode($type);
+
+
+            $properties = array(
+                'username'=>$username,
+                'web' => $web,
+                'fb' => $fb,
+                'icon' => $img);
+
+//                $properties = json_encode(array('properties' => $properties));
+
+            $geometry = array( 'type' => 'point',
+                'longitude' => $longitude,
+                'latitude'=>$latitude
+            );
+
+//                $geometry = json_encode(array('geometry' => $geometry));
+
+
+            $singleResto = array( 'type' => 'Feature',
+                'properties' => $properties,
+                'geometry' => $geometry);
+
+//            $singleResto = json_encode($singleResto);
+//                var_dump($singleResto);
+
+            if ($numResto === 1){
+                array_push($allRestoArray, $singleResto);
+//            print_r($allRestoArray);
+            }else{
+                array_push($allRestoArray, $singleResto);
+//                print_r($allRestoArray);
+            }
+
+//            $json = "{
+//                    'type': 'Feature',
+//                    'properties': {
+//                        'web': $web,
+//                        'fb': $fb,
+//                        'icon': 'resto'
+//                        },
+//                    'geometry': {
+//                        'type': 'Point',
+//                        'coordinates': [$longitude, $latitude]
+//                        }
+//                    },";
+//            var_dump($longitude);
+            $numResto ++;
+        }
+        $allRestoJSON = json_encode($allRestoArray, JSON_UNESCAPED_SLASHES);
+        $geoJson = json_encode(array( 'type' => 'FeatureCollection',
+            'features' => $allRestoArray), JSON_UNESCAPED_SLASHES);
+//        var_dump($allRestoJSON);
+//        die();
+        return $geoJson;
+    }
+
+    public function jsonRestaurantMobileAction(Request $request){
+        $jsonRestaurantList = $this->jsonRestaurantMobile();
+        $serializer = new serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($jsonRestaurantList);
+        $response = new Response();
+        $response->setContent($formatted);
+        return $response;
+    }
 }

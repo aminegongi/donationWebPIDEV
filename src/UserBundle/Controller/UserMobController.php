@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
+use UserBundle\Entity\Conversation;
 use UserBundle\Entity\User;
 
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -17,6 +18,8 @@ class UserMobController extends Controller
     public function getUserIdAction(Request $req){
         $idu = $req->get('id');
         $user = $this->getDoctrine()->getRepository(User::class)->find($idu);
+        //$user->setDateNaissance($user->getDateNaissance()->format('Y-m-d'));
+
         $ser = new Serializer([new ObjectNormalizer()]);
         $json = $ser->normalize($user);
         return new JsonResponse($json);
@@ -25,13 +28,24 @@ class UserMobController extends Controller
     public function getUserMailAction(Request $req){
         $mail = $req->get('mail');
         $user = $this->getDoctrine()->getRepository(User::class)->UserMailR($mail);
+        //$user->setDateNaissance($user->getDateNaissance()->format('Y-m-d'));
         $ser = new Serializer([new ObjectNormalizer()]);
         $json = $ser->normalize($user);
         return new JsonResponse($json);
     }
 
+    public function getTokenByMailAction(Request $req){
+        $mail = $req->get('mail');
+        $user = $this->getDoctrine()->getRepository(User::class)->UserMailR($mail);
+        $tt = $user['0']->getConfirmationToken();
+        $ser = new Serializer([new ObjectNormalizer()]);
+        $json = $ser->normalize($tt);
+        return new JsonResponse($json);
+    }
+
     public function loginAction(Request $req){
         $user = new User;
+
         //encodage bcrypt : $encoded = $encoderService->encodePassword($user, $plainPassword);
         $mail = $req->get('mail');
         $pass = $req->get('pass');
@@ -104,6 +118,7 @@ class UserMobController extends Controller
             }
             else {
                 $user = new User();
+
                 $user->setUsername($un);
                 $user->setUsernameCanonical(strtolower($un));
                 $user->setEmail($mail);
@@ -133,6 +148,103 @@ class UserMobController extends Controller
         return new JsonResponse($json);
     }
 
+    public function ModifierCompteUSAction(Request $req){
+        $id = $req->get('id');
+
+        $nom = $req->get('no');
+        $prenom = $req->get('pr');
+        $pays = $req->get('pa');
+        $ville = $req->get('vi');
+        //$dateNaissance = $req->get('dn');
+        $genre = $req->get('ge');
+        $image = $req->get('im');
+
+        $fb = $req->get('fb');
+        $siteweb = $req->get('sw');
+        $desc = $req->get('de');
+        $long = $req->get('lo');
+        $lat = $req->get('la');
+
+        $em = $this->getDoctrine()->getManager();
+        $user = $em->getRepository(User::class)->find($id);
+
+        $user->setPays($pays);
+        $user->setVille($ville);
+        $user->setImage($image);
+        if(!empty($nom) || isset($nom)){
+            $user->setNom($nom);
+            $user->setPrenom($prenom);
+            $user->setGenre($genre);
+        }
+        else{
+            $user->setPageFB($fb);
+            $user->setSiteWeb($siteweb);
+            $user->setDescription($desc);
+            $user->setLongitude($long);
+            $user->setLatitude($lat);
+        }
+
+        $em->flush();
+
+        $ser = new Serializer([new ObjectNormalizer()]);
+        $json = $ser->normalize($user);
+        return new JsonResponse($json);
+    }
+
+    /* Conversation Chat CN1 */
+    public function disCchatAction(Request $req){
+        $fromAjax = $req->get('ajax');
+        $idr = $req->get('idAutre');
+        $idme = $req->get('idMe');
+        $ar = $this->getDoctrine()->getRepository(Conversation::class)->getSRConversation($idr,$idme);
+        $code='';
+        foreach ($ar as $conv ){
+            if($conv->getReceiver()->getId() == $idr){
+                $img = $conv->getSender()->getImage();
+                $code .= '  <div class="msg-right"> '.$conv->getMessage().'</div>';
+            }
+            else{
+                $code .= '  <div class="msg-left"> '.$conv->getMessage().'</div>';
+            }
+        }
+        if($fromAjax ==  'oui'){
+            return new JsonResponse(array(
+                'ch'=>$code
+            ));
+        }
+        else{
+            return $this->render('@User/ViewMob/mobChat.html.twig',array(
+                'co'=>$code,'idme'=>$idme,'idr'=>$idr
+            ));
+        }
+    }
+
+    public function sendChatAction(Request $req)
+    {
+        $conv = new Conversation();
+
+        $ids = $req->get('id');
+        $idr=$req->get('to');
+        $sender = $this->getDoctrine()->getRepository(User::class)->find($ids);
+        $receiver = $this->getDoctrine()->getRepository(User::class)->find($idr);
+        $conv->setReceiver($receiver);
+        $conv->setSender($sender);
+        $conv->setMessage($req->get('msg'));
+        $conv->setDateEnvoi(new \DateTime());
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($conv);
+        $em->flush();
+        return new JsonResponse(array('ok'=>"ok"));
+    }
+
+    public function listConvAction(Request $req)
+    {
+        $idme=$req->get('id');
+        $ar = $this->getDoctrine()->getRepository(Conversation::class)->getlistConDQL($idme);
+        $ser = new Serializer([new ObjectNormalizer()]);
+        $json = $ser->normalize($ar);
+        return new JsonResponse($json);
+    }
 
 
 

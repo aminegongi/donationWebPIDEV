@@ -72,8 +72,6 @@ geojson.features.forEach(function(marker) {
             });
             lastClicked = el.id;
             centred = el.id;
-            console.log(lastClicked);
-            console.log("here1");
         }else{
             if ( lastClicked === el.id ){
             toggleSidebar('left');
@@ -83,8 +81,6 @@ geojson.features.forEach(function(marker) {
             });
                 lastClicked = el.id;
                 centred = el.id;
-                console.log(lastClicked);
-                console.log("here2");
             } else {
                 if (card.getAttribute("name") === "collapsed"){
                     toggleSidebar('left');
@@ -94,8 +90,6 @@ geojson.features.forEach(function(marker) {
                     });
                     lastClicked = el.id;
                     centred = el.id;
-                    console.log(lastClicked);
-                    console.log("here3");
                 } else{
                 map.flyTo({
                     center: marker.geometry.coordinates,
@@ -103,8 +97,6 @@ geojson.features.forEach(function(marker) {
                 });
                 lastClicked = el.id;
                 centred = el.id;
-                console.log(lastClicked);
-                console.log("here4");
                 }
             }
         }

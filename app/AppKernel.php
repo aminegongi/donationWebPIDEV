@@ -29,6 +29,7 @@ class AppKernel extends Kernel
             new FOS\CKEditorBundle\FOSCKEditorBundle(),
             new CagnotteBundle\CagnotteBundle(),
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
+            new \Endroid\QrCodeBundle\EndroidQrCodeBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

@@ -35,4 +35,19 @@ after_request_update:
 after_requestIP:
     path:     /afterRequestIP
     defaults: { _controller: "RestoOrgBundle:PublicationDon:afterRequestIP" }
+api_get_all:
+    path:     /getAllApi
+    defaults: { _controller: "RestoOrgBundle:PublicationDon:getAllApi" }
+api_add_publication:
+    path:     /addPublicationApi
+    defaults: { _controller: "RestoOrgBundle:PublicationDon:addPublicationApi" }
+api_edit_publication:
+    path:     /editPublicationApi
+    defaults: { _controller: "RestoOrgBundle:PublicationDon:editPublicationApi" }
+api_delete_publication:
+    path:     /deletePublicationApi
+    defaults: { _controller: "RestoOrgBundle:PublicationDon:deletePublicationApi" }
+api_rec:
+    path:     /recApi
+    defaults: { _controller: "RestoOrgBundle:PublicationDon:recApi" }
 

@@ -44,6 +44,7 @@ class RepasServiController extends Controller
             $tarifResto = $this->getDoctrine()->getRepository(TarifResto::class)->findByIdResto($user)[0];
             $porteF = (float)$tarifResto->getPortefeuilleVirtuel();
             $tarif = (float)$tarifResto->getTarif();
+            $repasServi->setTarif($tarif);
             if ($porteF >= $tarif){
                 $x = $porteF / $tarif;
                 $count = floor($x);
@@ -74,6 +75,7 @@ class RepasServiController extends Controller
                 $tarifResto = $this->getDoctrine()->getRepository(TarifResto::class)->findByIdResto($user)[0];
                 $porteF = (float)$tarifResto->getPortefeuilleVirtuel();
                 $tarif = (float)$tarifResto->getTarif();
+                $repasServi->setTarif($tarif);
                 $newPortF = $porteF - $tarif;
                 $this->getDoctrine()->getRepository(TarifResto::class)->UpdatePorteFeuille($newPortF,$user)->execute();
             } catch (\Exception $e){

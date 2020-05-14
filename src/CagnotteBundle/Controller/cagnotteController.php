@@ -42,7 +42,6 @@ class cagnotteController extends Controller{
                 $em = $this->getDoctrine()->getManager();
                 $cagnotte->setDateDeCreation(new \DateTime('now'));
                 $cagnotte->setIdProprietaire($userId);
-                $cagnotte->setIdProprietaire($userId);
                 $cagnotte->setMontantActuel(0);
                 $cagnotte->setIdOrganisation(0);
                 $cagnotte->setEtat(0);
@@ -51,30 +50,6 @@ class cagnotteController extends Controller{
                 return $this->redirectToRoute('cagnotte_homepage');
             }
             return $this->render("@Cagnotte/Cagnotte/add.html.twig", array('form'=>$form->createView()));
-        }
-        else{
-            return $this->render('@Cagnotte/Cagnotte/error.html.twig');
-        }
-    }
-
-    public function editAction(Request $request, $id){
-        $tab=$this->getUser()->getRoles();
-        $userRole=$tab[0];
-        if (($userRole == 'ROLE_US') || ($userRole == 'ROLE_ORG')){
-            $em = $this->getDoctrine()->getManager();
-            $cagnotte = $em->getRepository('CagnotteBundle:cagnotte')->find($id);
-            $form = $this->createForm(cagnotteType::class, $cagnotte);
-            $form->handleRequest($request);
-
-            if ($form->isSubmitted() && $form->isValid()) {
-                $em = $this->getDoctrine()->getManager();
-                $em->persist($cagnotte);
-                $em->flush();
-                $this->addFlash('info', 'Created Successfully !');
-                return $this->redirectToRoute('cagnotte_homepage');
-            }
-
-            return $this->render('@Cagnotte/Cagnotte/edit.html.twig', array('form' => $form->createView()));
         }
         else{
             return $this->render('@Cagnotte/Cagnotte/error.html.twig');

@@ -11,6 +11,7 @@ class ComposerStaticInitc1191d9ace51ddfc51324677a67b7076
         '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
         '2c102faa651ef8ea5874edb585946bce' => __DIR__ . '/..' . '/swiftmailer/swiftmailer/lib/swift_required.php',
         '5255c38a0faeba867671b61dfda6d864' => __DIR__ . '/..' . '/paragonie/random_compat/lib/random.php',
+        'a9ed0d27b5a698798a89181429f162c5' => __DIR__ . '/..' . '/khanamiryan/qrcode-detector-decoder/lib/Common/customFunctions.php',
         '32dcc8afd4335739640db7d200c1971d' => __DIR__ . '/..' . '/symfony/polyfill-apcu/bootstrap.php',
         '6a47392539ca2329373e0d33e1dba053' => __DIR__ . '/..' . '/symfony/polyfill-intl-icu/bootstrap.php',
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
@@ -20,6 +21,10 @@ class ComposerStaticInitc1191d9ace51ddfc51324677a67b7076
     );
 
     public static $prefixLengthsPsr4 = array (
+        'Z' => 
+        array (
+            'Zxing\\' => 6,
+        ),
         'T' => 
         array (
             'Twig\\Extensions\\' => 16,
@@ -59,6 +64,7 @@ class ComposerStaticInitc1191d9ace51ddfc51324677a67b7076
         ),
         'M' => 
         array (
+            'MyCLabs\\Enum\\' => 13,
             'Monolog\\' => 8,
         ),
         'K' => 
@@ -75,6 +81,12 @@ class ComposerStaticInitc1191d9ace51ddfc51324677a67b7076
             'FOS\\UserBundle\\' => 15,
             'FOS\\CKEditorBundle\\' => 19,
         ),
+        'E' => 
+        array (
+            'Endroid\\QrCode\\' => 15,
+            'Endroid\\QrCodeBundle\\' => 21,
+            'Endroid\\Installer\\' => 18,
+        ),
         'D' => 
         array (
             'Doctrine\\Instantiator\\' => 22,
@@ -84,14 +96,23 @@ class ComposerStaticInitc1191d9ace51ddfc51324677a67b7076
             'Doctrine\\Common\\' => 16,
             'Doctrine\\Bundle\\DoctrineCacheBundle\\' => 36,
             'Doctrine\\Bundle\\DoctrineBundle\\' => 31,
+            'DASPRiD\\Enum\\' => 13,
         ),
         'C' => 
         array (
             'Composer\\CaBundle\\' => 18,
         ),
+        'B' => 
+        array (
+            'BaconQrCode\\' => 12,
+        ),
     );
 
     public static $prefixDirsPsr4 = array (
+        'Zxing\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/khanamiryan/qrcode-detector-decoder/lib',
+        ),
         'Twig\\Extensions\\' => 
         array (
             0 => __DIR__ . '/..' . '/twig/extensions/src',
@@ -204,6 +225,10 @@ class ComposerStaticInitc1191d9ace51ddfc51324677a67b7076
         array (
             0 => __DIR__ . '/..' . '/psr/cache/src',
         ),
+        'MyCLabs\\Enum\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/myclabs/php-enum/src',
+        ),
         'Monolog\\' => 
         array (
             0 => __DIR__ . '/..' . '/monolog/monolog/src/Monolog',
@@ -227,6 +252,18 @@ class ComposerStaticInitc1191d9ace51ddfc51324677a67b7076
         'FOS\\CKEditorBundle\\' => 
         array (
             0 => __DIR__ . '/..' . '/friendsofsymfony/ckeditor-bundle/src',
+        ),
+        'Endroid\\QrCode\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/endroid/qr-code/src',
+        ),
+        'Endroid\\QrCodeBundle\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/endroid/qr-code-bundle/src',
+        ),
+        'Endroid\\Installer\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/endroid/installer/src',
         ),
         'Doctrine\\Instantiator\\' => 
         array (
@@ -256,9 +293,17 @@ class ComposerStaticInitc1191d9ace51ddfc51324677a67b7076
         array (
             0 => __DIR__ . '/..' . '/doctrine/doctrine-bundle',
         ),
+        'DASPRiD\\Enum\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/dasprid/enum/src',
+        ),
         'Composer\\CaBundle\\' => 
         array (
             0 => __DIR__ . '/..' . '/composer/ca-bundle/src',
+        ),
+        'BaconQrCode\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/bacon/bacon-qr-code/src',
         ),
     );
 
