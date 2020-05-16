@@ -62,4 +62,8 @@ mob_chatList:
     path:     /chatList
     defaults: { _controller: UserBundle:UserMob:listConv }
 
+mob_sendMail:
+    path:     /sendMail
+    defaults: { _controller: UserBundle:UserMob:SendMail }
+
 

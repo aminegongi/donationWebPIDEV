@@ -246,6 +246,23 @@ class UserMobController extends Controller
         return new JsonResponse($json);
     }
 
+    public function SendMailAction(Request $req)
+    {
+        $objet=$req->get('objet');
+        $to=$req->get('to');
+        $msg=$req->get('msg');
 
+        $message = (new \Swift_Message($objet))
+            ->setFrom(['amine.gongi@esprit.tn' => 'DoNation'])
+            ->setTo($to)
+            ->setBody($msg,'text/html')
+        ;
+
+        $this->get('mailer')->send($message);
+
+        $ser = new Serializer([new ObjectNormalizer()]);
+        $json = $ser->normalize("ok");
+        return new JsonResponse($json);
+    }
 
 }
