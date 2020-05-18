@@ -80,20 +80,13 @@ class cagnotteMobileController extends Controller
     //    }
     //}
 
-    public function showAction($id){
-        $tab=$this->getUser()->getRoles();
-        $userRole=$tab[0];
-        if (($userRole == 'ROLE_US') || ($userRole == 'ROLE_ORG')){
-            $em = $this->getDoctrine()->getManager();
-
-            $selected = $em->getRepository('CagnotteBundle:cagnotte')->find($id);
-
-            return $this->render('@Cagnotte/Cagnotte/show.html.twig', array(
-                'selected' => $selected,
-                'userRole' => $userRole));
-        }
-        else{
-            return $this->render('@Cagnotte/Cagnotte/error.html.twig');
-        }
+    //Cagnotte/showCagnotteMobile?user=x&id=x
+    public function showAction(Request $request){
+        $em = $this->getDoctrine()->getManager();
+        $selected = $em->getRepository('CagnotteBundle:cagnotte')->find((int)$request->get("id"));
+        $ret = $selected;
+        $ser = new Serializer([new ObjectNormalizer()]);
+        $json = $ser->normalize($ret);
+        return new JsonResponse($json);
     }
 }
