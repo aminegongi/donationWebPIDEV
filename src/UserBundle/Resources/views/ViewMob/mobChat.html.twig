@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <style>
+        body{
+            background:white;
+            font-size: 42px;
+        }
+        #messages{
+            background:#fff;
+        }
+        .msg-right{
+            background:#3BA1EE;
+            padding:10px;
+            text-align:right;
+            color:#fff;
+            margin:5px;
+            width:70%;
+            float:right;
+            margin-right: 30px;
+            border-radius: 12px;
+            word-wrap: break-word;
+        }
+        .msg-left{
+            background:#ddd;
+            padding:10px;
+            margin:5px;
+            width:70%;
+            float:left;
+            margin-left: 30px;
+            border-radius: 12px;
+            word-wrap: break-word;
+        }
+        .msg-left:before {
+            width: 0;
+            height: 0;
+            content: "";
+            top: 19px;
+            left: -25px;
+            position: relative;
+            border-style: solid;
+            border-width: 20px 0px 0px 20px;
+            border-color: #ddd transparent transparent transparent;
+        }
+        .msg-right:after {
+            width: 0;
+            height: 0;
+            content: "";
+            top: 19px;
+            left: 25px;
+            position: relative;
+            border-style: solid;
+            border-width: 20px 20px 00px 0px;
+            border-color: #3BA1EE transparent transparent transparent;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <div id="messages">
+        {#
+        <div class="msg-left">
+            Hi..
+        </div>
+        <div class="msg-right">
+            Hello
+        </div>
+        #}
+
+        {{ co | raw }}
+    </div>
+</div>
+<script>
+    var myVar = setInterval(function(){ laConversation() }, 1000);
+    function laConversation() {
+        var element = document.getElementById("messages");
+        element.scrollTop = element.scrollHeight;
+        $.ajax({
+            type: 'POST',
+            url: '{{ path('mob_chatAffichage')}}',
+            data: {
+                idAutre:{{ idr }},
+                idMe: {{ idme }},
+                ajax: 'oui'
+            },
+            success: function(response){
+                $('#messages').html(response.ch);
+            }
+        });
+    }
+</script>
+
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</body>
+</html>

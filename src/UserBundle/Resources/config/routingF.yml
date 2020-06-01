@@ -50,3 +50,20 @@ mob_ModUs:
     path:     /api/modus
     defaults: { _controller: UserBundle:UserMob:ModifierCompteUS }
 
+mob_chatAffichage:
+    path:     /11chat
+    defaults: { _controller: UserBundle:UserMob:disCchat }
+
+mob_chatSend:
+    path:     /chatSend
+    defaults: { _controller: UserBundle:UserMob:sendChat }
+
+mob_chatList:
+    path:     /chatList
+    defaults: { _controller: UserBundle:UserMob:listConv }
+
+mob_sendMail:
+    path:     /sendMail
+    defaults: { _controller: UserBundle:UserMob:SendMail }
+
+

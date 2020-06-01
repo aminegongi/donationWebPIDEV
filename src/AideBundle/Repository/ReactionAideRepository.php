@@ -10,4 +10,21 @@ namespace AideBundle\Repository;
  */
 class ReactionAideRepository extends \Doctrine\ORM\EntityRepository
 {
+
+    //retourne nombre de reaction totale pour une demande
+    public function nbReactParDmnd($idDmnd){
+
+        $query = $this->createQueryBuilder('r')
+            ->where('r.idDemande = :iddmnd')
+            ->setParameters(array(
+                'iddmnd'=>$idDmnd,
+            ))
+            ->select('count(r.id)')
+            ->getQuery();
+
+
+        return $query->getSingleScalarResult();
+
+    }
+
 }

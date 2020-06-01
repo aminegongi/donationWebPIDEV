@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
+use UserBundle\Entity\Conversation;
 use UserBundle\Entity\User;
 
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -190,7 +191,78 @@ class UserMobController extends Controller
         return new JsonResponse($json);
     }
 
+    /* Conversation Chat CN1 */
+    public function disCchatAction(Request $req){
+        $fromAjax = $req->get('ajax');
+        $idr = $req->get('idAutre');
+        $idme = $req->get('idMe');
+        $ar = $this->getDoctrine()->getRepository(Conversation::class)->getSRConversation($idr,$idme);
+        $code='';
+        foreach ($ar as $conv ){
+            if($conv->getReceiver()->getId() == $idr){
+                $img = $conv->getSender()->getImage();
+                $code .= '  <div class="msg-right"> '.$conv->getMessage().'</div>';
+            }
+            else{
+                $code .= '  <div class="msg-left"> '.$conv->getMessage().'</div>';
+            }
+        }
+        if($fromAjax ==  'oui'){
+            return new JsonResponse(array(
+                'ch'=>$code
+            ));
+        }
+        else{
+            return $this->render('@User/ViewMob/mobChat.html.twig',array(
+                'co'=>$code,'idme'=>$idme,'idr'=>$idr
+            ));
+        }
+    }
 
+    public function sendChatAction(Request $req)
+    {
+        $conv = new Conversation();
 
+        $ids = $req->get('id');
+        $idr=$req->get('to');
+        $sender = $this->getDoctrine()->getRepository(User::class)->find($ids);
+        $receiver = $this->getDoctrine()->getRepository(User::class)->find($idr);
+        $conv->setReceiver($receiver);
+        $conv->setSender($sender);
+        $conv->setMessage($req->get('msg'));
+        $conv->setDateEnvoi(new \DateTime());
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($conv);
+        $em->flush();
+        return new JsonResponse(array('ok'=>"ok"));
+    }
+
+    public function listConvAction(Request $req)
+    {
+        $idme=$req->get('id');
+        $ar = $this->getDoctrine()->getRepository(Conversation::class)->getlistConDQL($idme);
+        $ser = new Serializer([new ObjectNormalizer()]);
+        $json = $ser->normalize($ar);
+        return new JsonResponse($json);
+    }
+
+    public function SendMailAction(Request $req)
+    {
+        $objet=$req->get('objet');
+        $to=$req->get('to');
+        $msg=$req->get('msg');
+
+        $message = (new \Swift_Message($objet))
+            ->setFrom(['amine.gongi@esprit.tn' => 'DoNation'])
+            ->setTo($to)
+            ->setBody($msg,'text/html')
+        ;
+
+        $this->get('mailer')->send($message);
+
+        $ser = new Serializer([new ObjectNormalizer()]);
+        $json = $ser->normalize("ok");
+        return new JsonResponse($json);
+    }
 
 }

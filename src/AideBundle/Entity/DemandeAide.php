@@ -247,5 +247,9 @@ class DemandeAide
         return $this->photo;
     }
 
+    public function __toString() {
+        return $this->titre;
+    }
+
 }
 

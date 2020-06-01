@@ -13,7 +13,6 @@ class ConversationController extends Controller
 {
     public function send_addAction(Request $req)
     {
-
         $conv = new Conversation();
         $sender = $this->container->get('security.token_storage')->getToken()->getUser();
         $idr=$req->request->get('to');

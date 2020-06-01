@@ -11,25 +11,28 @@ use Symfony\Component\HttpFoundation\Request;
 
 class cagnotteController extends Controller{
     public function indexAction(){
-        $tab=$this->getUser()->getRoles();
-        $userRole=$tab[0];
-        $userId=$this->getUser()->getId();
-        if (($userRole == 'ROLE_US') || ($userRole == 'ROLE_ORG')){
-            $em = $this->getDoctrine()->getManager();
-
-            $cagnottes = $em->getRepository('CagnotteBundle:cagnotte')->findAll();
-
-            return $this->render('@Cagnotte/Cagnotte/index.html.twig', array(
-                'cagnottes' => $cagnottes,
-                'userRole' => $userRole,
-                'userId' => $userId));
-        }
-        else{
+        $user = $this->container->get('security.token_storage')->getToken()->getUser();
+        if ($user == "anon."){
             return $this->render('@Cagnotte/Cagnotte/error.html.twig');
         }
+        $tab = $this->getUser()->getRoles();
+        $userRole=$tab[0];
+        $userId=$this->getUser()->getId();
+        $em = $this->getDoctrine()->getManager();
+
+        $cagnottes = $em->getRepository('CagnotteBundle:cagnotte')->findAll();
+
+        return $this->render('@Cagnotte/Cagnotte/index.html.twig', array(
+            'cagnottes' => $cagnottes,
+            'userRole' => $userRole,
+            'userId' => $userId));
     }
 
     public function newAction(Request $request){
+        $user = $this->container->get('security.token_storage')->getToken()->getUser();
+        if ($user == "anon."){
+            return $this->render('@Cagnotte/Cagnotte/error.html.twig');
+        }
         $tab=$this->getUser()->getRoles();
         $userRole=$tab[0];
         $userId=$this->getUser()->getId();
@@ -57,6 +60,10 @@ class cagnotteController extends Controller{
     }
 
     public function deleteAction($id){
+        $user = $this->container->get('security.token_storage')->getToken()->getUser();
+        if ($user == "anon."){
+            return $this->render('@Cagnotte/Cagnotte/error.html.twig');
+        }
         $tab=$this->getUser()->getRoles();
         $userRole=$tab[0];
         if (($userRole == 'ROLE_US') || ($userRole == 'ROLE_ORG')){
@@ -72,6 +79,10 @@ class cagnotteController extends Controller{
     }
 
     public function showAction($id){
+        $user = $this->container->get('security.token_storage')->getToken()->getUser();
+        if ($user == "anon."){
+            return $this->render('@Cagnotte/Cagnotte/error.html.twig');
+        }
         $tab=$this->getUser()->getRoles();
         $userRole=$tab[0];
         if (($userRole == 'ROLE_US') || ($userRole == 'ROLE_ORG')){
@@ -89,6 +100,10 @@ class cagnotteController extends Controller{
     }
 
     public function donateAction($id){
+        $user = $this->container->get('security.token_storage')->getToken()->getUser();
+        if ($user == "anon."){
+            return $this->render('@Cagnotte/Cagnotte/error.html.twig');
+        }
         $em = $this->getDoctrine()->getManager();
         $cagnotte = $em->getRepository('CagnotteBundle:cagnotte')->find($id);
         return $this->render('@Cagnotte/Cagnotte/donate.html.twig',array('selected' => $cagnotte));

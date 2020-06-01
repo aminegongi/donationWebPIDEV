@@ -3,6 +3,12 @@ demandeaide_index:
     defaults: { _controller: "AideBundle:DemandeAide:index" }
     methods:  GET
 
+
+demandeaide_indexbycat:
+    path:     /demandespour/{id}
+    defaults: { _controller: "AideBundle:DemandeAide:findAllForOneCat" }
+    methods:  GET
+
 demandeaide_show:
     path:     /{id}/show
     defaults: { _controller: "AideBundle:DemandeAide:show" }
@@ -22,3 +28,30 @@ demandeaide_delete:
     path:     /{id}/delete
     defaults: { _controller: "AideBundle:DemandeAide:delete" }
     methods:  DELETE
+
+demandeaide_all:
+    path:     /all
+    defaults: { _controller: "AideBundle:DemandeAideMobile:index" }
+    methods:  GET
+
+demandeaide_find:
+    path:     /find/{id}
+    defaults: { _controller: "AideBundle:DemandeAideMobile:find" }
+    methods:  GET
+
+demandeaide_findmine:
+    path:     /findmine/{iduser}
+    defaults: { _controller: "AideBundle:DemandeAideMobile:findMesDemandes" }
+    methods:  GET
+
+
+demandeaide_findallforonecat:
+    path:     /findallforonecat/{id}
+    defaults: { _controller: "AideBundle:DemandeAideMobile:findAllForOneCat" }
+    methods:  GET
+
+
+demandeaide_add:
+    path:     /add
+    defaults: { _controller: "AideBundle:DemandeAideMobile:add" }
+    methods:  [GET, POST]

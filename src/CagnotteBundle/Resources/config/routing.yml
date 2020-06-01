@@ -30,7 +30,17 @@ cagnotte_take:
     path:     /{id}/take
     defaults: { _controller: CagnotteBundle:cagnotte:take }
 
+cagnotte_get_mobiles:
+    path:     /getCagnottesMobile
+    defaults: { _controller: CagnotteBundle:cagnotteMobile:index }
+    methods: [GET, POST]
+
 cagnotte_new_mobile:
     path:     /newCagnotteMobile
     defaults: { _controller: CagnotteBundle:cagnotteMobile:new }
+    methods: [GET, POST]
+
+cagnotte_show_mobile:
+    path:     /showCagnotteMobile
+    defaults: { _controller: CagnotteBundle:cagnotteMobile:show }
     methods: [GET, POST]
