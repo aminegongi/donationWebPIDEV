@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\HttpFoundation\Response;
+use UserBundle\Entity\User;
 
 class DefaultController extends Controller
 {
@@ -75,7 +76,8 @@ class DefaultController extends Controller
 
     public function jsonRestaurant(){
 
-        $allResto = $this->getDoctrine()->getRepository(tarifResto::class)->findAll();
+//        $allResto = $this->getDoctrine()->getRepository(tarifResto::class)->findAll();
+        $allResto = $this->getDoctrine()->getRepository(User::class)->findByRole("ROLE_RES");
         $numResto = 1;
         $allRestoArray = array();
         foreach ($allResto as $item){
@@ -159,7 +161,8 @@ class DefaultController extends Controller
 
     public function jsonRestaurantMobile(){
 
-        $allResto = $this->getDoctrine()->getRepository(tarifResto::class)->findAll();
+//        $allResto = $this->getDoctrine()->getRepository(tarifResto::class)->findAll();
+        $allResto = $this->getDoctrine()->getRepository(User::class)->findByRole("ROLE_RES");
         $numResto = 1;
         $allRestoArray = array();
         foreach ($allResto as $item){
