@@ -134,11 +134,15 @@ class cagnotteController extends Controller{
         }
         $em->persist($cagnotte);
         $em->flush();
-        return $this->redirectToRoute('cagnotte_homepage');
+        return $this->redirectToRoute('cagnotte_success');
     }
 
     public function takeAction($id){
 
+        $user = $this->container->get('security.token_storage')->getToken()->getUser();
+        if ($user == "anon."){
+            return $this->render('@Cagnotte/Cagnotte/error.html.twig');
+        }
         $tab=$this->getUser()->getRoles();
         $userRole=$tab[0];
         if ($userRole == 'ROLE_ORG'){
@@ -150,5 +154,14 @@ class cagnotteController extends Controller{
             $em->flush();
         }
         return $this->redirectToRoute('cagnotte_homepage');
+    }
+
+    public function successAction(){
+        $user = $this->container->get('security.token_storage')->getToken()->getUser();
+        if ($user == "anon."){
+            return $this->render('@Cagnotte/Cagnotte/error.html.twig');
+        }
+
+        return $this->render('@Cagnotte/Cagnotte/success.html.twig');
     }
 }
