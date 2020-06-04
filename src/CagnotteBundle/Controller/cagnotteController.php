@@ -4,6 +4,7 @@ namespace CagnotteBundle\Controller;
 
 use CagnotteBundle\CagnotteBundle;
 use CagnotteBundle\Entity\cagnotte;
+use CagnotteBundle\Entity\donations;
 use CagnotteBundle\Form\cagnotteType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -122,7 +123,7 @@ class cagnotteController extends Controller{
         $charge = \Stripe\Charge::create([
             'amount' => $montant,
             'currency' => 'usd',
-            'description' => 'donation.tn',
+            'description' => 'donations.tn',
             'source' => $request->request->get('stripeToken'),
         ]);
         $montant = $montant / 100;
@@ -134,7 +135,10 @@ class cagnotteController extends Controller{
         }
         $em->persist($cagnotte);
         $em->flush();
-        return $this->redirectToRoute('cagnotte_success');
+        return $this->redirectToRoute('donation_new', array(
+            'nom' => $cagnotte->getNom(),
+            'methode' => 'Stripe',
+            'montant' => $montant));
     }
 
     public function takeAction($id){

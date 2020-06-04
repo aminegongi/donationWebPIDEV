@@ -48,3 +48,7 @@ cagnotte_show_mobile:
     path:     /showCagnotteMobile
     defaults: { _controller: CagnotteBundle:cagnotteMobile:show }
     methods: [GET, POST]
+
+donation_new:
+    path:     /new_donation/{nom}/{methode}/{montant}
+    defaults: { _controller: CagnotteBundle:donations:new }
