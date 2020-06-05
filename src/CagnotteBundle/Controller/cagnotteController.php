@@ -44,11 +44,15 @@ class cagnotteController extends Controller{
 
             if ($form->isSubmitted()){
                 $em = $this->getDoctrine()->getManager();
+                if ($cagnotte->getDateDeDebut() > $cagnotte->getDateDeFin()){
+                    return $this->redirectToRoute('cagnotte_new');
+                }
                 $cagnotte->setDateDeCreation(new \DateTime('now'));
                 $cagnotte->setIdProprietaire($userId);
                 $cagnotte->setMontantActuel(0);
                 $cagnotte->setIdOrganisation(0);
                 $cagnotte->setEtat(0);
+                $cagnotte->setIdCategorie(1);
                 $em->persist($cagnotte);
                 $em->flush();
                 return $this->redirectToRoute('cagnotte_homepage');

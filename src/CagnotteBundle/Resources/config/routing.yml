@@ -52,3 +52,7 @@ cagnotte_show_mobile:
 donation_new:
     path:     /new_donation/{nom}/{methode}/{montant}
     defaults: { _controller: CagnotteBundle:donations:new }
+
+donation_dashboard:
+    path:     /dashboard
+    defaults: { _controller: CagnotteBundle:donations:dashboard }
