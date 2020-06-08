@@ -3,19 +3,78 @@
 {% block body %}
 
     {{ render(controller('AideBundle:DemandeAide:show', { 'id':  idDmnd })) }}
-    <h1>Participationaide creation</h1>
+
+
+   {# <h1>Participationaide creation</h1> #}
 
     {{ form_start(form) }}
 
+
+
+    <div style="display: none" >
+        <label for="{{ form.idUser.vars.id }}">id User</label>
+        <input type="text"  style="width: 200px; left: 50%;" class="form-control" id="{{ form.idUser.vars.id }}" name="{{ form.idUser.vars.full_name }}" value="">
+        {{ form_errors(form.idUser) }}
+
+        {% do form.idUser.setRendered %}
+    </div>
+
+
+
+    <div class="form-group" style="display: none">
+        <label  for="{{ form.idDemande.vars.id }}">Titre</label>
+        <input class="form-control"   type="text"   id="{{ form.idDemande.vars.id }}" name="{{ form.idDemande.vars.full_name }}" >
+        {{ form_errors(form.idDemande) }}
+
+        {% do form.idDemande.setRendered %}
+    </div>
+
+{#
+
         {{ form_widget(form) }}
-        <input type="submit" value="Create" />
+
+#}
+
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+        Participer
+    </button>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Participer a cette demande</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Si vous voulez participer, un mail va etre evoyer au demandeur.
+                    {#  {{ render(controller('AideBundle:ParticipationAide:new')) }}#}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Retour</button>
+                    {#<button type="button" class="btn btn-primary">Participer</button>#}
+                    <input type="submit" class="btn btn-primary" value="Confirmer" />
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+       {#<input type="submit" value="Participer" />#}
     {{ form_end(form) }}
 
 
-
+    {#
     <ul>
         <li>
             <a href="{{ path('participationaide_index') }}">Back to the list</a>
         </li>
     </ul>
+    #}
 {% endblock %}

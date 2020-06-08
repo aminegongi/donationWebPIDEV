@@ -28,12 +28,29 @@
                     <div class=" bottom text-center">
                         <div class=" col-sm-6 emphasis">
                             <p class="ratings">
-                                <a>4.0</a>
+                                {% set catrating = rating[categorieAide.id][categorieAide.id] %}
+                                <a>{{ catrating }}</a>
+                                {% if catrating != 0 %}
+                                {% for i in 1..catrating %}
+                                    <a href="#"><span class="fa fa-star"></span></a>
+                                {% endfor %}
+                                {% endif %}
+
+                                {% if catrating != 4 %}
+
+                                {% set emptystar = 4-catrating %}
+
+                                {% for i in 1..emptystar %}
+                                    <a href="#"><span class="fa fa-star-o"></span></a>
+                                {% endfor %}
+
+                            {% endif %}
+                                {#
                                 <a href="#"><span class="fa fa-star"></span></a>
                                 <a href="#"><span class="fa fa-star"></span></a>
-                                <a href="#"><span class="fa fa-star"></span></a>
-                                <a href="#"><span class="fa fa-star"></span></a>
-                                <a href="#"><span class="fa fa-star-o"></span></a>
+                                <a href="#"><span class="fa fa-star"></span></a>#}
+                               {# <a href="#"><span class="fa fa-star"></span></a>#}
+                                {#<a href="#"><span class="fa fa-star-o"></span></a>#}
                             </p>
                         </div>
                         <div class=" col-sm-6 emphasis">
