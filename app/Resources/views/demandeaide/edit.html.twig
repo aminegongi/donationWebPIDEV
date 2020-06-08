@@ -34,7 +34,7 @@
                 {% endif %}
             {% endfor %}
 
-            <option selected="selected">
+            <option selected="selected" value="{{ catActualId  }}">
                 {{demandeAide.idCategorie}}
             </option>
         </select>
@@ -69,6 +69,12 @@
     <div class="form-group" style="display: flex; flex-direction: row; justify-content: center; width: 32%; margin-left: 32%;" >
         <label style=" font-size: 20px; width:100%;" for="{{ edit_form.photo.vars.id }}">Photo</label>
         <input type="file" style=" margin-left: 10% left: 50%;" class="form-control" id="{{ edit_form.photo.vars.id }}" name="{{ edit_form.photo.vars.full_name }}" value="{{demandeAide.photo}}">
+       {# <img
+
+                style="max-width:500px;width:100%;max-height:200px;"
+                src="{{ asset('uploads/imagesAide/' ~ demandeAide.photo) }}"
+                alt="Card image cap"
+        />#}
 
         {{ form_errors(edit_form.photo) }}
 

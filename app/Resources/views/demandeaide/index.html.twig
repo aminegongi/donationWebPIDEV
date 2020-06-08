@@ -113,13 +113,14 @@
 
                                 {#<a class="btn btn-sm btn-outline-secondary" href="{{ path('demandeaide_show', { 'id': demandeAide.id }) }}">Détails</a>#}
 
+                                {% if  demandeAide.idUser != utilisateur %}
                                 <a class="btn btn-sm btn-outline-secondary" href="{{ path('participationaide_new', { 'id': demandeAide.id }) }}">Participer</a>
 
-
+                                {% else %}
 
                                 <a  class="btn btn-sm btn-outline-secondary" href="{{ path('demandeaide_edit', { 'id': demandeAide.id }) }}"> Modifier</a>
 
-
+                                {% endif %}
 
 
 

@@ -42,10 +42,12 @@ class DemandeAideController extends Controller
         );
 
         $idcat ='';
+        $ConnectedUser = $this->get('security.token_storage')->getToken()->getUser();
         return $this->render('demandeaide/index.html.twig', array(
             'demandeAides' => $demandeAides,
             'categorieAides' => $this->getCategorie($idcat),
             'categories' => $this->allCategories(),
+            'utilisateur' => $ConnectedUser,
         ));
     }
 
@@ -154,6 +156,8 @@ class DemandeAideController extends Controller
      */
     public function editAction(Request $request, DemandeAide $demandeAide)
     {
+        $idCatActual = $demandeAide->getIdCategorie()->getId();
+        $photo = $demandeAide->getPhoto();
         $deleteForm = $this->createDeleteForm($demandeAide);
         $editForm = $this->createForm('AideBundle\Form\DemandeAideType', $demandeAide);
         $editForm->handleRequest($request);
@@ -182,6 +186,10 @@ class DemandeAideController extends Controller
                 $demandeAide->setPhoto($newFilename);
             }
 
+            else {
+                $demandeAide->setPhoto($photo);
+            }
+
 
 
 
@@ -204,6 +212,7 @@ class DemandeAideController extends Controller
             'delete_form' => $deleteForm->createView(),
             'user' => $user = $this->get('security.token_storage')->getToken()->getUser()->getId(),
             'categories' => $this->allCategories(),
+            'catActualId' => $idCatActual,
         ));
     }
 
