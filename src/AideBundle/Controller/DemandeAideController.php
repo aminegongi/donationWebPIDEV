@@ -32,9 +32,18 @@ class DemandeAideController extends Controller
             'categories' => $this->allCategories(),
         ));
     */
+        $comboCat = $request->get('catCombo');
         $em = $this->getDoctrine()->getManager();
-
-        $listeDemandeAides = $em->getRepository('AideBundle:DemandeAide')->findAll();
+        if($comboCat){
+        if ($comboCat == "all")
+        {$listeDemandeAides = $em->getRepository('AideBundle:DemandeAide')->findAll();}
+        else {
+            $listeDemandeAides = $em->getRepository('AideBundle:DemandeAide')->findByIdCategorie($comboCat);
+        }
+        }
+        else{
+            $listeDemandeAides = $em->getRepository('AideBundle:DemandeAide')->findAll();
+        }
         $demandeAides  = $this->get('knp_paginator')->paginate(
             $listeDemandeAides,
             $request->query->get('page', 1)/*le numéro de la page à afficher*/,

@@ -76,6 +76,22 @@
 
     <h1>Liste des demandes d'aide<a class="btn btn-primary btn-sm"  style="margin-left: 10%; font-size: medium; background-color:#4CAF50"  href="{{ path('demandeaide_new') }}"> Publier une demande</a></h1>
     <br/>
+    <form name= "comboForm" method="get" action="{{ path('demandeaide_index') }}">
+
+    <select class=""   style="" id="catCombo" name="catCombo" onchange="comboForm.submit();">
+        <option  value="" disabled selected>-- Categorie --</option>
+        <option  value="all" >Toutes</option>
+
+        {% for element in categories %}
+
+            <option value="{{  element.id }}" >{{element.Nom}}</option>
+
+        {% endfor %}
+    </select>
+
+    </form>
+
+    <br/>
 
     <div class="container">
         <div class="row">
