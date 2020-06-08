@@ -4,6 +4,8 @@ parameters:
     PubImages_directory: '%kernel.project_dir%/web/uploads/imagesPubs'
     AideImages_directory: '%kernel.project_dir%/web/uploads/imagesAide'
     AideDemandeImages_directory: '%kernel.project_dir%/web/uploads/imagesAide'
+    EmploiCatImages_directory: '%kernel.project_dir%/web/uploads/imagesEmploi/cat'
+    EmploiImages_directory: '%kernel.project_dir%/web/uploads/imagesEmploi/emploi'
 
 services:
     # default configuration for services in *this* file

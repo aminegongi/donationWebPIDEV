@@ -60,14 +60,23 @@
               <div class="menu_section">
                 <h3>General</h3>
                 <ul class="nav side-menu">
+
                   <li><a><i class="fa fa-home"></i> Dashboard </a></li>
+
                   <li><a href="{{ path('user_homepage') }}" ><i class="fa fa-user"></i> Les Utilisateurs </a></li>
+
                   <li><a><i class="fa fa-credit-card"></i> Gestion Cagnotte </a></li>
+
                   <li><a href="{{ path('categorieaide_index') }}" ><i class="fa fa-wheelchair"></i> Gestion Aide </a></li>
-                  <li><a><i class="fa fa-male"></i> Gestion Emploi </a></li>
+
+                  <li><a href="{{ path('CatEmp_show') }}" ><i class="fa fa-male"  ></i> Gestion Emploi </a></li>
+
                   <li><a><i class="fa fa-cutlery"></i> Gestion Restaurant-Don </a></li>
+
                   <li><a><i class="fa fa-group"></i> Gestiin Organisation </a></li>
+
                   <li><a href="{{ path('pub_index') }}"><i class="fa fa-dollar"></i> Gestion Publicités </a></li>
+
                   <li><a><i class="fa fa-envelope-o"></i> Gestion Newsletters<span class="fa fa-chevron-down"> </span></a>
                     <ul class="nav child_menu">
                       <li><a href="{{ path('newsletterW') }}">Newsletter</a></li>
@@ -75,6 +84,7 @@
                       <li><a href="{{ path('newsletterInscri') }}" >Inscri Newsletter</a></li>
                     </ul>
                   </li>
+
 
                 </ul>
               </div>

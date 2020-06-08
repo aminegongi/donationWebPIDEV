@@ -1,0 +1,13 @@
+{% extends 'front.html.twig' %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('front/scss/emploi/css/root.css') }}">
+{% endblock %}
+{% block body %}
+
+
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <input type="submit" class="btn btn-primary" value="ajouter" >
+    {{ form_end(form) }}
+
+{% endblock %}

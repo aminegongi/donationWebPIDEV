@@ -1,0 +1,80 @@
+{% extends "dash.html.twig" %}
+
+{% block content %}
+    <!-- page content -->
+        <div class="">
+            <div class="page-title">
+                <div class="title_left">
+                    <h3> Liste des catégories Emploi <small> </small> </h3>
+                </div>
+
+                <div class="title_right">
+                    <div class="col-md-5 col-sm-5   form-group pull-right top_search">
+                        <div class="input-group">
+                            <input type="text" name="rechgo" id="rechgo" class="form-control" placeholder="Search for...">
+                            <span class="input-group-btn">
+                        <button class="btn btn-default" type="button">Go!</button>
+                    </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2>Les Catégories <small></small></h2>
+                            <div class="nav navbar-right panel_toolbox">
+                                <a href="{{ path('CatEmp_add') }}"  class="btn btn-primary" style="color: white;" > Ajouter </a>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+
+                        <div class="x_content">
+
+                            <div class="row" id="catempR">
+                                {% for catEmp in listCatEmp %}
+                                    <div id="elCatEmp" class="col-md-55">
+                                        <div class="thumbnail">
+                                            <div class="image view view-first">
+                                                <img style="width: 100%; display: block;" src="{{ asset('uploads/imagesEmploi/cat/'~catEmp.image) }}" alt="image" />
+                                                <div class="mask">
+                                                    <p>{{ catEmp.descriptionCategorie }}</p>
+                                                    <div class="tools tools-bottom">
+                                                        <a href="{{path('CatEmp_update',{ 'id':catEmp.id } )}}"><i class="fa fa-pencil"></i></a>
+                                                        <a href="{{path('CatEmp_delete',{ 'id':catEmp.id } )}}" onclick="return confirm('Voulez-vous vraiment supprimer {{ catEmp.titreCategorie }}?');" ><i class="fa fa-times"></i></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="caption">
+                                                <h6>{{ catEmp.titreCategorie }}</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!-- /page content -->
+{% endblock %}
+
+{% block javascript %}
+{{ parent() }}
+<script>
+$(document).ready(function(){
+  $("#rechgo").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#catempR #elCatEmp").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+</script>
+{% endblock %}

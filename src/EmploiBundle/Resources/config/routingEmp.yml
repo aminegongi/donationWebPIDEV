@@ -1,0 +1,18 @@
+Emp_show:
+    path:     /
+    defaults: { _controller: EmploiBundle:Emplois:show }
+Emp_add:
+    path:     /add
+    defaults: { _controller: EmploiBundle:Emplois:add }
+Emp_MesShow:
+    path:     /MesEmplois
+    defaults: { _controller: EmploiBundle:Emplois:MesShow }
+Emp_delete:
+    path:     /deleteemp/{id}
+    defaults: { _controller: EmploiBundle:Emplois:delete }
+Emp_update:
+    path:     /updateemp/{id}
+    defaults: { _controller: EmploiBundle:Emplois:update }
+Emp_single:
+    path:     /emploi/{id}
+    defaults: { _controller: EmploiBundle:Emplois:singleEmploi }

@@ -1,0 +1,97 @@
+{% extends 'front.html.twig' %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('front/scss/emploi/css/root.css') }}">
+{% endblock %}
+{% block body %}
+    <style>
+        .cardimg{
+            height:150px;
+            width:100%;
+        }
+
+        div [class^="col-"]{
+            padding-left:5px;
+            padding-right:5px;
+        }
+        .card{
+            transition:0.5s;
+        }
+        .card-title{
+            font-size:15px;
+            transition:1s;
+        }
+        .card-title i{
+            font-size:15px;
+            transition:1s;
+            color:#ffa710
+        }
+        .card-title i:hover{
+            transform: scale(1.25) rotate(100deg);
+            color:#18d4ca;
+
+        }
+        .card:hover{
+            transform: scale(1.05);
+            box-shadow: 10px 10px 15px rgba(0,0,0,0.3);
+        }
+        .card-text{
+            height:80px;
+        }
+
+        .card::before, .card::after {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            transform: scale3d(0, 0, 1);
+            transition: transform .3s ease-out 0s;
+            background: rgba(255, 255, 255, 0.1);
+            content: '';
+            pointer-events: none;
+        }
+        .card::before {
+            transform-origin: left top;
+        }
+        .card::after {
+            transform-origin: right bottom;
+        }
+        .card:hover::before, .card:hover::after, .card:focus::before, .card:focus::after {
+            transform: scale3d(1, 1, 1);
+        }
+    </style>
+{% if listEmp == 1 %}
+    <h2> Merci de vous connecter </h2>
+{% else %}
+    <div class="row">
+        <div class="col-xs-12 col-md-9 c col-sm-9 col-xl-9">
+            <h2> listes de mes emplois </h2> <br>
+        </div>
+        <div class="col-xs-12 col-md-3 c col-sm-3 col-xl-3">
+            <a href="{{ path('Emp_add') }}" class="text-right btn btn-primary" > Ajouter </a>
+        </div>
+    </div>
+    <div class="container mt-2">
+        <div class="row">
+            {% for Emp in listEmp %}
+            <div class="col-md-3 col-sm-6">
+                <a href="{{ path('Emp_single',{ 'id':Emp.id }) }}" >
+                <div class="card card-block">
+                    <h5 class="card-title text-right"> {{ Emp.typeDemploi }} </h5>
+                    <img class="cardimg" src="{{ asset('uploads/imagesEmploi/emploi/'~Emp.photo) }}" alt="image" >
+                    <h4 class="card-title mt-3 mb-3">{{ Emp.titre }}</h4>
+                    <p class="card-text">
+                        {{ Emp.description|length >100 ? Emp.description|slice(0, 50)  ~ '...' : Emp.description  }}
+                    </p>
+                    <div >
+                        <a href="{{path('Emp_update',{ 'id':Emp.id } )}}"><i class="fa fa-edit"></i></a>
+                        <a href="{{path('Emp_delete',{ 'id':Emp.id } )}}" onclick="return confirm('Voulez-vous vraiment supprimer?');" ><i class="fa fa-times"></i></a>
+                    </div>
+                </div>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endif %}
+{% endblock %}
