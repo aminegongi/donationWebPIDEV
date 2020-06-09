@@ -4,6 +4,7 @@ namespace CagnotteBundle\Controller;
 
 use CagnotteBundle\CagnotteBundle;
 use CagnotteBundle\Entity\cagnotte;
+use CagnotteBundle\Entity\donations;
 use CagnotteBundle\Form\cagnotteType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -43,11 +44,15 @@ class cagnotteController extends Controller{
 
             if ($form->isSubmitted()){
                 $em = $this->getDoctrine()->getManager();
+                if ($cagnotte->getDateDeDebut() > $cagnotte->getDateDeFin()){
+                    return $this->redirectToRoute('cagnotte_new');
+                }
                 $cagnotte->setDateDeCreation(new \DateTime('now'));
                 $cagnotte->setIdProprietaire($userId);
                 $cagnotte->setMontantActuel(0);
                 $cagnotte->setIdOrganisation(0);
                 $cagnotte->setEtat(0);
+                $cagnotte->setIdCategorie(1);
                 $em->persist($cagnotte);
                 $em->flush();
                 return $this->redirectToRoute('cagnotte_homepage');
@@ -122,7 +127,7 @@ class cagnotteController extends Controller{
         $charge = \Stripe\Charge::create([
             'amount' => $montant,
             'currency' => 'usd',
-            'description' => 'donation.tn',
+            'description' => 'donations.tn',
             'source' => $request->request->get('stripeToken'),
         ]);
         $montant = $montant / 100;
@@ -134,11 +139,18 @@ class cagnotteController extends Controller{
         }
         $em->persist($cagnotte);
         $em->flush();
-        return $this->redirectToRoute('cagnotte_homepage');
+        return $this->redirectToRoute('donation_new', array(
+            'nom' => $cagnotte->getNom(),
+            'methode' => 'Stripe',
+            'montant' => $montant));
     }
 
     public function takeAction($id){
 
+        $user = $this->container->get('security.token_storage')->getToken()->getUser();
+        if ($user == "anon."){
+            return $this->render('@Cagnotte/Cagnotte/error.html.twig');
+        }
         $tab=$this->getUser()->getRoles();
         $userRole=$tab[0];
         if ($userRole == 'ROLE_ORG'){
@@ -150,5 +162,14 @@ class cagnotteController extends Controller{
             $em->flush();
         }
         return $this->redirectToRoute('cagnotte_homepage');
+    }
+
+    public function successAction(){
+        $user = $this->container->get('security.token_storage')->getToken()->getUser();
+        if ($user == "anon."){
+            return $this->render('@Cagnotte/Cagnotte/error.html.twig');
+        }
+
+        return $this->render('@Cagnotte/Cagnotte/success.html.twig');
     }
 }

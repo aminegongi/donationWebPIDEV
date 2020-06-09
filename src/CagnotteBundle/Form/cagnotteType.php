@@ -18,7 +18,6 @@ class cagnotteType extends AbstractType
             ->add('dateDeDebut')
             ->add('dateDeFin')
             ->add('montantDemande')
-            ->add('idCategorie')
             ->add('Sauvegarder', SubmitType::class);
     }/**
      * {@inheritdoc}
