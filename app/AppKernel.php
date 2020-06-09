@@ -31,6 +31,7 @@ class AppKernel extends Kernel
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
             new \Endroid\QrCodeBundle\EndroidQrCodeBundle(),
             new EmploiBundle\EmploiBundle(),
+            new Nomaya\SocialBundle\NomayaSocialBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

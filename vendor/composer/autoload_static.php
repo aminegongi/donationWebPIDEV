@@ -323,6 +323,13 @@ class ComposerStaticInitb57730b7e685922269d445eb87967ec1
                 0 => __DIR__ . '/..' . '/twig/twig/lib',
             ),
         ),
+        'N' => 
+        array (
+            'Nomaya\\SocialBundle\\' => 
+            array (
+                0 => __DIR__ . '/..' . '/nomaya/social-bundle',
+            ),
+        ),
         'K' => 
         array (
             'Knp\\Component' => 
