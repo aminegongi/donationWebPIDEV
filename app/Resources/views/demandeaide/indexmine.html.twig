@@ -74,9 +74,9 @@
 {% block body %}
 
 
-    <h1>Liste des demandes d'aide<a class="btn btn-primary btn-sm"  style="margin-left: 10%; font-size: medium; background-color:#4CAF50"  href="{{ path('demandeaide_new') }}"> Publier une demande</a></h1>
+    <h1>Mes demandes d'aide<a class="btn btn-primary btn-sm"  style="margin-left: 10%; font-size: medium; background-color:#4CAF50"  href="{{ path('demandeaide_new') }}"> Publier une demande</a></h1>
     <br/>
-    <form name= "comboForm" method="get" action="{{ path('demandeaide_index') }}">
+    <form name= "comboForm" method="get" action="{{ path('demandeaide_mine') }}">
 
     <select class=""   style="" id="catCombo" name="catCombo" onchange="comboForm.submit();">
         <option  value="" disabled selected>-- Categorie --</option>
@@ -93,6 +93,9 @@
 
     <br/>
 
+    {% if  demandeAides is empty  %}
+        <p> Aucune demande </p>
+{% else %}
     <div class="container">
         <div class="row">
         {% for demandeAide in demandeAides %}
@@ -130,7 +133,7 @@
                                 {#<a class="btn btn-sm btn-outline-secondary" href="{{ path('demandeaide_show', { 'id': demandeAide.id }) }}">Détails</a>#}
 
                                 {% if  demandeAide.idUser != utilisateur %}
-                                <a class="btn btn-sm btn-outline-secondary" href="{{ path('participationaide_new', { 'id': demandeAide.id }) }}">Afficher</a>
+                                <a class="btn btn-sm btn-outline-secondary" href="{{ path('participationaide_new', { 'id': demandeAide.id }) }}">Participer</a>
 
                                 {% else %}
 
@@ -157,5 +160,5 @@
     <br/>
     <div class="text-center">{{ knp_pagination_render(demandeAides) }}</div>
     <br/>
-
+{% endif %}
 {% endblock %}

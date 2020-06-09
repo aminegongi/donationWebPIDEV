@@ -59,7 +59,18 @@
                     <!--         <li class="nav-item active"><a class="nav-link" href="index.html">Home</a></li> -->
 
                     <li class="nav-item"><a class="nav-link" href="{{ path('cagnotte_homepage') }}">Cagnotte</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ path('demandeaide_index') }}">Aide</a>
+                   {# <li class="nav-item"><a class="nav-link" href="{{ path('demandeaide_index') }}">Aide</a>#}
+
+                    <li class="nav-item submenu dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                           aria-expanded="false">Aide</a>
+                        <ul class="dropdown-menu">
+                            <li class="nav-item"><a class="nav-link" href="{{ path('demandeaide_index') }}">Accueil</a>
+                            <li class="nav-item"><a class="nav-link" href="{{ path('demandeaide_mine') }}">Mes demandes</a>
+                        </ul>
+                    </li>
+
+
                     <li class="nav-item submenu dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                            aria-expanded="false">Emploi</a>
