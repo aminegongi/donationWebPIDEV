@@ -59,7 +59,9 @@
 
     <div class="form-group" style="display: flex; flex-direction: row; justify-content: center; width: 32%; margin-left: 32%;" >
         <label style=" font-size: 20px; width:100%;" for="{{ edit_form.description.vars.id }}">Description</label>
-        <input type="text" style=" margin-left: 10%" class="form-control" id="{{ edit_form.description.vars.id }}" name="{{ edit_form.description.vars.full_name }}" value="{{demandeAide.description}}">
+        <textarea type="text" style=" margin-left: 10%" class="form-control" id="{{ edit_form.description.vars.id }}" name="{{ edit_form.description.vars.full_name }}" value="{{demandeAide.description}}" rows="4">{{demandeAide.description}}</textarea>
+
+        {#<textarea class="form-control"   id="{{ form.description.vars.id }}" name="{{ form.description.vars.full_name }}"  style="margin-left: 10%;" rows="4"></textarea>#}
         {{ form_errors(edit_form.description) }}
 
         {% do edit_form.description.setRendered %}
