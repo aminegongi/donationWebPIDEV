@@ -16,3 +16,9 @@ Emp_update:
 Emp_single:
     path:     /emploi/{id}
     defaults: { _controller: EmploiBundle:Emplois:singleEmploi }
+Emp_pdf:
+    path:     /pdf/{id}
+    defaults: { _controller: EmploiBundle:Emplois:pdf }
+Empmob_show:
+    path:     /mobile/
+    defaults: { _controller: EmploiBundle:emploimob:show }

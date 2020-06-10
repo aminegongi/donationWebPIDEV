@@ -8,9 +8,18 @@ use EmploiBundle\Entity\filtreEmploi;
 use EmploiBundle\Form\EmploisType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+/**
+ * Import the TranslateClient class
+ */
+use Stichoza\GoogleTranslate\GoogleTranslate;
+
+// Include Dompdf required namespaces
+use Dompdf\Dompdf;
+use Dompdf\Options;
 
 class EmploisController extends Controller
 {
+
 
     public function showAction(Request $req)
     {
@@ -45,12 +54,76 @@ class EmploisController extends Controller
         ));
     }
 
-    public function singleEmploiAction($id)
-    {
+    public function pdfAction($id){
+        // Configure Dompdf according to your needs
+        $pdfOptions = new Options();
+        $pdfOptions->set('defaultFont', 'Arial');
+
+        // Instantiate Dompdf with our options
+        $dompdf = new Dompdf($pdfOptions);
+
         $list = $this->getDoctrine()->getRepository(Emplois::class)->find($id);
-        return $this->render('@Emploi/Emplois/SingleEmploi.html.twig',array(
+
+        // Retrieve the HTML generated in our twemploisig file
+        $html = $this->renderView('@Emploi/Emplois/pdf.html.twig', [
             'Emp'=>$list
-        ));
+        ]);
+
+        // Load HTML to Dompdf
+        $dompdf->loadHtml($html);
+
+        // (Optional) Setup the paper size and orientation 'portrait' or 'portrait'
+        $dompdf->setPaper('A4', 'portrait');
+
+        // Render the HTML as PDF
+        $dompdf->render();
+        $date = new \DateTime('now');
+        $dd = $date->format('Y-m-d H:i:s');
+        // Output the generated PDF to Browser (force download)
+        $dompdf->stream($list->getTitre()."_".$dd.".pdf", [
+            "Attachment" => true
+        ]);
+    }
+    public function singleEmploiAction($id  , Request $req)
+    {
+        $lan = $req->get('langue');
+
+        if($lan == 'fr' || empty($lan)){
+            $list = $this->getDoctrine()->getRepository(Emplois::class)->find($id);
+            return $this->render('@Emploi/Emplois/SingleEmploi.html.twig',array(
+                'Emp'=>$list
+            ));
+        }
+        else if($lan == 'en' ){
+            $list = $this->getDoctrine()->getRepository(Emplois::class)->find($id);
+            $tr = new GoogleTranslate();
+            $tr->setSource(null); // Detect automatically the language
+            $tr->setTarget('en'); // Translate to Spanish
+
+
+            $list->setTitre($tr->translate($list->getTitre()));
+            $list->setDescription($tr->translate($list->getDescription()));
+            $list->setEmplacement($tr->translate($list->getEmplacement()));
+            $list->setTypeContrat($tr->translate($list->getTypeContrat()));
+            $list->setTypeDemploi($tr->translate($list->getTypeDemploi()));
+            //$list->setIdcategorie()->setTitreCategorie($tr->translate($list->getIdcategorie()->getTitreCategorie()));
+
+            return $this->render('@Emploi/Emplois/SingleEmploi_En.html.twig',array(
+                'Emp'=>$list
+            ));
+        }
+
+
+
+        // By default the TranslateClient is from 'auto' to 'en'
+        /*$tr = new GoogleTranslate();
+
+        $tr->setSource(null); // Detect automatically the language
+        $tr->setTarget('en'); // Translate to Spanish
+
+        $text = $tr->translate('bonjour');
+
+        */
     }
 
     public function MesShowAction()

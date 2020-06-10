@@ -68,7 +68,7 @@
             <h2> listes de mes emplois </h2> <br>
         </div>
         <div class="col-xs-12 col-md-3 c col-sm-3 col-xl-3">
-            <a href="{{ path('Emp_add') }}" class="text-right btn btn-primary" > Ajouter </a>
+            <a href="{{ path('Emp_add') }}" class="btn btn-primary" style="width: 100%; border-color: #c500b0 ; background-color: #c500b0;"  class="text-right btn btn-primary" > Déposer un emploi </a>
         </div>
     </div>
     <div class="container mt-2">
@@ -79,8 +79,8 @@
                 <div class="card card-block">
                     <h5 class="card-title text-right"> {{ Emp.typeDemploi }} </h5>
                     <img class="cardimg" src="{{ asset('uploads/imagesEmploi/emploi/'~Emp.photo) }}" alt="image" >
-                    <h4 class="card-title mt-3 mb-3">{{ Emp.titre }}</h4>
-                    <p class="card-text">
+                    <h4 class="card-title mt-3 mb-3" style="font-size: 20px;" s>{{ Emp.titre }}</h4>
+                    <p style="color: black;" class="card-text">
                         {{ Emp.description|length >100 ? Emp.description|slice(0, 50)  ~ '...' : Emp.description  }}
                     </p>
                     <div >

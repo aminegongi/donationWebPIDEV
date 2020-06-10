@@ -7,6 +7,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -22,7 +23,34 @@ class EmploisType extends AbstractType
             ->add('photo',FileType::class, [
                 'label' => 'Image Catégorie Emploi','data_class'=> null,'required' => true])
             ->add('salaire')
-            ->add('emplacement')
+            ->add('emplacement',ChoiceType::class,[
+                'choices' => [
+                    'Tunis' => 'Tunis',
+                    'Ariana' => 'Ariana',
+                    'Beja' => 'Beja',
+                    'BenArous' => 'BenArous',
+                    'Bizerte' => 'Bizerte',
+                    'Gabes' => 'Gabes',
+                    'Gafsa' => 'Gafsa',
+                    'Kairouan' => 'Kairouan',
+                    'Kasserine' => 'Kasserine',
+                    'Kebili' => 'Kebili',
+                    'Kef' => 'Kef',
+                    'Mahdia' => 'Mahdia',
+                    'Manouba' => 'Manouba',
+                    'Medenine' => 'Medenine',
+                    'Monastir' => 'Monastir',
+                    'Nabeul' => 'Nabeul',
+                    'Sfax' => 'Sfax',
+                    'SidiBouzid' => 'SidiBouzid',
+                    'Siliana' => 'Siliana',
+                    'Sousse' => 'Sousse',
+                    'Tataouine' => 'Tataouine',
+                    'Tozeur' => 'Tozeur',
+                    'Zaghouan' => 'Zaghouan',
+                    'Jendouba' => 'Jendouba',
+                ]
+            ])
             ->add('typeDemploi',ChoiceType::class,[
                 'choices' => [
                     'Offre' => 'Offre',
