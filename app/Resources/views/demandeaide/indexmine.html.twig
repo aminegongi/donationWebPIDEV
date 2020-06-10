@@ -101,14 +101,18 @@
         {% for demandeAide in demandeAides %}
 
             <div class="col-md-4">
-                <div class="card mb-4 box-shadow">
+                <div class="card mb-4 box-shadow" style="width:300px;height:480px;">
+                    <div style="width:100%; min-height:40%; max-height: 40%;align-self: center;  margin-top: 10px; margin-right: 10px; margin-left: 10px; ">
                     <img
                             class="card-img-top"
-                            style="max-width:500px;width:100%;max-height:200px;"
+                            {#style="max-width:500px;width:100%;max-height:200px;"#}
                             src="{{ asset('uploads/imagesAide/' ~ demandeAide.photo) }}"
                             alt="Card image cap"
+                            style=" min-width: 90%; min-height: 200px;  max-width: 90%; max-height: 200px;"
                     />
+                    </div>
                     <br/>
+                    <div style="margin-top: 30px; height: 200px;">
                     <h5 class="card-title">{{ demandeAide.titre }}</h5>
                     <em class="card-title">{{ demandeAide.idCategorie.nom }}</em>
                     <div class="card-body">
@@ -145,11 +149,13 @@
 
 
                             </div>
-                            <small class="text-muted">9 mins</small>
+                            {#<small class="text-muted">9 mins</small>#}
                         </div>
-
                     </div>
+                    </div>
+                    <div>
                     <small>{{ demandeAide.idUser }}</small>
+                    </div>
                 </div>
             </div>
 
