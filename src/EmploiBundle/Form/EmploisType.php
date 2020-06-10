@@ -26,7 +26,29 @@ class EmploisType extends AbstractType
             ->add('emplacement',ChoiceType::class,[
                 'choices' => [
                     'Tunis' => 'Tunis',
-                    'Demande' => 'Demande',
+                    'Ariana' => 'Ariana',
+                    'Beja' => 'Beja',
+                    'BenArous' => 'BenArous',
+                    'Bizerte' => 'Bizerte',
+                    'Gabes' => 'Gabes',
+                    'Gafsa' => 'Gafsa',
+                    'Kairouan' => 'Kairouan',
+                    'Kasserine' => 'Kasserine',
+                    'Kebili' => 'Kebili',
+                    'Kef' => 'Kef',
+                    'Mahdia' => 'Mahdia',
+                    'Manouba' => 'Manouba',
+                    'Medenine' => 'Medenine',
+                    'Monastir' => 'Monastir',
+                    'Nabeul' => 'Nabeul',
+                    'Sfax' => 'Sfax',
+                    'SidiBouzid' => 'SidiBouzid',
+                    'Siliana' => 'Siliana',
+                    'Sousse' => 'Sousse',
+                    'Tataouine' => 'Tataouine',
+                    'Tozeur' => 'Tozeur',
+                    'Zaghouan' => 'Zaghouan',
+                    'Jendouba' => 'Jendouba',
                 ]
             ])
             ->add('typeDemploi',ChoiceType::class,[
