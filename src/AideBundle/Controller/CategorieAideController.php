@@ -124,7 +124,7 @@ class CategorieAideController extends Controller
     public function editAction(Request $request, CategorieAide $categorieAide)
     {
 
-
+        $icn = $categorieAide->getIcone();
         $deleteForm = $this->createDeleteForm($categorieAide);
         $editForm = $this->createForm('AideBundle\Form\CategorieAideType', $categorieAide);
         $editForm->handleRequest($request);
@@ -155,22 +155,9 @@ class CategorieAideController extends Controller
                 // instead of its contents
                 $categorieAide->setIcone($newFilename);
             }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            else {
+                $categorieAide->setIcone($icn);
+            }
 
             $this->getDoctrine()->getManager()->flush();
 
@@ -244,8 +231,6 @@ class CategorieAideController extends Controller
         return $arrRes;
 
     }
-
-
 
     // retourne le nombre de demandes signalées pour chaque categorie
     public function nbDmndSigEachCat(){
@@ -371,24 +356,6 @@ else {
 
 
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     }
