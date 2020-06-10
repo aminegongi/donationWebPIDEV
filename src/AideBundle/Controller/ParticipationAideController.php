@@ -36,7 +36,10 @@ class ParticipationAideController extends Controller
     {
         $user = $this->get('security.token_storage')->getToken()->getUser();
 
-        $idDmnd = $this->getDoctrine()->getRepository(DemandeAide::class)->find($id);
+         $idDmnd = $this->getDoctrine()->getRepository(DemandeAide::class)->find($id);
+        // var_dump($idDmnd);
+        // die();
+        $ownerDmnd = $idDmnd->getIdUser();
 
 //        var_dump($idDmnd);
 //        die();
@@ -50,6 +53,7 @@ class ParticipationAideController extends Controller
         if ($form->isSubmitted() ) {
             $participationAide->setIdDemande($idDmnd);
             $participationAide->setIdUser($user);
+            //$this->sendMail($ownerDmnd->getEmail(),$user->getEmail(),$idDmnd);
         }
 
 
@@ -61,7 +65,7 @@ class ParticipationAideController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($participationAide);
             $em->flush();
-
+            $this->sendMail($ownerDmnd->getEmail(),$user->getEmail(),$idDmnd);
             return $this->redirectToRoute('participationaide_show', array('id' => $participationAide->getId()));
         }
 
@@ -142,5 +146,35 @@ class ParticipationAideController extends Controller
             ->setMethod('DELETE')
             ->getForm()
         ;
+    }
+
+    private function sendMail($ownerMail,$participantMail,  $dmnd){
+        // php mail
+        $titreDmnd = $dmnd->getTitre();
+        $idDmnd = $dmnd->getId();
+        $from = "no_reply@donation.tn";
+        //$to = "amine.gongi@esprit.tn" ;
+        $to = $ownerMail ;
+        $subject = "Nouvelle participation à votre demande";
+        $message = "Bonjour, " . $participantMail . " veut bien vous aider à votre demande d'aide ". $titreDmnd . " https://donation.tn/aide/demandeaide/" . $idDmnd ."/showmadmnd ";
+        $headers = 'From: '.$from."\r\n".
+            'Reply-To: '.$from."\r\n" .
+            'X-Mailer: PHP/' . phpversion();
+/*
+        if(mail($to, $subject, $message, $headers)){
+            echo 'Your mail has been sent successfully.';
+        } else{
+            echo 'Unable to send email. Please try again.';
+        }
+*/
+        try{
+            if(mail($to, $subject, $message, $headers)){
+                echo 'Your mail has been sent successfully.';
+            }
+        }catch (\Exception $exception){
+            echo 'Unable to send email. Please try again.';
+
+        }
+        //fin php mail
     }
 }
