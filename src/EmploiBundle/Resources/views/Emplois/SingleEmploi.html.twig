@@ -3,6 +3,7 @@
     <link rel="stylesheet" href="{{ asset('front/scss/emploi/css/root.css') }}">
 {% endblock %}
 {% block body %}
+    <script type="text/javascript" src="https://platform-api.sharethis.com/js/sharethis.js#property=5ee0c5ca23dc0c0012814334&product=inline-share-buttons" async="async"></script>
     <style>
 
         h1.product-page {
@@ -129,11 +130,12 @@
                         <h1 style="text-align: left;" class="product-page">{{ Emp.titre }}</h1>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-5 col-xl-5">
-                        <form>
+                        <form id="comboFormEmp"  action="{{ path('Emp_single',{ 'id':Emp.id }) }}" method="get">
                             <div class="form-group">
-                                <select class="form-control" id="langue">
-                                    <option>Francais</option>
-                                    <option>Anglais</option>
+                                <select class="form-control" name="langue" id="langue" onchange="comboFormEmp.submit();" >
+                                    <option  value="" disabled selected>Langue</option>
+                                    <option value="fr" >Francais</option>
+                                    <option value="en" >Anglais</option>
                                 </select>
                             </div>
                         </form>
@@ -166,7 +168,10 @@
                 <p style="text-align: left;" class="product-body">
                     {{ Emp.description }}
                 </p>
-
+                <hr>
+                <div class="sharethis-inline-share-buttons"></div>
+                <hr>
+                <a style="width: 100%;" class="btn btn-secondary" href="{{ path('Emp_pdf',{'id':Emp.id}) }}" ><i class="fa fa-print" > </i> Imprimer </a>
             </div>
 
         </div>

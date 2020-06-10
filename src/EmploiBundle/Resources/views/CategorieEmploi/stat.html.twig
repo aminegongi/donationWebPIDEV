@@ -1,0 +1,105 @@
+{% extends "dash.html.twig" %}
+
+{% block content %}
+    <!-- page content -->
+    <div class="">
+        <div class="page-title">
+            <div class="title_left">
+                <h3> Statistique des catégories Emploi <small> </small> </h3>
+            </div>
+
+        </div>
+
+        <div class="clearfix"></div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Statistique <small></small></h2>
+                        <div class="nav navbar-right panel_toolbox">
+                            <a href="{{ path('CatEmp_show') }}"  class="btn btn-success" style="color: white;" > Afficher </a>
+                            <a href="{{ path('CatEmp_add') }}"  class="btn btn-primary" style="color: white;" > Ajouter </a>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+
+                    <div class="x_content">
+
+                        <div class="row" >
+                            <h2>feffzfefefefefefee</h2>
+                            <div id="curve_date_chart" style="width: 800px; height: 500px"></div>
+                        </div>
+
+                        <div class="row" >
+                            <h2>feffzfefefefefefee</h2>
+                            <div id="visualization" ></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+
+            </div>
+        </div>
+    </div>
+    <!-- /page content -->
+{% endblock %}
+
+{% block javascript %}
+{{ parent() }}
+
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script type="text/javascript">
+            google.charts.load('current', {'packages':['corechart']});
+            google.charts.setOnLoadCallback(drawChart);
+
+            function drawChart() {
+                var data = google.visualization.arrayToDataTable([
+                    ['Catégorie', 'Nombre d\'emploi' ],
+                    {% for EmpCat in nbEmpCat %}
+                    ['{{  EmpCat.titre  }}',   {{ EmpCat.nb }}],
+                    {% endfor %}
+                ]);
+
+                var options = {
+                    curveType: 'function',
+                    legend: { position: 'bottom' }
+                };
+
+                var chart = new google.visualization.PieChart(document.getElementById('curve_date_chart'));
+
+                chart.draw(data, options);
+            }
+</script>
+
+<script type="text/javascript">
+google.load('visualization', '1', {'packages': ['geochart']});
+google.setOnLoadCallback(drawVisualization);
+
+function drawVisualization() {
+  var data = google.visualization.arrayToDataTable([
+    ['Region', 'Emplois'],
+
+    {% for EmpReg in nbEmpReg  %}
+        ['{{ EmpReg.emp }}','{{ EmpReg.nb }}'],
+    {% endfor %}
+  ]);
+
+  var opts = {
+    region: 'TN',
+    displayMode: 'regions',
+    resolution: 'provinces',
+    width: 640,
+    height: 480
+  };
+  var geochart = new google.visualization.GeoChart(
+      document.getElementById('visualization'));
+  geochart.draw(data, opts);
+};
+  </script>
+
+
+{% endblock %}

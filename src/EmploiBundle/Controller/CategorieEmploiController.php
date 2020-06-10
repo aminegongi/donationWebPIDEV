@@ -112,4 +112,13 @@ class CategorieEmploiController extends Controller
         ));
     }
 
+    public function statAction()
+    {
+        $nbEmpCat = $this->getDoctrine()->getRepository(CategorieEmploi::class)->findNbEmpParCat();
+        $nbEmpReg = $this->getDoctrine()->getRepository(CategorieEmploi::class)->findNbEmpParReg();
+        return $this->render('@Emploi/CategorieEmploi/stat.html.twig',array(
+            'nbEmpCat'=>$nbEmpCat,
+            'nbEmpReg'=>$nbEmpReg
+        ));
+    }
 }

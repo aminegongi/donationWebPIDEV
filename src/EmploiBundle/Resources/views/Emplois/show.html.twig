@@ -64,9 +64,10 @@
 <h2> listes des emplois </h2> <br>
     <div class="container mt-2">
         <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-3 col-xl-3">
+
+            <div class="col-xs-12 col-sm-12 col-md-4 col-xl-4">
                 <h3>Filtre & Recherche</h3>
-                <form method="get" action="{{ path('Emp_show') }}" >
+                <form method="get" action="{{ path('Emp_show') }}" style="text-align: left;" >
                     <div class="form-group row">
                         <div class="col-sm-10">
                             <input type="text" class="form-control" id="rech" name="rech" placeholder="Recherche">
@@ -74,8 +75,8 @@
                     </div>
 
                     <div class="form-group row">
-                        <div class="col-sm-3">Ordre (par date Ajout)</div>
-                        <div class="col-sm-9">
+                        <div class="col-sm-3" style="color: black;" ><b>Ordre</b> </div>
+                        <div class="col-sm-9"  >
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" id="rr" name="oo" value="asc" >
                                 <label class="form-check-label" for="rr">
@@ -92,7 +93,7 @@
                     </div>
 
                     <div class="form-group row">
-                        <div class="col-sm-3">Type Emploi</div>
+                        <div class="col-sm-3" style="color: black;" ><b>Type Emploi</b></div>
                         <div class="col-sm-9">
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" id="offre" name="t[]" value="Offre" >
@@ -111,7 +112,7 @@
 
 
                     <div class="form-group row">
-                        <div class="col-sm-3">Type De Contrat</div>
+                        <div class="col-sm-3" style="color: black;" ><b> Type De Contrat</b></div>
                         <div class="col-sm-9">
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" id="ContratDureeIndeterminee" name="c[]" value="ContratDureeIndeterminee" >
@@ -153,7 +154,7 @@
                     </div>
 
                     <div class="form-group row">
-                        <div class="col-sm-3">Les Catégories</div>
+                        <div class="col-sm-3"style="color: black;" ><b>Les Catégories</b></div>
                         <div class="col-sm-9">
                             {% for l in listCat %}
                             <div class="form-check">
@@ -167,18 +168,20 @@
                     </div>
 
                     <div class="form-group row">
-                        <div class="col-sm-12 " style="width: 100%;">
-                            <button type="submit" class="btn btn-primary">Filtre</button>
+                        <div class="col-sm-12 " >
+                            <button id="filtreBtn" type="submit" style="width: 100%; border-color: #c500b0 ; background-color: #c500b0;" class="btn btn-primary">Filtre</button>
                         </div>
                     </div>
+
                 </form>
             </div>
-            <div class="col-xs-12 col-sm-12 col-md-9 col-xl-9">
+
+            <div class="col-xs-12 col-sm-12 col-md-8 col-xl-8">
                 <div class="row">
                 {% for Emp in listEmp %}
 
                         <div class="col-md-3 col-sm-6">
-                            <a href="{{ path('Emp_single',{ 'id':Emp.id }) }}" >
+                            <a href="{{ path('Emp_single',{ 'id':Emp.id  }) }}" >
                             <div class="card card-block">
                                 <h5 class="card-title text-right"> {{ Emp.typeDemploi }} </h5>
                                 <img class="cardimg" src="{{ asset('uploads/imagesEmploi/emploi/'~Emp.photo) }}" alt="image" >
@@ -195,5 +198,7 @@
             </div>
         </div>
     </div>
+
+
 
 {% endblock %}

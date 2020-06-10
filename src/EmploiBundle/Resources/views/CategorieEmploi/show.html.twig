@@ -28,6 +28,7 @@
                         <div class="x_title">
                             <h2>Les Catégories <small></small></h2>
                             <div class="nav navbar-right panel_toolbox">
+                                <a href="{{ path('CatEmp_stat') }}"  class="btn btn-success" style="color: white;" > Statistique </a>
                                 <a href="{{ path('CatEmp_add') }}"  class="btn btn-primary" style="color: white;" > Ajouter </a>
                             </div>
                             <div class="clearfix"></div>
@@ -60,6 +61,10 @@
                         </div>
                     </div>
                 </div>
+
+                <div>
+
+                </div>
             </div>
         </div>
     <!-- /page content -->
@@ -77,4 +82,7 @@ $(document).ready(function(){
   });
 });
 </script>
+
+
+
 {% endblock %}

@@ -4,10 +4,99 @@
 {% endblock %}
 {% block body %}
 
-
+{#
     {{ form_start(form) }}
     {{ form_widget(form) }}
     <input type="submit" class="btn btn-primary" value="ajouter" >
     {{ form_end(form) }}
+ #}
+    <div class="row">
+        <div class="col-md-12 col-sm-12 ">
+            <div class="x_panel">
+                <div class="x_titre">
+                    <h2>Modifier une offre/demande</h2>
+                </div>
+                <div class="x_content">
+                    {{ form_start(form) }}
 
+                    <div >
+                        <label class="col-form-label col-md-12 col-sm-12 " style="text-align: left;" for="first-name"> Titre de l'Offre/la demande<span class="required">*</span>
+                        </label>
+                        <div class="col-md-12 col-sm-12 ">
+                            {{ form_widget(form.titre, {'attr':{'class': 'form-control' }}) }}
+                        </div>
+                        <span style="color: darkred;" >{{form_errors(form.titre) }}</span>
+                    </div>
+                    <div class="item form-group">
+                        <label class="col-form-label col-md-12 col-sm-12 " style="text-align: left;" for="first-name">Déscription de l'Offre/la demande<span class="required">*</span>
+                        </label>
+                        <div class="col-md-12 col-sm-12 ">
+                            {{ form_widget(form.description, {'attr':{'class': 'form-control'}}) }}
+                        </div>
+                        <span style="color: darkred;" >{{form_errors(form.description) }}</span>
+                    </div>
+                    <div class="item form-group">
+                        <label class="col-form-label col-md-12 col-sm-12" style="text-align: left;" for="first-name">Photo de l'Offre/la demande<span class="required">*</span>
+                        </label>
+                        <div class="col-md-12 col-sm-12 ">
+                            {{ form_widget(form.photo, {'attr':{'class': 'form-control'}}) }}
+                        </div>
+                        <span style="color: darkred;" >{{form_errors(form.photo) }}</span>
+                    </div>
+                    <div class="item form-group">
+                        <label class="col-form-label col-md-12 col-sm-12 " style="text-align: left;" for="first-name">Salaire de l'Offre/la demande<span class="required">*</span>
+                        </label>
+                        <div class="col-md-12 col-sm-12 ">
+                            {{ form_widget(form.salaire, {'attr':{'class': 'form-control'}}) }}
+                        </div>
+                        <span style="color: darkred;" >{{form_errors(form.salaire) }}</span>
+                    </div>
+                    <div class="item form-group">
+                        <label class="col-form-label col-md-12 col-sm-12 " style="text-align: left;" for="first-name">Emplacement de l'Offre/la demande<span class="required">*</span>
+                        </label>
+                        <div class="col-md-12 col-sm-12 ">
+                            {{ form_widget(form.emplacement, {'attr':{'class': 'form-control'}}) }}
+                        </div>
+                        <span style="color: darkred;" >{{form_errors(form.emplacement) }}</span>
+                    </div>
+                    <div class="item form-group">
+                        <label class="col-form-label col-md-12 col-sm-12 " style="text-align: left;" for="first-name">Type de la demande d'emploi<span class="required">*</span>
+                        </label>
+                        <div class="col-md-12 col-sm-12 ">
+                            {{ form_widget(form.typeDemploi, {'attr':{'class': 'form-control'}}) }}
+                        </div>
+                        <span style="color: darkred;" >{{form_errors(form.typeDemploi) }}</span>
+                    </div>
+                    <div class="item form-group">
+                        <label class="col-form-label col-md-12 col-sm-12 " style="text-align: left;" for="first-name">Type du Contrat <span class="required">*</span>
+                        </label>
+                        <div class="col-md-12 col-sm-12 ">
+                            {{ form_widget(form.typeContrat, {'attr':{'class': 'form-control'}}) }}
+                        </div>
+                        <span style="color: darkred;" >{{form_errors(form.typeContrat) }}</span>
+                    </div>
+
+                    <div class="item form-group">
+                        <label class="col-form-label col-md-12 col-sm-12" style="text-align: left;" for="first-name">Catégorie de l'Offre/la demande<span class="required">*</span>
+                        </label>
+                        <div class="col-md-12 col-sm-12 ">
+                            {{ form_widget(form.idcategorie, {'attr':{'class': 'form-control'}}) }}
+                        </div>
+                        <span style="color: darkred;" >{{form_errors(form.idcategorie) }}</span>
+                    </div>
+
+                    <div class="ln_solid"></div>
+                    <div class="item form-group">
+                        <div class="col-md-12 col-sm-12 offset-md-12">
+                            <input type="submit" style="width: 100%; border-color: #c500b0 ; background-color: #c500b0;" class="btn btn-primary" value="ajouter" >
+                        </div>
+                    </div>
+
+
+
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
