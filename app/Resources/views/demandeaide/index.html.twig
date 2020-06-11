@@ -151,7 +151,10 @@
                         </div>
                     </div>
                     <div>
-                    <small>{{ demandeAide.idUser }}</small>
+                    {#<small>{{ demandeAide.idUser }}</small>#}
+                        <small>
+                        <a href="{{ path('UserAutreProfil',{ 'id': demandeAide.idUser.id } ) }}">{{ demandeAide.idUser }}</a>
+                        </small>
                     </div>
                 </div>
             </div>

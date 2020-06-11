@@ -56,7 +56,9 @@
 
         {% for part in participations %}
             <!-- modifier le path par le lien vers le profile -->
-            <li><a href="{{ path('demandeaide_index') }}">{{ part.idUser}}</a></li>
+           {# <li><a href="{{ path('demandeaide_index') }}">{{ part.idUser}}</a></li> #}
+            <li><a href="{{ path('UserAutreProfil',{ 'id': part.idUser.id } ) }}">{{ part.idUser}}</a></li>
+            {#href="{{path('UserAutreProfil',{ 'id': list.id } )}}"#}
         {% endfor %}
     </ul>
     {% endif %}
