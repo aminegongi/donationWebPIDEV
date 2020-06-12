@@ -8,6 +8,8 @@ $baseDir = dirname($vendorDir);
 return array(
     'Twig_Extensions_' => array($vendorDir . '/twig/extensions/lib'),
     'Twig_' => array($vendorDir . '/twig/twig/lib'),
+    'Sabberworm\\CSS' => array($vendorDir . '/sabberworm/php-css-parser/lib'),
+    'Nomaya\\SocialBundle\\' => array($vendorDir . '/nomaya/social-bundle'),
     'Knp\\Component' => array($vendorDir . '/knplabs/knp-components/src'),
     'Knp\\Bundle\\TimeBundle' => array($vendorDir . '/knplabs/knp-time-bundle'),
     'Doctrine\\ORM\\' => array($vendorDir . '/doctrine/orm/lib'),

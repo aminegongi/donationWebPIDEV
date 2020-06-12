@@ -24,7 +24,7 @@ class donations
     /**
      * @ORM\ManyToOne(targetEntity="CagnotteBundle\Entity\cagnotte")
      *
-     * @ORM\JoinColumn(name="id_categorie", referencedColumnName="id")
+     * @ORM\JoinColumn(name="id_cagnotte", referencedColumnName="id")
      */
     private $idCagnotte;
 

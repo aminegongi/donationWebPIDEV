@@ -4,6 +4,11 @@ demandeaide_index:
     methods:  GET
 
 
+demandeaide_mine:
+    path:     /mesdemandes
+    defaults: { _controller: "AideBundle:DemandeAide:mesDmnd" }
+    methods:  GET
+
 demandeaide_indexbycat:
     path:     /demandespour/{id}
     defaults: { _controller: "AideBundle:DemandeAide:findAllForOneCat" }
@@ -12,6 +17,12 @@ demandeaide_indexbycat:
 demandeaide_show:
     path:     /{id}/show
     defaults: { _controller: "AideBundle:DemandeAide:show" }
+    methods:  GET
+
+
+demandeaide_show_ma_dmnd:
+    path:     /{id}/showmadmnd
+    defaults: { _controller: "AideBundle:DemandeAide:showMaDmnd" }
     methods:  GET
 
 demandeaide_new:

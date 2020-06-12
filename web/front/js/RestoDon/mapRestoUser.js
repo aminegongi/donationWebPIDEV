@@ -43,7 +43,7 @@ map.addControl(
     })
 );
 
-var lastClicked = "donation";
+var lastClicked = "donations";
 
 geojson.features.forEach(function(marker) {
 // create a DOM element for the marker
@@ -67,7 +67,7 @@ geojson.features.forEach(function(marker) {
         fb.src = marker.properties.fb;
         web.src = marker.properties.web;
 
-        if (lastClicked === "donation"){
+        if (lastClicked === "donations"){
             toggleSidebar('left');
             map.flyTo({
                 center: marker.geometry.coordinates,

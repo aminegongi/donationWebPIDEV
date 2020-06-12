@@ -1,0 +1,204 @@
+{% extends 'front.html.twig' %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('front/scss/emploi/css/root.css') }}">
+{% endblock %}
+{% block body %}
+    <style>
+        .cardimg{
+            height:150px;
+            width:100%;
+        }
+
+        div [class^="col-"]{
+            padding-left:5px;
+            padding-right:5px;
+        }
+        .card{
+            transition:0.5s;
+        }
+        .card-title{
+            font-size:15px;
+            transition:1s;
+        }
+        .card-title i{
+            font-size:15px;
+            transition:1s;
+            color:#ffa710
+        }
+        .card-title i:hover{
+            transform: scale(1.25) rotate(100deg);
+            color:#18d4ca;
+
+        }
+        .card:hover{
+            transform: scale(1.05);
+            box-shadow: 10px 10px 15px rgba(0,0,0,0.3);
+        }
+        .card-text{
+            height:80px;
+        }
+
+        .card::before, .card::after {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            transform: scale3d(0, 0, 1);
+            transition: transform .3s ease-out 0s;
+            background: rgba(255, 255, 255, 0.1);
+            content: '';
+            pointer-events: none;
+        }
+        .card::before {
+            transform-origin: left top;
+        }
+        .card::after {
+            transform-origin: right bottom;
+        }
+        .card:hover::before, .card:hover::after, .card:focus::before, .card:focus::after {
+            transform: scale3d(1, 1, 1);
+        }
+    </style>
+
+<h2> listes des emplois </h2> <br>
+    <div class="container mt-2">
+        <div class="row">
+
+            <div class="col-xs-12 col-sm-12 col-md-4 col-xl-4">
+                <h3>Filtre & Recherche</h3>
+                <form method="get" action="{{ path('Emp_show') }}" style="text-align: left;" >
+                    <div class="form-group row">
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="rech" name="rech" placeholder="Recherche">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-sm-3" style="color: black;" ><b>Ordre</b> </div>
+                        <div class="col-sm-9"  >
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" id="rr" name="oo" value="asc" >
+                                <label class="form-check-label" for="rr">
+                                    Ascendant
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" id="rrr" value="desc" name="oo">
+                                <label class="form-check-label" for="rrr">
+                                    Descendant
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-sm-3" style="color: black;" ><b>Type Emploi</b></div>
+                        <div class="col-sm-9">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="offre" name="t[]" value="Offre" >
+                                <label class="form-check-label" for="offre">
+                                    Offre
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="demande" value="Demande" name="t[]">
+                                <label class="form-check-label" for="demande">
+                                    Demande
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group row">
+                        <div class="col-sm-3" style="color: black;" ><b> Type De Contrat</b></div>
+                        <div class="col-sm-9">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="ContratDureeIndeterminee" name="c[]" value="ContratDureeIndeterminee" >
+                                <label class="form-check-label" for="ContratDureeIndeterminee">
+                                    Contrat Duree Indeterminee
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="Contratdureedeterminee" value="Contratdureedeterminee" name="c[]">
+                                <label class="form-check-label" for="Contratdureedeterminee">
+                                    Contrat duree determinee
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="ContratTravailTemporaire" value="ContratTravailTemporaire" name="c[]">
+                                <label class="form-check-label" for="ContratTravailTemporaire">
+                                    Contrat Travail Temporaire
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="ContratApprentissage" value="ContratApprentissage" name="c[]">
+                                <label class="form-check-label" for="ContratApprentissage">
+                                    Contrat Apprentissage
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="ContratProfessionnalisation" value="ContratProfessionnalisation" name="c[]">
+                                <label class="form-check-label" for="ContratProfessionnalisation">
+                                    Contrat Professionnalisation
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="ContratUniqueInsertion" value="ContratUniqueInsertion" name="c[]">
+                                <label class="form-check-label" for="ContratUniqueInsertion">
+                                    Contrat Unique Insertion
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-sm-3"style="color: black;" ><b>Les Catégories</b></div>
+                        <div class="col-sm-9">
+                            {% for l in listCat %}
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="{{l.titreCategorie}}" name="cat[]" value="{{l.titreCategorie}}" >
+                                <label class="form-check-label" for="{{l.titreCategorie}}">
+                                    {{l.titreCategorie}}
+                                </label>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-sm-12 " >
+                            <button id="filtreBtn" type="submit" style="width: 100%; border-color: #c500b0 ; background-color: #c500b0;" class="btn btn-primary">Filtre</button>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+
+            <div class="col-xs-12 col-sm-12 col-md-8 col-xl-8">
+                <div class="row">
+                {% for Emp in listEmp %}
+
+                        <div class="col-md-3 col-sm-6">
+                            <a href="{{ path('Emp_single',{ 'id':Emp.id  }) }}" >
+                            <div class="card card-block">
+                                <h5 class="card-title text-right"> {{ Emp.typeDemploi }} </h5>
+                                <img class="cardimg" src="{{ asset('uploads/imagesEmploi/emploi/'~Emp.photo) }}" alt="image" >
+                                <h4 class="card-title mt-3 mb-3">{{ Emp.titre }}</h4>
+                                <p style="color:black;" class="card-text">
+                                    {{ Emp.description|length >100 ? Emp.description|slice(0, 50)  ~ '...' : Emp.description  }}
+                                </p>
+                            </div>
+                            </a>
+                        </div>
+
+                {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}

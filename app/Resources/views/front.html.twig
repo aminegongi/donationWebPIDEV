@@ -31,7 +31,7 @@
     <link rel="stylesheet" href="{{ asset('front/vendors/flat-icon/font/flaticon.css') }}">
     <link rel="stylesheet" href="{{ asset('front/vendors/nice-select/nice-select.css') }}">
     <link rel="stylesheet" href="{{ asset('front/scss/style.css') }}"}>
-    <link rel="stylesheet" href="{{ asset('front/scss/modified/css/donation.css') }}">
+    <link rel="stylesheet" href="{{ asset('front/scss/modified/css/donations.css') }}">
 
 
 
@@ -59,12 +59,26 @@
                     <!--         <li class="nav-item active"><a class="nav-link" href="index.html">Home</a></li> -->
 
                     <li class="nav-item"><a class="nav-link" href="{{ path('cagnotte_homepage') }}">Cagnotte</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ path('demandeaide_index') }}">Aide</a>
+                   {# <li class="nav-item"><a class="nav-link" href="{{ path('demandeaide_index') }}">Aide</a>#}
+
+                    <li class="nav-item submenu dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                           aria-expanded="false">Aide</a>
+                        <ul class="dropdown-menu">
+                            <li class="nav-item"><a class="nav-link" href="{{ path('demandeaide_index') }}">Accueil</a>
+                            <li class="nav-item"><a class="nav-link" href="{{ path('demandeaide_mine') }}">Mes demandes</a>
+                            <li class="nav-item"><a class="nav-link" href="{{ path('demandeaide_new') }}">Besoin d'aide ?</a>
+
+                        </ul>
+                    </li>
+
+
                     <li class="nav-item submenu dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                            aria-expanded="false">Emploi</a>
                         <ul class="dropdown-menu">
-                            <li class="nav-item"><a class="nav-link" href="#">Amentities</a>
+                            <li class="nav-item"><a class="nav-link" href="{{ path('Emp_show') }}">Les emplois</a>
+                            <li class="nav-item"><a class="nav-link" href="{{ path('Emp_MesShow') }}">Mes emplois</a>
                         </ul>
                     </li>
 

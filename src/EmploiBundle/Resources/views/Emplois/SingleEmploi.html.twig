@@ -1,0 +1,182 @@
+{% extends 'front.html.twig' %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('front/scss/emploi/css/root.css') }}">
+{% endblock %}
+{% block body %}
+    <script type="text/javascript" src="https://platform-api.sharethis.com/js/sharethis.js#property=5ee0c5ca23dc0c0012814334&product=inline-share-buttons" async="async"></script>
+    <style>
+
+        h1.product-page {
+            font-weight:800;
+            margin: 0 0 20px;
+            padding:0;
+            font-size:26px;
+            color:#c500b0;
+        }
+        h2.product-page {
+            font-weight:800;
+            margin: 0 0 20px;
+            padding: 0;
+            font-size:18px;
+            color:#c500b0;
+        }
+
+        p.product-info-meta {
+            margin:0;
+        }
+        p.product-body {
+            font-size: 12px;
+            line-height: 20px;
+            font-weight: 400;
+        }
+
+        .containerPro {
+            margin:0 auto;
+            background:#fff;
+            border-left:1px solid #ddd;
+            border-right:1px solid #ddd;
+            padding: 0;
+        }
+
+        .product-containerPro {
+            margin:0 0 20px;
+        }
+        .product-left-containerPro {
+            width:542px;
+            padding: 20px;
+            min-height:200px;
+            float:left;
+        }
+        .product-col-containerPro {
+            width: 360px;
+            padding: 20px;
+            padding-left: 1px;
+            min-height:200px;
+            float:left;
+        }
+        .main-product-containerPro .product-left-containerPro {
+
+            min-height: 440px;
+
+        }
+        .main-product-containerPro .product-col-containerPro {
+
+            min-height: 440px;
+
+            width: 359px;
+        }
+        .quantity {
+            height: 40px;
+            line-height: 38px;
+            float:left;
+            border:1px solid #ddd;
+            display:inline-block;
+            border-right:0;
+            padding: 0 20px;
+            font-family: "Open Sans";
+            font-size: 14px;
+            font-weight: 400;
+        }
+        .buttonEmp {
+            display:inline-block;
+            border-left: 0;
+            margin: 0;
+            float:left;
+            line-height: 38px;
+            height:42px;
+            border:1px solid #ddd;
+            background: #fdfdfd;
+            background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(249,198,103,1)), color-stop(100%,rgba(247,150,33,1))); /* Chrome,Safari4+ */
+            background: -webkit-linear-gradient(top, rgba(249,198,103,1) 0%,rgba(247,150,33,1) 100%); /* Chrome10+,Safari5.1+ */
+            padding: 0 20px;
+            font-family: "Open Sans";
+            font-size: 14px;
+            font-weight: 400;
+        }
+        .product-price {
+            border-top: 1px solid #ddd;
+            border-bottom: 1px solid #ddd;
+            padding: 10px;
+            background:#fff;
+        }
+        .product-price-meta {
+            font-size:12px;
+            font-style: italic;
+            font-weight: 400;
+        }
+        .price {
+
+            font-weight:800;
+        }
+        .old-price {
+            text-decoration: line-through;
+            font-weight: 400;
+            color:#888;
+            display:inline-block;
+            margin: 0 5px 0;
+        }
+    </style>
+    <div class="containerPro">
+
+        <div class="product-containerPro main-product-containerPro">
+
+            <div class="product-left-containerPro">
+                <img src="{{ asset('uploads/imagesEmploi/emploi/'~Emp.photo) }}" alt="" width="540"/>
+            </div>
+
+            <div class="product-col-containerPro">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-7 col-xl-7">
+                        <h1 style="text-align: left;" class="product-page">{{ Emp.titre }}</h1>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-5 col-xl-5">
+                        <form id="comboFormEmp"  action="{{ path('Emp_single',{ 'id':Emp.id }) }}" method="get">
+                            <div class="form-group">
+                                <select class="form-control" name="langue" id="langue" onchange="comboFormEmp.submit();" >
+                                    <option  value="" disabled selected>Langue</option>
+                                    <option value="fr" >Francais</option>
+                                    <option value="en" >Anglais</option>
+                                </select>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <p style="text-align: left;">
+                    <b> Annonce déposé par : </b> <a href="{{path('UserAutreProfil',{ 'id':Emp.idUtilisateur.id} )}}" > {{ Emp.idUtilisateur.username }} </a>
+                </p>
+                <p style="text-align: left;">
+                    <b> Catégorie : </b> {{ Emp.idcategorie.titreCategorie }}
+                </p>
+                <p style="text-align: left;">
+                    <b> Type : </b>  {{ Emp.typeDemploi }} d'emploi
+                </p>
+
+                <p style="text-align: left;">
+                    <b> Type de Contrat : </b>  {{ Emp.typeContrat }}
+                </p>
+                <p style="text-align: left;">
+                    <b> Emplacement : </b>  {{ Emp.emplacement }}
+                </p>
+
+                <p style="text-align: left;" class="product-price">
+                    <b>Salaire :</b>
+                    <span class="price" >{{ Emp.salaire }}</span>
+                </p>
+
+                <h5 style="text-align: left;" >Déscription : </h5>
+                <p style="text-align: left;" class="product-body">
+                    {{ Emp.description }}
+                </p>
+                <hr>
+                <div class="sharethis-inline-share-buttons"></div>
+                <hr>
+                <a style="width: 100%;" class="btn btn-secondary" href="{{ path('Emp_pdf',{'id':Emp.id}) }}" ><i class="fa fa-print" > </i> Imprimer </a>
+            </div>
+
+        </div>
+        <br clear="all"/>
+
+    </div>
+
+{% endblock %}

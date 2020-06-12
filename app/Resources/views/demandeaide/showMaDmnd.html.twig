@@ -1,0 +1,117 @@
+{% extends 'front.html.twig' %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('front/scss/aide/css/root.css') }}">
+{% endblock %}
+
+{% block body %}
+    {#
+    <h1>Demande aide</h1>
+
+    <table>
+        <tbody>
+            <tr>
+
+            <tr>
+                <th>Titre</th>
+                <td>{{ demandeAide.titre }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ demandeAide.description }}</td>
+            </tr>
+            <tr>
+            </tr>
+            <tr>
+                <th>Nbreactions</th>
+                <td>{{ demandeAide.nbReactions }}</td>
+            </tr>
+            <tr>
+                <th>Photo</th>
+                <td><img style="width: 25%; display: block;" src="{{ asset('uploads/imagesAide/' ~ demandeAide.photo) }}" alt="image"></td>
+            </tr>
+        </tbody>
+    </table>
+#}
+    <div class="card flex-md-row mb-4 box-shadow h-md-250">
+        <div class="card-body d-flex flex-column align-items-start">
+            <strong class="d-inline-block mb-2 text-primary">{{ demandeAide.idUser }}</strong>
+            <h2 class="mb-0">
+                <span class="text-dark" >{{ demandeAide.titre }}</span>
+            </h2>
+            <div class="mb-1 text-muted">{{ demandeAide.idCategorie }}</div>
+            <span class="card-text mb-auto">{{ demandeAide.description }}</span>
+            <a href="{{ path('demandeaide_index') }}">Retour à la liste</a>
+            <br>
+            {{ facebookButton() }}
+        </div>
+        <img class="card-img-right flex-auto d-none d-md-block" style="max-height: 200px; max-width: 200px;" src="{{ asset('uploads/imagesAide/' ~ demandeAide.photo) }}" alt="Card image cap">
+    </div>
+
+<div>
+    <h2>participants : </h2>
+    {% if participations is empty %}
+    <p>aucun participant</p>
+    {% else %}
+    <ul>
+
+        {% for part in participations %}
+            <!-- modifier le path par le lien vers le profile -->
+           {# <li><a href="{{ path('demandeaide_index') }}">{{ part.idUser}}</a></li> #}
+            <li><a href="{{ path('UserAutreProfil',{ 'id': part.idUser.id } ) }}">{{ part.idUser}}</a></li>
+            {#href="{{path('UserAutreProfil',{ 'id': list.id } )}}"#}
+        {% endfor %}
+    </ul>
+    {% endif %}
+</div>
+<br/>
+<br/>
+
+    <ul>
+        {#
+        <li>
+            <a href="{{ path('demandeaide_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('demandeaide_edit', { 'id': demandeAide.id }) }}">Edit</a>
+        </li>
+#}
+        {# participer#}
+{#
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+            Launch demo modal
+        </button>
+#}
+        <!-- Modal -->
+        {#
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Participer</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        Si vous voulez participer, un mail va etre evoyer au demandeur.
+                      {#  {{ render(controller('AideBundle:ParticipationAide:new')) }}#}
+                 {#   </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">confirmer </button>
+                    </div>
+                </div>
+            </div>
+        </div>#}
+
+
+
+{#
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+#}
+{% endblock %}
