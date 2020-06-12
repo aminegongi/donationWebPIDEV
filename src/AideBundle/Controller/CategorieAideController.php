@@ -32,13 +32,14 @@ class CategorieAideController extends Controller
         $total = $this->nbDmndEachCat();
         $totalSig = $this->nbDmndSigEachCat();
         $totalConf = $this->nbDmndConfEachCat();
-        
+        $rating = $this->getCatRating();
 
         return $this->render('categorieaide/index.html.twig', array(
             'categorieAides' => $categorieAides,
             'total' => $total,
             'totalSig'=>$totalSig,
             'totalConf'=>$totalConf,
+            'rating'=>$rating,
 
         ));
 
@@ -123,7 +124,7 @@ class CategorieAideController extends Controller
     public function editAction(Request $request, CategorieAide $categorieAide)
     {
 
-
+        $icn = $categorieAide->getIcone();
         $deleteForm = $this->createDeleteForm($categorieAide);
         $editForm = $this->createForm('AideBundle\Form\CategorieAideType', $categorieAide);
         $editForm->handleRequest($request);
@@ -154,22 +155,9 @@ class CategorieAideController extends Controller
                 // instead of its contents
                 $categorieAide->setIcone($newFilename);
             }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            else {
+                $categorieAide->setIcone($icn);
+            }
 
             $this->getDoctrine()->getManager()->flush();
 
@@ -244,8 +232,6 @@ class CategorieAideController extends Controller
 
     }
 
-
-
     // retourne le nombre de demandes signalées pour chaque categorie
     public function nbDmndSigEachCat(){
 
@@ -300,7 +286,6 @@ class CategorieAideController extends Controller
     }
 
    // pour l' app mobile
-
     public function allAction()
     {
         $em = $this->getDoctrine()->getManager();
@@ -310,6 +295,66 @@ class CategorieAideController extends Controller
         $serializer= new Serializer([new ObjectNormalizer()]);
         $formated = $serializer->normalize( $categorieAides);
         return new JsonResponse($formated);
+    }
+
+    //retourne le rating du categorie pour remplir les "etoiles"
+    public function getCatRating(){
+         //initialized with one element at index 0
+        //to start adding later from index 1 not 0 same IDs as categories index = id of one categorie
+        //prevent view's error
+        $arrRes= array('a');
+        $arrIdCat= array();
+        $em = $this->getDoctrine()->getManager();
+        $categorieAides = $em->getRepository('AideBundle:CategorieAide')->findAll();
+
+        $nbrTotaleDmnd = $this->nbDmndEachCat();
+        $nbrConfDmnd = $this->nbDmndConfEachCat();
+
+        $rating=0;
+
+
+
+
+        foreach ($categorieAides as $categorie) {
+
+            array_push($arrIdCat, $categorie->getId());
+        }
+
+
+
+
+
+
+        foreach ($arrIdCat as $idCategorie) {
+        //$nbDmnds = $em->getRepository('AideBundle:DemandeAide')->nbDmndConfParCat($idCategorie);
+
+            if($nbrTotaleDmnd[$idCategorie][$idCategorie] == 0)
+                $rating=0;
+else {
+        $moy = ($nbrConfDmnd[$idCategorie][$idCategorie]/ $nbrTotaleDmnd[$idCategorie][$idCategorie]);
+
+        if ($moy == 0)
+          $rating = 0;
+
+      elseif ($moy > 0.75)
+          $rating = 4;
+
+      elseif ($moy > 0.5)
+            $rating = 3;
+      elseif ($moy > 0.25)
+          $rating = 2;
+      else
+          $rating = 1;
+            }
+
+
+        array_push($arrRes, [$idCategorie => $rating]);
+}
+
+
+        return $arrRes;
+
+
     }
 
 

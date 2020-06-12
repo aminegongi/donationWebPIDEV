@@ -9,6 +9,7 @@ imports:
     - { resource: "@AideBundle/Resources/config/services.yml" }
     - { resource: "@RestoOrgBundle/Resources/config/services.yml" }
     - { resource: "@CagnotteBundle/Resources/config/services.yml" }
+    - { resource: "@EmploiBundle/Resources/config/services.yml" }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
@@ -37,6 +38,8 @@ framework:
     assets: ~
     php_errors:
         log: true
+    templating:
+      engines: ['twig']
 
 # Twig Configuration
 twig:
@@ -92,7 +95,7 @@ fos_user:
         sender_name: "DoNation_no_reply"
     registration:
         confirmation:
-            enabled: true
+            enabled: false
 
 knp_paginator:
     page_range: 5
@@ -123,3 +126,37 @@ endroid_qr_code:
     validate_result: false # checks if the result is readable
     writer_options:
         exclude_xml_declaration: true
+
+
+nomaya_social:
+  buttons:
+    facebook:
+      url:            null
+      locale:         "fr_FR"
+      send:           false
+      width:          300
+      showFaces:      false
+      layout:         "button_count"
+    twitter:
+      url:            null
+      locale:         "fr"
+      message:        "Je veux partager ça avec vous"
+      text:           "Tweet"
+      via:            "L'Equipe cartedevisitevirtuelle.fr"
+      tag:            "ttot"
+    googleplus:
+      url:            null
+      locale :        "fr"
+      size :          "medium"
+      annotation :    "bubble"
+      width :         300
+    linkedin:
+      url:            null
+      locale:         "fr_FR"
+      counter:        "right"
+    pinterest:
+      url:            null
+  links:
+    facebook:           "http://www.facebook.com/yann.chauvel"
+    googleplus:         "https://plus.google.com/105931415830389032796"
+  theme:                  'default' # optional

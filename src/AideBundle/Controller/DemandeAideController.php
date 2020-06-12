@@ -32,9 +32,18 @@ class DemandeAideController extends Controller
             'categories' => $this->allCategories(),
         ));
     */
+        $comboCat = $request->get('catCombo');
         $em = $this->getDoctrine()->getManager();
-
-        $listeDemandeAides = $em->getRepository('AideBundle:DemandeAide')->findAll();
+        if($comboCat){
+        if ($comboCat == "all")
+        {$listeDemandeAides = $em->getRepository('AideBundle:DemandeAide')->findAll();}
+        else {
+            $listeDemandeAides = $em->getRepository('AideBundle:DemandeAide')->findByIdCategorie($comboCat);
+        }
+        }
+        else{
+            $listeDemandeAides = $em->getRepository('AideBundle:DemandeAide')->findAll();
+        }
         $demandeAides  = $this->get('knp_paginator')->paginate(
             $listeDemandeAides,
             $request->query->get('page', 1)/*le numéro de la page à afficher*/,
@@ -42,12 +51,50 @@ class DemandeAideController extends Controller
         );
 
         $idcat ='';
+        $ConnectedUser = $this->get('security.token_storage')->getToken()->getUser();
         return $this->render('demandeaide/index.html.twig', array(
             'demandeAides' => $demandeAides,
             'categorieAides' => $this->getCategorie($idcat),
             'categories' => $this->allCategories(),
+            'utilisateur' => $ConnectedUser,
         ));
     }
+
+
+
+    public function mesDmndAction(Request $request){
+        $ConnectedUser = $this->get('security.token_storage')->getToken()->getUser();
+        $comboCat = $request->get('catCombo');
+        $em = $this->getDoctrine()->getManager();
+        if($comboCat){
+            if ($comboCat == "all")
+            {$listeDemandeAides = $em->getRepository('AideBundle:DemandeAide')->findByIdUser($ConnectedUser);}
+            else {
+               // $listeDemandeAides = $em->getRepository('AideBundle:DemandeAide')->findByIdCategorie($comboCat);
+                $listeDemandeAides = $em->getRepository('AideBundle:DemandeAide')->findBy(array('idCategorie' => $comboCat, 'idUser' => $ConnectedUser));
+            }
+        }
+        else{
+            $listeDemandeAides = $em->getRepository('AideBundle:DemandeAide')->findByIdUser($ConnectedUser);
+        }
+        $demandeAides  = $this->get('knp_paginator')->paginate(
+            $listeDemandeAides,
+            $request->query->get('page', 1)/*le numéro de la page à afficher*/,
+            9/*nbre d'éléments par page*/
+        );
+
+        $idcat ='';
+        $ConnectedUser = $this->get('security.token_storage')->getToken()->getUser();
+        return $this->render('demandeaide/indexmine.html.twig', array(
+            'demandeAides' => $demandeAides,
+            'categorieAides' => $this->getCategorie($idcat),
+            'categories' => $this->allCategories(),
+            'utilisateur' => $ConnectedUser,
+        ));
+    }
+
+
+
 
     public function findAllForOneCatAction(Request $request, $id){
 
@@ -148,12 +195,28 @@ class DemandeAideController extends Controller
         ));
     }
 
+
+    public function showMaDmndAction(DemandeAide $demandeAide)
+    {
+        $deleteForm = $this->createDeleteForm($demandeAide);
+
+        $participations = $this->getParticipations($demandeAide->getId());
+
+        return $this->render('demandeaide/showMaDmnd.html.twig', array(
+            'demandeAide' => $demandeAide,
+            'delete_form' => $deleteForm->createView(),
+            'participations' => $participations,
+        ));
+    }
+
     /**
      * Displays a form to edit an existing demandeAide entity.
      *
      */
     public function editAction(Request $request, DemandeAide $demandeAide)
     {
+        $idCatActual = $demandeAide->getIdCategorie()->getId();
+        $photo = $demandeAide->getPhoto();
         $deleteForm = $this->createDeleteForm($demandeAide);
         $editForm = $this->createForm('AideBundle\Form\DemandeAideType', $demandeAide);
         $editForm->handleRequest($request);
@@ -182,6 +245,10 @@ class DemandeAideController extends Controller
                 $demandeAide->setPhoto($newFilename);
             }
 
+            else {
+                $demandeAide->setPhoto($photo);
+            }
+
 
 
 
@@ -204,6 +271,7 @@ class DemandeAideController extends Controller
             'delete_form' => $deleteForm->createView(),
             'user' => $user = $this->get('security.token_storage')->getToken()->getUser()->getId(),
             'categories' => $this->allCategories(),
+            'catActualId' => $idCatActual,
         ));
     }
 
@@ -251,6 +319,12 @@ class DemandeAideController extends Controller
         $em = $this->getDoctrine()->getManager();
         $categorieAide = $em->getRepository('AideBundle:CategorieAide')->find($id);
         return $categorieAide;
+    }
+
+    public function getParticipations($idDmnd){
+        $em = $this->getDoctrine()->getManager();
+        $participationsAide = $em->getRepository('AideBundle:ParticipationAide')->findByIdDemande($idDmnd);
+        return $participationsAide;
     }
 
 

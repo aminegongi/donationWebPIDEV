@@ -1,3 +1,11 @@
+CatEmploiBack:
+    resource: "@EmploiBundle/Resources/config/routing.yml"
+    prefix:   /admin
+
+emploi:
+    resource: "@EmploiBundle/Resources/config/routingEmp.yml"
+    prefix:   /Emploi
+
 cagnotte:
     resource: "@CagnotteBundle/Resources/config/routing.yml"
     prefix:   /Cagnotte

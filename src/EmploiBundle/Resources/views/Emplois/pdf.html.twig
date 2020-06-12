@@ -1,0 +1,39 @@
+<html>
+<head>
+
+</head>
+<body>
+<h3><small> Information sur l'emploi : </small>  <b style="color: #c500b0;">{{ Emp.titre }}</b></h3>
+<table style="width:100% ; border-collapse: collapse; "  border="1px">
+    <tr>
+        <td><b>Annonce déposé par :</b></td>
+        <td>{{ Emp.idUtilisateur.username }}</td>
+    </tr>
+    <tr>
+        <td><b>Catégorie :</b></td>
+        <td>{{ Emp.idcategorie.titreCategorie }}</td>
+    </tr>
+    <tr>
+        <td><b>Type :</b></td>
+        <td>{{ Emp.typeDemploi }} d'emploi</td>
+    </tr>
+    <tr>
+        <td><b>Type de Contrat :</b></td>
+        <td>{{ Emp.typeContrat }}</td>
+    </tr>
+    <tr>
+        <td><b>Emplacement :</b></td>
+        <td>{{ Emp.emplacement }}</td>
+    </tr>
+    <tr>
+        <td><b>Salaire :</b></td>
+        <td>{{ Emp.salaire }}</td>
+    </tr>
+    <tr>
+        <td><b>Déscription  :</b></td>
+        <td>{{ Emp.description }}</td>
+    </tr>
+
+</table>
+</body>
+</html>

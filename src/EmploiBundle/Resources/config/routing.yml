@@ -1,0 +1,15 @@
+CatEmp_show:
+    path:     /CatEmp
+    defaults: { _controller: EmploiBundle:CategorieEmploi:show }
+CatEmp_add:
+    path:     /CatEmp/add
+    defaults: { _controller: EmploiBundle:CategorieEmploi:add }
+CatEmp_stat:
+    path:     /CatEmp/stat
+    defaults: { _controller: EmploiBundle:CategorieEmploi:stat }
+CatEmp_delete:
+    path:     /CatEmp/delete/{id}
+    defaults: { _controller: EmploiBundle:CategorieEmploi:delete }
+CatEmp_update:
+    path:     /CatEmp/update/{id}
+    defaults: { _controller: EmploiBundle:CategorieEmploi:update }
