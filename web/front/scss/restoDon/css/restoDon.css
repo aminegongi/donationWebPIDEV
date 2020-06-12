@@ -3,6 +3,9 @@
   width: 50%;
   height: 100%; }
 
+.RestoDon-home-left {
+  margin-top: 10%; }
+
 #RestoDon-home-barbecue {
   width: 80%;
   height: 20%; }
@@ -437,5 +440,18 @@ The toggleSidebar() function removes this class from the element in order to exp
 
 .right.collapsed {
   transform: translateX(295px); }
+
+.fb {
+  background-color: #43609C;
+  color: white;
+  padding: 8px 8px 8px 8px;
+  border-radius: 3px;
+  margin-right: 6px; }
+
+.web {
+  background-color: #9b5c60;
+  color: white;
+  padding: 8px 8px 8px 8px;
+  border-radius: 3px; }
 
 /*# sourceMappingURL=restoDon.css.map */

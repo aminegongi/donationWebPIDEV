@@ -86,7 +86,7 @@ class RepasServiController extends Controller
             $em->persist($repasServi);
             $em->flush();
 
-            return $this->redirectToRoute('repasservi_show', array('idRepas' => $repasServi->getIdRepas()));
+            return $this->redirectToRoute('resto_don_homepage', array('idRepas' => $repasServi->getIdRepas()));
 
         }
 

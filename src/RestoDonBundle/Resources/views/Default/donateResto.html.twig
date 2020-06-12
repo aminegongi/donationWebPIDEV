@@ -1,0 +1,36 @@
+{% extends 'front.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('front/scss/restoDon/css/root.css') }}">
+    <link rel="stylesheet" href="{{ asset('front/scss/restoDon/css/restoDon.css') }}">
+    <link href="https://api.mapbox.com/mapbox-gl-js/v1.9.1/mapbox-gl.css" rel="stylesheet" />
+{% endblock %}
+
+{% block body %}
+
+    {{ form_start(form) }}
+
+    <input type="number" min="0.00" step="0.05" class="formulaire-input" onfocusout="donate()" id="montant" name="montant" placeholder="montant">
+    <span class="span-erreur"></span>
+
+    <input class="button button-hero mt-4" style=" --first-color: var(--my-color); color: white;" type="submit" value="Create"/>
+
+    <a class="link-list" href="{{ path('resto_don_homepage') }}">Retour</a>
+
+    {{ form_end(form) }}
+{% endblock %}
+
+{#{% block javascripts %}#}
+{#    <script>#}
+{#        var montant = document.getElementById("montant").value;#}
+{#        function donate() {#}
+{#            str1 = '{{ path('''resto_don_donate', {'montant':;#}
+{#            str2 = str1.concat(montant);#}
+{#            str3 = str2.concat("}) }}");#}
+
+{#            document.getElementById("montant").setAttribute("href", str3);#}
+{#            console.log(document.getElementById("montant").getAttribute("href"));#}
+{#        };#}
+{#    </script>#}
+{#{% endblock %}#}
+

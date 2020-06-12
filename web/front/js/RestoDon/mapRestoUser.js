@@ -1,3 +1,4 @@
+var logo = window.document.getElementById('logo');
 var fb = window.document.getElementById('fb');
 var web = window.document.getElementById('web');
 var card = document.getElementById('left');
@@ -61,6 +62,8 @@ geojson.features.forEach(function(marker) {
 
     el.addEventListener('click', function() {
         // window.alert(marker.properties.fb);
+        // logo.src = "{{ asset('uploads/UserImg/" + marker.properties.icon + "') }}" ;
+        // console.log("{{ asset('uploads/UserImg/" + marker.properties.icon + "') }}");
         fb.src = marker.properties.fb;
         web.src = marker.properties.web;
 

@@ -94,7 +94,7 @@ class DonRestaurantController extends Controller
             $em->persist($donRestaurant);
             $em->flush();
 
-            return $this->redirectToRoute('donrestaurant_show', array('idDon' => $donRestaurant->getIddon()));
+            return $this->redirectToRoute('resto_don_homepage', array('idDon' => $donRestaurant->getIddon()));
         }
 
         return $this->render('@RestoDon/donrestaurant/new.html.twig', array(

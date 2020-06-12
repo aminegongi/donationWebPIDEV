@@ -1,0 +1,108 @@
+{% extends "base.html.twig" %}
+
+
+
+{% block body %}
+
+<!-- page content -->
+<div class="right_col" role="main" >
+    <div class="">
+        <div class="page-title">
+            <div class="title_left">
+                <h3>Nos Restaurants</h3>
+            </div>
+            <div class="title_right">
+                <div class="col-md-5 col-sm-5  form-group pull-right top_search">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Recherche(ajax)...">
+                        <span class="input-group-btn">
+                      <button class="btn btn-default" type="button">Go!</button>
+                    </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <style>
+            .absolute-center {
+                display: -ms-flexbox;
+                display: -webkit-flex;
+                display: flex;
+
+                -ms-flex-align: center;
+                -webkit-align-items: center;
+                -webkit-box-align: center;
+
+                align-items: center;
+
+            }
+        </style>
+        <div class="row">
+            {%  for tarifresto in tarifrestos %}
+
+                    <div class="col-md-3   widget widget_tally_box">
+                        <div class="x_panel fixed_height_390">
+                            <div class="x_content">
+                                <div class="flex">
+                                    {% if tarifresto.portefeuilleVirtuel / tarifresto.tarif > 0 %}
+                                    <ul class="list-inline widget_profile_box absolute-center" style="background-color: #0b2e13;">
+                                        {% else %}
+                                            <ul class="list-inline widget_profile_box absolute-center" style="background-color: #550000;">
+                                            {% endif %}
+                                        <li>
+                                            {% if tarifresto.idResto.image is null %}
+                                                <img src="{{ asset('gentelella-master/production/images/user.png') }}" alt="{{tarifresto.idResto.username}}" class="img-circle profile_img">
+                                            {% else %}
+                                                <img src="{{ asset('uploads/UserImg/'~  tarifresto.idResto.image ) }}" alt="{{tarifresto.idResto.username}}" class="img-circle profile_img">
+                                            {% endif %}
+                                        </li>
+                                    </ul>
+                                </div>
+                                {% if tarifresto.idResto.roles['0'] == 'ROLE_US' %}
+                                    <h3 class="name" style="margin: 0px">{{tarifresto.idResto.nom ~' '~ user.prenom}}</h3>
+                                {% else %}
+                                    <h3 class="name" style="margin: 0px" >{{ tarifresto.idResto.nom }}</h3>
+                                {% endif %}
+                                <hr>
+                                <div style="align: left;">
+                                    <ul style="padding: 3px">
+                                        <li>
+                                            Nombre de Point : <b>{{ tarifresto.idResto.pointXP }}</b>
+                                        </li>
+                                        <li>
+                                            Numéro Téléphone : <b>{{ tarifresto.idResto.numTel }}</b>
+                                        </li>
+                                        <li>
+                                            Adresse :<b> {{ tarifresto.idResto.pays }},{{ tarifresto.idResto.ville }}</b>
+                                        </li>
+                                        {% if tarifresto.idResto.roles['0'] != 'ROLE_US' %}
+                                            <li>
+                                                Facebook :<a href="{{tarifresto.idResto.pageFB }}" ><b> {{ tarifresto.idResto.pageFB }}</b></a>
+                                            </li>
+                                            <li>
+                                                Site Web :<a href="{{ tarifresto.idResto.siteWeb }}" ><b> {{ tarifresto.idResto.siteWeb }}</b></a>
+                                            </li>
+                                            <li>
+                                                Portefeuille : <b>{{ tarifresto.portefeuilleVirtuel }}</b>
+                                            </li>
+                                            <li>
+                                                Tarif : <b>{{ tarifresto.tarif }}</b>
+                                            </li>
+
+                                    </ul>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+
+        </div>
+{#        <div class="text-center">{{ knp_pagination_render(listU) }}</div>#}
+    </div>
+</div>
+<!-- /page content -->
+
+
+{% endblock %}

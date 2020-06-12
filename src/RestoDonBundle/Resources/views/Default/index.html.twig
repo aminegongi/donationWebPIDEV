@@ -11,12 +11,22 @@
         <div class="RestoDon-home-content">
 
             <div class="RestoDon-home-left">
-                <label for="tarif"></label>
-                <input type="text" readonly class="formulaire-input trick-cursor-none" style="width: 40%;" id="tarif" name="tarif" value="{{ tarif }}">
-                <input type="text" readonly class="formulaire-input trick-cursor-none" style="background-color: {{ couleurPortefeuille }}; color: {{ couleurPT }}; width: 40%;" id="porteFeuille" name="porteFeuille" value="{{ porteFeuille }}">
-                <a class="button button-hero mt-4" href="{{ path('donrestaurant_index') }}">Donation</a>
-                <a class="button button-hero mt-4" href="{{ path('repasservi_index') }}">Repas</a>
-                <a class="button button-hero mt-4" href="{{ path('tarifresto_index') }}">Tarif</a>
+                <div>
+                    <label for="tarif" style="font-size: 30px;">Tarif</label>
+                    <input type="text" readonly class="formulaire-input trick-cursor-none" style="width: 40%;" id="tarif" name="tarif" value="{{ tarif }} Dinars">
+                </div>
+                <div>
+                    <label for="tarif" style="font-size: 30px;">Portefeuille</label>
+                    <input type="text" readonly class="formulaire-input trick-cursor-none" style="background-color: {{ couleurPortefeuille }}; color: {{ couleurPT }}; width: 40%;" id="porteFeuille" name="porteFeuille" value="{{ porteFeuille }} Dinars">
+                </div>
+                <a class="button button-hero mt-4" href="{{ path('donrestaurant_new') }}">Donation</a>
+                <a class="button button-hero mt-4" href="{{ path('repasservi_new') }}">Repas</a>
+                {% if etat_tarif == "new" %}
+                <a class="button button-hero mt-4" href=" {{ path('tarifresto_new') }} ">Tarif</a>
+                {% endif %}
+                {% if etat_tarif == "edit" %}
+                    <a class="button button-hero mt-4" href=" {{ path('tarifresto_edit', { 'idTarif' :  idTarif  }) }} ">Tarif</a>
+                {% endif %}
             </div>
 
             <div class="RestoDon-home-right">
