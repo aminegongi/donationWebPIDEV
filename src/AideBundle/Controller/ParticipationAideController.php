@@ -66,7 +66,8 @@ class ParticipationAideController extends Controller
             $em->persist($participationAide);
             $em->flush();
             $this->sendMail($ownerDmnd->getEmail(),$user->getEmail(),$idDmnd);
-            return $this->redirectToRoute('participationaide_show', array('id' => $participationAide->getId()));
+            //return $this->redirectToRoute('participationaide_show', array('id' => $participationAide->getId()));
+            return $this->redirectToRoute('demandeaide_index');
         }
 
         return $this->render('participationaide/new.html.twig', array(

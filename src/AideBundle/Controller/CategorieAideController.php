@@ -161,7 +161,7 @@ class CategorieAideController extends Controller
 
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('categorieaide_edit', array('id' => $categorieAide->getId()));
+            return $this->redirectToRoute('categorieaide_show', array('id' => $categorieAide->getId()));
         }
 
         return $this->render('categorieaide/edit.html.twig', array(
@@ -224,7 +224,12 @@ class CategorieAideController extends Controller
         }
 
         foreach ($arrIdCat as $idCategorie) {
+           // try{
             $nbDmnds = $em->getRepository('AideBundle:DemandeAide')->nbDmndParCat($idCategorie);
+           // }catch (\Exception $exception){
+                //$nbDmnds=0;
+
+            //}
             array_push($arrRes, [$idCategorie => $nbDmnds]);
         }
 
@@ -327,9 +332,11 @@ class CategorieAideController extends Controller
 
         foreach ($arrIdCat as $idCategorie) {
         //$nbDmnds = $em->getRepository('AideBundle:DemandeAide')->nbDmndConfParCat($idCategorie);
-
+try{
             if($nbrTotaleDmnd[$idCategorie][$idCategorie] == 0)
                 $rating=0;
+
+
 else {
         $moy = ($nbrConfDmnd[$idCategorie][$idCategorie]/ $nbrTotaleDmnd[$idCategorie][$idCategorie]);
 
@@ -346,7 +353,10 @@ else {
       else
           $rating = 1;
             }
-
+}
+catch (\Exception $exception){
+    $rating = 0;
+}
 
         array_push($arrRes, [$idCategorie => $rating]);
 }
