@@ -52,7 +52,7 @@ class cagnotteController extends Controller{
                 $cagnotte->setMontantActuel(0);
                 $cagnotte->setIdOrganisation(0);
                 $cagnotte->setEtat(0);
-                $cagnotte->setIdCategorie(1);
+
                 $em->persist($cagnotte);
                 $em->flush();
                 return $this->redirectToRoute('cagnotte_homepage');

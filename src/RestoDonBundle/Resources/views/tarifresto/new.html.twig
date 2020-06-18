@@ -32,7 +32,7 @@
 
         <div class="formulaire-div-basics-svg">
 {#            <label class="formulaire-label" for="{{ form.tarif.vars.id }}">Tarif</label>#}
-            <input type="number" min="0.00" step="0.05" required class="formulaire-input" id="{{ form.tarif.vars.id }}" name="{{ form.tarif.vars.full_name }}" placeholder="Votre tarif">
+            <input type="number" min="0.00" step="0.05" required autofocus class="formulaire-input" id="{{ form.tarif.vars.id }}" name="{{ form.tarif.vars.full_name }}" placeholder="Votre tarif">
             {{ form_errors(form.tarif) }}
             {% do form.tarif.setRendered %}
         </div>
@@ -43,7 +43,7 @@
         </div>
     <ul class="link-list-style">
         <li>
-            <a class="link-list" id="background-fit-tarif" href="{{ path('tarifresto_index') }}">Back to the list</a>
+            <a class="link-list" id="background-fit-tarif" href="{{ path('resto_don_homepage') }}">Retour</a>
         </li>
     </ul>
 </div>

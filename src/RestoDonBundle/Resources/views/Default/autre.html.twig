@@ -10,12 +10,16 @@
 
     <input type=hidden id="allResto" name="allResto" value="{{ allRestoJSON }}"/>
 
+    <div>
+        <a class="button button-hero mt-4" style="margin-bottom: 2%; background-color: #79eeac;" {{ etatDonate }} href="{{ path('resto_don_donate_page') }}" >Donate</a>
+    </div>
 
     <div id="map" style="height: 70vh; width: auto; ">
         <div id="left" class="sidebar flex-center left collapsed">
-            <div class="sidebar-content rounded-rect flex-center">
-                <button id="fb">Facebook</button>
-                <button id="web">Web</button>
+            <div class="sidebar-content rounded-rect flex-center" style="background-color: #79eeac;">
+{#                <img id="logo">#}
+                <button id="fb" class="button button-hero mt-4" style="background-color: #43609C;" class="fb">Facebook</button>
+                <button id="web" class="button button-hero mt-4" style="background-color: #9b5c60;" class="web">Web</button>
             </div>
         </div>
     </div>

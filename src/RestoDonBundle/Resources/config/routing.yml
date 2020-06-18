@@ -14,6 +14,18 @@ resto_don_homepage:
     path:     /
     defaults: { _controller: RestoDonBundle:Default:index }
 
+resto_don_backpage:
+    path:     /back
+    defaults: { _controller: RestoDonBundle:Default:index }
+
+resto_don_donate_page:
+    path:     /DonatePage
+    defaults: { _controller: RestoDonBundle:Default:donatePage }
+
+resto_don_donate:
+    path:     /Donate/{montant}
+    defaults: { _controller: RestoDonBundle:Default:donate }
+
 jsonRestaurant:
     path: /ListMapResto
     defaults: { _controller: RestoDonBundle:Default:jsonRestaurant }

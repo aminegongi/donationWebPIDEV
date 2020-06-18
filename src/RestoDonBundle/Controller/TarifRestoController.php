@@ -55,7 +55,7 @@ class TarifRestoController extends Controller
             $em->persist($tarifResto);
             $em->flush();
 
-            return $this->redirectToRoute('tarifresto_show', array('idTarif' => $tarifResto->getIdtarif()));
+            return $this->redirectToRoute('resto_don_homepage', array('idTarif' => $tarifResto->getIdtarif()));
 
         }
 
@@ -94,7 +94,7 @@ class TarifRestoController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('tarifresto_edit', array('idTarif' => $tarifResto->getIdTarif()));
+            return $this->redirectToRoute('resto_don_homepage', array('idTarif' => $tarifResto->getIdTarif()));
         }
 
         return $this->render('@RestoDon/tarifresto/edit.html.twig', array(
@@ -120,7 +120,7 @@ class TarifRestoController extends Controller
             $em->flush();
         }
 
-        return $this->redirectToRoute('tarifresto_index');
+        return $this->redirectToRoute('resto_don_homepage');
     }
 
     /**

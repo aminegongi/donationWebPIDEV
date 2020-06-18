@@ -8,7 +8,7 @@
 {% block body %}
 <div id="body-new-tarif">
     <h1>Tarifresto edit</h1>
-    <div id="form" style="--first-color: var(--my-color); justify-content: center;">
+    <div id="form" style="--first-color: var(--my-color); justify-content: center; margin-top: 10%;">
     {{ form_start(edit_form) }}
 
     <div class="formulaire-div-basics-svg" style="display: none;">
@@ -21,7 +21,8 @@
     </div>
 
     <div class="formulaire-div-basics-svg">
-        {#            <label class="formulaire-label" for="{{ form.portefeuilleVirtuel.vars.id }}">portefeuilleVirtuel</label>#}
+{#                    <label class="formulaire-label" for="{{ edit_form.portefeuilleVirtuel.vars.id }}">portefeuilleVirtuel</label>#}
+        <label for="tarif" style="font-size: 30px;">Portefeuille</label>
         <input type="text" readonly class="formulaire-input trick-cursor-none" id="{{ edit_form.portefeuilleVirtuel.vars.id }}" name="{{ edit_form.portefeuilleVirtuel.vars.full_name }}" value="{{ edit_form.portefeuilleVirtuel.vars.data }}">
         {{ form_errors(edit_form.portefeuilleVirtuel) }}
         {% do edit_form.portefeuilleVirtuel.setRendered %}
@@ -29,7 +30,8 @@
 
     <div class="formulaire-div-basics-svg">
         {#            <label class="formulaire-label" for="{{ form.tarif.vars.id }}">Tarif</label>#}
-        <input type="number" min="0.00" step="0.05" class="formulaire-input" id="{{ edit_form.tarif.vars.id }}" name="{{ edit_form.tarif.vars.full_name }}" >
+        <label for="tarif" style="font-size: 30px;">Tarif</label>
+        <input type="number" min="0.00" step="0.05" autofocus class="formulaire-input" id="{{ edit_form.tarif.vars.id }}" name="{{ edit_form.tarif.vars.full_name }}" >
         {{ form_errors(edit_form.tarif) }}
         {% do edit_form.tarif.setRendered %}
     </div>
@@ -51,7 +53,7 @@
         </table>
             </li>
             <li class="link-list-style" id="background-fit-tarif">
-                <a class="link-list" href="{{ path('tarifresto_index') }}">Back to the list</a>
+                <a class="link-list" href="{{ path('resto_don_homepage') }}">Retour</a>
             </li>
         </ul>
 
