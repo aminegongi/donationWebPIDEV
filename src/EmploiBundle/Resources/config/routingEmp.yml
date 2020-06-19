@@ -19,6 +19,25 @@ Emp_single:
 Emp_pdf:
     path:     /pdf/{id}
     defaults: { _controller: EmploiBundle:Emplois:pdf }
+
 Empmob_show:
     path:     /mobile/
     defaults: { _controller: EmploiBundle:emploimob:show }
+Empmob_add:
+    path:     /mobile/add
+    defaults: { _controller: EmploiBundle:emploimob:add }
+Empmob_single:
+    path:     /mobile/single/{id}
+    defaults: { _controller: EmploiBundle:emploimob:singleEmploi }
+Empmob_singleEn:
+    path:     /mobile/singleEn/{id}
+    defaults: { _controller: EmploiBundle:emploimob:SEmploiEn }
+Empmob_mesShow:
+    path:     /mobile/mes/{id}
+    defaults: { _controller: EmploiBundle:emploimob:MesShow }
+Empmob_delete:
+    path:     /mobile/delete/{id}
+    defaults: { _controller: EmploiBundle:emploimob:delete }
+Empmob_pdf:
+    path:     /mobile/pdf/{id}
+    defaults: { _controller: EmploiBundle:emploimob:pdf }

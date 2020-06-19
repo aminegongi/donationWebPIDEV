@@ -52,6 +52,8 @@ class DemandeAideController extends Controller
 
         $idcat ='';
         $ConnectedUser = $this->get('security.token_storage')->getToken()->getUser();
+        //var_dump($ConnectedUser);
+        //die();
         return $this->render('demandeaide/index.html.twig', array(
             'demandeAides' => $demandeAides,
             'categorieAides' => $this->getCategorie($idcat),
@@ -166,7 +168,8 @@ class DemandeAideController extends Controller
             $em->persist($demandeAide);
             $em->flush();
 
-            return $this->redirectToRoute('demandeaide_show', array('id' => $demandeAide->getId()));
+           // return $this->redirectToRoute('demandeaide_show', array('id' => $demandeAide->getId()));
+            return $this->redirectToRoute('demandeaide_index');
         }
         $arr = [1 =>'a', 5 =>'b', 6 =>'c'];
         $a="";
