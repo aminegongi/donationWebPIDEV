@@ -89,4 +89,36 @@ class cagnotteMobileController extends Controller
         $json = $ser->normalize($ret);
         return new JsonResponse($json);
     }
+
+    //Cagnotte/prendreCagnotteMobile?user=x&id=x
+    public function prendreAction(Request $request){
+        $em = $this->getDoctrine()->getManager();
+        $selected = $em->getRepository('CagnotteBundle:cagnotte')->find((int)$request->get("id"));
+        $selected->setIdOrganisation((int)$request->get("user"));
+        $selected->setEtat(1);
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($selected);
+        $em->flush();
+        $ret = "OK";
+        $ser = new Serializer([new ObjectNormalizer()]);
+        $json = $ser->normalize($ret);
+        return new JsonResponse($json);
+    }
+
+    //Cagnotte/donateCagnotteMobile?user=x&id=x&montant=x
+    public function donateAction(Request $request){
+        $em = $this->getDoctrine()->getManager();
+        $selected = $em->getRepository('CagnotteBundle:cagnotte')->find((int)$request->get("id"));
+        $selected->setMontantActuel($selected->getMontantActuel() + (float)$request->get("montant"));
+        if ($selected->getMontantActuel() >= $selected->getMontantDemande()){
+            $selected->setEtat(2);
+        }
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($selected);
+        $em->flush();
+        $ret = "OK";
+        $ser = new Serializer([new ObjectNormalizer()]);
+        $json = $ser->normalize($ret);
+        return new JsonResponse($json);
+    }
 }

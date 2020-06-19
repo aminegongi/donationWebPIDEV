@@ -25,10 +25,6 @@ class donationsController extends Controller{
         return $this->redirectToRoute('cagnotte_success');
     }
 
-    public function getNombreCagottes(){
-
-    }
-
     public function dashboardAction(){
         $user = $this->container->get('security.token_storage')->getToken()->getUser();
         if ($user == "anon."){
